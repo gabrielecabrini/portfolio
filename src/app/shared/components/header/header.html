@@ -1,0 +1,22 @@
+<header>
+  <div class="header-inner">
+    <a class="brand" routerLink="/">gc.</a>
+    <nav>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        {{ 'nav.home' | translate }}
+      </a>
+      <a routerLink="/about" routerLinkActive="active">
+        {{ 'nav.about' | translate }}
+      </a>
+      <a routerLink="/experience" routerLinkActive="active">
+        {{ 'nav.experience' | translate }}
+      </a>
+      <a routerLink="/projects" routerLinkActive="active">
+        {{ 'nav.projects' | translate }}
+      </a>
+    </nav>
+    <button class="lang-toggle" (click)="toggle()" [attr.aria-label]="'nav.switchLang' | translate">
+      {{ i18n.currentLang() === 'it' ? '🇬🇧 EN' : '🇮🇹 IT' }}
+    </button>
+  </div>
+</header>

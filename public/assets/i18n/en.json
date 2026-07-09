@@ -1,0 +1,67 @@
+{
+  "nav.home": "Home",
+  "nav.about": "About",
+  "nav.experience": "Experience",
+  "nav.projects": "Projects",
+  "nav.switchLang": "Switch to Italian",
+
+  "home.greeting": "Hi, I'm",
+  "home.subtitle": "Fullstack Software Developer",
+  "home.tagline": "I build software across the full stack, with a strong passion for open source and the Linux world. From the JVM to the browser, from backend to infrastructure.",
+  "home.cta.projects": "View projects",
+  "home.cta.experience": "Experience",
+  "home.cta.about": "About me",
+
+  "about.title": "About",
+  "about.bio": "I'm Gabriele, a fullstack software developer based in northern Italy, near Bergamo. I have experience building enterprise applications and ERP systems. I work across the full stack — from Java/Spring Boot backends to Angular frontends, down to infrastructure with Docker, Kubernetes, and Linux environments. Passionate about open source and the Linux world, I always look for elegant and scalable solutions.",
+  "about.links.title": "Contact & profiles",
+
+  "experience.work.title": "Work experience",
+  "experience.skills.title": "Skills",
+  "experience.languages.title": "Languages",
+  "experience.certs.title": "Certifications",
+  "experience.empty": "Nothing here yet. Check back soon!",
+
+  "experience.work.skyblockpuro.role": "Founder & Lead Developer",
+  "experience.work.skyblockpuro.description": "Founded the Minecraft server SkyBlockPuro. Responsible for the entire technical infrastructure: DDoS protection, proxy management, version updates, custom Java plugin development, and coordination of external contributors.",
+
+  "experience.work.r1se.role": "Backend Developer",
+  "experience.work.r1se.description": "Developed backend software for internal company utilities. Set up the initial cloud infrastructure on AWS using EC2 instances.",
+
+  "experience.work.sandrini.role": "Fullstack Developer",
+  "experience.work.sandrini.description": "Backend development of an ERP management system using Java and Spring Boot. ERP frontend development with Angular and TypeScript. CI/CD pipeline implementation. Development of an integrative ERP mobile app with Flutter (Android). PostgreSQL, SQL Server, MariaDB, and Redis database management. Hands-on experience with Docker, Kubernetes, and Proxmox.",
+
+  "experience.work.metamc.role": "Lead Developer",
+  "experience.work.metamc.description": "Developed Java plugins for Minecraft servers handling 150+ concurrent active players. Responsible for server infrastructure management and development team supervision.",
+
+  "experience.work.devroom.role": "Freelance Developer",
+  "experience.work.devroom.description": "Commission-based work for the devroom team: mod development, server configurations, and custom plugins.",
+
+  "experience.work.songoda.role": "Translator (EN → IT)",
+  "experience.work.songoda.description": "Translated Songoda's Minecraft plugins from English to Italian.",
+
+  "experience.work.techscode.role": "Translator (EN → IT)",
+  "experience.work.techscode.description": "Translated TechsCode's Minecraft plugins from English to Italian.",
+
+  "experience.lang.italian.level": "Native",
+  "experience.lang.english.level": "Advanced (C1)",
+
+  "projects.title": "Projects",
+  "projects.subtitle": "A selection of projects I've worked on.",
+  "projects.card.repo": "Code",
+  "projects.card.live": "Demo",
+  "projects.back": "Back to projects",
+  "projects.notFound": "Project not found.",
+
+  "projects.rdoh.title": "rdoh",
+  "projects.rdoh.description": "DNS-over-HTTPS resolver written in Rust, with DNSSEC support.",
+
+  "projects.brainfucker.title": "brainfucker",
+  "projects.brainfucker.description": "Interpreter and LLVM IR transpiler for the Brainfuck language, written in Go.",
+
+  "projects.tcp-proxy.title": "tcp-proxy",
+  "projects.tcp-proxy.description": "Configurable TCP proxy written in Rust using the Tokio async runtime, designed to handle multiple concurrent connections efficiently.",
+
+  "projects.sossoldi.title": "Sossoldi",
+  "projects.sossoldi.description": "Open source Flutter app for personal wealth management and Net Worth tracking."
+}

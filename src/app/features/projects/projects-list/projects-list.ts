@@ -1,0 +1,14 @@
+import { Component } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
+import { PROJECTS } from '../../../../assets/data/projects';
+import { Project } from '../../../core/models/project.model';
+
+@Component({
+  selector: 'app-projects-list',
+  imports: [TranslatePipe],
+  templateUrl: './projects-list.html',
+  styleUrl: './projects-list.css',
+})
+export class ProjectsList {
+  readonly projects: Project[] = PROJECTS;
+}

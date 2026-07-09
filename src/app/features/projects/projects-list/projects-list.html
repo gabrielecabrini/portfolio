@@ -1,0 +1,45 @@
+<section class="projects-page">
+  <div class="projects-inner">
+
+    <div class="section-header">
+      <h2>{{ 'projects.title' | translate }}</h2>
+      <p class="section-desc">{{ 'projects.subtitle' | translate }}</p>
+    </div>
+
+    <div class="projects-grid">
+      @for (project of projects; track project.id) {
+        <article class="project-card">
+
+          @if (project.imageUrl) {
+            <div class="card-image">
+              <img [src]="project.imageUrl" [alt]="project.titleKey | translate" />
+            </div>
+          }
+
+          <div class="card-body">
+            <h3>{{ project.titleKey | translate }}</h3>
+            <p>{{ project.descriptionKey | translate }}</p>
+          </div>
+
+          <div class="card-footer">
+            <div class="tags">
+              @for (tag of project.tags; track tag) {
+                <span class="tag">{{ tag }}</span>
+              }
+            </div>
+            <div class="card-links">
+              @if (project.repoUrl) {
+                <a [href]="project.repoUrl" target="_blank" rel="noopener noreferrer"
+                   class="card-link">
+                  {{ 'projects.card.repo' | translate }} ↗
+                </a>
+              }
+            </div>
+          </div>
+
+        </article>
+      }
+    </div>
+
+  </div>
+</section>

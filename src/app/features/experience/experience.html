@@ -1,0 +1,132 @@
+<section class="exp-page">
+  <div class="exp-inner">
+
+    <!-- Work Experience -->
+    <div class="exp-section">
+      <h2>{{ 'experience.work.title' | translate }}</h2>
+
+      @if (workExperiences.length === 0) {
+        <p class="empty">{{ 'experience.empty' | translate }}</p>
+      }
+
+      <div class="timeline">
+        @for (job of workExperiences; track job.id) {
+          <div class="timeline-item">
+            @if (job.logoUrl) {
+              <div class="item-logo">
+                <img [src]="job.logoUrl" [alt]="job.company" />
+              </div>
+            } @else {
+              <div class="item-logo placeholder">
+                {{ job.company.charAt(0) }}
+              </div>
+            }
+            <div class="item-body">
+              <div class="item-header">
+                <div>
+                  <h3 class="item-title">{{ job.roleKey | translate }}</h3>
+                  <span class="item-subtitle">
+                    @if (job.url) {
+                      <a [href]="job.url" target="_blank" rel="noopener noreferrer">{{ job.company }} ↗</a>
+                    } @else {
+                      {{ job.company }}
+                    }
+                  </span>
+                </div>
+                <span class="item-date">{{ formatRange(job.startDate, job.endDate) }}</span>
+              </div>
+              <p class="item-desc">{{ job.descriptionKey | translate }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="exp-section">
+      <h2>{{ 'experience.skills.title' | translate }}</h2>
+
+      @if (skills.length === 0) {
+        <p class="empty">{{ 'experience.empty' | translate }}</p>
+      }
+
+      <div class="skills-grid">
+        @for (skill of skills; track skill.id) {
+          <div class="skill-card">
+            @if (skill.iconUrl) {
+              <img class="skill-icon" [src]="skill.iconUrl" [alt]="skill.name" />
+            }
+            <div class="skill-body">
+              <h3>{{ skill.name }}</h3>
+              @if (skill.descriptionKey) {
+                <p>{{ skill.descriptionKey | translate }}</p>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Languages -->
+    <div class="exp-section">
+      <h2>{{ 'experience.languages.title' | translate }}</h2>
+
+      <div class="skills-grid">
+        @for (lang of languages; track lang.id) {
+          <div class="skill-card">
+            @if (lang.iconUrl) {
+              <img class="skill-icon" [src]="lang.iconUrl" [alt]="lang.name" />
+            }
+            <div class="skill-body">
+              <h3>{{ lang.name }}</h3>
+              @if (lang.descriptionKey) {
+                <p>{{ lang.descriptionKey | translate }}</p>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Certifications -->
+    <div class="exp-section">
+      <h2>{{ 'experience.certs.title' | translate }}</h2>
+
+      @if (certifications.length === 0) {
+        <p class="empty">{{ 'experience.empty' | translate }}</p>
+      }
+
+      <div class="certs-grid">
+        @for (cert of certifications; track cert.id) {
+          <div class="cert-card">
+            @if (cert.iconUrl) {
+              <div class="cert-logo">
+                <img [src]="cert.iconUrl" [alt]="cert.issuer" />
+              </div>
+            } @else {
+              <div class="cert-logo placeholder">
+                {{ cert.issuer.charAt(0) }}
+              </div>
+            }
+            <div class="cert-body">
+              <h3 class="cert-name">
+                @if (cert.url) {
+                  <a [href]="cert.url" target="_blank" rel="noopener noreferrer">{{ cert.name }} ↗</a>
+                } @else {
+                  {{ cert.name }}
+                }
+              </h3>
+              <span class="cert-issuer">{{ cert.issuer }}</span>
+              <span class="cert-date">{{ formatDate(cert.date) }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="exp-cta">
+      <a routerLink="/projects" class="btn-primary">{{ 'home.cta.projects' | translate }}</a>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,67 @@
+{
+  "nav.home": "Home",
+  "nav.about": "Chi sono",
+  "nav.experience": "Esperienza",
+  "nav.projects": "Progetti",
+  "nav.switchLang": "Passa alla lingua inglese",
+
+  "home.greeting": "Ciao, sono",
+  "home.subtitle": "Fullstack Software Developer",
+  "home.tagline": "Sviluppo software a tutto stack, con una forte passione per l'open source e il mondo Linux. Dalla JVM al browser, dal backend all'infrastruttura.",
+  "home.cta.projects": "Vedi i progetti",
+  "home.cta.experience": "Esperienze",
+  "home.cta.about": "Chi sono",
+
+  "about.title": "Chi sono",
+  "about.bio": "Sono Gabriele, un fullstack software developer del nord Italia, vicino a Bergamo. Ho esperienza nello sviluppo di applicazioni enterprise e sistemi ERP. Lavoro sull'intero stack — dal backend Java/Spring Boot al frontend Angular, passando per l'infrastruttura con Docker, Kubernetes e ambienti Linux. Appassionato di open source e del mondo Linux, cerco sempre soluzioni eleganti e scalabili.",
+  "about.links.title": "Contatti e profili",
+
+  "experience.work.title": "Esperienza lavorativa",
+  "experience.skills.title": "Skill",
+  "experience.languages.title": "Lingue",
+  "experience.certs.title": "Certificazioni",
+  "experience.empty": "Nessun elemento ancora. Aggiornalo presto!",
+
+  "experience.work.skyblockpuro.role": "Founder & Lead Developer",
+  "experience.work.skyblockpuro.description": "Fondatore del server Minecraft SkyBlockPuro. Responsabile dell'intera infrastruttura tecnica: protezione anti-DDoS, gestione proxy, aggiornamenti di versione, sviluppo di plugin Java personalizzati e coordinamento di collaboratori esterni.",
+
+  "experience.work.r1se.role": "Backend Developer",
+  "experience.work.r1se.description": "Sviluppo di software backend per utilities interne aziendali. Configurazione iniziale dell'infrastruttura cloud su AWS con istanze EC2.",
+
+  "experience.work.sandrini.role": "Fullstack Developer",
+  "experience.work.sandrini.description": "Sviluppo backend del gestionale ERP con Java e Spring Boot. Sviluppo del frontend ERP con Angular e TypeScript. Implementazione di pipeline CI/CD. Sviluppo di un'app mobile integrativa per il gestionale con Flutter (Android). Gestione di database PostgreSQL, SQL Server, MariaDB e Redis. Acquisizione di competenze su Docker, Kubernetes e Proxmox.",
+
+  "experience.work.metamc.role": "Lead Developer",
+  "experience.work.metamc.description": "Sviluppo di plugin Java per server Minecraft con oltre 150 player attivi in contemporanea. Responsabile dell'infrastruttura server e supervisione del team di sviluppo.",
+
+  "experience.work.devroom.role": "Freelance Developer",
+  "experience.work.devroom.description": "Lavori su commissione per il team devroom: sviluppo di mod, configurazioni server e plugin custom.",
+
+  "experience.work.songoda.role": "Traduttore (EN → IT)",
+  "experience.work.songoda.description": "Traduzione dei plugin Minecraft di Songoda dall'inglese all'italiano.",
+
+  "experience.work.techscode.role": "Traduttore (EN → IT)",
+  "experience.work.techscode.description": "Traduzione dei plugin Minecraft di TechsCode dall'inglese all'italiano.",
+
+  "experience.lang.italian.level": "Madrelingua",
+  "experience.lang.english.level": "Avanzato (C1)",
+
+  "projects.title": "Progetti",
+  "projects.subtitle": "Una selezione di progetti a cui ho lavorato.",
+  "projects.card.repo": "Codice",
+  "projects.card.live": "Demo",
+  "projects.back": "Torna ai progetti",
+  "projects.notFound": "Progetto non trovato.",
+
+  "projects.rdoh.title": "rdoh",
+  "projects.rdoh.description": "Resolver DNS-over-HTTPS scritto in Rust, con supporto DNSSEC.",
+
+  "projects.brainfucker.title": "brainfucker",
+  "projects.brainfucker.description": "Interprete e transpiler verso LLVM IR per il linguaggio Brainfuck, scritto in Go.",
+
+  "projects.tcp-proxy.title": "tcp-proxy",
+  "projects.tcp-proxy.description": "TCP proxy configurabile scritto in Rust con il runtime asincrono Tokio, progettato per gestire più connessioni concorrenti in modo efficiente.",
+
+  "projects.sossoldi.title": "Sossoldi",
+  "projects.sossoldi.description": "App Flutter open source per la gestione del patrimonio personale e il tracciamento del Net Worth."
+}

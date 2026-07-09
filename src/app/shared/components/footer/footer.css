@@ -1,0 +1,19 @@
+footer {
+  border-top: 1px solid var(--border);
+  height: 60px;
+}
+
+.footer-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
