@@ -66,5 +66,10 @@
   "projects.sossoldi.description": "Open source Flutter app for personal wealth management and Net Worth tracking.",
 
   "projects.winboat.title": "WinBoat",
-  "projects.winboat.description": "Open source app to run Windows applications natively on Linux, with an elegant GUI and automated setup via Docker/Podman and QEMU/KVM."
+  "projects.winboat.description": "Open source app to run Windows applications natively on Linux, with an elegant GUI and automated setup via Docker/Podman and QEMU/KVM.",
+
+  "notFound.code": "404",
+  "notFound.title": "Page not found",
+  "notFound.message": "The page you're looking for doesn't exist or has been moved.",
+  "notFound.cta": "Back to home"
 }
