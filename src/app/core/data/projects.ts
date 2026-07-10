@@ -8,7 +8,7 @@ export const PROJECTS: Project[] = [
     tags: ['Flutter', 'Dart', 'Finance'],
     repoUrl: 'https://github.com/RIP-Comm/sossoldi',
     url: 'https://rip-comm.github.io/sossoldi/',
-    imageUrl: 'https://github.com/RIP-Comm/sossoldi/raw/main/assets/iosicon.png',
+    imageUrl: 'assets/images/projects/sossoldi.png',
   },
   {
     id: 'brainfucker',
@@ -16,7 +16,7 @@ export const PROJECTS: Project[] = [
     descriptionKey: 'projects.brainfucker.description',
     tags: ['Go', 'LLVM IR', 'Brainfuck'],
     repoUrl: 'https://github.com/gabrielecabrini/brainfucker',
-    imageUrl: 'https://www.pngkey.com/png/detail/624-6245823_hello-world-brainfuck-brainfuck-hello-world.png',
+    imageUrl: 'assets/images/projects/brainfucker.png',
   },
   {
     id: 'winboat',
@@ -25,7 +25,7 @@ export const PROJECTS: Project[] = [
     tags: ['TypeScript', 'Docker', 'QEMU'],
     repoUrl: 'https://github.com/TibixDev/winboat',
     url: 'https://www.winboat.app',
-    imageUrl: 'https://www.winboat.app/_astro/winboat_logo.NqN8dmd9.svg',
+    imageUrl: 'assets/images/projects/winboat.svg',
   },
   {
     id: 'rdoh',
