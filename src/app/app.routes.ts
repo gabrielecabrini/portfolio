@@ -16,5 +16,8 @@ export const routes: Routes = [
     path: 'projects',
     loadComponent: () => import('./features/projects/projects-list/projects-list').then(m => m.ProjectsList),
   },
-  { path: '**', redirectTo: '' },
+  {
+    path: '**',
+    loadComponent: () => import('./features/not-found/not-found').then(m => m.NotFound),
+  },
 ];

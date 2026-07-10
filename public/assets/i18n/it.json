@@ -66,5 +66,10 @@
   "projects.sossoldi.description": "App Flutter open source per la gestione del patrimonio personale e il tracciamento del Net Worth.",
 
   "projects.winboat.title": "WinBoat",
-  "projects.winboat.description": "Applicazione open source per eseguire app Windows nativamente su Linux, con un'interfaccia grafica elegante e configurazione automatizzata tramite Docker/Podman e QEMU/KVM."
+  "projects.winboat.description": "Applicazione open source per eseguire app Windows nativamente su Linux, con un'interfaccia grafica elegante e configurazione automatizzata tramite Docker/Podman e QEMU/KVM.",
+
+  "notFound.code": "404",
+  "notFound.title": "Pagina non trovata",
+  "notFound.message": "La pagina che cerchi non esiste o è stata spostata.",
+  "notFound.cta": "Torna in home"
 }
