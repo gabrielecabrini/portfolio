@@ -19,12 +19,23 @@
   to   { opacity: 0; }
 }
 
-/* View Transitions API — smooth cross-page navigation */
-::view-transition-old(root) {
-  animation: fade-out 0.12s ease-in;
-}
+/* View Transitions API — animate only the main content, header/footer stay static */
+::view-transition-old(root),
 ::view-transition-new(root) {
-  animation: fade-up 0.25s ease-out;
+  animation: none;
+}
+
+::view-transition-old(main-content) {
+  animation: none;
+  opacity: 0;
+}
+::view-transition-new(main-content) {
+  animation: vt-slide-up 0.22s ease-out;
+}
+
+@keyframes vt-slide-up {
+  from { transform: translateY(14px); }
+  to   { transform: translateY(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
