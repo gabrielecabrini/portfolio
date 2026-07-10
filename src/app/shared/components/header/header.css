@@ -67,6 +67,7 @@ nav a.active {
   color: var(--accent);
 }
 
+/* ── Tablet: compact single row ── */
 @media (max-width: 768px) {
   nav {
     gap: 1rem;
@@ -74,5 +75,47 @@ nav a.active {
 
   nav a {
     font-size: 0.85rem;
+  }
+}
+
+/* ── Mobile: brand + toggle on row 1, nav full-width on row 2 ── */
+@media (max-width: 480px) {
+  .header-inner {
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 0;
+    padding: 0 1rem;
+  }
+
+  .brand {
+    /* first row, left — pushes lang-toggle to the right */
+    flex: 1;
+    line-height: 60px;
+  }
+
+  .lang-toggle {
+    font-size: 0.78rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  nav {
+    /* second row, full width */
+    order: 3;
+    width: 100%;
+    gap: 0;
+    justify-content: space-around;
+    border-top: 1px solid var(--border);
+  }
+
+  nav a {
+    font-size: 0.8rem;
+    flex: 1;
+    text-align: center;
+    /* 44px min touch target */
+    padding: 0.6rem 0;
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

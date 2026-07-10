@@ -108,3 +108,25 @@
 .card-link:hover {
   color: var(--accent);
 }
+
+/* ── Responsive ── */
+
+@media (max-width: 768px) {
+  .projects-page {
+    padding: 3rem 1rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-page {
+    padding: 2rem 1rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}

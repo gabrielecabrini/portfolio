@@ -1,7 +1,9 @@
 .hero {
   display: flex;
   align-items: center;
-  min-height: calc(100vh - var(--header-h) - 60px);
+  /* dvh accounts for mobile browser chrome (address bar) */
+  min-height: calc(100dvh - var(--header-h) - 60px);
+  min-height: calc(100vh - var(--header-h) - 60px); /* fallback */
   padding: 4rem 1.5rem;
 }
 
@@ -74,4 +76,19 @@ h1 {
 .btn-secondary:hover {
   border-color: var(--text);
   color: var(--text);
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 2.5rem 1rem;
+    /* on small screens don't force full-viewport height */
+    min-height: unset;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    /* full-width buttons on narrow screens */
+    width: 100%;
+    text-align: center;
+  }
 }

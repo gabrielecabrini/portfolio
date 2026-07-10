@@ -14,3 +14,10 @@
   --max-w: 900px;
   --header-h: 60px;
 }
+
+/* On mobile the header wraps to 2 rows */
+@media (max-width: 480px) {
+  :root {
+    --header-h: 98px;
+  }
+}

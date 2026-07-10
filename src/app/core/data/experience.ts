@@ -74,6 +74,11 @@ export const SKILLS: Skill[] = [
     iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg',
   },
   {
+    id: 'kotlin',
+    name: 'Kotlin',
+    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg',
+  },
+  {
     id: 'spring-boot',
     name: 'Spring Boot',
     iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg',

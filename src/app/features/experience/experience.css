@@ -75,6 +75,8 @@
 .item-body {
   flex: 1;
   padding-top: 0.1rem;
+  /* prevent long words (company names) from overflowing */
+  min-width: 0;
 }
 
 .item-header {
@@ -213,6 +215,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+  min-width: 0;
 }
 
 .cert-name {
@@ -244,9 +247,54 @@
   text-align: center;
 }
 
+/* ── Responsive ── */
+
 @media (max-width: 768px) {
+  .exp-page {
+    padding: 3rem 1rem;
+  }
+
+  .exp-inner {
+    gap: 2.5rem;
+  }
+
   .item-header {
     flex-direction: column;
     gap: 0.25rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .exp-page {
+    padding: 2rem 1rem;
+  }
+
+  /* Compact icon-grid: 3 columns, icon above name */
+  .skills-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+  }
+
+  .skill-card {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0.75rem 0.4rem;
+    gap: 0.45rem;
+  }
+
+  .skill-body h3 {
+    font-size: 0.75rem;
+    margin-bottom: 0;
+  }
+
+  /* description only shown for languages, not skills — keep it small */
+  .skill-body p {
+    font-size: 0.72rem;
   }
 }
