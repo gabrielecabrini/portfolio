@@ -42,33 +42,6 @@
       </div>
     </div>
 
-    <!-- Education -->
-    <div class="exp-section">
-      <h2>{{ 'experience.edu.title' | translate }}</h2>
-
-      <div class="timeline">
-        @for (edu of education; track edu.id) {
-          <div class="timeline-item">
-            <div class="item-logo placeholder">
-              {{ edu.institution.charAt(0) }}
-            </div>
-            <div class="item-body">
-              <div class="item-header">
-                <div>
-                  <h3 class="item-title">{{ edu.qualificationKey | translate }}</h3>
-                  <span class="item-subtitle">{{ edu.institution }}</span>
-                  @if (edu.location) {
-                    <span class="item-subtitle"> · {{ edu.location }}</span>
-                  }
-                </div>
-                <span class="item-date">{{ edu.startDate }} – {{ edu.endDate }}</span>
-              </div>
-            </div>
-          </div>
-        }
-      </div>
-    </div>
-
     <!-- Skills -->
     <div class="exp-section">
       <h2>{{ 'experience.skills.title' | translate }}</h2>
