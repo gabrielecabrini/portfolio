@@ -10,14 +10,15 @@
       @for (project of projects; track project.id) {
         <article class="project-card">
 
-          @if (project.imageUrl) {
-            <div class="card-image">
-              <img [src]="project.imageUrl" [alt]="project.titleKey | translate" />
-            </div>
-          }
-
           <div class="card-body">
-            <h3>{{ project.titleKey | translate }}</h3>
+            <div class="card-title">
+              @if (project.imageUrl) {
+                <img class="card-logo"
+                     [src]="project.imageUrl"
+                     [alt]="project.titleKey | translate" />
+              }
+              <h3>{{ project.titleKey | translate }}</h3>
+            </div>
             <p>{{ project.descriptionKey | translate }}</p>
           </div>
 

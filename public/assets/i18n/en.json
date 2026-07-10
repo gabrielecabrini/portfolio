@@ -63,5 +63,8 @@
   "projects.tcp-proxy.description": "Configurable TCP proxy written in Rust using the Tokio async runtime, designed to handle multiple concurrent connections efficiently.",
 
   "projects.sossoldi.title": "Sossoldi",
-  "projects.sossoldi.description": "Open source Flutter app for personal wealth management and Net Worth tracking."
+  "projects.sossoldi.description": "Open source Flutter app for personal wealth management and Net Worth tracking.",
+
+  "projects.winboat.title": "WinBoat",
+  "projects.winboat.description": "Open source app to run Windows applications natively on Linux, with an elegant GUI and automated setup via Docker/Podman and QEMU/KVM."
 }

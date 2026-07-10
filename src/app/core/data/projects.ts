@@ -16,7 +16,16 @@ export const PROJECTS: Project[] = [
     descriptionKey: 'projects.brainfucker.description',
     tags: ['Go', 'LLVM IR', 'Brainfuck'],
     repoUrl: 'https://github.com/gabrielecabrini/brainfucker',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Hello_World_Brainfuck.png/250px-Hello_World_Brainfuck.png',
+    imageUrl: 'https://www.pngkey.com/png/detail/624-6245823_hello-world-brainfuck-brainfuck-hello-world.png',
+  },
+  {
+    id: 'winboat',
+    titleKey: 'projects.winboat.title',
+    descriptionKey: 'projects.winboat.description',
+    tags: ['TypeScript', 'Docker', 'QEMU'],
+    repoUrl: 'https://github.com/TibixDev/winboat',
+    url: 'https://www.winboat.app',
+    imageUrl: 'https://www.winboat.app/_astro/winboat_logo.NqN8dmd9.svg',
   },
   {
     id: 'rdoh',
