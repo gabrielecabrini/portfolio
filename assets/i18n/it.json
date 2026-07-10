@@ -9,14 +9,18 @@
   "home.greeting": "Ciao, sono",
   "home.subtitle": "Fullstack Software Developer",
   "home.tagline": "Sviluppo software fullstack con interesse per l'open source e il mondo Linux, dalla JVM al browser, dal backend all'infrastruttura.",
+  "home.cta.cv": "CV",
   "home.cta.projects": "Vedi i progetti",
   "home.cta.experience": "Esperienze",
   "home.cta.about": "Chi sono",
 
   "about.title": "Chi sono",
+  "about.cv.link": "Curriculum Vitae",
   "about.bio": "Sono Gabriele, un fullstack software developer del nord Italia, vicino a Bergamo. Ho esperienza nello sviluppo di applicazioni enterprise e sistemi ERP. Lavoro sull'intero stack — dal backend Java/Spring Boot al frontend Angular, passando per l'infrastruttura con Docker, Kubernetes e ambienti Linux. Appassionato di open source e del mondo Linux, cerco sempre soluzioni eleganti e scalabili.",
   "about.links.title": "Contatti e profili",
 
+  "experience.edu.title": "Formazione",
+  "experience.edu.afp.qualification": "Qualifica di Amministratore Informatico / Gestionale (Economia)",
   "experience.work.title": "Esperienza lavorativa",
   "experience.skills.title": "Skill",
   "experience.languages.title": "Lingue",
@@ -68,6 +72,14 @@
 
   "projects.winboat.title": "WinBoat",
   "projects.winboat.description": "Applicazione open source per eseguire app Windows nativamente su Linux, con un'interfaccia grafica elegante e configurazione automatizzata tramite Docker/Podman e QEMU/KVM.",
+
+  "cv.download": "Scarica PDF",
+  "cv.downloading": "Generazione in corso…",
+  "cv.lang.hint": "Lingua: cambia con il toggle nell'header",
+  "cv.mobile.hint": "L'anteprima del CV è disponibile su desktop. Qui puoi scaricare direttamente il PDF.",
+  "cv.location": "Bergamo, Italia",
+  "cv.section.profile": "Profilo",
+  "cv.section.projects": "Progetti",
 
   "notFound.code": "404",
   "notFound.title": "Pagina non trovata",
