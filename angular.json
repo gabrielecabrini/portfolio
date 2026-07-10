@@ -69,7 +69,9 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "cname": "www.gabrielecabrini.it"
+            "cname": "www.gabrielecabrini.it",
+            "name": "Gabriele Cabrini",
+            "email": "gabrielecabriniiii@gmail.com"
           }
         }
       }
