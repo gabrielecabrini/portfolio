@@ -29,12 +29,19 @@
 }
 
 .avatar {
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--border);
   flex-shrink: 0;
+}
+
+@media (min-width: 769px) {
+  .avatar {
+    width: 140px;
+    height: 140px;
+  }
 }
 
 .section-header {

@@ -13,7 +13,7 @@
   border-radius: 50%;
   color: var(--muted);
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s, color 0.15s, opacity 0.2s, transform 0.2s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, opacity 0.2s, transform 0.2s, bottom 0.2s ease;
   animation: fade-in 0.2s ease both;
 }
 

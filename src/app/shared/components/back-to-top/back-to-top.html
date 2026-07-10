@@ -1,6 +1,7 @@
 @if (visible()) {
   <button
     class="back-to-top"
+    [style.bottom]="bottomStyle()"
     (click)="scrollToTop()"
     aria-label="Torna in cima"
   >
