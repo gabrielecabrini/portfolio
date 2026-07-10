@@ -67,6 +67,14 @@ nav a.active {
   color: var(--accent);
 }
 
+.flag-icon {
+  width: 16px;
+  height: 11px;
+  object-fit: cover;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
 /* ── Tablet: compact single row ── */
 @media (max-width: 768px) {
   nav {

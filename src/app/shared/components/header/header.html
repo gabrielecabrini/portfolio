@@ -16,7 +16,11 @@
       </a>
     </nav>
     <button class="lang-toggle" (click)="i18n.toggle()" [attr.aria-label]="'nav.switchLang' | translate">
-      {{ (i18n.currentLang() ?? 'it') === 'it' ? '🇬🇧 EN' : '🇮🇹 IT' }}
+      @if ((i18n.currentLang() ?? 'it') === 'it') {
+        <img src="https://flagcdn.com/gb.svg" alt="" class="flag-icon" aria-hidden="true" /> EN
+      } @else {
+        <img src="https://flagcdn.com/it.svg" alt="" class="flag-icon" aria-hidden="true" /> IT
+      }
     </button>
   </div>
 </header>
