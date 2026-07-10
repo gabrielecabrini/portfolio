@@ -9,7 +9,7 @@ export const WORK_EXPERIENCES: WorkExperience[] = [
     roleKey: 'experience.work.sandrini.role',
     startDate: '2023-04',
     descriptionKey: 'experience.work.sandrini.description',
-    logoUrl: 'https://sc02.alicdn.com/kf/H759c70944f8a4253b771921bf6a9ee5eR.png',
+    logoUrl: 'assets/images/logos/sandrini-metalli.webp',
   },
   {
     id: 'skyblockpuro',
@@ -18,7 +18,7 @@ export const WORK_EXPERIENCES: WorkExperience[] = [
     startDate: '2024-01',
     endDate: '2025-09',
     descriptionKey: 'experience.work.skyblockpuro.description',
-    logoUrl: 'https://i.postimg.cc/9FD9nVsR/e54cca6c3d295e78368ae99a66a5312d.jpg',
+    logoUrl: 'assets/images/logos/skyblockpuro.webp',
   },
   {
     id: 'r1se-gaming',
@@ -27,7 +27,7 @@ export const WORK_EXPERIENCES: WorkExperience[] = [
     startDate: '2022-07',
     endDate: '2023-03',
     descriptionKey: 'experience.work.r1se.description',
-    logoUrl: 'https://media.licdn.com/dms/image/v2/C4D0BAQHwtkeGoSsDVw/company-logo_200_200/company-logo_200_200/0/1677565726840/teleios_fz_logo?e=1785369600&v=beta&t=EiismrDde5D43V3YzHZw86tWfOdIQ4-kKSS9uZXn090',
+    logoUrl: 'assets/images/logos/r1se-gaming.webp',
   },
   {
     id: 'metamc-networks',
@@ -36,7 +36,7 @@ export const WORK_EXPERIENCES: WorkExperience[] = [
     startDate: '2022-04',
     endDate: '2023-03',
     descriptionKey: 'experience.work.metamc.description',
-    logoUrl: 'https://www.metamc.it/img/logo.png',
+    logoUrl: 'assets/images/logos/metamc-networks.webp',
   },
   {
     id: 'devroom',
@@ -45,7 +45,7 @@ export const WORK_EXPERIENCES: WorkExperience[] = [
     startDate: '2022-08',
     endDate: '2024-02',
     descriptionKey: 'experience.work.devroom.description',
-    logoUrl: 'https://www.devroomteam.com/_next/image?url=%2Fdevroom_icon.png&w=64&q=75',
+    logoUrl: 'assets/images/logos/devroom.png',
   },
   {
     id: 'songoda',
@@ -54,7 +54,7 @@ export const WORK_EXPERIENCES: WorkExperience[] = [
     startDate: '2022-01',
     endDate: '2022-05',
     descriptionKey: 'experience.work.songoda.description',
-    logoUrl: 'https://songoda.com/branding/icon.png',
+    logoUrl: 'assets/images/logos/songoda.webp',
   },
   {
     id: 'techscode',
@@ -63,7 +63,7 @@ export const WORK_EXPERIENCES: WorkExperience[] = [
     startDate: '2021-01',
     endDate: '2022-03',
     descriptionKey: 'experience.work.techscode.description',
-    logoUrl: 'https://techscode.com/images/logo.png',
+    logoUrl: 'assets/images/logos/techscode.webp',
   },
 ];
 
