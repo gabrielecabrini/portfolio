@@ -12,6 +12,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     provideTranslateService({ fallbackLang: 'it' }),
-    provideTranslateHttpLoader(),  // default: /assets/i18n/{lang}.json — overrides after provideTranslateService
+    provideTranslateHttpLoader({ prefix: 'assets/i18n/' }),
   ],
 };
