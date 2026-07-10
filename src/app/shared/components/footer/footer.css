@@ -17,3 +17,11 @@ footer {
   color: var(--muted);
   font-size: 0.82rem;
 }
+
+.repo-link {
+  transition: color 0.15s;
+}
+
+.repo-link:hover {
+  color: var(--accent);
+}
