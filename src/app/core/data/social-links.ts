@@ -27,4 +27,11 @@ export const SOCIAL_LINKS: SocialLink[] = [
     href: 'mailto:gabriele.cabrini@proton.me',
     iconUrl: 'https://cdn.simpleicons.org/protonmail',
   },
+  {
+    name: 'PayPal',
+    href: 'https://paypal.me/gabrielecabrinii',
+    iconUrl: 'https://cdn.simpleicons.org/paypal',
+    target: '_blank',
+    rel: 'noopener noreferrer',
+  },
 ];
