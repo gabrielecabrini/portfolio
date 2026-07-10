@@ -2,6 +2,13 @@
 <html lang="it" data-beasties-container>
 <head>
   <meta charset="utf-8">
+  <script>
+    try {
+      var t = localStorage.getItem('theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    } catch(e) {}
+  </script>
   <title>Gabriele Cabrini — Portfolio</title>
   <meta name="description" content="Fullstack Software Developer based in northern Italy. Java/Spring Boot, Angular, Docker, Kubernetes.">
   <base href="/">
@@ -21,6 +28,9 @@
   <meta name="twitter:title" content="Gabriele Cabrini — Fullstack Software Developer">
   <meta name="twitter:description" content="Fullstack Software Developer based in northern Italy. Java/Spring Boot, Angular, Docker, Kubernetes.">
   <meta name="twitter:image" content="https://www.gabrielecabrini.it/assets/images/logo.png">
+
+  <meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f8f8f8" media="(prefers-color-scheme: light)">
 
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link rel="preconnect" href="https://cdn.simpleicons.org">
@@ -48,8 +58,8 @@
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
-<style>:root{--bg:#0d0d0d;--surface:#161616;--surface-hover:#1e1e1e;--border:#2a2a2a;--text:#e8e8e8;--muted:#888888;--accent:#7c6ef5;--accent-dim:#5b50c9;--font:system-ui, -apple-system, "Segoe UI", sans-serif;--font-mono:"JetBrains Mono", "Fira Code", "Cascadia Code", monospace;--radius:8px;--radius-sm:4px;--max-w:900px;--header-h:60px}@media(max-width:480px){:root{--header-h:98px}}*,*:before,*:after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important}}</style><link rel="stylesheet" href="styles-YW6Z3G6Q.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles-YW6Z3G6Q.css"></noscript></head>
+<style>:root{--bg:#0d0d0d;--surface:#161616;--surface-hover:#1e1e1e;--border:#2a2a2a;--text:#e8e8e8;--muted:#888888;--accent:#7c6ef5;--accent-dim:#5b50c9;--font:system-ui, -apple-system, "Segoe UI", sans-serif;--font-mono:"JetBrains Mono", "Fira Code", "Cascadia Code", monospace;--radius:8px;--radius-sm:4px;--max-w:900px;--header-h:60px}@media(max-width:480px){:root{--header-h:98px}}*,*:before,*:after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-delay:0ms!important;transition-duration:.01ms!important}}</style><link rel="stylesheet" href="styles-Q7FDX55F.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles-Q7FDX55F.css"></noscript></head>
 <body>
   <app-root></app-root>
-<link rel="modulepreload" href="chunk-V5DRBX2V.js"><link rel="modulepreload" href="chunk-Y2XQ7Y4K.js"><link rel="modulepreload" href="chunk-AS3JHRS6.js"><script src="main-HYTNT7QY.js" type="module"></script></body>
+<link rel="modulepreload" href="chunk-F3CVPISW.js"><link rel="modulepreload" href="chunk-EIA75SU2.js"><link rel="modulepreload" href="chunk-MEJODX7O.js"><script src="main-2HI3Z5F6.js" type="module"></script></body>
 </html>
