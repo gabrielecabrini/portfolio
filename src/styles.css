@@ -2,3 +2,16 @@
 @import './styles/_reset.css';
 @import './styles/_typography.css';
 @import './styles/_animations.css';
+
+@media print {
+  app-header,
+  app-footer,
+  app-back-to-top {
+    display: none !important;
+  }
+
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}

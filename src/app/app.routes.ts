@@ -17,6 +17,10 @@ export const routes: Routes = [
     loadComponent: () => import('./features/projects/projects-list/projects-list').then(m => m.ProjectsList),
   },
   {
+    path: 'cv',
+    loadComponent: () => import('./features/cv/cv').then(m => m.Cv),
+  },
+  {
     path: '**',
     loadComponent: () => import('./features/not-found/not-found').then(m => m.NotFound),
   },

@@ -1,0 +1,336 @@
+/* ── Screen wrapper ── */
+.cv-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 820px;
+  margin: 2rem auto 1rem;
+  padding: 0 1rem;
+}
+
+.cv-lang-hint {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.cv-print-btn {
+  padding: 0.5rem 1.25rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.cv-print-btn:hover {
+  border-color: var(--accent);
+  background: var(--surface-hover);
+}
+
+/* ── Paper card ── */
+.cv-page {
+  max-width: 820px;
+  margin: 0 auto 4rem;
+  padding: 48px 56px;
+  background: #fff;
+  color: #111;
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.10);
+  border-radius: 4px;
+}
+
+/* ── Header ── */
+.cv-header {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-bottom: 0;
+}
+
+.cv-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1px solid #ddd;
+}
+
+.cv-header-info {
+  flex: 1;
+}
+
+.cv-name {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 0.2rem;
+  line-height: 1.2;
+}
+
+.cv-role {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 0.2rem;
+}
+
+.cv-location {
+  font-size: 0.88rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.cv-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+}
+
+.cv-contact-link {
+  font-size: 0.82rem;
+  color: #444;
+  text-decoration: none;
+}
+
+.cv-contact-link:hover {
+  color: #111;
+}
+
+/* ── Divider ── */
+.cv-rule {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 1.5rem 0;
+}
+
+/* ── Sections ── */
+.cv-section {
+  margin-bottom: 0;
+}
+
+.cv-section-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+/* ── Bio ── */
+.cv-bio {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: #333;
+}
+
+/* ── Work / Cert entries ── */
+.cv-entry,
+.cv-cert-entry {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 0 1.5rem;
+  margin-bottom: 1.1rem;
+}
+
+.cv-entry:last-child,
+.cv-cert-entry:last-child {
+  margin-bottom: 0;
+}
+
+.cv-entry-meta,
+.cv-cert-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding-top: 1px;
+}
+
+.cv-entry-date {
+  font-size: 0.78rem;
+  color: #555;
+  white-space: nowrap;
+}
+
+.cv-entry-company {
+  font-size: 0.8rem;
+  color: #444;
+  font-weight: 500;
+}
+
+.cv-entry-role {
+  font-size: 0.9rem;
+  color: #111;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.cv-entry-desc {
+  font-size: 0.82rem;
+  color: #444;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.cv-cert-name {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: #111;
+  text-decoration: none;
+}
+
+/* ── Skills ── */
+.cv-skills-list {
+  font-size: 0.88rem;
+  color: #333;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* ── Languages ── */
+.cv-lang-grid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.cv-lang-entry {
+  font-size: 0.88rem;
+  color: #333;
+}
+
+/* ── Projects ── */
+.cv-proj-entry {
+  margin-bottom: 0.9rem;
+}
+
+.cv-proj-entry:last-child {
+  margin-bottom: 0;
+}
+
+.cv-proj-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.2rem;
+}
+
+.cv-proj-header strong {
+  font-size: 0.9rem;
+  color: #111;
+}
+
+.cv-proj-tags {
+  font-size: 0.78rem;
+  color: #666;
+}
+
+/* ── GDPR disclaimer ── */
+.cv-gdpr {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e5e5;
+  font-size: 0.72rem;
+  color: #888;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* ── Mobile: download-only view ── */
+.cv-mobile-msg {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .cv-actions {
+    display: none;
+  }
+
+  .cv-mobile-msg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 4rem 1.5rem;
+    text-align: center;
+  }
+
+  .cv-mobile-msg p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    max-width: 32ch;
+    line-height: 1.6;
+  }
+
+  .cv-page {
+    display: none;
+  }
+}
+
+/* ── Print ── */
+@media print {
+  .cv-actions {
+    display: none !important;
+  }
+
+  .cv-page {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 0;
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 15mm 20mm;
+  }
+
+  .cv-name,
+  .cv-role,
+  .cv-location,
+  .cv-section-title,
+  .cv-entry-role,
+  .cv-entry-company,
+  .cv-bio,
+  .cv-entry-desc,
+  .cv-skills-list,
+  .cv-lang-entry,
+  .cv-proj-header strong {
+    color: #000 !important;
+  }
+
+  .cv-entry-date,
+  .cv-proj-tags,
+  .cv-location {
+    color: #444 !important;
+  }
+
+  .cv-contact-link,
+  .cv-cert-name {
+    color: #000 !important;
+    text-decoration: none !important;
+  }
+
+  .cv-rule {
+    border-color: #bbb !important;
+  }
+
+  .cv-photo {
+    border-color: #ccc !important;
+  }
+
+  .cv-entry,
+  .cv-cert-entry,
+  .cv-proj-entry {
+    break-inside: avoid;
+  }
+
+  .cv-section {
+    break-inside: avoid;
+  }
+}

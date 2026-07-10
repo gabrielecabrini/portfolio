@@ -17,7 +17,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
   },
   {
     name: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/gabriele-cabrini-b41ab423b/',
+    href: 'https://www.linkedin.com/in/gabrielecabrini/',
     iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linkedin/linkedin-original.svg',
     target: '_blank',
     rel: 'noopener noreferrer',

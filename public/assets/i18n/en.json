@@ -9,14 +9,18 @@
   "home.greeting": "Hi, I'm",
   "home.subtitle": "Fullstack Software Developer",
   "home.tagline": "I develop fullstack software with an interest in open source and the Linux world, from the JVM to the browser, from backend to infrastructure.",
+  "home.cta.cv": "CV",
   "home.cta.projects": "View projects",
   "home.cta.experience": "Experience",
   "home.cta.about": "About me",
 
   "about.title": "About",
+  "about.cv.link": "Curriculum Vitae",
   "about.bio": "I'm Gabriele, a fullstack software developer based in northern Italy, near Bergamo. I have experience building enterprise applications and ERP systems. I work across the full stack — from Java/Spring Boot backends to Angular frontends, down to infrastructure with Docker, Kubernetes, and Linux environments. Passionate about open source and the Linux world, I always look for elegant and scalable solutions.",
   "about.links.title": "Contact & profiles",
 
+  "experience.edu.title": "Education",
+  "experience.edu.afp.qualification": "Qualification: IT and Management Administrator (Economics)",
   "experience.work.title": "Work experience",
   "experience.skills.title": "Skills",
   "experience.languages.title": "Languages",
@@ -68,6 +72,14 @@
 
   "projects.winboat.title": "WinBoat",
   "projects.winboat.description": "Open source app to run Windows applications natively on Linux, with an elegant GUI and automated setup via Docker/Podman and QEMU/KVM.",
+
+  "cv.download": "Download PDF",
+  "cv.downloading": "Generating…",
+  "cv.lang.hint": "Language: switch with the toggle in the header",
+  "cv.mobile.hint": "The CV preview is available on desktop. Here you can download the PDF directly.",
+  "cv.location": "Bergamo, Italy",
+  "cv.section.profile": "Profile",
+  "cv.section.projects": "Projects",
 
   "notFound.code": "404",
   "notFound.title": "Page not found",

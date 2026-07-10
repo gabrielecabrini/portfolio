@@ -1,0 +1,160 @@
+<!-- ── Desktop toolbar ── -->
+<div class="cv-actions">
+  <span class="cv-lang-hint">{{ 'cv.lang.hint' | translate }}</span>
+  <button class="cv-print-btn" (click)="downloadPdf()" [disabled]="downloading()">
+    {{ downloading() ? ('cv.downloading' | translate) : ('cv.download' | translate) }}
+  </button>
+</div>
+
+<!-- ── Mobile: download only ── -->
+<div class="cv-mobile-msg">
+  <p>{{ 'cv.mobile.hint' | translate }}</p>
+  <button class="cv-print-btn" (click)="downloadPdf()" [disabled]="downloading()">
+    {{ downloading() ? ('cv.downloading' | translate) : ('cv.download' | translate) }}
+  </button>
+</div>
+
+<!-- ── CV paper ── -->
+<div class="cv-page">
+
+  <!-- Header -->
+  <header class="cv-header">
+    <img class="cv-photo" src="assets/images/pfp.jpeg" alt="Gabriele Cabrini" decoding="async" />
+    <div class="cv-header-info">
+      <h1 class="cv-name">Gabriele Cabrini</h1>
+      <p class="cv-role">{{ 'home.subtitle' | translate }}</p>
+      <p class="cv-location">{{ 'cv.location' | translate }}</p>
+      <div class="cv-contacts">
+        @for (link of contactLinks; track link.href) {
+          <a [href]="link.href" target="_blank" rel="noopener noreferrer" class="cv-contact-link">
+            {{ displayUrl(link.href) }}
+          </a>
+        }
+      </div>
+    </div>
+  </header>
+
+  <hr class="cv-rule" />
+
+  <!-- Profile -->
+  <section class="cv-section">
+    <h2 class="cv-section-title">{{ 'cv.section.profile' | translate }}</h2>
+    <p class="cv-bio">{{ 'about.bio' | translate }}</p>
+  </section>
+
+  <hr class="cv-rule" />
+
+  <!-- Work Experience -->
+  <section class="cv-section">
+    <h2 class="cv-section-title">{{ 'experience.work.title' | translate }}</h2>
+    @for (job of workExperiences; track job.id) {
+      <div class="cv-entry">
+        <div class="cv-entry-meta">
+          <span class="cv-entry-date">{{ job.startDate | dateRange:job.endDate:(i18n.currentLang() ?? 'it') }}</span>
+          <span class="cv-entry-company">{{ job.company }}</span>
+        </div>
+        <div class="cv-entry-body">
+          <strong class="cv-entry-role">{{ job.roleKey | translate }}</strong>
+          <p class="cv-entry-desc">{{ job.descriptionKey | translate }}</p>
+        </div>
+      </div>
+    }
+  </section>
+
+  <hr class="cv-rule" />
+
+  <!-- Education -->
+  <section class="cv-section">
+    <h2 class="cv-section-title">{{ 'experience.edu.title' | translate }}</h2>
+    @for (edu of education; track edu.id) {
+      <div class="cv-entry">
+        <div class="cv-entry-meta">
+          <span class="cv-entry-date">{{ edu.startDate }} – {{ edu.endDate }}</span>
+          <span class="cv-entry-company">{{ edu.institution }}</span>
+          @if (edu.location) {
+            <span class="cv-entry-date">{{ edu.location }}</span>
+          }
+        </div>
+        <div class="cv-entry-body">
+          <strong class="cv-entry-role">{{ edu.qualificationKey | translate }}</strong>
+        </div>
+      </div>
+    }
+  </section>
+
+  <hr class="cv-rule" />
+
+  <!-- Skills -->
+  <section class="cv-section">
+    <h2 class="cv-section-title">{{ 'experience.skills.title' | translate }}</h2>
+    <p class="cv-skills-list">
+      @for (skill of skills; track skill.id; let last = $last) {
+        {{ skill.name }}@if (!last) { · }
+      }
+    </p>
+  </section>
+
+  <hr class="cv-rule" />
+
+  <!-- Languages -->
+  <section class="cv-section">
+    <h2 class="cv-section-title">{{ 'experience.languages.title' | translate }}</h2>
+    <div class="cv-lang-grid">
+      @for (lang of languages; track lang.id) {
+        <div class="cv-lang-entry">
+          <strong>{{ lang.name }}</strong>
+          @if (lang.descriptionKey) {
+            <span> — {{ lang.descriptionKey | translate }}</span>
+          }
+        </div>
+      }
+    </div>
+  </section>
+
+  @if (certifications.length > 0) {
+    <hr class="cv-rule" />
+
+    <!-- Certifications -->
+    <section class="cv-section">
+      <h2 class="cv-section-title">{{ 'experience.certs.title' | translate }}</h2>
+      @for (cert of certifications; track cert.id) {
+        <div class="cv-cert-entry">
+          <div class="cv-cert-meta">
+            <span class="cv-entry-date">{{ cert.date | dateFormat:(i18n.currentLang() ?? 'it') }}</span>
+            <span>{{ cert.issuer }}</span>
+          </div>
+          <div class="cv-cert-body">
+            @if (cert.url) {
+              <a [href]="cert.url" target="_blank" rel="noopener noreferrer" class="cv-cert-name">{{ cert.name }} ↗</a>
+            } @else {
+              <strong>{{ cert.name }}</strong>
+            }
+          </div>
+        </div>
+      }
+    </section>
+  }
+
+  <hr class="cv-rule" />
+
+  <!-- Projects -->
+  <section class="cv-section">
+    <h2 class="cv-section-title">{{ 'cv.section.projects' | translate }}</h2>
+    @for (proj of projects; track proj.id) {
+      <div class="cv-proj-entry">
+        <div class="cv-proj-header">
+          <strong>{{ proj.titleKey | translate }}</strong>
+          <span class="cv-proj-tags">{{ proj.tags.join(' · ') }}</span>
+        </div>
+        <p class="cv-entry-desc">{{ proj.descriptionKey | translate }}</p>
+      </div>
+    }
+  </section>
+
+  @if ((i18n.currentLang() ?? 'it') === 'it') {
+    <p class="cv-gdpr">
+      Autorizzo il trattamento dei dati personali contenuti nel mio curriculum vitae ai sensi del D.&nbsp;Lgs.&nbsp;196/2003 e del Regolamento UE 2016/679 (GDPR).
+    </p>
+  }
+
+</div>

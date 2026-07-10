@@ -1,6 +1,7 @@
 import { WorkExperience } from '../models/work-experience.model';
 import { Skill } from '../models/skill.model';
 import { Certification } from '../models/certification.model';
+import { Education } from '../models/education.model';
 
 export const WORK_EXPERIENCES: WorkExperience[] = [
   {
@@ -172,6 +173,17 @@ export const LANGUAGES: Skill[] = [
     name: 'English',
     descriptionKey: 'experience.lang.english.level',
     iconUrl: 'https://flagcdn.com/gb.svg',
+  },
+];
+
+export const EDUCATION: Education[] = [
+  {
+    id: 'afp-patronato',
+    institution: 'AFP Patronato S. Vincenzo',
+    qualificationKey: 'experience.edu.afp.qualification',
+    startDate: '2019',
+    endDate: '2022',
+    location: 'Endine Gaiano (BG)',
   },
 ];
 
