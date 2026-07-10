@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Home } from './features/home/home';
 
 export const routes: Routes = [
+  // Home is eager — keeps FCP fast for the landing page
   { path: '', component: Home },
   {
     path: 'about',
@@ -13,7 +14,7 @@ export const routes: Routes = [
   },
   {
     path: 'projects',
-    loadChildren: () => import('./features/projects/projects.routes').then(m => m.projectsRoutes),
+    loadComponent: () => import('./features/projects/projects-list/projects-list').then(m => m.ProjectsList),
   },
   { path: '**', redirectTo: '' },
 ];

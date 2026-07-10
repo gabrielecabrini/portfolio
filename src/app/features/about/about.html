@@ -18,39 +18,18 @@
     </div>
 
     <div class="links-grid">
-
-      <a href="https://github.com/gabrielecabrini" target="_blank" rel="noopener noreferrer" class="link-card">
-        <span class="link-icon">
-          <img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub" class="link-img" />
-        </span>
-        <span class="link-name">GitHub</span>
-        <span class="link-arrow">↗</span>
-      </a>
-
-      <a href="https://www.linkedin.com/in/gabriele-cabrini-b41ab423b/" target="_blank" rel="noopener noreferrer" class="link-card">
-        <span class="link-icon">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linkedin/linkedin-original.svg" alt="LinkedIn" class="link-img" />
-        </span>
-        <span class="link-name">LinkedIn</span>
-        <span class="link-arrow">↗</span>
-      </a>
-
-      <a href="https://t.me/gabrielecabrini" target="_blank" rel="noopener noreferrer" class="link-card">
-        <span class="link-icon">
-          <img src="https://cdn.simpleicons.org/telegram" alt="Telegram" class="link-img" />
-        </span>
-        <span class="link-name">Telegram</span>
-        <span class="link-arrow">↗</span>
-      </a>
-
-      <a href="mailto:gabriele.cabrini@proton.me" class="link-card">
-        <span class="link-icon">
-          <img src="https://cdn.simpleicons.org/protonmail" alt="Email" class="link-img" />
-        </span>
-        <span class="link-name">gabriele.cabrini@proton.me</span>
-        <span class="link-arrow">↗</span>
-      </a>
-
+      @for (link of links; track link.href) {
+        <a [href]="link.href"
+           [attr.target]="link.target ?? null"
+           [attr.rel]="link.rel ?? null"
+           class="link-card">
+          <span class="link-icon">
+            <img [src]="link.iconUrl" [alt]="link.name" class="link-img" />
+          </span>
+          <span class="link-name">{{ link.name }}</span>
+          <span class="link-arrow">↗</span>
+        </a>
+      }
     </div>
 
   </div>

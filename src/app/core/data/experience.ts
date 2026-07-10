@@ -1,6 +1,6 @@
-import { WorkExperience } from '../../app/core/models/work-experience.model';
-import { Skill } from '../../app/core/models/skill.model';
-import { Certification } from '../../app/core/models/certification.model';
+import { WorkExperience } from '../models/work-experience.model';
+import { Skill } from '../models/skill.model';
+import { Certification } from '../models/certification.model';
 
 export const WORK_EXPERIENCES: WorkExperience[] = [
   {
@@ -168,7 +168,6 @@ export const LANGUAGES: Skill[] = [
     descriptionKey: 'experience.lang.english.level',
     iconUrl: 'https://flagcdn.com/gb.svg',
   },
-
 ];
 
 export const CERTIFICATIONS: Certification[] = [

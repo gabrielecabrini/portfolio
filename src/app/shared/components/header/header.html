@@ -15,8 +15,8 @@
         {{ 'nav.projects' | translate }}
       </a>
     </nav>
-    <button class="lang-toggle" (click)="toggle()" [attr.aria-label]="'nav.switchLang' | translate">
-      {{ i18n.currentLang() === 'it' ? '🇬🇧 EN' : '🇮🇹 IT' }}
+    <button class="lang-toggle" (click)="i18n.toggle()" [attr.aria-label]="'nav.switchLang' | translate">
+      {{ (i18n.currentLang() ?? 'it') === 'it' ? '🇬🇧 EN' : '🇮🇹 IT' }}
     </button>
   </div>
 </header>
