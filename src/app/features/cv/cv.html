@@ -50,7 +50,7 @@
     @for (job of workExperiences; track job.id) {
       <div class="cv-entry">
         <div class="cv-entry-meta">
-          <span class="cv-entry-date">{{ job.startDate | dateRange:job.endDate:(i18n.currentLang() ?? 'it') }}</span>
+          <span class="cv-entry-date">{{ job.startDate | dateRange:job.endDate:i18n.lang() }}</span>
           <span class="cv-entry-company">{{ job.company }}</span>
         </div>
         <div class="cv-entry-body">
@@ -120,7 +120,7 @@
       @for (cert of certifications; track cert.id) {
         <div class="cv-cert-entry">
           <div class="cv-cert-meta">
-            <span class="cv-entry-date">{{ cert.date | dateFormat:(i18n.currentLang() ?? 'it') }}</span>
+            <span class="cv-entry-date">{{ cert.date | dateFormat:i18n.lang() }}</span>
             <span>{{ cert.issuer }}</span>
           </div>
           <div class="cv-cert-body">
@@ -151,7 +151,7 @@
     }
   </section>
 
-  @if ((i18n.currentLang() ?? 'it') === 'it') {
+  @if (i18n.lang() === 'it') {
     <p class="cv-gdpr">
       Autorizzo il trattamento dei dati personali contenuti nel mio curriculum vitae ai sensi del D.&nbsp;Lgs.&nbsp;196/2003 e del Regolamento UE 2016/679 (GDPR).
     </p>

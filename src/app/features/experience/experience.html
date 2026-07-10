@@ -33,7 +33,7 @@
                     }
                   </span>
                 </div>
-                <span class="item-date">{{ job.startDate | dateRange:job.endDate:(i18n.currentLang() ?? 'it') }}</span>
+                <span class="item-date">{{ job.startDate | dateRange:job.endDate:i18n.lang() }}</span>
               </div>
               <p class="item-desc">{{ job.descriptionKey | translate }}</p>
             </div>
@@ -117,7 +117,7 @@
                 }
               </h3>
               <span class="cert-issuer">{{ cert.issuer }}</span>
-              <span class="cert-date">{{ cert.date | dateFormat:(i18n.currentLang() ?? 'it') }}</span>
+              <span class="cert-date">{{ cert.date | dateFormat:i18n.lang() }}</span>
             </div>
           </div>
         }

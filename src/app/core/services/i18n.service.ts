@@ -1,4 +1,4 @@
-import { effect, inject, Injectable, Signal } from '@angular/core';
+import { computed, effect, inject, Injectable, Signal } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -11,6 +11,7 @@ export class I18nService {
   private readonly translate = inject(TranslateService);
   private readonly document = inject(DOCUMENT);
   readonly currentLang: Signal<string | null> = this.translate.currentLang;
+  readonly lang = computed(() => this.currentLang() ?? 'it');
 
   constructor() {
     const saved = localStorage.getItem(STORAGE_KEY) as Lang | null;
