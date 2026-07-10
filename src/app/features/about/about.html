@@ -2,7 +2,7 @@
   <div class="about-inner">
 
     <div class="profile-row">
-      <img class="avatar" src="assets/images/pfp.jpeg" alt="Gabriele Cabrini" />
+      <img class="avatar" src="assets/images/pfp.jpeg" alt="Gabriele Cabrini" decoding="async" />
       <div>
         <div class="section-header">
           <h2>{{ 'about.title' | translate }}</h2>
@@ -18,13 +18,14 @@
     </div>
 
     <div class="links-grid">
-      @for (link of links; track link.href) {
+      @for (link of links; track link.href; let i = $index) {
         <a [href]="link.href"
            [attr.target]="link.target ?? null"
            [attr.rel]="link.rel ?? null"
-           class="link-card">
+           class="link-card"
+           [style.animation-delay]="(140 + i * 60) + 'ms'">
           <span class="link-icon">
-            <img [src]="link.iconUrl" [alt]="link.name" class="link-img" />
+            <img [src]="link.iconUrl" [alt]="link.name" class="link-img" decoding="async" loading="lazy" />
           </span>
           <span class="link-name">{{ link.name }}</span>
           <span class="link-arrow">↗</span>

@@ -14,7 +14,7 @@
           <div class="timeline-item">
             @if (job.logoUrl) {
               <div class="item-logo">
-                <img [src]="job.logoUrl" [alt]="job.company" />
+                <img [src]="job.logoUrl" [alt]="job.company" decoding="async" loading="lazy" />
               </div>
             } @else {
               <div class="item-logo placeholder">
@@ -54,7 +54,7 @@
         @for (skill of skills; track skill.id) {
           <div class="skill-card">
             @if (skill.iconUrl) {
-              <img class="skill-icon" [src]="skill.iconUrl" [alt]="skill.name" />
+              <img class="skill-icon" [src]="skill.iconUrl" [alt]="skill.name" decoding="async" loading="lazy" />
             }
             <div class="skill-body">
               <h3>{{ skill.name }}</h3>
@@ -75,7 +75,7 @@
         @for (lang of languages; track lang.id) {
           <div class="skill-card">
             @if (lang.iconUrl) {
-              <img class="skill-icon" [src]="lang.iconUrl" [alt]="lang.name" />
+              <img class="skill-icon" [src]="lang.iconUrl" [alt]="lang.name" decoding="async" loading="lazy" />
             }
             <div class="skill-body">
               <h3>{{ lang.name }}</h3>
@@ -101,7 +101,7 @@
           <div class="cert-card">
             @if (cert.iconUrl) {
               <div class="cert-logo">
-                <img [src]="cert.iconUrl" [alt]="cert.issuer" />
+                <img [src]="cert.iconUrl" [alt]="cert.issuer" decoding="async" loading="lazy" />
               </div>
             } @else {
               <div class="cert-logo placeholder">

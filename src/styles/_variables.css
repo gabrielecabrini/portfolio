@@ -15,6 +15,17 @@
   --header-h: 60px;
 }
 
+[data-theme="light"] {
+  --bg: #f8f8f8;
+  --surface: #ffffff;
+  --surface-hover: #f0f0f0;
+  --border: #e0e0e0;
+  --text: #111111;
+  --muted: #555555;
+  --accent: #5b50c9;
+  --accent-dim: #4a3dc5;
+}
+
 /* On mobile the header wraps to 2 rows */
 @media (max-width: 480px) {
   :root {

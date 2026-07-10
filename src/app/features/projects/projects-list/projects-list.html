@@ -15,7 +15,8 @@
               @if (project.imageUrl) {
                 <img class="card-logo"
                      [src]="project.imageUrl"
-                     [alt]="project.titleKey | translate" />
+                     [alt]="project.titleKey | translate"
+                     decoding="async" loading="lazy" />
               }
               <h3>{{ project.titleKey | translate }}</h3>
             </div>

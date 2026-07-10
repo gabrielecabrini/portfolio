@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { I18nService } from '../../../core/services/i18n.service';
+import { ThemeService } from '../../../core/services/theme.service';
 
 @Component({
   selector: 'app-header',
@@ -12,4 +13,5 @@ import { I18nService } from '../../../core/services/i18n.service';
 })
 export class Header {
   readonly i18n = inject(I18nService);
+  readonly theme = inject(ThemeService);
 }

@@ -2,6 +2,13 @@
 <html lang="it">
 <head>
   <meta charset="utf-8">
+  <script>
+    try {
+      var t = localStorage.getItem('theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t);
+    } catch(e) {}
+  </script>
   <title>Gabriele Cabrini — Portfolio</title>
   <meta name="description" content="Fullstack Software Developer based in northern Italy. Java/Spring Boot, Angular, Docker, Kubernetes.">
   <base href="/">
@@ -21,6 +28,9 @@
   <meta name="twitter:title"       content="Gabriele Cabrini — Fullstack Software Developer">
   <meta name="twitter:description" content="Fullstack Software Developer based in northern Italy. Java/Spring Boot, Angular, Docker, Kubernetes.">
   <meta name="twitter:image"       content="https://www.gabrielecabrini.it/assets/images/logo.png">
+
+  <meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f8f8f8" media="(prefers-color-scheme: light)">
 
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link rel="preconnect" href="https://cdn.simpleicons.org">

@@ -15,6 +15,9 @@
         {{ 'nav.projects' | translate }}
       </a>
     </nav>
+    <button class="theme-toggle" (click)="theme.toggle()" [attr.aria-label]="'nav.switchTheme' | translate">
+      {{ theme.theme() === 'dark' ? '☀' : '🌙' }}
+    </button>
     <button class="lang-toggle" (click)="i18n.toggle()" [attr.aria-label]="'nav.switchLang' | translate">
       {{ (i18n.currentLang() ?? 'it') === 'it' ? '🇬🇧 EN' : '🇮🇹 IT' }}
     </button>
