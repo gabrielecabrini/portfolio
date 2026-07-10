@@ -18,6 +18,12 @@ footer {
   font-size: 0.82rem;
 }
 
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
 .repo-link {
   transition: color 0.15s;
 }
