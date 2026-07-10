@@ -2,22 +2,3 @@ main {
   min-height: calc(100vh - var(--header-h) - 60px);
   view-transition-name: main-content;
 }
-
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: var(--accent);
-  transform-origin: left;
-  transform: scaleX(0);
-  z-index: 200;
-  animation: scroll-grow linear both;
-  animation-timeline: scroll(root);
-}
-
-@keyframes scroll-grow {
-  from { transform: scaleX(0); }
-  to   { transform: scaleX(1); }
-}
