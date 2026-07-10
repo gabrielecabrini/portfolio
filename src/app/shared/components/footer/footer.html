@@ -14,6 +14,9 @@
          rel="noopener noreferrer">
         v{{ version }} ↗
       </a>
+      <button class="theme-toggle" (click)="theme.toggle()" [attr.aria-label]="'nav.switchTheme' | translate">
+        {{ theme.theme() === 'dark' ? '☀' : '🌙' }}
+      </button>
     </div>
   </div>
 </footer>

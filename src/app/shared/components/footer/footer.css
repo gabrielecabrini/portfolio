@@ -31,3 +31,18 @@ footer {
 .repo-link:hover {
   color: var(--accent);
 }
+
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 0.9rem;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.15s;
+  line-height: 1;
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+}

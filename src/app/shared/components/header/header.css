@@ -46,8 +46,7 @@ nav a.active {
   color: var(--text);
 }
 
-.lang-toggle,
-.theme-toggle {
+.lang-toggle {
   background: none;
   border: 1px solid var(--border);
   color: var(--muted);
@@ -63,8 +62,7 @@ nav a.active {
   white-space: nowrap;
 }
 
-.lang-toggle:hover,
-.theme-toggle:hover {
+.lang-toggle:hover {
   border-color: var(--accent);
   color: var(--accent);
 }
@@ -95,8 +93,7 @@ nav a.active {
     line-height: 60px;
   }
 
-  .lang-toggle,
-  .theme-toggle {
+  .lang-toggle {
     font-size: 0.78rem;
     padding: 0.2rem 0.5rem;
   }
