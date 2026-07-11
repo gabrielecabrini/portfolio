@@ -189,11 +189,18 @@ export const EDUCATION: Education[] = [
 
 export const CERTIFICATIONS: Certification[] = [
   {
+    id: 'gsom-polimi-image-text-dl',
+    name: 'Image and Text Analysis with Deep Learning',
+    issuer: 'GSOM · Politecnico di Milano',
+    date: '2026-05',
+    iconUrl: 'assets/images/logos/polimi.webp',
+  },
+  {
     id: 'kotlin-for-java-developers',
     name: 'Kotlin for Java Developers',
     issuer: 'JetBrains Academy · Coursera',
     date: '2025-06',
-    iconUrl: 'https://resources.jetbrains.com/storage/products/jetbrains/img/meta/jetbrains_250x250.png',
+    iconUrl: 'assets/images/logos/jetbrains.webp',
     url: 'https://www.coursera.org/verify/C556TLSX3HOM',
   },
 ];
