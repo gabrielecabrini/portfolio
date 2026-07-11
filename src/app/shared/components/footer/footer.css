@@ -36,11 +36,12 @@ footer {
   background: none;
   border: none;
   color: var(--muted);
-  font-size: 0.9rem;
   padding: 0;
   cursor: pointer;
   transition: color 0.15s;
-  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .theme-toggle:hover {
