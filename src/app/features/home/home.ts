@@ -1,10 +1,11 @@
 import { afterNextRender, ChangeDetectionStrategy, Component, OnDestroy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { GithubActivity } from './github-activity/github-activity';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, TranslatePipe],
+  imports: [RouterLink, TranslatePipe, GithubActivity],
   templateUrl: './home.html',
   styleUrl: './home.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,13 +1,20 @@
 <section class="hero">
   <div class="hero-inner">
-    <p class="label">{{ 'home.greeting' | translate }}</p>
-    <h1>Gabriele Cabrini</h1>
-    <p class="subtitle">{{ displayText() }}<span class="cursor" aria-hidden="true">|</span></p>
-    <p class="tagline">{{ 'home.tagline' | translate }}</p>
-    <div class="cta-row">
-      <a routerLink="/experience" class="btn-primary">{{ 'home.cta.experience' | translate }}</a>
-      <a routerLink="/about" class="btn-secondary">{{ 'home.cta.about' | translate }}</a>
-      <a routerLink="/cv" class="btn-secondary">{{ 'home.cta.cv' | translate }}</a>
+    <div class="hero-left">
+      <p class="label">{{ 'home.greeting' | translate }}</p>
+      <h1>Gabriele Cabrini</h1>
+      <p class="subtitle">{{ displayText() }}<span class="cursor" aria-hidden="true">|</span></p>
+      <p class="tagline">{{ 'home.tagline' | translate }}</p>
+      <div class="cta-row">
+        <a routerLink="/experience" class="btn-primary"
+           data-umami-event="home_cta_click" data-umami-event-target="/experience">{{ 'home.cta.experience' | translate }}</a>
+        <a routerLink="/about" class="btn-secondary"
+           data-umami-event="home_cta_click" data-umami-event-target="/about">{{ 'home.cta.about' | translate }}</a>
+        <a routerLink="/cv" class="btn-secondary"
+           data-umami-event="home_cta_click" data-umami-event-target="/cv">{{ 'home.cta.cv' | translate }}</a>
+      </div>
     </div>
+
+    <app-github-activity class="hero-right" />
   </div>
 </section>

@@ -1,0 +1,10 @@
+<div class="activity-wrapper" aria-hidden="true">
+  <span class="activity-label">// TODO: fetch from GitHub</span>
+  <div class="contrib-grid">
+    @for (item of gridItems; track $index) {
+      <div class="contrib-cell"
+           [attr.data-level]="item.level"
+           [style.animation-delay]="item.delay"></div>
+    }
+  </div>
+</div>
