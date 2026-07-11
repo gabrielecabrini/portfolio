@@ -2,7 +2,7 @@
   <div class="hero-inner">
     <p class="label">{{ 'home.greeting' | translate }}</p>
     <h1>Gabriele Cabrini</h1>
-    <p class="subtitle">{{ 'home.subtitle' | translate }}</p>
+    <p class="subtitle">{{ displayText() }}<span class="cursor" aria-hidden="true">|</span></p>
     <p class="tagline">{{ 'home.tagline' | translate }}</p>
     <div class="cta-row">
       <a routerLink="/experience" class="btn-primary">{{ 'home.cta.experience' | translate }}</a>
