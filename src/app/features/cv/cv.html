@@ -1,7 +1,8 @@
 <!-- ── Desktop toolbar ── -->
 <div class="cv-actions">
   <span class="cv-lang-hint">{{ 'cv.lang.hint' | translate }}</span>
-  <button class="cv-print-btn" (click)="downloadPdf()" [disabled]="downloading()">
+  <button class="cv-print-btn" (click)="downloadPdf()" [disabled]="downloading()"
+          data-umami-event="cv_download">
     {{ downloading() ? ('cv.downloading' | translate) : ('cv.download' | translate) }}
   </button>
 </div>
@@ -9,7 +10,8 @@
 <!-- ── Mobile: download only ── -->
 <div class="cv-mobile-msg">
   <p>{{ 'cv.mobile.hint' | translate }}</p>
-  <button class="cv-print-btn" (click)="downloadPdf()" [disabled]="downloading()">
+  <button class="cv-print-btn" (click)="downloadPdf()" [disabled]="downloading()"
+          data-umami-event="cv_download">
     {{ downloading() ? ('cv.downloading' | translate) : ('cv.download' | translate) }}
   </button>
 </div>

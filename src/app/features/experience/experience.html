@@ -26,11 +26,7 @@
                 <div>
                   <h3 class="item-title">{{ job.roleKey | translate }}</h3>
                   <span class="item-subtitle">
-                    @if (job.url) {
-                      <a [href]="job.url" target="_blank" rel="noopener noreferrer">{{ job.company }} ↗</a>
-                    } @else {
-                      {{ job.company }}
-                    }
+                    {{ job.company }}
                   </span>
                 </div>
                 <span class="item-date">{{ job.startDate | dateRange:job.endDate:i18n.lang() }}</span>
@@ -111,7 +107,9 @@
             <div class="cert-body">
               <h3 class="cert-name">
                 @if (cert.url) {
-                  <a [href]="cert.url" target="_blank" rel="noopener noreferrer">{{ cert.name }} ↗</a>
+                  <a [href]="cert.url" target="_blank" rel="noopener noreferrer"
+                     data-umami-event="cert_link_click"
+                     [attr.data-umami-event-cert]="cert.name">{{ cert.name }} ↗</a>
                 } @else {
                   {{ cert.name }}
                 }
@@ -125,7 +123,8 @@
     </div>
 
     <div class="exp-cta">
-      <a routerLink="/projects" class="btn-primary">{{ 'home.cta.projects' | translate }}</a>
+      <a routerLink="/projects" class="btn-primary"
+         data-umami-event="experience_cta_click">{{ 'home.cta.projects' | translate }}</a>
     </div>
 
   </div>

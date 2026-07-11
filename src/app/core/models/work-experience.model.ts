@@ -6,5 +6,4 @@ export interface WorkExperience {
   endDate?: string;    // "YYYY-MM" — undefined means present
   descriptionKey: string;
   logoUrl?: string;
-  url?: string;
 }

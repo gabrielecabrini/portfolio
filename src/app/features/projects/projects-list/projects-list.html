@@ -32,7 +32,9 @@
             <div class="card-links">
               @if (project.repoUrl) {
                 <a [href]="project.repoUrl" target="_blank" rel="noopener noreferrer"
-                   class="card-link">
+                   class="card-link"
+                   data-umami-event="project_repo_click"
+                   [attr.data-umami-event-project]="project.id">
                   {{ 'projects.card.repo' | translate }} ↗
                 </a>
               }

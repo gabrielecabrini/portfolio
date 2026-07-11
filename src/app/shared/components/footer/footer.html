@@ -14,7 +14,8 @@
          rel="noopener noreferrer">
         v{{ version }} ↗
       </a>
-      <button class="theme-toggle" (click)="theme.toggle()" [attr.aria-label]="'nav.switchTheme' | translate">
+      <button class="theme-toggle" (click)="theme.toggle()" [attr.aria-label]="'nav.switchTheme' | translate"
+              data-umami-event="theme_toggle">
         {{ theme.theme() === 'dark' ? '☀' : '🌙' }}
       </button>
     </div>

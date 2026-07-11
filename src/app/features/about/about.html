@@ -23,7 +23,9 @@
            [attr.target]="link.target ?? null"
            [attr.rel]="link.rel ?? null"
            class="link-card"
-           [style.animation-delay]="(140 + i * 60) + 'ms'">
+           [style.animation-delay]="(140 + i * 60) + 'ms'"
+           data-umami-event="social_link_click"
+           [attr.data-umami-event-name]="link.name">
           <span class="link-icon">
             <img [src]="link.iconUrl" [alt]="link.name" class="link-img" decoding="async" loading="lazy" />
           </span>
