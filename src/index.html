@@ -59,19 +59,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
 
-  <script>
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        var s = document.createElement('script');
-        s.src = 'https://umami.gabrielecabrini.it/usage.js';
-        s.setAttribute('data-website-id', 'f81fde19-db48-47c5-8090-09af948c96da');
-        s.setAttribute('data-domains', 'gabrielecabrini.it');
-        s.setAttribute('data-performance', "true")
-        s.async = true;
-        document.head.appendChild(s);
-      }, 1000);
-    });
-  </script>
+  <script async src="https://umami.gabrielecabrini.it/usage.js"
+    data-website-id="f81fde19-db48-47c5-8090-09af948c96da"
+    data-domains="gabrielecabrini.it"
+    data-performance="true"></script>
 </head>
 <body>
   <app-root></app-root>
