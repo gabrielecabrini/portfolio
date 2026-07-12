@@ -18,6 +18,23 @@ footer {
   font-size: 0.82rem;
 }
 
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.local-time {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+@media (max-width: 480px) {
+  .sitemap-link {
+    display: none;
+  }
+}
+
 .footer-right {
   display: flex;
   align-items: center;
