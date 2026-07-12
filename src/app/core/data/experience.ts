@@ -1,5 +1,5 @@
 import { WorkExperience } from '../models/work-experience.model';
-import { Skill } from '../models/skill.model';
+import { Skill, SkillGroup } from '../models/skill.model';
 import { Certification } from '../models/certification.model';
 import { Education } from '../models/education.model';
 
@@ -68,98 +68,53 @@ export const WORK_EXPERIENCES: WorkExperience[] = [
   },
 ];
 
-export const SKILLS: Skill[] = [
+export const SKILL_GROUPS: SkillGroup[] = [
   {
-    id: 'java',
-    name: 'Java',
-    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg',
+    categoryKey: 'experience.skills.cat.backend',
+    skills: [
+      { id: 'java', name: 'Java', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg' },
+      { id: 'kotlin', name: 'Kotlin', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg' },
+      { id: 'spring-boot', name: 'Spring Boot', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg' },
+      { id: 'golang', name: 'Go', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original-wordmark.svg' },
+    ],
   },
   {
-    id: 'kotlin',
-    name: 'Kotlin',
-    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg',
+    categoryKey: 'experience.skills.cat.frontend',
+    skills: [
+      { id: 'typescript', name: 'TypeScript', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg' },
+      { id: 'angular', name: 'Angular', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg' },
+      { id: 'flutter', name: 'Flutter', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg' },
+    ],
   },
   {
-    id: 'spring-boot',
-    name: 'Spring Boot',
-    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg',
+    categoryKey: 'experience.skills.cat.database',
+    skills: [
+      { id: 'postgresql', name: 'PostgreSQL', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg' },
+      { id: 'sql-server', name: 'SQL Server', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-plain.svg' },
+      { id: 'mariadb', name: 'MariaDB', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg' },
+      { id: 'redis', name: 'Redis', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg' },
+    ],
   },
   {
-    id: 'typescript',
-    name: 'TypeScript',
-    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg',
+    categoryKey: 'experience.skills.cat.devops',
+    skills: [
+      { id: 'docker', name: 'Docker', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg' },
+      { id: 'kubernetes', name: 'Kubernetes', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg' },
+      { id: 'aws', name: 'AWS', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg' },
+    ],
   },
   {
-    id: 'angular',
-    name: 'Angular',
-    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg',
-  },
-  {
-    id: 'flutter',
-    name: 'Flutter',
-    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg',
-  },
-  {
-    id: 'docker',
-    name: 'Docker',
-    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg',
-  },
-  {
-    id: 'kubernetes',
-    name: 'Kubernetes',
-    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg',
-  },
-  {
-    id: 'postgresql',
-    name: 'PostgreSQL',
-    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg',
-  },
-  {
-    id: 'sql-server',
-    name: 'SQL Server',
-    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-plain.svg',
-  },
-  {
-    id: 'mariadb',
-    name: 'MariaDB',
-    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg',
-  },
-  {
-    id: 'redis',
-    name: 'Redis',
-    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg',
-  },
-  {
-    id: 'aws',
-    name: 'AWS',
-    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg',
-  },
-  {
-    id: 'linux',
-    name: 'Linux',
-    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg',
-  },
-  {
-    id: 'git',
-    name: 'Git',
-    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg',
-  },
-  {
-    id: 'golang',
-    name: 'Go',
-    iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original-wordmark.svg',
-  },
-  {
-    id: 'proxmox',
-    name: 'Proxmox',
-    iconUrl: 'https://cdn.simpleicons.org/proxmox',
-  },
-  {
-    id: 'vmware',
-    name: 'VMware vSphere',
-    iconUrl: 'https://cdn.simpleicons.org/vmware',
+    categoryKey: 'experience.skills.cat.infra',
+    skills: [
+      { id: 'linux', name: 'Linux', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg' },
+      { id: 'proxmox', name: 'Proxmox', iconUrl: 'https://cdn.simpleicons.org/proxmox' },
+      { id: 'vmware', name: 'VMware vSphere', iconUrl: 'https://cdn.simpleicons.org/vmware' },
+      { id: 'git', name: 'Git', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg' },
+    ],
   },
 ];
+
+export const SKILLS: Skill[] = SKILL_GROUPS.flatMap(g => g.skills);
 
 export const LANGUAGES: Skill[] = [
   {

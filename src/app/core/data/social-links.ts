@@ -4,7 +4,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
   {
     name: 'GitHub',
     href: 'https://github.com/gabrielecabrini',
-    iconUrl: 'https://cdn.simpleicons.org/github/ffffff',
+    iconUrl: 'https://cdn.simpleicons.org/github/181717',
     target: '_blank',
     rel: 'noopener noreferrer',
   },

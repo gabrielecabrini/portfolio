@@ -42,20 +42,23 @@
     <div class="exp-section">
       <h2>{{ 'experience.skills.title' | translate }}</h2>
 
-      @if (skills.length === 0) {
-        <p class="empty">{{ 'experience.empty' | translate }}</p>
-      }
-
-      <div class="skills-grid">
-        @for (skill of skills; track skill.id) {
-          <div class="skill-card">
-            @if (skill.iconUrl) {
-              <img class="skill-icon" [src]="skill.iconUrl" [alt]="skill.name" decoding="async" loading="lazy" />
-            }
-            <div class="skill-body">
-              <h3>{{ skill.name }}</h3>
-              @if (skill.descriptionKey) {
-                <p>{{ skill.descriptionKey | translate }}</p>
+      <div class="skill-groups">
+        @for (group of skillGroups; track group.categoryKey) {
+          <div class="skill-group">
+            <h3 class="skill-cat-label">{{ group.categoryKey | translate }}</h3>
+            <div class="skills-grid">
+              @for (skill of group.skills; track skill.id) {
+                <div class="skill-card">
+                  @if (skill.iconUrl) {
+                    <img class="skill-icon" [src]="skill.iconUrl" [alt]="skill.name" decoding="async" loading="lazy" />
+                  }
+                  <div class="skill-body">
+                    <h3>{{ skill.name }}</h3>
+                    @if (skill.descriptionKey) {
+                      <p>{{ skill.descriptionKey | translate }}</p>
+                    }
+                  </div>
+                </div>
               }
             </div>
           </div>
