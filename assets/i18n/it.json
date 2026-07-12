@@ -27,7 +27,7 @@
   "about.cv.link": "Curriculum Vitae",
   "about.cv.hint": "Disponibile online e scaricabile in PDF",
   "about.cv.cta": "Visualizza",
-  "about.bio": "Sono Gabriele e lavoro dalla provincia di Bergamo. Come (penso) avrai letto in home page, mi piace avere il controllo su tutto il ciclo di vita del software. Negli anni mi sono specializzato nella costruzione di applicazioni enterprise e sistemi ERP complessi, trasformando requisiti articolati in piattaforme affidabili.\nMi muovo agevolmente tra la logica di business dei backend in Java/Spring Boot e le interfacce utente in Angular. L'amore per il mondo Linux mi spinge poi a curare in prima persona anche l'infrastruttura, containerizzando e orchestrando i servizi con Docker e Kubernetes. La mia filosofia? Che si tratti di architettura o di codice, cerco sempre la soluzione più pulita, elegante e scalabile.",
+  "about.bio": "Sono Gabriele e lavoro dalla provincia di Bergamo. Mi piace avere il controllo su tutto il ciclo di vita del software. Negli anni mi sono specializzato nella costruzione di applicazioni enterprise e sistemi ERP complessi, trasformando requisiti articolati in piattaforme affidabili.\nMi muovo agevolmente tra la logica di business dei backend in Java/Spring Boot e le interfacce utente in Angular. L'amore per il mondo Linux mi spinge poi a curare in prima persona anche l'infrastruttura, containerizzando e orchestrando i servizi con Docker e Kubernetes. La mia filosofia? Che si tratti di architettura o di codice, cerco sempre la soluzione più pulita, elegante e scalabile.",
   "about.links.title": "Contatti e profili",
   "about.contact.heading": "Hai un progetto in mente?",
   "about.contact.hint": "Di solito rispondo entro 24h",
