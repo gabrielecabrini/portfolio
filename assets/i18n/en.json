@@ -25,8 +25,13 @@
 
   "about.title": "About",
   "about.cv.link": "Curriculum Vitae",
-  "about.bio": "I'm Gabriele, a fullstack software developer based in northern Italy, near Bergamo. I have experience building enterprise applications and ERP systems. I work across the full stack — from Java/Spring Boot backends to Angular frontends, down to infrastructure with Docker, Kubernetes, and Linux environments. Passionate about open source and the Linux world, I always look for elegant and scalable solutions.",
+  "about.cv.hint": "Available online and as PDF",
+  "about.cv.cta": "View",
+  "about.bio": "I'm Gabriele, a software developer based near Bergamo, Italy. As you might have guessed from the homepage, I love having a hands-on approach across the entire software lifecycle. Over the years, I’ve specialized in building enterprise applications and complex ERP systems, turning intricate requirements into reliable platforms.\nI seamlessly navigate between business logic in Java/Spring Boot backends and user interfaces in Angular. My passion for the Linux ecosystem also drives me to manage the infrastructure side, containerizing and orchestrating deployments with Docker and Kubernetes. My philosophy? Whether it's architecture or code, I always strive for the cleanest, most elegant, and scalable solution.",
   "about.links.title": "Contact & profiles",
+  "about.contact.heading": "Have a project in mind?",
+  "about.contact.hint": "I usually reply within 24h",
+  "about.contact.cta": "Get in touch",
 
   "experience.edu.title": "Education",
   "experience.edu.afp.qualification": "Qualification: IT and Management Administrator (Economics)",
