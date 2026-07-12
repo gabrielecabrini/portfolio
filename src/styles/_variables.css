@@ -13,6 +13,7 @@
   --radius-sm: 4px;
   --max-w: 900px;
   --header-h: 60px;
+  --footer-h: 60px;
 }
 
 [data-theme="light"] {

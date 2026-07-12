@@ -7,21 +7,26 @@ export const routes: Routes = [
   {
     path: 'about',
     loadComponent: () => import('./features/about/about').then(m => m.About),
+    title: 'title.about',
   },
   {
     path: 'experience',
     loadComponent: () => import('./features/experience/experience').then(m => m.Experience),
+    title: 'title.experience',
   },
   {
     path: 'projects',
     loadComponent: () => import('./features/projects/projects-list/projects-list').then(m => m.ProjectsList),
+    title: 'title.projects',
   },
   {
     path: 'cv',
     loadComponent: () => import('./features/cv/cv').then(m => m.Cv),
+    title: 'title.cv',
   },
   {
     path: '**',
     loadComponent: () => import('./features/not-found/not-found').then(m => m.NotFound),
+    title: 'title.notFound',
   },
 ];

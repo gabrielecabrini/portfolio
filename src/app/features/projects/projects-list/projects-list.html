@@ -8,7 +8,7 @@
 
     <div class="projects-grid">
       @for (project of projects; track project.id) {
-        <article class="project-card">
+        <article class="project-card" [style.animation-delay]="(80 + $index * 70) + 'ms'">
 
           <div class="card-body">
             <div class="card-title">

@@ -9,10 +9,15 @@
 .activity-label {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: var(--muted);
+  color: #6a9955; /* IDE comment green */
   letter-spacing: 0.04em;
   animation: fade-up 0.5s ease both;
   animation-delay: 400ms;
+  cursor: default;
+}
+
+[data-theme="light"] .activity-label {
+  color: #4a7a34;
 }
 
 .contrib-grid {

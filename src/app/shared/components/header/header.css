@@ -3,9 +3,10 @@ header {
   top: 0;
   z-index: 100;
   height: var(--header-h);
-  background: var(--bg);
+  background: color-mix(in srgb, var(--bg) 60%, transparent);
   border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
 .header-inner {

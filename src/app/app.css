@@ -1,4 +1,25 @@
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1.1rem;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: top 0.1s;
+}
+
+.skip-link:focus-visible {
+  top: 1rem;
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
 main {
-  min-height: calc(100vh - var(--header-h) - 60px);
+  min-height: calc(100vh - var(--header-h) - var(--footer-h));
   view-transition-name: main-content;
 }

@@ -2,8 +2,8 @@
   display: flex;
   align-items: center;
   /* dvh accounts for mobile browser chrome (address bar) */
-  min-height: calc(100dvh - var(--header-h) - 60px);
-  min-height: calc(100vh - var(--header-h) - 60px); /* fallback */
+  min-height: calc(100dvh - var(--header-h) - var(--footer-h));
+  min-height: calc(100vh - var(--header-h) - var(--footer-h)); /* fallback */
   padding: 4rem 1.5rem;
 }
 

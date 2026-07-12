@@ -2,8 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: calc(100dvh - var(--header-h) - 60px);
-  min-height: calc(100vh - var(--header-h) - 60px);
+  min-height: calc(100vh - var(--header-h) - var(--footer-h));
   padding: 4rem 1.5rem;
   text-align: center;
 }

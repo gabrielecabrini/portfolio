@@ -1,6 +1,6 @@
 footer {
   border-top: 1px solid var(--border);
-  height: 60px;
+  height: var(--footer-h);
 }
 
 .footer-inner {
