@@ -5,6 +5,14 @@
   "nav.projects": "Progetti",
   "nav.switchLang": "Passa alla lingua inglese",
   "nav.switchTheme": "Cambia tema",
+  "nav.backToTop": "Torna in cima",
+  "nav.skipToContent": "Salta al contenuto",
+
+  "title.about": "Chi sono",
+  "title.experience": "Esperienza",
+  "title.projects": "Progetti",
+  "title.cv": "CV",
+  "title.notFound": "Pagina non trovata",
 
   "home.greeting": "Ciao, sono",
   "home.subtitle": "Fullstack Software Developer",
