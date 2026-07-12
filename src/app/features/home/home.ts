@@ -15,9 +15,10 @@ export class Home implements OnDestroy {
 
   private readonly phrases = [
     'Fullstack Software Developer',
-    'Spring Boot & Kotlin Engineer',
+    'Spring Boot & Kotlin Developer',
     'Angular Developer',
     'Linux & Open Source Enthusiast',
+    'Flutter Developer',
   ];
   private phraseIndex = 0;
   private charIndex = 0;
