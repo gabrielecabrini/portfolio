@@ -70,8 +70,15 @@
 
 .links-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
+}
+
+.cta-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.5rem 0 0;
+  animation: fade-in 0.4s ease both;
 }
 
 .link-card {
@@ -126,7 +133,67 @@
   font-size: 0.9rem;
 }
 
-/* ── Responsive ── */
+/* ── CTAs row (contact + CV) ── */
+
+.ctas-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+  animation: fade-up 0.4s ease both;
+}
+
+.contact-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.4rem 1.6rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.contact-cta:hover {
+  border-color: var(--accent);
+  background: var(--surface-hover);
+  color: var(--text);
+}
+
+.contact-cta-heading {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  max-width: none;
+}
+
+.contact-cta-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+  max-width: none;
+}
+
+.contact-dot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: avail-pulse 1.8s ease-out infinite;
+}
+
+.contact-cta-btn {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--accent);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
 
 @media (max-width: 768px) {
   .about-page {
@@ -145,6 +212,16 @@
 
   .links-grid {
     grid-template-columns: 1fr;
+  }
+
+  .ctas-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-cta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
   }
 }
 

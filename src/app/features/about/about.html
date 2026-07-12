@@ -33,19 +33,31 @@
           <span class="link-arrow">↗</span>
         </a>
       }
-      <a routerLink="/cv" class="link-card cv-link" [style.animation-delay]="(140 + links.length * 60) + 'ms'">
-        <span class="link-icon">
-          <svg class="link-img" viewBox="0 0 24 24" fill="none" stroke="#71717a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="16" y1="13" x2="8" y2="13"/>
-            <line x1="16" y1="17" x2="8" y2="17"/>
-            <polyline points="10 9 9 9 8 9"/>
-          </svg>
-        </span>
-        <span class="link-name">{{ 'about.cv.link' | translate }}</span>
-        <span class="link-arrow">↗</span>
+    </div>
+
+    <hr class="cta-divider" [style.animation-delay]="(140 + (links.length + 1) * 60) + 'ms'" />
+
+    <div class="ctas-row" [style.animation-delay]="(140 + (links.length + 2) * 60) + 'ms'">
+
+      <a [href]="email" class="contact-cta" data-umami-event="contact_email_click">
+        <div class="contact-cta-left">
+          <p class="contact-cta-heading">{{ 'about.contact.heading' | translate }}</p>
+          <p class="contact-cta-hint">
+            <span class="contact-dot" aria-hidden="true"></span>
+            {{ 'about.contact.hint' | translate }}
+          </p>
+        </div>
+        <span class="contact-cta-btn">{{ 'about.contact.cta' | translate }} ↗</span>
       </a>
+
+      <a routerLink="/cv" class="contact-cta" data-umami-event="about_cv_click">
+        <div class="contact-cta-left">
+          <p class="contact-cta-heading">{{ 'about.cv.link' | translate }}</p>
+          <p class="contact-cta-hint">{{ 'about.cv.hint' | translate }}</p>
+        </div>
+        <span class="contact-cta-btn">{{ 'about.cv.cta' | translate }} ↗</span>
+      </a>
+
     </div>
 
   </div>

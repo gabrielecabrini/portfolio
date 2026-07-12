@@ -12,5 +12,6 @@ import { SocialLink } from '../../core/models/social-link.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class About {
-  readonly links: SocialLink[] = SOCIAL_LINKS;
+  readonly links: SocialLink[] = SOCIAL_LINKS.filter(l => !l.href.startsWith('mailto:'));
+  readonly email = SOCIAL_LINKS.find(l => l.href.startsWith('mailto:'))!.href;
 }
