@@ -99,6 +99,7 @@
   "cv.location": "Bergamo, Italia",
   "cv.section.profile": "Profilo",
   "cv.section.projects": "Progetti",
+  "cv.footer.generated": "Generato il {{date}}",
 
   "notFound.code": "404",
   "notFound.title": "Pagina non trovata",
