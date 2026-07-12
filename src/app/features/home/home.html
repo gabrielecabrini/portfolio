@@ -13,6 +13,11 @@
         <a routerLink="/cv" class="btn-secondary"
            data-umami-event="home_cta_click" data-umami-event-target="/cv">{{ 'home.cta.cv' | translate }}</a>
       </div>
+
+      <p class="availability">
+        <span class="avail-dot" aria-hidden="true"></span>
+        {{ 'home.available' | translate }}
+      </p>
     </div>
 
     <app-github-activity class="hero-right" />
