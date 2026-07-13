@@ -1,109 +1,180 @@
 {
-  "nav.home": "Home",
-  "nav.about": "Chi sono",
-  "nav.experience": "Esperienza",
-  "nav.projects": "Progetti",
-  "nav.switchLang": "Passa alla lingua inglese",
-  "nav.switchTheme": "Cambia tema",
-  "nav.backToTop": "Torna in cima",
-  "nav.skipToContent": "Salta al contenuto",
+  "nav": {
+    "home": "Home",
+    "about": "Chi sono",
+    "experience": "Esperienza",
+    "projects": "Progetti",
+    "switchLang": "Passa alla lingua inglese",
+    "switchTheme": "Cambia tema",
+    "backToTop": "Torna in cima",
+    "skipToContent": "Salta al contenuto"
+  },
 
-  "title.about": "Chi sono",
-  "title.experience": "Esperienza",
-  "title.projects": "Progetti",
-  "title.cv": "CV",
-  "title.notFound": "Pagina non trovata",
+  "title": {
+    "about": "Chi sono",
+    "experience": "Esperienza",
+    "projects": "Progetti",
+    "notFound": "Pagina non trovata"
+  },
 
-  "home.greeting": "Ciao, sono",
-  "home.subtitle": "Fullstack Software Developer",
-  "home.tagline": "Sviluppo software fullstack con interesse per l'open source e il mondo Linux, dalla JVM al browser, dal backend all'infrastruttura.",
-  "home.cta.cv": "CV",
-  "home.available": "Disponibile per posizioni full-time e progetti freelance",
-  "home.contact.cta": "contattami ↗",
-  "home.cta.projects": "Vedi i progetti",
-  "home.cta.experience": "Esperienze",
-  "home.cta.about": "Chi sono",
+  "home": {
+    "greeting": "Ciao, sono",
+    "subtitle": "Fullstack Software Developer",
+    "tagline": "Sviluppo software fullstack con interesse per l'open source e il mondo Linux, dalla JVM al browser, dal backend all'infrastruttura.",
+    "available": "Disponibile per posizioni full-time e progetti freelance",
+    "cta": {
+      "cv": "CV",
+      "projects": "Vedi i progetti",
+      "experience": "Esperienze",
+      "about": "Chi sono"
+    },
+    "contact": {
+      "cta": "contattami ↗"
+    }
+  },
 
-  "about.title": "Chi sono",
-  "about.cv.link": "Curriculum Vitae",
-  "about.cv.hint": "Disponibile online e scaricabile in PDF",
-  "about.cv.cta": "Visualizza",
-  "about.bio": "Sono Gabriele e lavoro dalla provincia di Bergamo. Mi piace avere il controllo su tutto il ciclo di vita del software. Negli anni mi sono specializzato nella costruzione di applicazioni enterprise e sistemi ERP complessi, trasformando requisiti articolati in piattaforme affidabili.\nMi muovo agevolmente tra la logica di business dei backend in Java/Spring Boot e le interfacce utente in Angular. L'amore per il mondo Linux mi spinge poi a curare in prima persona anche l'infrastruttura, containerizzando e orchestrando i servizi con Docker e Kubernetes. La mia filosofia? Che si tratti di architettura o di codice, cerco sempre la soluzione più pulita, elegante e scalabile.",
-  "about.links.title": "Contatti e profili",
-  "about.contact.heading": "Hai un progetto in mente?",
-  "about.contact.hint": "Di solito rispondo entro 24h",
-  "about.contact.cta": "Scrivimi",
+  "about": {
+    "title": "Chi sono",
+    "bio": "Sono Gabriele e lavoro dalla provincia di Bergamo. Mi piace avere il controllo su tutto il ciclo di vita del software. Negli anni mi sono specializzato nella costruzione di applicazioni enterprise e sistemi ERP complessi, trasformando requisiti articolati in piattaforme affidabili.\nMi muovo agevolmente tra la logica di business dei backend in Java/Spring Boot e le interfacce utente in Angular. L'amore per il mondo Linux mi spinge poi a curare in prima persona anche l'infrastruttura, containerizzando e orchestrando i servizi con Docker e Kubernetes. La mia filosofia? Che si tratti di architettura o di codice, cerco sempre la soluzione più pulita, elegante e scalabile.",
+    "cv": {
+      "link": "Curriculum Vitae",
+      "hint": "Disponibile online e scaricabile in PDF",
+      "cta": "Visualizza"
+    },
+    "links": {
+      "title": "Contatti e profili"
+    },
+    "contact": {
+      "heading": "Hai un progetto in mente?",
+      "hint": "Di solito rispondo entro 24h",
+      "cta": "Scrivimi"
+    }
+  },
 
-  "experience.edu.title": "Formazione",
-  "experience.edu.afp.qualification": "Qualifica di Amministratore Informatico / Gestionale (Economia)",
-  "experience.work.title": "Esperienza lavorativa",
-  "experience.skills.title": "Skill",
-  "experience.skills.cat.backend": "Backend",
-  "experience.skills.cat.frontend": "Frontend",
-  "experience.skills.cat.database": "Database",
-  "experience.skills.cat.devops": "DevOps & Cloud",
-  "experience.skills.cat.infra": "Infrastruttura",
-  "experience.languages.title": "Lingue",
-  "experience.certs.title": "Certificazioni & Corsi",
-  "experience.empty": "Nessun elemento ancora. Aggiornalo presto!",
+  "experience": {
+    "empty": "Nessun elemento ancora. Aggiornalo presto!",
+    "edu": {
+      "title": "Formazione",
+      "afp": {
+        "qualification": "Qualifica di Amministratore Informatico / Gestionale (Economia)"
+      }
+    },
+    "work": {
+      "title": "Esperienza lavorativa",
+      "skyblockpuro": {
+        "role": "Founder & Lead Developer",
+        "description": "Fondatore del server Minecraft SkyBlockPuro. Responsabile dell'intera infrastruttura tecnica: protezione anti-DDoS, gestione proxy, aggiornamenti di versione, sviluppo di plugin Java personalizzati e coordinamento di collaboratori esterni."
+      },
+      "r1se": {
+        "role": "Backend Developer",
+        "description": "Sviluppo di software backend per utilities interne aziendali. Configurazione iniziale dell'infrastruttura cloud su AWS con istanze EC2."
+      },
+      "sandrini": {
+        "role": "Fullstack Developer",
+        "description": "Sviluppo backend del gestionale ERP con Java e Spring Boot. Sviluppo del frontend ERP con Angular e TypeScript. Implementazione di pipeline CI/CD. Sviluppo di un'app mobile integrativa per il gestionale con Flutter (Android). Gestione di database PostgreSQL, SQL Server, MariaDB e Redis. Acquisizione di competenze su Docker, Kubernetes e Proxmox."
+      },
+      "metamc": {
+        "role": "Lead Developer",
+        "description": "Sviluppo di plugin Java per server Minecraft con oltre 150 player attivi in contemporanea. Responsabile dell'infrastruttura server e supervisione del team di sviluppo."
+      },
+      "devroom": {
+        "role": "Freelance Developer",
+        "description": "Lavori su commissione per il team devroom: sviluppo di mod, configurazioni server e plugin custom."
+      },
+      "songoda": {
+        "role": "Traduttore (EN → IT)",
+        "description": "Traduzione dei plugin Minecraft di Songoda dall'inglese all'italiano."
+      },
+      "techscode": {
+        "role": "Traduttore (EN → IT)",
+        "description": "Traduzione dei plugin Minecraft di TechsCode dall'inglese all'italiano."
+      }
+    },
+    "skills": {
+      "title": "Skill",
+      "cat": {
+        "backend": "Backend",
+        "frontend": "Frontend",
+        "database": "Database",
+        "devops": "DevOps & Cloud",
+        "infra": "Infrastruttura"
+      }
+    },
+    "languages": {
+      "title": "Lingue"
+    },
+    "lang": {
+      "italian": { "level": "Madrelingua" },
+      "english": { "level": "Avanzato (C1)" }
+    },
+    "certs": {
+      "title": "Certificazioni & Corsi"
+    }
+  },
 
-  "experience.work.skyblockpuro.role": "Founder & Lead Developer",
-  "experience.work.skyblockpuro.description": "Fondatore del server Minecraft SkyBlockPuro. Responsabile dell'intera infrastruttura tecnica: protezione anti-DDoS, gestione proxy, aggiornamenti di versione, sviluppo di plugin Java personalizzati e coordinamento di collaboratori esterni.",
+  "projects": {
+    "title": "Progetti",
+    "subtitle": "Una selezione di progetti a cui ho lavorato.",
+    "card": {
+      "repo": "Codice"
+    },
+    "rdoh": {
+      "title": "rdoh",
+      "description": "Resolver DNS-over-HTTPS scritto in Rust, con supporto DNSSEC."
+    },
+    "brainfucker": {
+      "title": "brainfucker",
+      "description": "Interprete e transpiler verso LLVM IR per il linguaggio Brainfuck, scritto in Go."
+    },
+    "tcp-proxy": {
+      "title": "tcp-proxy",
+      "description": "TCP proxy configurabile scritto in Rust con il runtime asincrono Tokio, progettato per gestire più connessioni concorrenti in modo efficiente."
+    },
+    "sossoldi": {
+      "title": "Sossoldi",
+      "description": "App Flutter open source per la gestione del patrimonio personale e il tracciamento del Net Worth."
+    },
+    "winboat": {
+      "title": "WinBoat",
+      "description": "Applicazione open source per eseguire app Windows nativamente su Linux, con un'interfaccia grafica elegante e configurazione automatizzata tramite Docker/Podman e QEMU/KVM."
+    }
+  },
 
-  "experience.work.r1se.role": "Backend Developer",
-  "experience.work.r1se.description": "Sviluppo di software backend per utilities interne aziendali. Configurazione iniziale dell'infrastruttura cloud su AWS con istanze EC2.",
+  "cv": {
+    "download": "Scarica PDF",
+    "downloading": "Generazione in corso…",
+    "location": "Bergamo, Italia",
+    "lang": {
+      "hint": "Lingua: cambia con il toggle nell'header"
+    },
+    "mobile": {
+      "hint": "L'anteprima del CV è disponibile su desktop. Qui puoi scaricare direttamente il PDF."
+    },
+    "section": {
+      "profile": "Profilo",
+      "projects": "Progetti"
+    },
+    "footer": {
+      "generated": "Generato il {{date}}"
+    }
+  },
 
-  "experience.work.sandrini.role": "Fullstack Developer",
-  "experience.work.sandrini.description": "Sviluppo backend del gestionale ERP con Java e Spring Boot. Sviluppo del frontend ERP con Angular e TypeScript. Implementazione di pipeline CI/CD. Sviluppo di un'app mobile integrativa per il gestionale con Flutter (Android). Gestione di database PostgreSQL, SQL Server, MariaDB e Redis. Acquisizione di competenze su Docker, Kubernetes e Proxmox.",
+  "notFound": {
+    "code": "404",
+    "title": "Pagina non trovata",
+    "message": "La pagina che cerchi non esiste o è stata spostata.",
+    "cta": "Torna in home"
+  },
 
-  "experience.work.metamc.role": "Lead Developer",
-  "experience.work.metamc.description": "Sviluppo di plugin Java per server Minecraft con oltre 150 player attivi in contemporanea. Responsabile dell'infrastruttura server e supervisione del team di sviluppo.",
-
-  "experience.work.devroom.role": "Freelance Developer",
-  "experience.work.devroom.description": "Lavori su commissione per il team devroom: sviluppo di mod, configurazioni server e plugin custom.",
-
-  "experience.work.songoda.role": "Traduttore (EN → IT)",
-  "experience.work.songoda.description": "Traduzione dei plugin Minecraft di Songoda dall'inglese all'italiano.",
-
-  "experience.work.techscode.role": "Traduttore (EN → IT)",
-  "experience.work.techscode.description": "Traduzione dei plugin Minecraft di TechsCode dall'inglese all'italiano.",
-
-  "experience.lang.italian.level": "Madrelingua",
-  "experience.lang.english.level": "Avanzato (C1)",
-
-  "projects.title": "Progetti",
-  "projects.subtitle": "Una selezione di progetti a cui ho lavorato.",
-  "projects.card.repo": "Codice",
-  "projects.card.live": "Demo",
-  "projects.back": "Torna ai progetti",
-  "projects.notFound": "Progetto non trovato.",
-
-  "projects.rdoh.title": "rdoh",
-  "projects.rdoh.description": "Resolver DNS-over-HTTPS scritto in Rust, con supporto DNSSEC.",
-
-  "projects.brainfucker.title": "brainfucker",
-  "projects.brainfucker.description": "Interprete e transpiler verso LLVM IR per il linguaggio Brainfuck, scritto in Go.",
-
-  "projects.tcp-proxy.title": "tcp-proxy",
-  "projects.tcp-proxy.description": "TCP proxy configurabile scritto in Rust con il runtime asincrono Tokio, progettato per gestire più connessioni concorrenti in modo efficiente.",
-
-  "projects.sossoldi.title": "Sossoldi",
-  "projects.sossoldi.description": "App Flutter open source per la gestione del patrimonio personale e il tracciamento del Net Worth.",
-
-  "projects.winboat.title": "WinBoat",
-  "projects.winboat.description": "Applicazione open source per eseguire app Windows nativamente su Linux, con un'interfaccia grafica elegante e configurazione automatizzata tramite Docker/Podman e QEMU/KVM.",
-
-  "cv.download": "Scarica PDF",
-  "cv.downloading": "Generazione in corso…",
-  "cv.lang.hint": "Lingua: cambia con il toggle nell'header",
-  "cv.mobile.hint": "L'anteprima del CV è disponibile su desktop. Qui puoi scaricare direttamente il PDF.",
-  "cv.location": "Bergamo, Italia",
-  "cv.section.profile": "Profilo",
-  "cv.section.projects": "Progetti",
-  "cv.footer.generated": "Generato il {{date}}",
-
-  "notFound.code": "404",
-  "notFound.title": "Pagina non trovata",
-  "notFound.message": "La pagina che cerchi non esiste o è stata spostata.",
-  "notFound.cta": "Torna in home"
+  "blog": {
+    "subtitle": "Pensieri, guide e appunti tecnici.",
+    "search": {
+      "placeholder": "Cerca per titolo…",
+      "noResults": "Nessun articolo trovato."
+    },
+    "notFound": {
+      "title": "Articolo non trovato",
+      "desc": "L'articolo che cerchi non esiste o è stato rimosso."
+    }
+  }
 }
