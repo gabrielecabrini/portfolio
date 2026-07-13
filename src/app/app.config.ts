@@ -1,6 +1,6 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter, TitleStrategy, withInMemoryScrolling, withViewTransitions } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -15,7 +15,7 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling({ scrollPositionRestoration: 'top' }),
       withViewTransitions({ skipInitialTransition: true }),
     ),
-    provideHttpClient(),
+    provideHttpClient(withFetch()),
     provideTranslateService({ fallbackLang: 'it' }),
     provideTranslateHttpLoader({ prefix: 'assets/i18n/' }),
     { provide: TitleStrategy, useClass: TranslateTitleStrategy },
