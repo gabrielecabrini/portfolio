@@ -1,27 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.gabrielecabrini.it/</loc>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://www.gabrielecabrini.it/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://www.gabrielecabrini.it/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.gabrielecabrini.it/"/>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.gabrielecabrini.it/about</loc>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://www.gabrielecabrini.it/about"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://www.gabrielecabrini.it/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.gabrielecabrini.it/about"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.gabrielecabrini.it/experience</loc>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://www.gabrielecabrini.it/experience"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://www.gabrielecabrini.it/experience"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.gabrielecabrini.it/experience"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.gabrielecabrini.it/projects</loc>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://www.gabrielecabrini.it/projects"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://www.gabrielecabrini.it/projects"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.gabrielecabrini.it/projects"/>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.gabrielecabrini.it/cv</loc>
+    <xhtml:link rel="alternate" hreflang="it"        href="https://www.gabrielecabrini.it/cv"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://www.gabrielecabrini.it/cv"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.gabrielecabrini.it/cv"/>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
