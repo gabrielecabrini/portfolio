@@ -16,7 +16,7 @@
 
       <p class="availability">
         <span class="avail-dot" aria-hidden="true"></span>
-        {{ 'home.available' | translate }}
+        {{ 'home.available' | translate }}<span class="availability-sep" aria-hidden="true"> | </span><a [href]="email" class="availability-contact" data-umami-event="home_contact_email">{{ 'home.contact.cta' | translate }}</a>
       </p>
     </div>
 
