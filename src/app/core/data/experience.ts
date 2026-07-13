@@ -93,6 +93,8 @@ export const SKILL_GROUPS: SkillGroup[] = [
       { id: 'sql-server', name: 'SQL Server', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-plain.svg' },
       { id: 'mariadb', name: 'MariaDB', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg' },
       { id: 'redis', name: 'Redis', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg' },
+      { id: 'elk', name: 'Elastic Stack', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/elasticsearch/elasticsearch-original.svg' },
+      { id: 'cassandra', name: 'Cassandra', iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cassandra/cassandra-original.svg' },
     ],
   },
   {
