@@ -3,7 +3,6 @@
   "nav.about": "About",
   "nav.experience": "Experience",
   "nav.projects": "Projects",
-  "nav.blog": "Blog",
   "nav.switchLang": "Switch to Italian",
   "nav.switchTheme": "Toggle theme",
   "nav.backToTop": "Back to top",
@@ -12,8 +11,6 @@
   "title.about": "About",
   "title.experience": "Experience",
   "title.projects": "Projects",
-  "title.cv": "CV",
-  "title.blog": "Blog",
   "title.notFound": "Page not found",
 
   "home.greeting": "Hi, I'm",
@@ -107,5 +104,12 @@
   "notFound.code": "404",
   "notFound.title": "Page not found",
   "notFound.message": "The page you're looking for doesn't exist or has been moved.",
-  "notFound.cta": "Back to home"
+  "notFound.cta": "Back to home",
+
+  "blog.subtitle": "Thoughts, guides and technical notes.",
+  "blog.empty.title": "No articles yet",
+  "blog.empty.message": "I'm working on the first posts. Check back soon.",
+  "blog.readMore": "Read",
+  "blog.minRead": "min",
+  "blog.tags": "Tags"
 }

@@ -22,12 +22,12 @@ export const routes: Routes = [
   {
     path: 'cv',
     loadComponent: () => import('./features/cv/cv').then(m => m.Cv),
-    title: 'title.cv',
+    title: 'CV',
   },
   {
     path: 'blog',
     loadComponent: () => import('./features/blog/blog-list/blog-list').then(m => m.BlogList),
-    title: 'title.blog',
+    title: 'Blog',
   },
   {
     path: '**',
