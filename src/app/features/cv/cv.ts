@@ -5,7 +5,7 @@ import { PdfExportService } from '../../core/services/pdf-export.service';
 import { WORK_EXPERIENCES, SKILLS, LANGUAGES, CERTIFICATIONS, EDUCATION } from '../../core/data/experience';
 import { Education } from '../../core/models/education.model';
 import { PROJECTS } from '../../core/data/projects';
-import { SOCIAL_LINKS } from '../../core/data/social-links';
+import { EMAIL, SOCIAL_LINKS } from '../../core/data/social-links';
 import { SocialLink } from '../../core/models/social-link.model';
 import { DateFormatPipe } from '../../core/pipes/date-format.pipe';
 import { DateRangePipe } from '../../core/pipes/date-range.pipe';
@@ -35,9 +35,10 @@ export class Cv {
   readonly certifications = CERTIFICATIONS;
   readonly projects = PROJECTS;
 
-  readonly contactLinks: SocialLink[] = SOCIAL_LINKS.filter(
-    l => l.href.startsWith('mailto:') || l.href.includes('linkedin.com'),
-  );
+  readonly contactLinks: SocialLink[] = [
+    EMAIL,
+    ...SOCIAL_LINKS.filter(l => l.href.includes('linkedin.com')),
+  ];
 
   displayUrl(href: string): string {
     return href.startsWith('mailto:')

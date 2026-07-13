@@ -2,7 +2,7 @@ import { afterNextRender, ChangeDetectionStrategy, Component, OnDestroy, signal 
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { GithubActivity } from './github-activity/github-activity';
-import { SOCIAL_LINKS } from '../../core/data/social-links';
+import { EMAIL } from '../../core/data/social-links';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +13,7 @@ import { SOCIAL_LINKS } from '../../core/data/social-links';
 })
 export class Home implements OnDestroy {
   readonly displayText = signal('');
-  readonly email = SOCIAL_LINKS.find(l => l.href.startsWith('mailto:'))!.href;
+  readonly email = EMAIL.href;
 
   private readonly phrases = [
     'Fullstack Software Developer',
