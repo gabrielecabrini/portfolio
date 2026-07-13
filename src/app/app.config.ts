@@ -7,11 +7,16 @@ import { Observable, of } from 'rxjs';
 
 import * as it from '../../public/assets/i18n/it.json';
 import * as en from '../../public/assets/i18n/en.json';
+import * as blogIt from '../../public/assets/i18n/blog/it.json';
+import * as blogEn from '../../public/assets/i18n/blog/en.json';
 
 import { routes } from './app.routes';
 import { TranslateTitleStrategy } from './core/services/title.strategy';
 
-const TRANSLATIONS: Record<string, TranslationObject> = { it, en };
+const TRANSLATIONS: Record<string, TranslationObject> = {
+  it: { ...it, ...blogIt },
+  en: { ...en, ...blogEn },
+};
 
 class InlineTranslateLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<TranslationObject> {

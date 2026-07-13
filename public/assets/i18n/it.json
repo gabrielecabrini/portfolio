@@ -3,6 +3,7 @@
   "nav.about": "Chi sono",
   "nav.experience": "Esperienza",
   "nav.projects": "Progetti",
+  "nav.blog": "Blog",
   "nav.switchLang": "Passa alla lingua inglese",
   "nav.switchTheme": "Cambia tema",
   "nav.backToTop": "Torna in cima",
@@ -12,6 +13,7 @@
   "title.experience": "Esperienza",
   "title.projects": "Progetti",
   "title.cv": "CV",
+  "title.blog": "Blog",
   "title.notFound": "Pagina non trovata",
 
   "home.greeting": "Ciao, sono",

@@ -25,6 +25,11 @@ export const routes: Routes = [
     title: 'title.cv',
   },
   {
+    path: 'blog',
+    loadComponent: () => import('./features/blog/blog-list/blog-list').then(m => m.BlogList),
+    title: 'title.blog',
+  },
+  {
     path: '**',
     loadComponent: () => import('./features/not-found/not-found').then(m => m.NotFound),
     title: 'title.notFound',

@@ -3,6 +3,7 @@
   "nav.about": "About",
   "nav.experience": "Experience",
   "nav.projects": "Projects",
+  "nav.blog": "Blog",
   "nav.switchLang": "Switch to Italian",
   "nav.switchTheme": "Toggle theme",
   "nav.backToTop": "Back to top",
@@ -12,6 +13,7 @@
   "title.experience": "Experience",
   "title.projects": "Projects",
   "title.cv": "CV",
+  "title.blog": "Blog",
   "title.notFound": "Page not found",
 
   "home.greeting": "Hi, I'm",

@@ -15,6 +15,9 @@
       <a routerLink="/projects" routerLinkActive="active">
         {{ 'nav.projects' | translate }}
       </a>
+      <a routerLink="/blog" routerLinkActive="active">
+        {{ 'nav.blog' | translate }}
+      </a>
     </nav>
     <button class="lang-toggle" (click)="i18n.toggle()" [attr.aria-label]="'nav.switchLang' | translate"
             data-umami-event="lang_toggle">

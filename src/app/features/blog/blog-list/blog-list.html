@@ -1,0 +1,25 @@
+<section class="blog-page">
+  <div class="blog-inner">
+
+    <div class="section-header">
+      <h2>{{ 'blog.title' | translate }}</h2>
+      <p class="section-desc">{{ 'blog.subtitle' | translate }}</p>
+    </div>
+
+    @if (posts.length === 0) {
+      <div class="blog-empty">
+        <p class="empty-title">{{ 'blog.empty.title' | translate }}</p>
+        <p class="empty-message">{{ 'blog.empty.message' | translate }}</p>
+      </div>
+    } @else {
+      <div class="blog-list">
+        @for (post of posts; track post.slug) {
+          <article class="post-card" [style.animation-delay]="(80 + $index * 70) + 'ms'">
+            <!-- populated when articles exist -->
+          </article>
+        }
+      </div>
+    }
+
+  </div>
+</section>
