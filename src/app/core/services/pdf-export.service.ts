@@ -3,17 +3,13 @@ import { DOCUMENT } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 
 const CAPTURE_SCALE = 2;
-// .cv-section registers its TOP *before* the section title, so the algorithm always
-// cuts before title+content as a unit — never after a lone title (orphan).
-// Fine-grained entry selectors still allow inter-entry cuts inside long sections.
-const BLOCK_SELECTORS = [
-  '.cv-header',
-  '.cv-section',
-  '.cv-entry',
-  '.cv-cert-entry',
-  '.cv-proj-entry',
-  '.cv-gdpr',
-].join(', ');
+// Extra canvas-pixels added below each entry's bottom before registering it as a
+// safe break. Prevents near-miss splits where an entry overflows the ideal page end
+// by just a few pixels and gets cut instead of being pushed to the next page.
+const ENTRY_BOTTOM_MARGIN = 10;
+
+const SECTION_SELECTORS = '.cv-header, .cv-section, .cv-gdpr';
+const ENTRY_SELECTORS = '.cv-entry, .cv-cert-entry, .cv-proj-entry';
 
 @Injectable({ providedIn: 'root' })
 export class PdfExportService {
@@ -46,12 +42,28 @@ export class PdfExportService {
 
       const pageRect = page.getBoundingClientRect();
       const safeBreaks = new Set<number>([0, canvas.height]);
-      page.querySelectorAll(BLOCK_SELECTORS).forEach(el => {
+      page.querySelectorAll(`${SECTION_SELECTORS}, ${ENTRY_SELECTORS}`).forEach(el => {
         const r = el.getBoundingClientRect();
         const top = Math.round((r.top - pageRect.top) * CAPTURE_SCALE);
         const bot = Math.round((r.bottom - pageRect.top) * CAPTURE_SCALE);
-        if (top > 0) safeBreaks.add(top);
-        if (bot < canvas.height) safeBreaks.add(bot);
+
+        const isFirstEntry =
+          el.matches(ENTRY_SELECTORS) &&
+          !el.previousElementSibling?.matches(ENTRY_SELECTORS);
+
+        // TOP is safe for sections and for non-first entries.
+        // The first entry in a section is excluded: cutting before it would leave
+        // the section's h2 title stranded alone at the bottom of the previous page.
+        if (!isFirstEntry && top > 0) safeBreaks.add(top);
+
+        // BOTTOM: entries use bot + ENTRY_BOTTOM_MARGIN so that a block whose true
+        // bottom exceeds the ideal page end by a small amount is not picked as a
+        // candidate — the algorithm falls back to an earlier break and pushes the
+        // whole entry to the next page instead of shaving off its last few pixels.
+        const safeBot = el.matches(ENTRY_SELECTORS)
+          ? Math.min(bot + ENTRY_BOTTOM_MARGIN, canvas.height)
+          : bot;
+        if (safeBot < canvas.height) safeBreaks.add(safeBot);
       });
       sortedBreaks = [...safeBreaks].sort((a, b) => a - b);
     } finally {

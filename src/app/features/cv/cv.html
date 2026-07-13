@@ -127,7 +127,7 @@
           </div>
           <div class="cv-cert-body">
             @if (cert.url) {
-              <a [href]="cert.url" target="_blank" rel="noopener noreferrer" class="cv-cert-name">{{ cert.name }} ↗</a>
+              <a [href]="cert.url" target="_blank" rel="noopener noreferrer" class="cv-cert-name">{{ cert.name }}</a>
             } @else {
               <strong>{{ cert.name }}</strong>
             }
