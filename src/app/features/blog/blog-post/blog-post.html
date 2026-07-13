@@ -1,0 +1,40 @@
+@if (post(); as post) {
+  <article class="post-page">
+    <div class="post-inner">
+
+      <a routerLink="/blog" class="back-link">← Blog</a>
+
+      <header class="post-header">
+        <div class="post-meta">
+          <time class="post-date">{{ post.date | date:'d MMM yyyy':'':lang() }}</time>
+          <div class="post-tags">
+            @for (tag of post.tags; track tag) {
+              <span class="tag">{{ tag }}</span>
+            }
+          </div>
+        </div>
+        <h1>{{ translation()?.title }}</h1>
+        <p class="post-excerpt">{{ translation()?.excerpt }}</p>
+      </header>
+
+      <hr class="divider" />
+
+      @switch (contentState().status) {
+        @case ('loading') {
+          <div class="post-loading">
+            <span class="loading-dot"></span>
+            <span class="loading-dot"></span>
+            <span class="loading-dot"></span>
+          </div>
+        }
+        @case ('error') {
+          <p class="post-error">Contenuto non disponibile.</p>
+        }
+        @case ('ok') {
+          <div class="post-content markdown-body" [innerHTML]="$any(contentState()).html"></div>
+        }
+      }
+
+    </div>
+  </article>
+}

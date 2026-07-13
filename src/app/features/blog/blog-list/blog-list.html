@@ -6,17 +6,33 @@
       <p class="section-desc">{{ 'blog.subtitle' | translate }}</p>
     </div>
 
-    @if (posts.length === 0) {
-      <div class="blog-empty">
-        <p class="empty-title">{{ 'blog.empty.title' | translate }}</p>
-        <p class="empty-message">{{ 'blog.empty.message' | translate }}</p>
-      </div>
+    <div class="blog-search">
+      <input
+        type="search"
+        class="search-input"
+        [placeholder]="'blog.search.placeholder' | translate"
+        [value]="query()"
+        (input)="query.set($any($event.target).value)"
+      />
+    </div>
+
+    @if (filteredPosts().length === 0) {
+      <p class="no-results">{{ 'blog.search.noResults' | translate }}</p>
     } @else {
       <div class="blog-list">
-        @for (post of posts; track post.slug) {
-          <article class="post-card" [style.animation-delay]="(80 + $index * 70) + 'ms'">
-            <!-- populated when articles exist -->
-          </article>
+        @for (post of filteredPosts(); track post.slug) {
+          <a class="post-card" [routerLink]="['/blog', post.slug]" [style.animation-delay]="(80 + $index * 70) + 'ms'">
+            <div class="post-meta">
+              <time class="post-date">{{ post.date | date:'d MMM yyyy':'':lang() }}</time>
+              <div class="post-tags">
+                @for (tag of post.tags; track tag) {
+                  <span class="tag">{{ tag }}</span>
+                }
+              </div>
+            </div>
+            <h3 class="post-title">{{ translation(post)?.title }}</h3>
+            <p class="post-excerpt">{{ translation(post)?.excerpt }}</p>
+          </a>
         }
       </div>
     }

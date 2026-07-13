@@ -3,6 +3,10 @@ import { provideRouter, TitleStrategy, withInMemoryScrolling, withViewTransition
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideTranslateService, TranslateLoader, TranslationObject } from '@ngx-translate/core';
+import { registerLocaleData } from '@angular/common';
+import localeIt from '@angular/common/locales/it';
+
+registerLocaleData(localeIt, 'it');
 import { Observable, of } from 'rxjs';
 
 import * as it from '../../public/assets/i18n/it.json';

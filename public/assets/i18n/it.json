@@ -14,7 +14,6 @@
     "about": "Chi sono",
     "experience": "Esperienza",
     "projects": "Progetti",
-    "cv": "CV",
     "notFound": "Pagina non trovata"
   },
 
@@ -116,11 +115,8 @@
   "projects": {
     "title": "Progetti",
     "subtitle": "Una selezione di progetti a cui ho lavorato.",
-    "back": "Torna ai progetti",
-    "notFound": "Progetto non trovato.",
     "card": {
-      "repo": "Codice",
-      "live": "Demo"
+      "repo": "Codice"
     },
     "rdoh": {
       "title": "rdoh",
@@ -172,12 +168,13 @@
 
   "blog": {
     "subtitle": "Pensieri, guide e appunti tecnici.",
-    "readMore": "Leggi",
-    "minRead": "min",
-    "tags": "Tag",
-    "empty": {
-      "title": "Nessun articolo ancora",
-      "message": "Sto lavorando ai primi contenuti. Torna presto."
+    "search": {
+      "placeholder": "Cerca per titolo…",
+      "noResults": "Nessun articolo trovato."
+    },
+    "notFound": {
+      "title": "Articolo non trovato",
+      "desc": "L'articolo che cerchi non esiste o è stato rimosso."
     }
   }
 }

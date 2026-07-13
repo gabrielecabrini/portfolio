@@ -14,7 +14,6 @@
     "about": "About",
     "experience": "Experience",
     "projects": "Projects",
-    "cv": "CV",
     "notFound": "Page not found"
   },
 
@@ -116,11 +115,8 @@
   "projects": {
     "title": "Projects",
     "subtitle": "A selection of projects I've worked on.",
-    "back": "Back to projects",
-    "notFound": "Project not found.",
     "card": {
-      "repo": "Code",
-      "live": "Demo"
+      "repo": "Code"
     },
     "rdoh": {
       "title": "rdoh",
@@ -172,12 +168,13 @@
 
   "blog": {
     "subtitle": "Thoughts, guides and technical notes.",
-    "readMore": "Read",
-    "minRead": "min",
-    "tags": "Tags",
-    "empty": {
-      "title": "No articles yet",
-      "message": "I'm working on the first posts. Check back soon."
+    "search": {
+      "placeholder": "Search by title…",
+      "noResults": "No articles found."
+    },
+    "notFound": {
+      "title": "Post not found",
+      "desc": "The post you're looking for doesn't exist or has been removed."
     }
   }
 }

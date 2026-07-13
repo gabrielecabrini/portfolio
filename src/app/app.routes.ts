@@ -30,6 +30,16 @@ export const routes: Routes = [
     title: 'Blog',
   },
   {
+    path: 'blog/not-found',
+    loadComponent: () => import('./features/blog/blog-not-found/blog-not-found').then(m => m.BlogNotFound),
+    title: 'Blog',
+  },
+  {
+    path: 'blog/:slug',
+    loadComponent: () => import('./features/blog/blog-post/blog-post').then(m => m.BlogPost),
+    title: 'Blog',
+  },
+  {
     path: '**',
     loadComponent: () => import('./features/not-found/not-found').then(m => m.NotFound),
     title: 'title.notFound',
