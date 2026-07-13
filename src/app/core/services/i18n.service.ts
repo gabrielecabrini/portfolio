@@ -18,8 +18,7 @@ export class I18nService {
     let lang: Lang = 'it';
     if (this.isBrowser) {
       const saved = localStorage.getItem(STORAGE_KEY) as Lang | null;
-      const browser = (navigator.language || '').slice(0, 2) as Lang;
-      lang = saved ?? (SUPPORTED.includes(browser) ? browser : 'it');
+      lang = saved ?? 'it';
     }
     this.translate.use(lang);
 
