@@ -7,7 +7,6 @@
   color: var(--text);
   line-height: 1.75;
   font-size: 1rem;
-  animation: fade-up 0.4s ease both;
 }
 
 /* Headings */
