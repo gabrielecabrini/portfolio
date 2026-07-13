@@ -6,10 +6,20 @@ import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { switchMap, catchError, map, startWith } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { marked } from 'marked';
+import { markedHighlight } from 'marked-highlight';
+import hljs from 'highlight.js/lib/common';
 import { DatePipe } from '@angular/common';
 import { BLOG_POSTS } from '../../../core/data/blog.registry';
 import { I18nService } from '../../../core/services/i18n.service';
 import { Lang } from '../../../core/models/blog-post.model';
+
+marked.use(markedHighlight({
+  langPrefix: 'hljs language-',
+  highlight(code, lang) {
+    const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+    return hljs.highlight(code, { language }).value;
+  },
+}));
 
 type ContentState = { status: 'loading' } | { status: 'error' } | { status: 'ok'; html: SafeHtml };
 

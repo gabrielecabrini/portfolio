@@ -2,6 +2,7 @@
 @import './styles/_reset.css';
 @import './styles/_typography.css';
 @import './styles/_animations.css';
+@import './styles/_markdown.css';
 
 /* GitHub brand icon is near-black — invert in dark mode for visibility */
 :root img[alt="GitHub"] { filter: invert(1); }
