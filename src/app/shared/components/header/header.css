@@ -112,7 +112,6 @@ nav a.active {
     order: 3;
     width: 100%;
     gap: 0;
-    justify-content: space-around;
     border-top: 1px solid var(--border);
   }
 
