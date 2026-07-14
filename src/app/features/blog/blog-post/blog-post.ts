@@ -10,6 +10,7 @@ import { marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js/lib/common';
 import { DatePipe } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 import { BLOG_POSTS } from '../../../core/data/blog.registry';
 import { I18nService } from '../../../core/services/i18n.service';
 import { Lang } from '../../../core/models/blog-post.model';
@@ -26,7 +27,7 @@ type ContentState = { status: 'loading' } | { status: 'error' } | { status: 'ok'
 
 @Component({
   selector: 'app-blog-post',
-  imports: [RouterLink, DatePipe],
+  imports: [RouterLink, DatePipe, TranslatePipe],
   templateUrl: './blog-post.html',
   styleUrl: './blog-post.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -41,6 +42,11 @@ export class BlogPost {
 
   readonly lang = this.i18n.lang;
   readonly #slug = toSignal(this.route.paramMap.pipe(map(p => p.get('slug'))));
+
+  // True only for Angular's first-ever navigation (hard load / hydration, id 1) — a
+  // missing id is treated the same way so we default to showing rather than hiding
+  // the prerendered header.
+  readonly #isInitialNav = (this.router.getCurrentNavigation()?.id ?? 1) === 1;
 
   constructor() {
     effect(() => {
@@ -64,10 +70,18 @@ export class BlogPost {
       switchMap(({ slug, lang }) => {
         if (!slug || !this.isBrowser) return of<ContentState>({ status: 'loading' });
         return this.http.get(`/assets/blog/${slug}/${lang}.md`, { responseType: 'text' }).pipe(
-          map(raw => ({
-            status: 'ok' as const,
-            html: this.sanitizer.bypassSecurityTrustHtml(marked.parse(raw) as string),
-          })),
+          map(raw => {
+            // Missing assets can 200 with the SPA's own index.html (dev-server /
+            // static-host history fallback) instead of a real 404 — treat that as
+            // "not found" rather than trying to render it as Markdown.
+            if (raw.trimStart().toLowerCase().startsWith('<!doctype html')) {
+              throw new Error('markdown asset missing: got app shell instead');
+            }
+            return {
+              status: 'ok' as const,
+              html: this.sanitizer.bypassSecurityTrustHtml(marked.parse(raw) as string),
+            };
+          }),
           catchError(() => of<ContentState>({ status: 'error' })),
           startWith<ContentState>({ status: 'loading' }),
         );
@@ -76,4 +90,9 @@ export class BlogPost {
     ),
     { requireSync: true }
   );
+
+  // In-app navigation waits for the Markdown to resolve so header + body reveal
+  // together with one entrance animation, instead of the header popping in first and
+  // the body stretching the layout when it lands. A hard load/hydration always shows.
+  readonly ready = computed(() => this.#isInitialNav || this.contentState().status !== 'loading');
 }

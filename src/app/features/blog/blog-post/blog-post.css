@@ -101,6 +101,12 @@ h1 {
 .post-error {
   color: var(--muted);
   font-size: 0.95rem;
+  animation: fade-up 0.3s ease both;
+}
+
+.post-content {
+  animation: fade-up 0.4s ease both;
+  animation-delay: 0.06s;
 }
 
 .post-not-found {
