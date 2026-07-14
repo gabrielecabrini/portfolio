@@ -20,20 +20,16 @@
 
         <hr class="divider" />
 
-        @switch (contentState().status) {
-          @case ('loading') {
-            <div class="post-loading">
-              <span class="loading-dot"></span>
-              <span class="loading-dot"></span>
-              <span class="loading-dot"></span>
-            </div>
-          }
-          @case ('error') {
-            <p class="post-error">{{ 'blog.contentUnavailable' | translate }}</p>
-          }
-          @case ('ok') {
-            <div class="post-content markdown-body" [innerHTML]="$any(contentState()).html"></div>
-          }
+        @if (contentResource.isLoading()) {
+          <div class="post-loading">
+            <span class="loading-dot"></span>
+            <span class="loading-dot"></span>
+            <span class="loading-dot"></span>
+          </div>
+        } @else if (contentResource.error()) {
+          <p class="post-error">{{ 'blog.contentUnavailable' | translate }}</p>
+        } @else {
+          <div class="post-content markdown-body" [innerHTML]="contentResource.value()"></div>
         }
 
       </div>

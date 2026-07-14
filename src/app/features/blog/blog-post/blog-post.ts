@@ -1,11 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, PLATFORM_ID, resource } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
 import { DomSanitizer, SafeHtml, Title } from '@angular/platform-browser';
-import { toSignal, toObservable } from '@angular/core/rxjs-interop';
-import { switchMap, catchError, map, startWith } from 'rxjs/operators';
-import { of } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs/operators';
 import { marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js/lib/common';
@@ -25,8 +23,6 @@ marked.use(markedHighlight({
   },
 }));
 
-type ContentState = { status: 'loading' } | { status: 'error' } | { status: 'ok'; html: SafeHtml };
-
 @Component({
   selector: 'app-blog-post',
   imports: [RouterLink, DatePipe, TranslatePipe],
@@ -37,7 +33,6 @@ type ContentState = { status: 'loading' } | { status: 'error' } | { status: 'ok'
 export class BlogPost {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
-  private readonly http = inject(HttpClient);
   private readonly sanitizer = inject(DomSanitizer);
   private readonly i18n = inject(I18nService);
   private readonly title = inject(Title);
@@ -50,7 +45,7 @@ export class BlogPost {
   // True only for Angular's first-ever navigation (hard load / hydration, id 1) — a
   // missing id is treated the same way so we default to showing rather than hiding
   // the prerendered header.
-  readonly #isInitialNav = (this.router.getCurrentNavigation()?.id ?? 1) === 1;
+  readonly #isInitialNav = (this.router.currentNavigation()?.id ?? 1) === 1;
 
   constructor() {
     // Registry data (title/excerpt/date/tags) is synchronous, unlike the markdown body,
@@ -91,35 +86,26 @@ export class BlogPost {
     return post.translations[lang] ?? post.translations[post.langs[0]];
   });
 
-  readonly contentState = toSignal<ContentState>(
-    toObservable(computed(() => ({ slug: this.#slug(), lang: this.i18n.lang() }))).pipe(
-      switchMap(({ slug, lang }) => {
-        if (!slug || !this.isBrowser) return of<ContentState>({ status: 'loading' });
-        return this.http.get(`/assets/blog/${slug}/${lang}.md`, { responseType: 'text', observe: 'response' }).pipe(
-          map(response => {
-            // Missing assets can 200 with the SPA's own index.html (dev-server /
-            // static-host history fallback) instead of a real 404 — that fallback is
-            // always served as text/html, never a real .md, so the header tells us
-            // apart from actual content without inspecting the body.
-            if (response.headers.get('content-type')?.includes('text/html')) {
-              throw new Error('markdown asset missing: got app shell instead');
-            }
-            return {
-              status: 'ok' as const,
-              html: this.sanitizer.bypassSecurityTrustHtml(marked.parse(response.body ?? '') as string),
-            };
-          }),
-          catchError(() => of<ContentState>({ status: 'error' })),
-          startWith<ContentState>({ status: 'loading' }),
-        );
-      }),
-      startWith<ContentState>({ status: 'loading' }),
-    ),
-    { requireSync: true }
-  );
+  readonly contentResource = resource({
+    params: () => ({ slug: this.#slug(), lang: this.i18n.lang() }),
+    loader: async ({ params: { slug, lang }, abortSignal }): Promise<SafeHtml | undefined> => {
+      if (!slug || !this.isBrowser) return undefined;
+      const response = await fetch(`/assets/blog/${slug}/${lang}.md`, { signal: abortSignal });
+      // Missing assets can 200 with the SPA's own index.html (dev-server /
+      // static-host history fallback) instead of a real 404 — that fallback is
+      // always served as text/html, never a real .md, so the header tells us
+      // apart from actual content without inspecting the body.
+      if (response.headers.get('content-type')?.includes('text/html')) {
+        throw new Error('markdown asset missing: got app shell instead');
+      }
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const raw = await response.text();
+      return this.sanitizer.bypassSecurityTrustHtml(marked.parse(raw) as string);
+    },
+  });
 
   // In-app navigation waits for the Markdown to resolve so header + body reveal
   // together with one entrance animation, instead of the header popping in first and
   // the body stretching the layout when it lands. A hard load/hydration always shows.
-  readonly ready = computed(() => this.#isInitialNav || this.contentState().status !== 'loading');
+  readonly ready = computed(() => this.#isInitialNav || !this.contentResource.isLoading());
 }
