@@ -17,6 +17,9 @@ import { TranslateTitleStrategy } from './core/services/title.strategy';
 
 const TRANSLATIONS: Record<string, TranslationObject> = { it, en };
 
+// Translations are bundled at build time and returned synchronously (of(...)) instead
+// of fetched over HTTP: on prerendered pages there's no client-side request to wait on
+// for text to appear, and on the server there's no HTTP client available anyway.
 class InlineTranslateLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<TranslationObject> {
     return of(TRANSLATIONS[lang] ?? TRANSLATIONS['it']);

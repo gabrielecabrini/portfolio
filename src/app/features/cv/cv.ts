@@ -22,6 +22,10 @@ export class Cv {
   private readonly pdfExport = inject(PdfExportService);
   readonly downloading = signal(false);
 
+  // Most recent/current role first: missing endDate ("present") sorts as if it ended
+  // in the far future, so ongoing jobs always lead; ties (e.g. two "present" roles,
+  // not expected today but not prevented by the model) break by later start date.
+  // /experience shows the same data unsorted (declaration order in core/data/experience.ts).
   readonly workExperiences = [...WORK_EXPERIENCES].sort((a, b) => {
     const aEnd = a.endDate ?? '9999-12';
     const bEnd = b.endDate ?? '9999-12';

@@ -20,6 +20,9 @@ export const routes: Routes = [
     title: 'title.projects',
   },
   {
+    // 'CV' and 'Blog' below are deliberately literal, not `title.*` i18n keys: both
+    // words are identical in it/en, and TranslateTitleStrategy falls back to the raw
+    // key string when ngx-translate has no matching translation, so this "just works".
     path: 'cv',
     loadComponent: () => import('./features/cv/cv').then(m => m.Cv),
     title: 'CV',
@@ -35,6 +38,8 @@ export const routes: Routes = [
     title: 'Blog',
   },
   {
+    // Placeholder — once BlogPost resolves the post it overwrites this via its own
+    // effect (Title.setTitle directly, bypassing TitleStrategy) with the post's title.
     path: 'blog/:slug',
     loadComponent: () => import('./features/blog/blog-post/blog-post').then(m => m.BlogPost),
     title: 'Blog',

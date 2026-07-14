@@ -15,6 +15,10 @@ export class I18nService {
   readonly lang = computed(() => this.currentLang() ?? 'it');
 
   constructor() {
+    // Server/prerender always renders 'it' (localStorage doesn't exist there), matching
+    // the static lang="it" already in index.html. The browser build then reads the saved
+    // preference on top, so a returning EN visitor sees a brief IT flash before hydration
+    // swaps it — this is the accepted tradeoff for keeping prerendered output deterministic.
     let lang: Lang = 'it';
     if (this.isBrowser) {
       const saved = localStorage.getItem(STORAGE_KEY) as Lang | null;

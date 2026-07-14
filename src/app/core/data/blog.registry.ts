@@ -1,5 +1,8 @@
 import { BlogPost } from '../models/blog-post.model';
 
+// Blog metadata only. Array order is the list-page display order as-is (nothing
+// re-sorts by date), so newest posts should be inserted first. Adding a post requires
+// more than an entry here; see features/blog/README.md.
 export const BLOG_POSTS: BlogPost[] = [
   {
     slug: 'still-developing',

@@ -1,5 +1,9 @@
 import { SocialLink } from '../models/social-link.model';
 
+// Kept separate from SOCIAL_LINKS (rather than folded in) because it's consumed
+// individually by home/about/cv for the "email me" CTA, not just iterated as a list.
+// iconUrl is an inline SVG data URI (not a CDN icon like the others) so the mail
+// glyph never depends on an external request.
 export const EMAIL: SocialLink = {
   name: 'gabriele.cabrini@proton.me',
   href: 'mailto:gabriele.cabrini@proton.me',

@@ -3,6 +3,11 @@ import { Skill, SkillGroup } from '../models/skill.model';
 import { Certification } from '../models/certification.model';
 import { Education } from '../models/education.model';
 
+// Content for /experience and /cv. Order here is display order for skills/education/
+// certifications; WORK_EXPERIENCES itself is re-sorted by end date in cv.ts (most
+// recent/current first) so insertion order doesn't matter for that one. Adding an
+// entry with a `...Key` field also requires the matching key in both
+// public/assets/i18n/it.json and en.json — see core/data/README.md.
 export const WORK_EXPERIENCES: WorkExperience[] = [
   {
     id: 'sandrini-metalli',

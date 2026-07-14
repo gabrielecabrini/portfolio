@@ -12,6 +12,10 @@ export class ThemeService {
   readonly theme: WritableSignal<Theme>;
 
   constructor() {
+    // This duplicates the inline <script> in index.html, which sets data-theme
+    // synchronously before Angular loads (to avoid a flash of the wrong theme on
+    // first paint). Both must be kept in sync manually — same THEME_KEY, same
+    // saved-value-then-prefers-color-scheme fallback — if this logic changes.
     let initial: Theme = 'dark';
     if (this.isBrowser) {
       const saved = localStorage.getItem(THEME_KEY) as Theme | null;
