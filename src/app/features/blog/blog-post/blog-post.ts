@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { isPlatformBrowser } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { switchMap, catchError, map, startWith } from 'rxjs/operators';
@@ -36,6 +37,7 @@ export class BlogPost {
   private readonly http = inject(HttpClient);
   private readonly sanitizer = inject(DomSanitizer);
   private readonly i18n = inject(I18nService);
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   readonly lang = this.i18n.lang;
   readonly #slug = toSignal(this.route.paramMap.pipe(map(p => p.get('slug'))));
@@ -60,7 +62,7 @@ export class BlogPost {
   readonly contentState = toSignal<ContentState>(
     toObservable(computed(() => ({ slug: this.#slug(), lang: this.i18n.lang() }))).pipe(
       switchMap(({ slug, lang }) => {
-        if (!slug) return of<ContentState>({ status: 'loading' });
+        if (!slug || !this.isBrowser) return of<ContentState>({ status: 'loading' });
         return this.http.get(`/assets/blog/${slug}/${lang}.md`, { responseType: 'text' }).pipe(
           map(raw => ({
             status: 'ok' as const,
