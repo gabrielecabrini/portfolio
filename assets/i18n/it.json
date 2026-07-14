@@ -175,6 +175,7 @@
     "notFound": {
       "title": "Articolo non trovato",
       "desc": "L'articolo che cerchi non esiste o è stato rimosso."
-    }
+    },
+    "contentUnavailable": "Contenuto non disponibile."
   }
 }
