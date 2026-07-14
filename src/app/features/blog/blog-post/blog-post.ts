@@ -69,17 +69,18 @@ export class BlogPost {
     toObservable(computed(() => ({ slug: this.#slug(), lang: this.i18n.lang() }))).pipe(
       switchMap(({ slug, lang }) => {
         if (!slug || !this.isBrowser) return of<ContentState>({ status: 'loading' });
-        return this.http.get(`/assets/blog/${slug}/${lang}.md`, { responseType: 'text' }).pipe(
-          map(raw => {
+        return this.http.get(`/assets/blog/${slug}/${lang}.md`, { responseType: 'text', observe: 'response' }).pipe(
+          map(response => {
             // Missing assets can 200 with the SPA's own index.html (dev-server /
-            // static-host history fallback) instead of a real 404 — treat that as
-            // "not found" rather than trying to render it as Markdown.
-            if (raw.trimStart().toLowerCase().startsWith('<!doctype html')) {
+            // static-host history fallback) instead of a real 404 — that fallback is
+            // always served as text/html, never a real .md, so the header tells us
+            // apart from actual content without inspecting the body.
+            if (response.headers.get('content-type')?.includes('text/html')) {
               throw new Error('markdown asset missing: got app shell instead');
             }
             return {
               status: 'ok' as const,
-              html: this.sanitizer.bypassSecurityTrustHtml(marked.parse(raw) as string),
+              html: this.sanitizer.bypassSecurityTrustHtml(marked.parse(response.body ?? '') as string),
             };
           }),
           catchError(() => of<ContentState>({ status: 'error' })),
