@@ -9,7 +9,7 @@ const CAPTURE_SCALE = 2;
 const ENTRY_BOTTOM_MARGIN = 10;
 
 const SECTION_SELECTORS = '.cv-header, .cv-section, .cv-gdpr';
-const ENTRY_SELECTORS = '.cv-entry, .cv-cert-entry, .cv-proj-entry';
+const ENTRY_SELECTORS = '.cv-entry, .cv-cert-entry';
 
 @Injectable({ providedIn: 'root' })
 export class PdfExportService {

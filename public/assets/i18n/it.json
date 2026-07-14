@@ -150,10 +150,6 @@
     "mobile": {
       "hint": "L'anteprima del CV è disponibile su desktop. Qui puoi scaricare direttamente il PDF."
     },
-    "section": {
-      "profile": "Profilo",
-      "projects": "Progetti"
-    },
     "footer": {
       "generated": "Generato il {{date}}"
     }

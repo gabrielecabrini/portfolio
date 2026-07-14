@@ -38,14 +38,6 @@
 
   <hr class="cv-rule" />
 
-  <!-- Profile -->
-  <section class="cv-section">
-    <h2 class="cv-section-title">{{ 'cv.section.profile' | translate }}</h2>
-    <p class="cv-bio">{{ 'about.bio' | translate }}</p>
-  </section>
-
-  <hr class="cv-rule" />
-
   <!-- Work Experience -->
   <section class="cv-section">
     <h2 class="cv-section-title">{{ 'experience.work.title' | translate }}</h2>
@@ -136,22 +128,6 @@
       }
     </section>
   }
-
-  <hr class="cv-rule" />
-
-  <!-- Projects -->
-  <section class="cv-section">
-    <h2 class="cv-section-title">{{ 'cv.section.projects' | translate }}</h2>
-    @for (proj of projects; track proj.id) {
-      <div class="cv-proj-entry">
-        <div class="cv-proj-header">
-          <strong>{{ proj.titleKey | translate }}</strong>
-          <span class="cv-proj-tags">{{ proj.tags.join(' · ') }}</span>
-        </div>
-        <p class="cv-entry-desc">{{ proj.descriptionKey | translate }}</p>
-      </div>
-    }
-  </section>
 
   @if (i18n.lang() === 'it') {
     <p class="cv-gdpr">

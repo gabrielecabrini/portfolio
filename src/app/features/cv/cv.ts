@@ -4,7 +4,6 @@ import { I18nService } from '../../core/services/i18n.service';
 import { PdfExportService } from '../../core/services/pdf-export.service';
 import { WORK_EXPERIENCES, SKILLS, LANGUAGES, CERTIFICATIONS, EDUCATION } from '../../core/data/experience';
 import { Education } from '../../core/models/education.model';
-import { PROJECTS } from '../../core/data/projects';
 import { EMAIL, SOCIAL_LINKS } from '../../core/data/social-links';
 import { SocialLink } from '../../core/models/social-link.model';
 import { DateFormatPipe } from '../../core/pipes/date-format.pipe';
@@ -37,7 +36,6 @@ export class Cv {
   readonly skills = SKILLS;
   readonly languages = LANGUAGES;
   readonly certifications = CERTIFICATIONS;
-  readonly projects = PROJECTS;
 
   readonly contactLinks: SocialLink[] = [
     EMAIL,

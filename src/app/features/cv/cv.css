@@ -119,13 +119,6 @@
   margin-bottom: 1rem;
 }
 
-/* ── Bio ── */
-.cv-bio {
-  font-size: 0.88rem;
-  line-height: 1.7;
-  color: #333;
-}
-
 /* ── Work / Cert entries ── */
 .cv-entry,
 .cv-cert-entry {
@@ -201,32 +194,6 @@
   color: #333;
 }
 
-/* ── Projects ── */
-.cv-proj-entry {
-  margin-bottom: 0.9rem;
-}
-
-.cv-proj-entry:last-child {
-  margin-bottom: 0;
-}
-
-.cv-proj-header {
-  display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
-  margin-bottom: 0.2rem;
-}
-
-.cv-proj-header strong {
-  font-size: 0.9rem;
-  color: #111;
-}
-
-.cv-proj-tags {
-  font-size: 0.78rem;
-  color: #666;
-}
-
 /* ── GDPR disclaimer ── */
 .cv-gdpr {
   margin-top: 2rem;
@@ -296,16 +263,13 @@
   .cv-section-title,
   .cv-entry-role,
   .cv-entry-company,
-  .cv-bio,
   .cv-entry-desc,
   .cv-skills-list,
-  .cv-lang-entry,
-  .cv-proj-header strong {
+  .cv-lang-entry {
     color: #000 !important;
   }
 
   .cv-entry-date,
-  .cv-proj-tags,
   .cv-location {
     color: #444 !important;
   }
@@ -325,8 +289,7 @@
   }
 
   .cv-entry,
-  .cv-cert-entry,
-  .cv-proj-entry {
+  .cv-cert-entry {
     break-inside: avoid;
   }
 
