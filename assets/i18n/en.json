@@ -150,10 +150,6 @@
     "mobile": {
       "hint": "The CV preview is available on desktop. Here you can download the PDF directly."
     },
-    "section": {
-      "profile": "Profile",
-      "projects": "Projects"
-    },
     "footer": {
       "generated": "Generated on {{date}}"
     }
