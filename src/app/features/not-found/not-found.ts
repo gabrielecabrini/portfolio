@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { SeoService } from '../../core/services/seo.service';
 
 @Component({
   selector: 'app-not-found',
@@ -9,4 +10,8 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './not-found.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NotFound {}
+export class NotFound {
+  constructor() {
+    inject(SeoService).setRobots('noindex, nofollow');
+  }
+}

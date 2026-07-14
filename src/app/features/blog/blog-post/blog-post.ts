@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, effect, inject, PLATFORM_
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml, Title } from '@angular/platform-browser';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { switchMap, catchError, map, startWith } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -13,7 +13,9 @@ import { DatePipe } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { BLOG_POSTS } from '../../../core/data/blog.registry';
 import { I18nService } from '../../../core/services/i18n.service';
+import { SeoService, SITE_ORIGIN } from '../../../core/services/seo.service';
 import { Lang } from '../../../core/models/blog-post.model';
+import { SITE } from '../../../core/services/title.strategy';
 
 marked.use(markedHighlight({
   langPrefix: 'hljs language-',
@@ -38,6 +40,8 @@ export class BlogPost {
   private readonly http = inject(HttpClient);
   private readonly sanitizer = inject(DomSanitizer);
   private readonly i18n = inject(I18nService);
+  private readonly title = inject(Title);
+  private readonly seo = inject(SeoService);
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   readonly lang = this.i18n.lang;
@@ -53,6 +57,34 @@ export class BlogPost {
       if (this.#slug() != null && !this.post()) {
         this.router.navigate(['/blog', 'not-found'], { replaceUrl: true });
       }
+    });
+
+    // Registry data (title/excerpt/date/tags) is synchronous, unlike the markdown body,
+    // so it's reliably present in the prerendered HTML — this is what search engines see.
+    effect(() => {
+      const post = this.post();
+      const translation = this.translation();
+      if (!post || !translation) return;
+
+      const fullTitle = `${translation.title} — ${SITE_ORIGIN}`;
+      this.title.setTitle(fullTitle);
+      this.seo.setSocialTitle(fullTitle);
+      this.seo.setDescription(translation.excerpt);
+      this.seo.setType('article');
+      this.seo.setArticleMeta(post.date, post.tags);
+      this.seo.setJsonLd('blog-posting-jsonld', {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: translation.title,
+        description: translation.excerpt,
+        datePublished: post.date,
+        dateModified: post.date,
+        url: `${SITE_ORIGIN}/blog/${post.slug}`,
+        inLanguage: this.i18n.lang(),
+        keywords: post.tags.join(', '),
+        author: { '@type': 'Person', name: SITE, url: SITE_ORIGIN },
+        publisher: { '@type': 'Person', name: SITE, url: SITE_ORIGIN },
+      });
     });
   }
 

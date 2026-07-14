@@ -3,14 +3,16 @@ import { Title } from '@angular/platform-browser';
 import { RouterStateSnapshot, TitleStrategy } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { I18nService } from './i18n.service';
+import { SeoService } from './seo.service';
 
-const SITE = 'Gabriele Cabrini';
+export const SITE = 'Gabriele Cabrini';
 
 @Injectable({ providedIn: 'root' })
 export class TranslateTitleStrategy extends TitleStrategy {
   private readonly title = inject(Title);
   private readonly translate = inject(TranslateService);
   private readonly i18n = inject(I18nService);
+  private readonly seo = inject(SeoService);
   private currentKey: string | undefined;
 
   constructor() {
@@ -24,6 +26,7 @@ export class TranslateTitleStrategy extends TitleStrategy {
   override updateTitle(snapshot: RouterStateSnapshot): void {
     this.currentKey = this.buildTitle(snapshot);
     this.applyTitle(this.currentKey);
+    this.seo.setCanonical(snapshot.url);
   }
 
   private applyTitle(key: string | undefined): void {

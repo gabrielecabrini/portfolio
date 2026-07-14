@@ -3,8 +3,8 @@ import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 
 const STORAGE_KEY = 'lang';
-const SUPPORTED = ['it', 'en'] as const;
-type Lang = typeof SUPPORTED[number];
+export const SUPPORTED_LANGS = ['it', 'en'] as const;
+export type Lang = typeof SUPPORTED_LANGS[number];
 
 @Injectable({ providedIn: 'root' })
 export class I18nService {
