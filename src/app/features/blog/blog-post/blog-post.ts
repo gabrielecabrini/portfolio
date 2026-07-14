@@ -53,12 +53,6 @@ export class BlogPost {
   readonly #isInitialNav = (this.router.getCurrentNavigation()?.id ?? 1) === 1;
 
   constructor() {
-    effect(() => {
-      if (this.#slug() != null && !this.post()) {
-        this.router.navigate(['/blog', 'not-found'], { replaceUrl: true });
-      }
-    });
-
     // Registry data (title/excerpt/date/tags) is synchronous, unlike the markdown body,
     // so it's reliably present in the prerendered HTML — this is what search engines see.
     effect(() => {

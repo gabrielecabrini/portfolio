@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Header } from './shared/components/header/header';
@@ -10,5 +10,6 @@ import { BackToTop } from './shared/components/back-to-top/back-to-top';
   imports: [RouterOutlet, TranslatePipe, Header, Footer, BackToTop],
   templateUrl: './app.html',
   styleUrl: './app.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {}

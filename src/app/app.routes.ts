@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { Home } from './features/home/home';
+import { blogPostGuard } from './features/blog/blog-post/blog-post.guard';
 
 export const routes: Routes = [
   // Home is eager — keeps FCP fast for the landing page
@@ -41,6 +42,7 @@ export const routes: Routes = [
     // Placeholder — once BlogPost resolves the post it overwrites this via its own
     // effect (Title.setTitle directly, bypassing TitleStrategy) with the post's title.
     path: 'blog/:slug',
+    canActivate: [blogPostGuard],
     loadComponent: () => import('./features/blog/blog-post/blog-post').then(m => m.BlogPost),
     title: 'Blog',
   },
