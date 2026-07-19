@@ -24,7 +24,6 @@
     "available": "Available for full-time positions and freelance projects",
     "cta": {
       "cv": "CV",
-      "projects": "View projects",
       "experience": "Experience",
       "about": "About me"
     },
@@ -54,6 +53,9 @@
 
   "experience": {
     "empty": "Nothing here yet. Check back soon!",
+    "cta": {
+      "projects": "View projects"
+    },
     "edu": {
       "title": "Education",
       "afp": {
