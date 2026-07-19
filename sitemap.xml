@@ -41,12 +41,4 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <url>
-    <loc>https://www.gabrielecabrini.it/blog</loc>
-    <xhtml:link rel="alternate" hreflang="it" href="https://www.gabrielecabrini.it/blog"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.gabrielecabrini.it/blog"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.gabrielecabrini.it/blog"/>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
 </urlset>
