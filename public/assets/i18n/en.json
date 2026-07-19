@@ -161,18 +161,6 @@
     "title": "Page not found",
     "message": "The page you're looking for doesn't exist or has been moved.",
     "cta": "Back to home"
-  },
-
-  "blog": {
-    "subtitle": "Thoughts, guides and technical notes.",
-    "search": {
-      "placeholder": "Search by title…",
-      "noResults": "No articles found."
-    },
-    "notFound": {
-      "title": "Post not found",
-      "desc": "The post you're looking for doesn't exist or has been removed."
-    },
-    "contentUnavailable": "Content unavailable."
   }
+
 }
