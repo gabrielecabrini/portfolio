@@ -1,14 +1,14 @@
 <section class="projects-page">
   <div class="projects-inner">
 
-    <div class="section-header">
+    <div class="section-header" appReveal>
       <h2>{{ 'projects.title' | translate }}</h2>
       <p class="section-desc">{{ 'projects.subtitle' | translate }}</p>
     </div>
 
     <div class="projects-grid">
       @for (project of projects; track project.id) {
-        <article class="project-card" [style.animation-delay]="(80 + $index * 70) + 'ms'">
+        <article class="project-card" appReveal [revealDelay]="(80 + $index * 70) + 'ms'">
 
           <div class="card-body">
             <div class="card-title">

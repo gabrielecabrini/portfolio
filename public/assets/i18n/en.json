@@ -35,6 +35,9 @@
 
   "about": {
     "title": "About",
+    "seo": {
+      "description": "Fullstack Software Developer based near Bergamo, Italy. Specializing in Java/Spring Boot, Angular, and Docker/Kubernetes infrastructure."
+    },
     "bio": "I'm Gabriele, a software developer based near Bergamo, Italy. I love having a hands-on approach across the entire software lifecycle. Over the years, I've specialized in building enterprise applications and complex ERP systems, turning intricate requirements into reliable platforms.\nI seamlessly navigate between business logic in Java/Spring Boot backends and user interfaces in Angular. My passion for the Linux ecosystem also drives me to manage the infrastructure side, containerizing and orchestrating deployments with Docker and Kubernetes. My philosophy? Whether it's architecture or code, I always strive for the cleanest, most elegant, and scalable solution.",
     "cv": {
       "link": "Curriculum Vitae",
@@ -53,6 +56,9 @@
 
   "experience": {
     "empty": "Nothing here yet. Check back soon!",
+    "seo": {
+      "description": "Work experience, technical skills, certifications, and languages of Gabriele Cabrini — Fullstack Software Developer."
+    },
     "cta": {
       "projects": "View projects"
     },
@@ -145,6 +151,9 @@
 
   "cv": {
     "download": "Download PDF",
+    "seo": {
+      "description": "Curriculum Vitae of Gabriele Cabrini — Fullstack Software Developer based in northern Italy. Java, Spring Boot, Angular, Docker, Kubernetes."
+    },
     "downloading": "Generating…",
     "location": "Bergamo, Italy",
     "lang": {

@@ -2,7 +2,7 @@
   <div class="exp-inner">
 
     <!-- Work Experience -->
-    <div class="exp-section">
+    <div class="exp-section" appReveal>
       <h2>{{ 'experience.work.title' | translate }}</h2>
 
       @if (workExperiences.length === 0) {
@@ -10,8 +10,8 @@
       }
 
       <div class="timeline">
-        @for (job of workExperiences; track job.id) {
-          <div class="timeline-item">
+        @for (job of workExperiences; track job.id; let i = $index) {
+          <div class="timeline-item" appReveal [revealDelay]="(i * 60) + 'ms'">
             @if (job.logoUrl) {
               <div class="item-logo">
                 <img [src]="job.logoUrl" [alt]="job.company" decoding="async" loading="lazy" />
@@ -39,7 +39,7 @@
     </div>
 
     <!-- Skills -->
-    <div class="exp-section">
+    <div class="exp-section" appReveal>
       <h2>{{ 'experience.skills.title' | translate }}</h2>
 
       <div class="skill-groups">
@@ -67,7 +67,7 @@
     </div>
 
     <!-- Languages -->
-    <div class="exp-section">
+    <div class="exp-section" appReveal>
       <h2>{{ 'experience.languages.title' | translate }}</h2>
 
       <div class="skills-grid">
@@ -88,7 +88,7 @@
     </div>
 
     <!-- Certifications -->
-    <div class="exp-section">
+    <div class="exp-section" appReveal>
       <h2>{{ 'experience.certs.title' | translate }}</h2>
 
       @if (certifications.length === 0) {

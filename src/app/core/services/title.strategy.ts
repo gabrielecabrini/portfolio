@@ -1,6 +1,7 @@
 import { effect, inject, Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterStateSnapshot, TitleStrategy } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { I18nService } from './i18n.service';
 import { SeoService } from './seo.service';
@@ -34,7 +35,7 @@ export class TranslateTitleStrategy extends TitleStrategy {
       this.title.setTitle(SITE);
       return;
     }
-    this.translate.get(key).subscribe(label => {
+    firstValueFrom(this.translate.get(key)).then(label => {
       this.title.setTitle(`${label} — ${SITE}`);
     });
   }

@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
+import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { SeoService } from '../../core/services/seo.service';
 import { I18nService } from '../../core/services/i18n.service';
 import { PdfExportService } from '../../core/services/pdf-export.service';
 import { WORK_EXPERIENCES, SKILLS, LANGUAGES, CERTIFICATIONS, EDUCATION } from '../../core/data/experience';
@@ -8,10 +9,11 @@ import { EMAIL, SOCIAL_LINKS } from '../../core/data/social-links';
 import { SocialLink } from '../../core/models/social-link.model';
 import { DateFormatPipe } from '../../core/pipes/date-format.pipe';
 import { DateRangePipe } from '../../core/pipes/date-range.pipe';
+import { DisplayUrlPipe } from '../../core/pipes/display-url.pipe';
 
 @Component({
   selector: 'app-cv',
-  imports: [TranslatePipe, DateFormatPipe, DateRangePipe],
+  imports: [TranslatePipe, DateFormatPipe, DateRangePipe, DisplayUrlPipe],
   templateUrl: './cv.html',
   styleUrl: './cv.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,10 +44,16 @@ export class Cv {
     ...SOCIAL_LINKS.filter(l => l.href.includes('linkedin.com')),
   ];
 
-  displayUrl(href: string): string {
-    return href.startsWith('mailto:')
-      ? href.slice(7)
-      : href.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  constructor() {
+    const seo = inject(SeoService);
+    const translate = inject(TranslateService);
+
+    effect(() => {
+      this.i18n.lang();
+      seo.setDescription(translate.instant('cv.seo.description'));
+      seo.setSocialTitle(`CV — Gabriele Cabrini`);
+      seo.setType('website');
+    });
   }
 
   async downloadPdf(): Promise<void> {

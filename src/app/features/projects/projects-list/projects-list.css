@@ -27,15 +27,6 @@
   gap: 1.25rem;
 }
 
-/* ── Entrance: header + staggered cards ── */
-.section-header {
-  animation: fade-up 0.4s ease both;
-}
-
-.project-card {
-  animation: fade-up 0.4s ease both;
-}
-
 .project-card {
   background: var(--surface);
   border: 1px solid var(--border);

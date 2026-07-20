@@ -23,7 +23,7 @@
            [attr.target]="link.target ?? null"
            [attr.rel]="link.rel ?? null"
            class="link-card"
-           [style.animation-delay]="(140 + i * 60) + 'ms'"
+           appReveal [revealDelay]="(i * 60) + 'ms'"
            data-umami-event="social_link_click"
            [attr.data-umami-event-name]="link.name">
           <span class="link-icon">
@@ -35,9 +35,9 @@
       }
     </div>
 
-    <hr class="cta-divider" [style.animation-delay]="(140 + (links.length + 1) * 60) + 'ms'" />
+    <hr class="cta-divider" appReveal />
 
-    <div class="ctas-row" [style.animation-delay]="(140 + (links.length + 2) * 60) + 'ms'">
+    <div class="ctas-row" appReveal [revealDelay]="'60ms'">
 
       <a [href]="email" class="contact-cta" data-umami-event="contact_email_click">
         <div class="contact-cta-left">

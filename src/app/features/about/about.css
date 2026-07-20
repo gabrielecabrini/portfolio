@@ -16,15 +16,6 @@
   margin-bottom: 0;
 }
 
-.links-section-header {
-  animation: fade-up 0.4s ease both;
-  animation-delay: 80ms;
-}
-
-.link-card {
-  animation: fade-up 0.4s ease both;
-}
-
 .avatar {
   width: 130px;
   height: 130px;
@@ -78,7 +69,6 @@
   border: none;
   border-top: 1px solid var(--border);
   margin: 2.5rem 0 0;
-  animation: fade-in 0.4s ease both;
 }
 
 .link-card {
@@ -112,6 +102,10 @@
   color: var(--accent);
 }
 
+.link-card:hover .link-arrow {
+  transform: translateX(3px);
+}
+
 .link-img {
   width: 22px;
   height: 22px;
@@ -131,6 +125,7 @@
 .link-arrow {
   color: var(--muted);
   font-size: 0.9rem;
+  transition: transform 0.2s ease;
 }
 
 /* ── CTAs row (contact + CV) ── */
@@ -140,7 +135,6 @@
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
   margin-top: 2rem;
-  animation: fade-up 0.4s ease both;
 }
 
 .contact-cta {

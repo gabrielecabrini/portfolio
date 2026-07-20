@@ -10,14 +10,6 @@
   gap: 4rem;
 }
 
-/* ── Entrance: stagger each section ── */
-.exp-inner > .exp-section {
-  animation: fade-up 0.45s ease both;
-}
-.exp-inner > .exp-section:nth-child(1) { animation-delay: 0ms; }
-.exp-inner > .exp-section:nth-child(2) { animation-delay: 100ms; }
-.exp-inner > .exp-section:nth-child(3) { animation-delay: 200ms; }
-.exp-inner > .exp-section:nth-child(4) { animation-delay: 300ms; }
 
 .exp-section > h2 {
   color: var(--text);
@@ -173,11 +165,16 @@
   border-color: var(--accent);
 }
 
+.skill-card:hover .skill-icon {
+  transform: scale(1.12);
+}
+
 .skill-icon {
   width: 32px;
   height: 32px;
   object-fit: contain;
   flex-shrink: 0;
+  transition: transform 0.2s ease;
 }
 
 .skill-body h3 {

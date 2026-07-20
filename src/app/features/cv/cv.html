@@ -29,7 +29,7 @@
       <div class="cv-contacts">
         @for (link of contactLinks; track link.href) {
           <a [href]="link.href" target="_blank" rel="noopener noreferrer" class="cv-contact-link">
-            {{ displayUrl(link.href) }}
+            {{ link.href | displayUrl }}
           </a>
         }
       </div>

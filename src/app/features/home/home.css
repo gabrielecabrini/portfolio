@@ -36,6 +36,7 @@
   color: var(--accent);
   font-size: 0.9rem;
   font-weight: 500;
+  font-family: var(--font-mono);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
@@ -99,6 +100,8 @@ h1 {
 .btn-primary:hover {
   background: var(--accent-dim);
   color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 35%, transparent);
 }
 
 .btn-secondary {

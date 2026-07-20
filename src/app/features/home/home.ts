@@ -1,8 +1,10 @@
-import { afterNextRender, ChangeDetectionStrategy, Component, OnDestroy, signal } from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, effect, inject, OnDestroy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { GithubActivity } from './github-activity/github-activity';
 import { EMAIL } from '../../core/data/social-links';
+import { I18nService } from '../../core/services/i18n.service';
+import { SeoService } from '../../core/services/seo.service';
 
 @Component({
   selector: 'app-home',
@@ -28,6 +30,17 @@ export class Home implements OnDestroy {
   private timer: ReturnType<typeof setTimeout> | null = null;
 
   constructor() {
+    const seo = inject(SeoService);
+    const translate = inject(TranslateService);
+    const i18n = inject(I18nService);
+
+    effect(() => {
+      i18n.lang();
+      seo.setDescription(translate.instant('home.tagline'));
+      seo.setSocialTitle('Gabriele Cabrini — Fullstack Software Developer');
+      seo.setType('website');
+    });
+
     afterNextRender(() => this.tick());
   }
 
