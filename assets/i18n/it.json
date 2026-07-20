@@ -35,6 +35,9 @@
 
   "about": {
     "title": "Chi sono",
+    "seo": {
+      "description": "Sviluppatore fullstack con base a Bergamo, Italia. Specializzato in Java/Spring Boot, Angular e infrastrutture Docker/Kubernetes."
+    },
     "bio": "Sono Gabriele e lavoro dalla provincia di Bergamo. Mi piace avere il controllo su tutto il ciclo di vita del software. Negli anni mi sono specializzato nella costruzione di applicazioni enterprise e sistemi ERP complessi, trasformando requisiti articolati in piattaforme affidabili.\nMi muovo agevolmente tra la logica di business dei backend in Java/Spring Boot e le interfacce utente in Angular. L'amore per il mondo Linux mi spinge poi a curare in prima persona anche l'infrastruttura, containerizzando e orchestrando i servizi con Docker e Kubernetes. La mia filosofia? Che si tratti di architettura o di codice, cerco sempre la soluzione più pulita, elegante e scalabile.",
     "cv": {
       "link": "Curriculum Vitae",
@@ -53,6 +56,9 @@
 
   "experience": {
     "empty": "Nessun elemento ancora. Aggiornalo presto!",
+    "seo": {
+      "description": "Esperienza lavorativa, competenze tecniche, certificazioni e lingue di Gabriele Cabrini — Sviluppatore Fullstack."
+    },
     "cta": {
       "projects": "Vedi i progetti"
     },
@@ -145,6 +151,9 @@
 
   "cv": {
     "download": "Scarica PDF",
+    "seo": {
+      "description": "Curriculum Vitae di Gabriele Cabrini — Sviluppatore Fullstack con base nel nord Italia. Java, Spring Boot, Angular, Docker, Kubernetes."
+    },
     "downloading": "Generazione in corso…",
     "location": "Bergamo, Italia",
     "lang": {
