@@ -14,9 +14,6 @@ mostly just bind that data to a template. To change what a page says, start in
 `core/data/` — see **`src/app/core/data/README.md`** for the content model and the
 `...Key` → i18n-JSON convention that most fields use.
 
-The blog is the one exception with a secondary content source (Markdown files, not
-just data arrays) — see **`src/app/features/blog/README.md`**.
-
 Components are `standalone` + `OnPush` + signal-based throughout; state that needs to
 survive SSR/hydration (language, theme) lives in root services under
 `core/services/` and guards browser-only APIs with `isPlatformBrowser`.
