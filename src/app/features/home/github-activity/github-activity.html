@@ -2,9 +2,11 @@
   <span class="activity-label">{{ 'home.githubLabel' | translate }}</span>
   <div class="contrib-grid">
     @for (item of gridItems; track $index) {
-      <div class="contrib-cell"
-           [attr.data-level]="item.level"
-           [style.animation-delay]="item.delay"></div>
+      <div
+        class="contrib-cell"
+        [attr.data-level]="item.level"
+        [style.animation-delay]="item.delay"
+      ></div>
     }
   </div>
 </div>

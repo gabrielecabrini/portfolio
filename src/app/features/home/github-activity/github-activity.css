@@ -16,7 +16,7 @@
   cursor: default;
 }
 
-[data-theme="light"] .activity-label {
+[data-theme='light'] .activity-label {
   color: #4a7a34;
 }
 
@@ -35,17 +35,27 @@
 }
 
 @keyframes cell-in {
-  from { opacity: 0; transform: scale(0.4); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-.contrib-cell[data-level="1"] { background: color-mix(in srgb, var(--accent) 20%, var(--surface)); }
-.contrib-cell[data-level="2"] { background: color-mix(in srgb, var(--accent) 40%, var(--surface)); }
-.contrib-cell[data-level="3"] {
+.contrib-cell[data-level='1'] {
+  background: color-mix(in srgb, var(--accent) 20%, var(--surface));
+}
+.contrib-cell[data-level='2'] {
+  background: color-mix(in srgb, var(--accent) 40%, var(--surface));
+}
+.contrib-cell[data-level='3'] {
   background: color-mix(in srgb, var(--accent) 65%, var(--surface));
   box-shadow: 0 0 5px color-mix(in srgb, var(--accent) 35%, transparent);
 }
-.contrib-cell[data-level="4"] {
+.contrib-cell[data-level='4'] {
   background: var(--accent);
   box-shadow: 0 0 8px color-mix(in srgb, var(--accent) 65%, transparent);
 }

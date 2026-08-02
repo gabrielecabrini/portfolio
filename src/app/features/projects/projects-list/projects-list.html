@@ -1,6 +1,5 @@
 <section class="projects-page">
   <div class="projects-inner">
-
     <div class="section-header" appReveal>
       <h2>{{ 'projects.title' | translate }}</h2>
       <p class="section-desc">{{ 'projects.subtitle' | translate }}</p>
@@ -8,15 +7,17 @@
 
     <div class="projects-grid">
       @for (project of projects; track project.id) {
-        <article class="project-card" appReveal [revealDelay]="(80 + $index * 70) + 'ms'">
-
+        <article class="project-card" appReveal [revealDelay]="80 + $index * 70 + 'ms'">
           <div class="card-body">
             <div class="card-title">
               @if (project.imageUrl) {
-                <img class="card-logo"
-                     [src]="project.imageUrl"
-                     [alt]="project.titleKey | translate"
-                     decoding="async" loading="lazy" />
+                <img
+                  class="card-logo"
+                  [src]="project.imageUrl"
+                  [alt]="project.titleKey | translate"
+                  decoding="async"
+                  loading="lazy"
+                />
               }
               <h3>{{ project.titleKey | translate }}</h3>
             </div>
@@ -31,19 +32,21 @@
             </div>
             <div class="card-links">
               @if (project.repoUrl) {
-                <a [href]="project.repoUrl" target="_blank" rel="noopener noreferrer"
-                   class="card-link"
-                   data-umami-event="project_repo_click"
-                   [attr.data-umami-event-project]="project.id">
+                <a
+                  [href]="project.repoUrl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="card-link"
+                  data-umami-event="project_repo_click"
+                  [attr.data-umami-event-project]="project.id"
+                >
                   {{ 'projects.card.repo' | translate }} ↗
                 </a>
               }
             </div>
           </div>
-
         </article>
       }
     </div>
-
   </div>
 </section>

@@ -1,4 +1,11 @@
-import { afterNextRender, ChangeDetectionStrategy, Component, inject, OnDestroy, signal } from '@angular/core';
+import {
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnDestroy,
+  signal,
+} from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import packageJson from '../../../../../package.json';
 import { ThemeService } from '../../../core/services/theme.service';
@@ -38,9 +45,9 @@ export class Footer implements OnDestroy {
       hour12: false,
       timeZoneName: 'short',
     }).formatToParts(date);
-    const h = parts.find(p => p.type === 'hour')?.value ?? '';
-    const m = parts.find(p => p.type === 'minute')?.value ?? '';
-    const tz = parts.find(p => p.type === 'timeZoneName')?.value ?? '';
+    const h = parts.find((p) => p.type === 'hour')?.value ?? '';
+    const m = parts.find((p) => p.type === 'minute')?.value ?? '';
+    const tz = parts.find((p) => p.type === 'timeZoneName')?.value ?? '';
     return `${h}:${m} ${tz}`;
   }
 }

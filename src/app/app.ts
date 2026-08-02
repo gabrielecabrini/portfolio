@@ -29,10 +29,10 @@ export class App {
       );
       console.log(
         '%cGabriele Cabrini — Fullstack Software Developer\n\n' +
-        '📧  gabriele.cabrini@proton.me\n' +
-        '💼  linkedin.com/in/gabrielecabrini\n' +
-        '🐙  github.com/gabrielecabrini\n\n' +
-        'Feel free to say hi — always happy to connect.',
+          '📧  gabriele.cabrini@proton.me\n' +
+          '💼  linkedin.com/in/gabrielecabrini\n' +
+          '🐙  github.com/gabrielecabrini\n\n' +
+          'Feel free to say hi — always happy to connect.',
         'font-size: 0.85rem; color: #888; font-family: JetBrains Mono, monospace; line-height: 2;',
       );
     });

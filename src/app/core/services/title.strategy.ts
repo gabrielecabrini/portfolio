@@ -35,7 +35,7 @@ export class TranslateTitleStrategy extends TitleStrategy {
       this.title.setTitle(SITE);
       return;
     }
-    firstValueFrom(this.translate.get(key)).then(label => {
+    firstValueFrom(this.translate.get(key)).then((label) => {
       this.title.setTitle(`${label} — ${SITE}`);
     });
   }

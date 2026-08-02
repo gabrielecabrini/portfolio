@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 const STORAGE_KEY = 'lang';
 export const SUPPORTED_LANGS = ['it', 'en'] as const;
-export type Lang = typeof SUPPORTED_LANGS[number];
+export type Lang = (typeof SUPPORTED_LANGS)[number];
 
 @Injectable({ providedIn: 'root' })
 export class I18nService {

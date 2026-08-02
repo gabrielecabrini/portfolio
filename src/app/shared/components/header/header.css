@@ -56,7 +56,9 @@ nav a.active {
   letter-spacing: 0.03em;
   padding: 0.25rem 0.65rem;
   border-radius: var(--radius-sm);
-  transition: border-color 0.15s, color 0.15s;
+  transition:
+    border-color 0.15s,
+    color 0.15s;
   display: flex;
   align-items: center;
   gap: 0.3rem;

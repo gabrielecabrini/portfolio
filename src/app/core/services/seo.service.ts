@@ -43,7 +43,7 @@ export class SeoService {
 
   setArticleMeta(publishedTime: string, tags: string[]): void {
     this.meta.updateTag({ property: 'article:published_time', content: publishedTime });
-    this.document.querySelectorAll('meta[property="article:tag"]').forEach(el => el.remove());
+    this.document.querySelectorAll('meta[property="article:tag"]').forEach((el) => el.remove());
     for (const tag of tags) this.meta.addTag({ property: 'article:tag', content: tag }, true);
   }
 
@@ -63,7 +63,9 @@ export class SeoService {
   }
 
   private setLinkTag(rel: string, href: string, hreflang?: string): void {
-    const selector = hreflang ? `link[rel="${rel}"][hreflang="${hreflang}"]` : `link[rel="${rel}"]:not([hreflang])`;
+    const selector = hreflang
+      ? `link[rel="${rel}"][hreflang="${hreflang}"]`
+      : `link[rel="${rel}"]:not([hreflang])`;
     let link = this.document.querySelector<HTMLLinkElement>(selector);
     if (!link) {
       link = this.document.createElement('link');

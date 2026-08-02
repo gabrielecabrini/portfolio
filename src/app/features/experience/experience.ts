@@ -2,7 +2,12 @@ import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/cor
 import { RouterLink } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { I18nService } from '../../core/services/i18n.service';
-import { WORK_EXPERIENCES, SKILL_GROUPS, CERTIFICATIONS, LANGUAGES } from '../../core/data/experience';
+import {
+  WORK_EXPERIENCES,
+  SKILL_GROUPS,
+  CERTIFICATIONS,
+  LANGUAGES,
+} from '../../core/data/experience';
 import { WorkExperience } from '../../core/models/work-experience.model';
 import { Skill, SkillGroup } from '../../core/models/skill.model';
 import { Certification } from '../../core/models/certification.model';

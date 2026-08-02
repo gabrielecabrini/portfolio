@@ -35,10 +35,14 @@ export class RevealDirective implements OnDestroy {
               el.style.transitionDelay = this.revealDelay();
               el.classList.remove('reveal-pending');
               el.classList.add('reveal-visible');
-              el.addEventListener('transitionend', () => {
-                el.style.transition = '';
-                el.style.transitionDelay = '';
-              }, { once: true });
+              el.addEventListener(
+                'transitionend',
+                () => {
+                  el.style.transition = '';
+                  el.style.transitionDelay = '';
+                },
+                { once: true },
+              );
               if (this.revealOnce()) this.observer?.disconnect();
             }
           }

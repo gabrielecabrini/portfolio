@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, computed, HostListener, inject, OnDestroy, OnInit, PLATFORM_ID, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  HostListener,
+  inject,
+  OnDestroy,
+  OnInit,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -17,7 +27,7 @@ export class BackToTop implements OnInit, OnDestroy {
   private lastScrollTime = 0;
 
   readonly bottomStyle = computed(() =>
-    this.footerVisible() ? 'calc(var(--footer-h) + 1.25rem)' : ''
+    this.footerVisible() ? 'calc(var(--footer-h) + 1.25rem)' : '',
   );
 
   ngOnInit(): void {
@@ -26,7 +36,7 @@ export class BackToTop implements OnInit, OnDestroy {
     if (!footer) return;
     this.observer = new IntersectionObserver(
       ([entry]) => this.footerVisible.set(entry.isIntersecting),
-      { threshold: 0 }
+      { threshold: 0 },
     );
     this.observer.observe(footer);
   }

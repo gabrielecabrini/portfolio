@@ -42,14 +42,13 @@ export class PdfExportService {
 
       const pageRect = page.getBoundingClientRect();
       const safeBreaks = new Set<number>([0, canvas.height]);
-      page.querySelectorAll(`${SECTION_SELECTORS}, ${ENTRY_SELECTORS}`).forEach(el => {
+      page.querySelectorAll(`${SECTION_SELECTORS}, ${ENTRY_SELECTORS}`).forEach((el) => {
         const r = el.getBoundingClientRect();
         const top = Math.round((r.top - pageRect.top) * CAPTURE_SCALE);
         const bot = Math.round((r.bottom - pageRect.top) * CAPTURE_SCALE);
 
         const isFirstEntry =
-          el.matches(ENTRY_SELECTORS) &&
-          !el.previousElementSibling?.matches(ENTRY_SELECTORS);
+          el.matches(ENTRY_SELECTORS) && !el.previousElementSibling?.matches(ENTRY_SELECTORS);
 
         // TOP is safe for sections and for non-first entries.
         // The first entry in a section is excluded: cutting before it would leave
@@ -73,7 +72,7 @@ export class PdfExportService {
     const pdf = new jsPDF('p', 'mm', 'a4');
     const pageW = pdf.internal.pageSize.getWidth();
     const pageH = pdf.internal.pageSize.getHeight();
-    const pageHeightPx = Math.floor(pageH * canvas.width / pageW);
+    const pageHeightPx = Math.floor((pageH * canvas.width) / pageW);
 
     const now = new Date();
     const dd = String(now.getDate()).padStart(2, '0');
@@ -91,13 +90,13 @@ export class PdfExportService {
     };
 
     // ~10mm top padding added to continuation pages to avoid content flush against the edge
-    const topPaddingPx = Math.round(10 * canvas.width / pageW);
+    const topPaddingPx = Math.round((10 * canvas.width) / pageW);
     const offscreen = this.document.createElement('canvas');
     offscreen.width = canvas.width;
     const ctx = offscreen.getContext('2d')!;
 
     // If the final page would hold less than this, backtrack to move more blocks there.
-    const MIN_LAST_PAGE_PX = Math.round(pageHeightPx * 0.20);
+    const MIN_LAST_PAGE_PX = Math.round(pageHeightPx * 0.2);
 
     let sliceStart = 0;
     let pageIndex = 0;
@@ -110,7 +109,7 @@ export class PdfExportService {
       if (idealEnd >= canvas.height) {
         cutPoint = canvas.height;
       } else {
-        const candidates = sortedBreaks.filter(b => b > sliceStart && b <= idealEnd);
+        const candidates = sortedBreaks.filter((b) => b > sliceStart && b <= idealEnd);
         cutPoint = candidates.at(-1) ?? idealEnd;
 
         // Look-ahead: if cutting here would leave the final page under-filled
@@ -137,7 +136,7 @@ export class PdfExportService {
       ctx.drawImage(canvas, 0, sliceStart, canvas.width, sliceH, 0, topPad, canvas.width, sliceH);
 
       if (pageIndex > 0) pdf.addPage();
-      const sliceHmm = (sliceH + topPad) * pageW / canvas.width;
+      const sliceHmm = ((sliceH + topPad) * pageW) / canvas.width;
       pdf.addImage(offscreen.toDataURL('image/jpeg', 0.92), 'JPEG', 0, 0, pageW, sliceHmm);
       addPageFooter();
 

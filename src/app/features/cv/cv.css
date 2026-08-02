@@ -22,7 +22,9 @@
   border-radius: var(--radius);
   color: var(--text);
   cursor: pointer;
-  transition: border-color 0.15s, background 0.15s;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
 }
 
 .cv-print-btn:hover {
@@ -37,7 +39,7 @@
   padding: 48px 56px;
   background: #fff;
   color: #111;
-  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.10);
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
 }
 

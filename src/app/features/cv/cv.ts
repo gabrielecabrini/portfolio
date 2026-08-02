@@ -3,7 +3,13 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { SeoService } from '../../core/services/seo.service';
 import { I18nService } from '../../core/services/i18n.service';
 import { PdfExportService } from '../../core/services/pdf-export.service';
-import { WORK_EXPERIENCES, SKILLS, LANGUAGES, CERTIFICATIONS, EDUCATION } from '../../core/data/experience';
+import {
+  WORK_EXPERIENCES,
+  SKILLS,
+  LANGUAGES,
+  CERTIFICATIONS,
+  EDUCATION,
+} from '../../core/data/experience';
 import { Education } from '../../core/models/education.model';
 import { EMAIL, SOCIAL_LINKS } from '../../core/data/social-links';
 import { SocialLink } from '../../core/models/social-link.model';
@@ -41,7 +47,7 @@ export class Cv {
 
   readonly contactLinks: SocialLink[] = [
     EMAIL,
-    ...SOCIAL_LINKS.filter(l => l.href.includes('linkedin.com')),
+    ...SOCIAL_LINKS.filter((l) => l.href.includes('linkedin.com')),
   ];
 
   constructor() {

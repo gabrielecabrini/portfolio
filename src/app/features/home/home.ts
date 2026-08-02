@@ -1,4 +1,12 @@
-import { afterNextRender, ChangeDetectionStrategy, Component, effect, inject, OnDestroy, signal } from '@angular/core';
+import {
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+  OnDestroy,
+  signal,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { GithubActivity } from './github-activity/github-activity';
@@ -55,7 +63,10 @@ export class Home implements OnDestroy {
       this.charIndex++;
       this.displayText.set(phrase.slice(0, this.charIndex));
       if (this.charIndex === phrase.length) {
-        this.timer = setTimeout(() => { this.deleting = true; this.tick(); }, 1800);
+        this.timer = setTimeout(() => {
+          this.deleting = true;
+          this.tick();
+        }, 1800);
         return;
       }
     } else {

@@ -16,7 +16,7 @@
   --footer-h: 60px;
 }
 
-[data-theme="light"] {
+[data-theme='light'] {
   --bg: #f8f8f8;
   --surface: #ffffff;
   --surface-hover: #f0f0f0;

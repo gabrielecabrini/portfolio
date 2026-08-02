@@ -5,8 +5,8 @@ export interface WorkExperience {
   company: string;
   // i18n key (public/assets/i18n/{it,en}.json), not literal text — resolved via `| translate`.
   roleKey: string;
-  startDate: string;   // "YYYY-MM"
-  endDate?: string;    // "YYYY-MM" — undefined means present, rendered as "Present"/"Presente"
+  startDate: string; // "YYYY-MM"
+  endDate?: string; // "YYYY-MM" — undefined means present, rendered as "Present"/"Presente"
   // i18n key, see roleKey.
   descriptionKey: string;
   logoUrl?: string;

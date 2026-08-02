@@ -1,6 +1,5 @@
 <section class="exp-page">
   <div class="exp-inner">
-
     <!-- Work Experience -->
     <div class="exp-section" appReveal>
       <h2>{{ 'experience.work.title' | translate }}</h2>
@@ -11,7 +10,7 @@
 
       <div class="timeline">
         @for (job of workExperiences; track job.id; let i = $index) {
-          <div class="timeline-item" appReveal [revealDelay]="(i * 60) + 'ms'">
+          <div class="timeline-item" appReveal [revealDelay]="i * 60 + 'ms'">
             @if (job.logoUrl) {
               <div class="item-logo">
                 <img [src]="job.logoUrl" [alt]="job.company" decoding="async" loading="lazy" />
@@ -29,7 +28,9 @@
                     {{ job.company }}
                   </span>
                 </div>
-                <span class="item-date">{{ job.startDate | dateRange:job.endDate:i18n.lang() }}</span>
+                <span class="item-date">{{
+                  job.startDate | dateRange: job.endDate : i18n.lang()
+                }}</span>
               </div>
               <p class="item-desc">{{ job.descriptionKey | translate }}</p>
             </div>
@@ -50,7 +51,13 @@
               @for (skill of group.skills; track skill.id) {
                 <div class="skill-card">
                   @if (skill.iconUrl) {
-                    <img class="skill-icon" [src]="skill.iconUrl" [alt]="skill.name" decoding="async" loading="lazy" />
+                    <img
+                      class="skill-icon"
+                      [src]="skill.iconUrl"
+                      [alt]="skill.name"
+                      decoding="async"
+                      loading="lazy"
+                    />
                   }
                   <div class="skill-body">
                     <h3>{{ skill.name }}</h3>
@@ -74,7 +81,13 @@
         @for (lang of languages; track lang.id) {
           <div class="skill-card">
             @if (lang.iconUrl) {
-              <img class="skill-icon" [src]="lang.iconUrl" [alt]="lang.name" decoding="async" loading="lazy" />
+              <img
+                class="skill-icon"
+                [src]="lang.iconUrl"
+                [alt]="lang.name"
+                decoding="async"
+                loading="lazy"
+              />
             }
             <div class="skill-body">
               <h3>{{ lang.name }}</h3>
@@ -110,15 +123,20 @@
             <div class="cert-body">
               <h3 class="cert-name">
                 @if (cert.url) {
-                  <a [href]="cert.url" target="_blank" rel="noopener noreferrer"
-                     data-umami-event="cert_link_click"
-                     [attr.data-umami-event-cert]="cert.name">{{ cert.name }} ↗</a>
+                  <a
+                    [href]="cert.url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-umami-event="cert_link_click"
+                    [attr.data-umami-event-cert]="cert.name"
+                    >{{ cert.name }} ↗</a
+                  >
                 } @else {
                   {{ cert.name }}
                 }
               </h3>
               <span class="cert-issuer">{{ cert.issuer }}</span>
-              <span class="cert-date">{{ cert.date | dateFormat:i18n.lang() }}</span>
+              <span class="cert-date">{{ cert.date | dateFormat: i18n.lang() }}</span>
             </div>
           </div>
         }
@@ -126,9 +144,9 @@
     </div>
 
     <div class="exp-cta">
-      <a routerLink="/projects" class="btn-primary"
-         data-umami-event="experience_cta_click">{{ 'experience.cta.projects' | translate }}</a>
+      <a routerLink="/projects" class="btn-primary" data-umami-event="experience_cta_click">{{
+        'experience.cta.projects' | translate
+      }}</a>
     </div>
-
   </div>
 </section>
