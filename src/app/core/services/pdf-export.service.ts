@@ -16,6 +16,18 @@ export class PdfExportService {
   private readonly document = inject(DOCUMENT);
   private readonly translate = inject(TranslateService);
 
+  /**
+   * Rasterises the on-screen CV sheet and saves it as a multi-page A4 PDF.
+   *
+   * The approach is deliberately "screenshot, then slice" rather than redrawing the
+   * CV with jsPDF's text API: the HTML/CSS stays the single source of truth for the
+   * layout, so the download always matches what the page shows. The cost is that
+   * page breaks have to be found manually — the DOM is measured before capture to
+   * collect positions where a cut won't slice through an entry.
+   *
+   * html2canvas and jspdf are ~500kB combined and only needed on click, hence the
+   * dynamic import.
+   */
   async generate(page: HTMLElement, lang: string): Promise<void> {
     const [{ default: html2canvas }, { default: jsPDF }] = await Promise.all([
       import('html2canvas'),

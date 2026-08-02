@@ -2,17 +2,30 @@ import {
   afterNextRender,
   ChangeDetectionStrategy,
   Component,
-  effect,
-  inject,
   OnDestroy,
   signal,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { GithubActivity } from './github-activity/github-activity';
 import { EMAIL } from '../../core/data/social-links';
-import { I18nService } from '../../core/services/i18n.service';
-import { SeoService } from '../../core/services/seo.service';
+import { applyPageSeo } from '../../core/services/page-seo';
+
+// Job titles cycled by the hero typewriter. Not translated: they're the English
+// role names used on LinkedIn/CV in both languages.
+const PHRASES = [
+  'Fullstack Software Developer',
+  'Spring Boot & Kotlin Developer',
+  'Angular Developer',
+  'Linux & Open Source Enthusiast',
+  'Flutter Developer',
+];
+
+// Typewriter timings, in milliseconds.
+const TYPE_MS = 80; // per character while typing
+const DELETE_MS = 40; // per character while deleting (deliberately faster)
+const HOLD_FULL_MS = 1800; // pause on the complete phrase before deleting
+const HOLD_EMPTY_MS = 400; // pause on the empty line before the next phrase
 
 @Component({
   selector: 'app-home',
@@ -25,30 +38,19 @@ export class Home implements OnDestroy {
   readonly displayText = signal('');
   readonly email = EMAIL.href;
 
-  private readonly phrases = [
-    'Fullstack Software Developer',
-    'Spring Boot & Kotlin Developer',
-    'Angular Developer',
-    'Linux & Open Source Enthusiast',
-    'Flutter Developer',
-  ];
   private phraseIndex = 0;
   private charIndex = 0;
   private deleting = false;
   private timer: ReturnType<typeof setTimeout> | null = null;
 
   constructor() {
-    const seo = inject(SeoService);
-    const translate = inject(TranslateService);
-    const i18n = inject(I18nService);
-
-    effect(() => {
-      i18n.lang();
-      seo.setDescription(translate.instant('home.tagline'));
-      seo.setSocialTitle('Gabriele Cabrini — Fullstack Software Developer');
-      seo.setType('website');
+    applyPageSeo({
+      descriptionKey: 'home.tagline',
+      socialTitle: 'Gabriele Cabrini — Fullstack Software Developer',
     });
 
+    // Browser-only: prerendered HTML ships an empty line rather than a frozen
+    // half-typed phrase.
     afterNextRender(() => this.tick());
   }
 
@@ -56,8 +58,14 @@ export class Home implements OnDestroy {
     if (this.timer) clearTimeout(this.timer);
   }
 
+  /**
+   * One frame of the typewriter: reveals or hides a single character, then
+   * schedules the next frame. Phase transitions (typing → hold → deleting →
+   * next phrase) happen at the string boundaries and each get their own longer
+   * pause, so the cursor visibly rests instead of bouncing.
+   */
   private tick(): void {
-    const phrase = this.phrases[this.phraseIndex];
+    const phrase = PHRASES[this.phraseIndex];
 
     if (!this.deleting) {
       this.charIndex++;
@@ -66,7 +74,7 @@ export class Home implements OnDestroy {
         this.timer = setTimeout(() => {
           this.deleting = true;
           this.tick();
-        }, 1800);
+        }, HOLD_FULL_MS);
         return;
       }
     } else {
@@ -74,12 +82,12 @@ export class Home implements OnDestroy {
       this.displayText.set(phrase.slice(0, this.charIndex));
       if (this.charIndex === 0) {
         this.deleting = false;
-        this.phraseIndex = (this.phraseIndex + 1) % this.phrases.length;
-        this.timer = setTimeout(() => this.tick(), 400);
+        this.phraseIndex = (this.phraseIndex + 1) % PHRASES.length;
+        this.timer = setTimeout(() => this.tick(), HOLD_EMPTY_MS);
         return;
       }
     }
 
-    this.timer = setTimeout(() => this.tick(), this.deleting ? 40 : 80);
+    this.timer = setTimeout(() => this.tick(), this.deleting ? DELETE_MS : TYPE_MS);
   }
 }

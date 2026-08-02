@@ -1,10 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-@Pipe({ name: 'displayUrl', standalone: true })
+/**
+ * Turns a link href into readable label text by dropping the parts a reader
+ * doesn't need: the mailto:/http(s):// scheme and any trailing slash.
+ */
+@Pipe({ name: 'displayUrl' })
 export class DisplayUrlPipe implements PipeTransform {
   transform(href: string): string {
-    return href.startsWith('mailto:')
-      ? href.slice(7)
-      : href.replace(/^https?:\/\//, '').replace(/\/$/, '');
+    if (href.startsWith('mailto:')) return href.slice('mailto:'.length);
+    return href.replace(/^https?:\/\//, '').replace(/\/$/, '');
   }
 }

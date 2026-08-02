@@ -1,7 +1,7 @@
 import { Project } from '../models/project.model';
 
-// Content for /projects and the CV's project section, in display order. New entries
-// need matching titleKey/descriptionKey strings added to both i18n JSON files — see
+// Content for /projects, in display order. New entries need matching
+// titleKey/descriptionKey strings added to both i18n JSON files — see
 // core/data/README.md.
 export const PROJECTS: Project[] = [
   {

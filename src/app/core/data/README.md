@@ -20,16 +20,14 @@ key in both `it.json` and `en.json`.** Nothing checks this at build time — a m
 key renders as the raw key string instead of failing.
 
 Fields that are NOT keys (plain literal text, not translated): `company`, `name`,
-`institution`, blog post `title`/`excerpt` (blog content is bilingual by having
-separate Markdown files per language instead, see `features/blog/README.md`).
+`institution` — proper nouns that read the same in both languages.
 
 ## Files
 
 - `experience.ts` — work history, skills, languages, education, certifications
   (`/experience`, `/cv`). `WORK_EXPERIENCES` order doesn't matter for the CV (it's
   re-sorted there by end date); it does matter for `/experience`, which renders as-is.
-- `projects.ts` — `/projects` and the CV's project section, in display order.
+  `SKILLS` is derived from `SKILL_GROUPS` (flattened) for the CV's one-line list.
+- `projects.ts` — `/projects`, in display order.
 - `social-links.ts` — footer/about/CV contact links. `EMAIL` is separate from
   `SOCIAL_LINKS` because it's used individually as a CTA, not just listed.
-- `blog.registry.ts` — blog post metadata only (title, excerpt, date, tags). The
-  article body is Markdown, not here — see `features/blog/README.md`.

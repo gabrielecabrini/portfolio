@@ -5,6 +5,8 @@ const THEME_KEY = 'theme';
 type Theme = 'dark' | 'light';
 const THEME_COLORS: Record<Theme, string> = { dark: '#0d0d0d', light: '#f8f8f8' };
 
+// Owns the dark/light preference: resolves it on startup, persists the user's
+// choice, and mirrors it onto <html data-theme> plus the theme-color meta tag.
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
   private readonly document = inject(DOCUMENT);

@@ -1,16 +1,20 @@
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   Component,
   computed,
+  DestroyRef,
   HostListener,
   inject,
-  OnDestroy,
-  OnInit,
-  PLATFORM_ID,
   signal,
 } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
+
+// Scroll distance after which the button appears.
+const SHOW_AFTER_PX = 300;
+// Scroll events fire far more often than the single threshold check needs; ~20Hz
+// is plenty and keeps the handler off the main thread's critical path.
+const SCROLL_THROTTLE_MS = 50;
 
 @Component({
   selector: 'app-back-to-top',
@@ -19,42 +23,44 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrl: './back-to-top.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BackToTop implements OnInit, OnDestroy {
-  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+export class BackToTop {
   readonly visible = signal(false);
   private readonly footerVisible = signal(false);
-  private observer?: IntersectionObserver;
   private lastScrollTime = 0;
 
+  // Lift the (fixed-position) button above the footer once the footer is on
+  // screen, so it never overlaps the links there.
   readonly bottomStyle = computed(() =>
     this.footerVisible() ? 'calc(var(--footer-h) + 1.25rem)' : '',
   );
 
-  ngOnInit(): void {
-    if (!this.isBrowser) return;
-    const footer = document.querySelector('footer');
-    if (!footer) return;
-    this.observer = new IntersectionObserver(
-      ([entry]) => this.footerVisible.set(entry.isIntersecting),
-      { threshold: 0 },
-    );
-    this.observer.observe(footer);
-  }
+  constructor() {
+    const destroyRef = inject(DestroyRef);
 
-  ngOnDestroy(): void {
-    this.observer?.disconnect();
+    // afterNextRender never runs during prerendering, so everything below is
+    // browser-only by construction — no isPlatformBrowser guards needed.
+    afterNextRender(() => {
+      const footer = document.querySelector('footer');
+      if (!footer) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => this.footerVisible.set(entry.isIntersecting),
+        { threshold: 0 },
+      );
+      observer.observe(footer);
+      destroyRef.onDestroy(() => observer.disconnect());
+    });
   }
 
   @HostListener('window:scroll')
   onScroll(): void {
-    if (!this.isBrowser) return;
     const now = Date.now();
-    if (now - this.lastScrollTime < 50) return;
+    if (now - this.lastScrollTime < SCROLL_THROTTLE_MS) return;
     this.lastScrollTime = now;
-    this.visible.set(window.scrollY > 300);
+    this.visible.set(window.scrollY > SHOW_AFTER_PX);
   }
 
   scrollToTop(): void {
-    if (this.isBrowser) window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }

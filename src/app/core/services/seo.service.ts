@@ -5,14 +5,19 @@ import { SUPPORTED_LANGS } from './i18n.service';
 
 export const SITE_ORIGIN = 'https://www.gabrielecabrini.it';
 
+// Low-level writer for the document <head>. It only knows how to set tags; deciding
+// *what* a page should advertise is the caller's job — see page-seo.ts for the
+// per-page helper that feature components use instead of calling this directly.
+// Tags that never vary per route (og:type, og:image, twitter:card) are static in
+// src/index.html and deliberately have no setter here.
 @Injectable({ providedIn: 'root' })
 export class SeoService {
   private readonly document = inject(DOCUMENT);
   private readonly meta = inject(Meta);
 
-  // Canonical + hreflang alternates + og:url for the given route path (e.g. '/about',
-  // '/blog/some-slug'). Every route shares the same URL across languages (the language
-  // toggle doesn't change the path), so all hreflang variants point at the same href.
+  // Canonical + hreflang alternates + og:url for the given route path (e.g. '/about').
+  // Every route shares the same URL across languages (the language toggle doesn't
+  // change the path), so all hreflang variants point at the same href.
   setCanonical(path: string): void {
     const url = this.absoluteUrl(path);
     this.setLinkTag('canonical', url);
@@ -32,21 +37,12 @@ export class SeoService {
     this.meta.updateTag({ name: 'twitter:title', content: title });
   }
 
-  setType(type: 'website' | 'article'): void {
-    this.meta.updateTag({ property: 'og:type', content: type });
+  setRobots(content: string): void {
+    this.meta.updateTag({ name: 'robots', content });
   }
 
-  setImage(url: string): void {
-    this.meta.updateTag({ property: 'og:image', content: url });
-    this.meta.updateTag({ name: 'twitter:image', content: url });
-  }
-
-  setArticleMeta(publishedTime: string, tags: string[]): void {
-    this.meta.updateTag({ property: 'article:published_time', content: publishedTime });
-    this.document.querySelectorAll('meta[property="article:tag"]').forEach((el) => el.remove());
-    for (const tag of tags) this.meta.addTag({ property: 'article:tag', content: tag }, true);
-  }
-
+  // Upserts a <script type="application/ld+json"> keyed by id, so re-running on a
+  // language switch replaces the payload instead of appending a second block.
   setJsonLd(id: string, data: unknown): void {
     let script = this.document.getElementById(id) as HTMLScriptElement | null;
     if (!script) {
@@ -58,10 +54,8 @@ export class SeoService {
     script.textContent = JSON.stringify(data);
   }
 
-  setRobots(content: string): void {
-    this.meta.updateTag({ name: 'robots', content });
-  }
-
+  // Upserts a <link> keyed by rel (+ hreflang when given). Angular's Meta service
+  // only manages <meta>, so link tags are handled by hand.
   private setLinkTag(rel: string, href: string, hreflang?: string): void {
     const selector = hreflang
       ? `link[rel="${rel}"][hreflang="${hreflang}"]`

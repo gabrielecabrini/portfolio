@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { PROJECTS } from '../../../core/data/projects';
 import { Project } from '../../../core/models/project.model';
-import { I18nService } from '../../../core/services/i18n.service';
-import { SeoService, SITE_ORIGIN } from '../../../core/services/seo.service';
+import { applyPageSeo } from '../../../core/services/page-seo';
+import { SITE_ORIGIN } from '../../../core/services/seo.service';
 import { RevealDirective } from '../../../shared/directives/reveal.directive';
 
 @Component({
@@ -17,27 +17,28 @@ export class ProjectsList {
   readonly projects: Project[] = PROJECTS;
 
   constructor() {
-    const seo = inject(SeoService);
     const translate = inject(TranslateService);
-    const i18n = inject(I18nService);
 
-    effect(() => {
-      i18n.lang();
-      seo.setDescription(translate.instant('projects.subtitle'));
-      seo.setSocialTitle(`Projects — Gabriele Cabrini`);
-      seo.setType('website');
-      seo.setJsonLd('ld-projects', {
-        '@context': 'https://schema.org',
-        '@type': 'ItemList',
-        name: translate.instant('projects.title'),
-        url: `${SITE_ORIGIN}/projects`,
-        itemListElement: PROJECTS.map((p, i) => ({
-          '@type': 'ListItem',
-          position: i + 1,
-          name: translate.instant(p.titleKey),
-          ...(p.repoUrl ? { url: p.repoUrl } : {}),
-        })),
-      });
+    applyPageSeo({
+      descriptionKey: 'projects.subtitle',
+      socialTitle: 'Projects — Gabriele Cabrini',
+      // Mirrors the visible list as schema.org ItemList so search engines index the
+      // projects individually. Re-evaluated per language, hence instant() is fine.
+      jsonLd: () => ({
+        id: 'ld-projects',
+        data: {
+          '@context': 'https://schema.org',
+          '@type': 'ItemList',
+          name: translate.instant('projects.title'),
+          url: `${SITE_ORIGIN}/projects`,
+          itemListElement: PROJECTS.map((project, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            name: translate.instant(project.titleKey),
+            ...(project.repoUrl ? { url: project.repoUrl } : {}),
+          })),
+        },
+      }),
     });
   }
 }

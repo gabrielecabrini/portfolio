@@ -1,6 +1,6 @@
 # Portfolio
 
-Personal portfolio developed with Angular 21, deployed at [www.gabrielecabrini.it](https://www.gabrielecabrini.it) via `ng deploy` (angular-cli-ghpages).
+Personal portfolio developed with Angular 22, deployed at [www.gabrielecabrini.it](https://www.gabrielecabrini.it) via `ng deploy` (angular-cli-ghpages).
 
 ## Architecture
 
@@ -14,15 +14,20 @@ mostly just bind that data to a template. To change what a page says, start in
 `core/data/` — see **`src/app/core/data/README.md`** for the content model and the
 `...Key` → i18n-JSON convention that most fields use.
 
-Components are `standalone` + `OnPush` + signal-based throughout; state that needs to
+Components are standalone + `OnPush` + signal-based throughout. State that must
 survive SSR/hydration (language, theme) lives in root services under
-`core/services/` and guards browser-only APIs with `isPlatformBrowser`.
+`core/services/`. Browser-only work runs inside `afterNextRender`, which never
+executes during prerendering; `isPlatformBrowser` is only used where a value is
+needed synchronously during construction.
+
+Per-page `<head>` tags go through `core/services/page-seo.ts`, which re-applies
+them on every language switch. Tags that don't vary per route (`og:type`,
+`og:image`, `twitter:card`) are static in `src/index.html`.
 
 ## Stack
 
-- Angular 21 (standalone components, signals, SSR + static prerendering)
-- `@ngx-translate` for i18n (it/en), translations in `public/assets/i18n/`
-- `marked` + `highlight.js` for blog Markdown rendering
+- Angular 22 (standalone components, signals, zoneless, SSR + static prerendering)
+- `@ngx-translate` for i18n (it/en), translations bundled from `public/assets/i18n/`
 - `html2canvas` + `jspdf` for the CV's client-side PDF export
 
 ## Development
@@ -30,5 +35,9 @@ survive SSR/hydration (language, theme) lives in root services under
 ```
 npm start      # dev server
 npm run build  # production build (prerendered)
-npm test       # unit tests (vitest)
+npm test       # unit tests (vitest) — see note below
 ```
+
+> `npm test` currently needs a DOM environment that isn't installed. Add
+> `happy-dom` as a dev dependency, or configure a browser provider, to run the
+> suite.

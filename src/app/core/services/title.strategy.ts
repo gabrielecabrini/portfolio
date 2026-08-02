@@ -8,6 +8,14 @@ import { SeoService } from './seo.service';
 
 export const SITE = 'Gabriele Cabrini';
 
+/**
+ * Resolves route `title` values as i18n keys and re-applies them on a language
+ * switch. A key with no translation falls through to the raw string, which is why
+ * a literal title like `'CV'` works without a `title.*` entry (see app.routes.ts).
+ *
+ * Doubles as the hook for canonical/hreflang tags, since it's the one place that
+ * sees every navigation with its final URL.
+ */
 @Injectable({ providedIn: 'root' })
 export class TranslateTitleStrategy extends TitleStrategy {
   private readonly title = inject(Title);

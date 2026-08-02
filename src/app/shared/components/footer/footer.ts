@@ -10,7 +10,16 @@ import { TranslatePipe } from '@ngx-translate/core';
 import packageJson from '../../../../../package.json';
 import { ThemeService } from '../../../core/services/theme.service';
 
-const TZ = 'Europe/Rome';
+// "14:32 GMT+2" — the author's wall-clock time, shown so visitors in other
+// timezones know whether a reply is likely. Built once: the options are constant
+// and the formatter is re-used every second.
+const TIME_FORMAT = new Intl.DateTimeFormat('en', {
+  timeZone: 'Europe/Rome',
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: false,
+  timeZoneName: 'short',
+});
 
 @Component({
   selector: 'app-footer',
@@ -23,31 +32,21 @@ export class Footer implements OnDestroy {
   readonly year = new Date().getFullYear();
   readonly version: string = packageJson.version;
   readonly theme = inject(ThemeService);
-  readonly localTime = signal(this.formatTime(new Date()));
+  readonly localTime = signal(TIME_FORMAT.format(new Date()));
 
   private timer: ReturnType<typeof setInterval> | null = null;
 
   constructor() {
+    // The initial value above is computed during prerendering, so the static HTML
+    // ships the *build* time — accepted so the slot isn't visibly empty on first
+    // paint; hydration corrects it within a second. Only the ticking interval is
+    // browser-only, so the prerender doesn't leave a timer running.
     afterNextRender(() => {
-      this.timer = setInterval(() => this.localTime.set(this.formatTime(new Date())), 1000);
+      this.timer = setInterval(() => this.localTime.set(TIME_FORMAT.format(new Date())), 1000);
     });
   }
 
   ngOnDestroy(): void {
     if (this.timer) clearInterval(this.timer);
-  }
-
-  private formatTime(date: Date): string {
-    const parts = new Intl.DateTimeFormat('en', {
-      timeZone: TZ,
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-      timeZoneName: 'short',
-    }).formatToParts(date);
-    const h = parts.find((p) => p.type === 'hour')?.value ?? '';
-    const m = parts.find((p) => p.type === 'minute')?.value ?? '';
-    const tz = parts.find((p) => p.type === 'timeZoneName')?.value ?? '';
-    return `${h}:${m} ${tz}`;
   }
 }
