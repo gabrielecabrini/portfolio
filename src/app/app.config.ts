@@ -6,7 +6,7 @@ import {
   withViewTransitions,
 } from '@angular/router';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { provideClientHydration } from '@angular/platform-browser';
+import { provideClientHydration, withNoIncrementalHydration } from '@angular/platform-browser';
 import { provideTranslateService, TranslateLoader, TranslationObject } from '@ngx-translate/core';
 import { registerLocaleData } from '@angular/common';
 import localeIt from '@angular/common/locales/it';
@@ -34,7 +34,7 @@ class InlineTranslateLoader implements TranslateLoader {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideClientHydration(),
+    provideClientHydration(withNoIncrementalHydration()),
     provideRouter(
       routes,
       withInMemoryScrolling({ scrollPositionRestoration: 'top' }),
