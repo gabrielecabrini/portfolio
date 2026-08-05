@@ -2,8 +2,16 @@ import { effect, inject, Injectable, PLATFORM_ID, signal, WritableSignal } from 
 import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 
 const THEME_KEY = 'theme';
-type Theme = 'dark' | 'light';
+const THEMES = ['dark', 'light'] as const;
+type Theme = (typeof THEMES)[number];
 const THEME_COLORS: Record<Theme, string> = { dark: '#0d0d0d', light: '#f8f8f8' };
+
+// localStorage can hold anything (stale key, hand-edited value); narrow instead of
+// casting, so a junk value falls back to the preferred theme rather than ending up
+// on <html data-theme> and matching no stylesheet rule.
+function isTheme(value: unknown): value is Theme {
+  return typeof value === 'string' && (THEMES as readonly string[]).includes(value);
+}
 
 // Owns the dark/light preference: resolves it on startup, persists the user's
 // choice, and mirrors it onto <html data-theme> plus the theme-color meta tag.
@@ -20,9 +28,9 @@ export class ThemeService {
     // saved-value-then-prefers-color-scheme fallback — if this logic changes.
     let initial: Theme = 'dark';
     if (this.isBrowser) {
-      const saved = localStorage.getItem(THEME_KEY) as Theme | null;
+      const saved = localStorage.getItem(THEME_KEY);
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      initial = saved ?? (prefersDark ? 'dark' : 'light');
+      initial = isTheme(saved) ? saved : prefersDark ? 'dark' : 'light';
     }
 
     this.theme = signal<Theme>(initial);

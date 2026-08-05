@@ -66,6 +66,10 @@ export class Home implements OnDestroy {
    */
   private tick(): void {
     const phrase = PHRASES[this.phraseIndex];
+    // Unreachable: phraseIndex is always kept modulo PHRASES.length. Returning
+    // (rather than defaulting to '') means a future off-by-one stops the animation
+    // instead of spinning setTimeout on an empty string forever.
+    if (phrase === undefined) return;
 
     if (!this.deleting) {
       this.charIndex++;

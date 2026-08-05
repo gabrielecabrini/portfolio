@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { PROJECTS } from '../../../core/data/projects';
 import { Project } from '../../../core/models/project.model';
+import { instantText } from '../../../core/services/i18n.service';
 import { applyPageSeo } from '../../../core/services/page-seo';
 import { SITE_ORIGIN } from '../../../core/services/seo.service';
 import { RevealDirective } from '../../../shared/directives/reveal.directive';
@@ -29,12 +30,12 @@ export class ProjectsList {
         data: {
           '@context': 'https://schema.org',
           '@type': 'ItemList',
-          name: translate.instant('projects.title'),
+          name: instantText(translate, 'projects.title'),
           url: `${SITE_ORIGIN}/projects`,
           itemListElement: PROJECTS.map((project, index) => ({
             '@type': 'ListItem',
             position: index + 1,
-            name: translate.instant(project.titleKey),
+            name: instantText(translate, project.titleKey),
             ...(project.repoUrl ? { url: project.repoUrl } : {}),
           })),
         },

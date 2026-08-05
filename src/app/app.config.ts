@@ -9,20 +9,24 @@ import { provideClientHydration, withNoIncrementalHydration } from '@angular/pla
 import { provideTranslateService, TranslateLoader, TranslationObject } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 
-import * as it from '../../public/assets/i18n/it.json';
-import * as en from '../../public/assets/i18n/en.json';
+// Default imports, not `import * as`: a namespace import of a JSON module also
+// carries a `default` key holding the whole document again, which ngx-translate
+// would then expose as a bogus "default.*" translation namespace.
+import it from '../../public/assets/i18n/it.json';
+import en from '../../public/assets/i18n/en.json';
 
 import { routes } from './app.routes';
+import { FALLBACK_LANG, isLang, Lang } from './core/services/i18n.service';
 import { TranslateTitleStrategy } from './core/services/title.strategy';
 
-const TRANSLATIONS: Record<string, TranslationObject> = { it, en };
+const TRANSLATIONS: Record<Lang, TranslationObject> = { it, en };
 
 // Translations are bundled at build time and returned synchronously (of(...)) instead
 // of fetched over HTTP: on prerendered pages there's no client-side request to wait on
 // for text to appear, and on the server there's no HTTP client available anyway.
 class InlineTranslateLoader implements TranslateLoader {
   getTranslation(lang: string): Observable<TranslationObject> {
-    return of(TRANSLATIONS[lang] ?? TRANSLATIONS['it']);
+    return of(TRANSLATIONS[isLang(lang) ? lang : FALLBACK_LANG]);
   }
 }
 
@@ -36,7 +40,7 @@ export const appConfig: ApplicationConfig = {
       withViewTransitions({ skipInitialTransition: true }),
     ),
     provideTranslateService({
-      fallbackLang: 'it',
+      fallbackLang: FALLBACK_LANG,
       loader: { provide: TranslateLoader, useClass: InlineTranslateLoader },
     }),
     { provide: TitleStrategy, useClass: TranslateTitleStrategy },

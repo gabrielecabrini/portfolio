@@ -1,6 +1,6 @@
 import { effect, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { I18nService } from './i18n.service';
+import { I18nService, instantText } from './i18n.service';
 import { SeoService } from './seo.service';
 
 export interface PageSeo {
@@ -32,7 +32,7 @@ export function applyPageSeo(page: PageSeo): void {
     // on a language switch. Drop it and shared links keep the old language's text.
     i18n.lang();
 
-    const description = translate.instant(page.descriptionKey);
+    const description = instantText(translate, page.descriptionKey);
     seo.setDescription(description);
     seo.setSocialTitle(page.socialTitle);
 

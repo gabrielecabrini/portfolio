@@ -35,9 +35,19 @@ them on every language switch. Tags that don't vary per route (`og:type`,
 ```
 npm start      # dev server
 npm run build  # production build (prerendered)
-npm test       # unit tests (vitest) — see note below
+npm test       # unit tests (vitest, real Chromium)
 ```
 
-> `npm test` currently needs a DOM environment that isn't installed. Add
-> `happy-dom` as a dev dependency, or configure a browser provider, to run the
-> suite.
+Tests run in a real browser rather than a simulated DOM (`browsers: ["chromium"]`
+on the `test` target). After a fresh `npm ci`, download the browser binary once
+with `npx playwright install chromium`.
+
+## Type checking
+
+The build is configured to be as strict as the toolchain allows — `strictTemplates`
+plus `strictStandalone` and `typeCheckHostBindings` on the Angular side,
+`noUncheckedIndexedAccess` and `exactOptionalPropertyTypes` on the TypeScript side,
+and every Angular extended diagnostic promoted to an error
+(`extendedDiagnostics.defaultCategory`). `skipLibCheck` stays on deliberately: the
+alternative is type-checking the `.d.ts` files of `jspdf`/`html2canvas`, whose
+errors can't be fixed here.

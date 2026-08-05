@@ -11,11 +11,11 @@
   "include": ["src/**/*.ts"],
   "exclude": ["src/**/*.spec.ts"],
   "angularCompilerOptions": {
+    /* Every extended diagnostic is a build error, including ones Angular adds in
+       future versions. Individual checks are downgraded below only where the
+       diagnostic contradicts correct code. */
     "extendedDiagnostics": {
-      "checks": {
-        "nullishCoalescingNotNullable": "suppress",
-        "optionalChainNotNullable": "suppress"
-      }
+      "defaultCategory": "error"
     }
   }
 }

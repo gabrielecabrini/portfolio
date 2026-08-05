@@ -8,7 +8,10 @@ import { Pipe, PipeTransform } from '@angular/core';
  * instantiating a pipe class.
  */
 export function formatMonthYear(date: string, lang: string): string {
-  const [year, month] = date.split('-');
+  // `split` always yields index 0, so `year` is only optional to the type checker.
+  // A bare "YYYY" really can arrive though, so month defaults to January instead of
+  // making the whole date Invalid.
+  const [year = '', month = '1'] = date.split('-');
   return new Date(+year, +month - 1).toLocaleDateString(lang === 'it' ? 'it-IT' : 'en-US', {
     month: 'short',
     year: 'numeric',

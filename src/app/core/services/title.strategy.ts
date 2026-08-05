@@ -1,9 +1,8 @@
 import { effect, inject, Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterStateSnapshot, TitleStrategy } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
-import { I18nService } from './i18n.service';
+import { I18nService, instantText } from './i18n.service';
 import { SeoService } from './seo.service';
 
 export const SITE = 'Gabriele Cabrini';
@@ -38,13 +37,11 @@ export class TranslateTitleStrategy extends TitleStrategy {
     this.seo.setCanonical(snapshot.url);
   }
 
+  // Resolved synchronously: translations are bundled and loaded up-front (see
+  // InlineTranslateLoader in app.config.ts), so there is nothing to await. The
+  // previous promise-based version could also apply a stale title, since two quick
+  // navigations resolved in completion order rather than navigation order.
   private applyTitle(key: string | undefined): void {
-    if (!key) {
-      this.title.setTitle(SITE);
-      return;
-    }
-    firstValueFrom(this.translate.get(key)).then((label) => {
-      this.title.setTitle(`${label} — ${SITE}`);
-    });
+    this.title.setTitle(key ? `${instantText(this.translate, key)} — ${SITE}` : SITE);
   }
 }

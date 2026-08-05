@@ -8,6 +8,15 @@
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "noUncheckedSideEffectImports": true,
+    /* Left on deliberately: turning it off type-checks the .d.ts files of jspdf /
+       html2canvas / node_modules, whose errors can't be fixed in this repo. */
     "skipLibCheck": true,
     "isolatedModules": true,
     "experimentalDecorators": true,
@@ -16,11 +25,18 @@
     "module": "preserve",
     "resolveJsonModule": true
   },
+  /* strictTemplates implies the whole strict* template family (strictInputTypes,
+     strictNullInputTypes, strictAttributeTypes, strictSafeNavigationTypes,
+     strictDomLocalRefTypes, strictOutputEventTypes, strictDomEventTypes,
+     strictContextGenerics, strictLiteralTypes) — see
+     https://angular.dev/tools/cli/template-typecheck#strict-mode */
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true,
+    "strictStandalone": true,
+    "typeCheckHostBindings": true
   },
   "files": [],
   "references": [

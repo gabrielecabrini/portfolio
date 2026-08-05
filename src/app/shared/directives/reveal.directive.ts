@@ -20,12 +20,12 @@ export class RevealDirective implements OnDestroy {
   /** When false the element re-animates every time it re-enters the viewport. */
   readonly revealOnce = input(true);
 
-  private readonly el = inject(ElementRef);
+  private readonly el = inject<ElementRef<HTMLElement>>(ElementRef);
   private observer: IntersectionObserver | null = null;
 
   constructor() {
     afterNextRender(() => {
-      const el = this.el.nativeElement as HTMLElement;
+      const el = this.el.nativeElement;
 
       // IntersectionObserver always fires once on observe(). That first callback
       // reports the initial position and must not animate anything.

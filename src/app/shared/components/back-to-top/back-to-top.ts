@@ -4,7 +4,6 @@ import {
   Component,
   computed,
   DestroyRef,
-  HostListener,
   inject,
   signal,
 } from '@angular/core';
@@ -22,6 +21,7 @@ const SCROLL_THROTTLE_MS = 50;
   templateUrl: './back-to-top.html',
   styleUrl: './back-to-top.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '(window:scroll)': 'onScroll()' },
 })
 export class BackToTop {
   readonly visible = signal(false);
@@ -44,7 +44,10 @@ export class BackToTop {
       if (!footer) return;
 
       const observer = new IntersectionObserver(
-        ([entry]) => this.footerVisible.set(entry.isIntersecting),
+        (entries) => {
+          const entry = entries.at(-1);
+          if (entry) this.footerVisible.set(entry.isIntersecting);
+        },
         { threshold: 0 },
       );
       observer.observe(footer);
@@ -52,7 +55,6 @@ export class BackToTop {
     });
   }
 
-  @HostListener('window:scroll')
   onScroll(): void {
     const now = Date.now();
     if (now - this.lastScrollTime < SCROLL_THROTTLE_MS) return;

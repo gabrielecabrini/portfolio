@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
+import { instantText } from './i18n.service';
 
 const CAPTURE_SCALE = 2;
 // Extra canvas-pixels added below each entry's bottom before registering it as a
@@ -90,7 +91,7 @@ export class PdfExportService {
     const dd = String(now.getDate()).padStart(2, '0');
     const MM = String(now.getMonth() + 1).padStart(2, '0');
     const yyyy = now.getFullYear();
-    const generatedLabel = this.translate.instant('cv.footer.generated', {
+    const generatedLabel = instantText(this.translate, 'cv.footer.generated', {
       date: `${dd}/${MM}/${yyyy}`,
     });
 
@@ -105,7 +106,8 @@ export class PdfExportService {
     const topPaddingPx = Math.round((10 * canvas.width) / pageW);
     const offscreen = this.document.createElement('canvas');
     offscreen.width = canvas.width;
-    const ctx = offscreen.getContext('2d')!;
+    const ctx = offscreen.getContext('2d');
+    if (!ctx) throw new Error('PDF export: 2D canvas context unavailable.');
 
     // If the final page would hold less than this, backtrack to move more blocks there.
     const MIN_LAST_PAGE_PX = Math.round(pageHeightPx * 0.2);
@@ -131,8 +133,9 @@ export class PdfExportService {
         const nextCapacity = pageHeightPx - topPaddingPx;
         if (remaining > 0 && remaining <= nextCapacity && remaining < MIN_LAST_PAGE_PX) {
           for (let i = candidates.length - 2; i >= 0; i--) {
-            if (canvas.height - candidates[i] >= MIN_LAST_PAGE_PX) {
-              cutPoint = candidates[i];
+            const candidate = candidates[i];
+            if (candidate !== undefined && canvas.height - candidate >= MIN_LAST_PAGE_PX) {
+              cutPoint = candidate;
               break;
             }
           }
