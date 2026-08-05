@@ -1,7 +1,9 @@
-name: Deploy to GitHub Pages
+name: CI
 
 on:
   push:
+    branches: [master]
+  pull_request:
     branches: [master]
   workflow_dispatch:
 
@@ -9,7 +11,42 @@ permissions:
   contents: write
 
 jobs:
+  # Runs on pull requests too, so a Dependabot bump can't reach master red.
+  verify:
+    name: Lint, test and build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npx ng lint
+
+      # Unit tests run in real Chromium (see angular.json -> test.browsers), so the
+      # browser binary has to be fetched; it isn't part of the npm install.
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Test
+        run: npx ng test --watch=false
+
+      # Prerenders every route, which is also the strictest type check available:
+      # the Angular compiler only checks templates during a real build.
+      - name: Build
+        run: npx ng build
+
   deploy:
+    name: Deploy to GitHub Pages
+    needs: verify
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
 
     steps:

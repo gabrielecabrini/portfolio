@@ -36,18 +36,47 @@ them on every language switch. Tags that don't vary per route (`og:type`,
 npm start      # dev server
 npm run build  # production build (prerendered)
 npm test       # unit tests (vitest, real Chromium)
+npm run lint   # eslint + angular-eslint (TS and templates)
+npm run pretty # format everything in place (run before committing)
 ```
+
+`npm run pretty:check` is the read-only variant. Both skip whatever `.gitignore`
+lists, which Prettier reads by default.
 
 Tests run in a real browser rather than a simulated DOM (`browsers: ["chromium"]`
 on the `test` target). After a fresh `npm ci`, download the browser binary once
 with `npx playwright install chromium`.
 
-## Type checking
+`.github/workflows/ci.yml` runs lint, tests and a build on every push and pull
+request; the deploy job only runs outside pull requests, and only if that passes.
 
-The build is configured to be as strict as the toolchain allows — `strictTemplates`
-plus `strictStandalone` and `typeCheckHostBindings` on the Angular side,
-`noUncheckedIndexedAccess` and `exactOptionalPropertyTypes` on the TypeScript side,
-and every Angular extended diagnostic promoted to an error
-(`extendedDiagnostics.defaultCategory`). `skipLibCheck` stays on deliberately: the
-alternative is type-checking the `.d.ts` files of `jspdf`/`html2canvas`, whose
-errors can't be fixed here.
+## Three checks, three jobs
+
+They don't overlap, which is why all three are worth running:
+
+- **Prettier** owns formatting, and nothing else.
+- **The TypeScript/Angular compiler** owns types. It's configured as strictly as the
+  toolchain allows: `strictTemplates` plus `strictStandalone` and
+  `typeCheckHostBindings` on the Angular side, `noUncheckedIndexedAccess` and
+  `exactOptionalPropertyTypes` on the TypeScript side, and every Angular extended
+  diagnostic promoted to an error (`extendedDiagnostics.defaultCategory`).
+  `skipLibCheck` stays on deliberately: the alternative is type-checking the `.d.ts`
+  files of `jspdf`/`html2canvas`, whose errors can't be fixed here.
+- **ESLint** owns what neither of the above can see: type-aware rules such as
+  `no-floating-promises`, and linting of Angular templates (accessibility and
+  best practice). It enables no formatting rules, so it never fights Prettier.
+
+## Tests
+
+The suite is deliberately small and targets rules that are otherwise enforced only
+by remembering them:
+
+- `core/data/content-i18n.spec.ts` — every `...Key` in `core/data/` and every route
+  title resolves in **both** translation files, and the two files declare the same
+  keys. A missing translation doesn't crash; it renders the raw key on the page.
+- `core/pipes/date-format.pipe.spec.ts` — month is 1-based in the data and 0-based
+  in `Date`, so the January/December boundaries are covered, along with the
+  "Presente"/"Present" fallback for an ongoing role.
+- `features/cv/cv.spec.ts` — /cv sorts work entries while /experience shows them in
+  declaration order. Asserts the ordering rule and that the source array is not
+  sorted in place.
