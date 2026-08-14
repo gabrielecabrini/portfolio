@@ -1,0 +1,25 @@
+# node_modules and .angular are the ones that matter: leaving them in would push
+# the build context from a few MB to several GB.
+node_modules
+.angular
+dist
+out-tsc
+coverage
+__screenshots__
+
+.git
+.gitignore
+.github
+
+# Editor and agent tooling — never read by `ng build`, and excluding them keeps an
+# unrelated settings change from invalidating the npm ci layer.
+.idea
+.vscode
+.editorconfig
+.claude
+.agents
+skills-lock.json
+
+Dockerfile
+.dockerignore
+*.md

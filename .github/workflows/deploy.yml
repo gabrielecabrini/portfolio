@@ -3,12 +3,19 @@ name: CI
 on:
   push:
     branches: [master]
+    # Release tags exist only to publish a versioned image; the Pages deploy stays
+    # tied to master (see the `deploy` job condition).
+    tags: ['v*']
   pull_request:
     branches: [master]
   workflow_dispatch:
 
+# A job-level `permissions` block replaces this one instead of merging with it, so
+# every scope the workflow needs is declared here: contents for the gh-pages push,
+# packages for the GHCR push.
 permissions:
   contents: write
+  packages: write
 
 jobs:
   # Runs on pull requests too, so a Dependabot bump can't reach master red.
@@ -46,7 +53,9 @@ jobs:
   deploy:
     name: Deploy to GitHub Pages
     needs: verify
-    if: github.event_name != 'pull_request'
+    # Branch-scoped rather than just "not a PR": a v* tag push must not redeploy
+    # Pages, it only publishes the versioned image.
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
 
     steps:
@@ -64,3 +73,46 @@ jobs:
         run: npx ng deploy
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  image:
+    name: Publish Docker image to GHCR
+    needs: verify
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Needed for the gha cache backend below; the default docker driver can't use it.
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Derive tags and labels
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          # `latest` deliberately tracks master, not the newest release tag: it should
+          # mirror what gabrielecabrini.it is serving.
+          flavor: latest=false
+          tags: |
+            type=ref,event=branch
+            type=sha,format=short
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
