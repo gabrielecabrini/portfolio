@@ -47,8 +47,21 @@ Tests run in a real browser rather than a simulated DOM (`browsers: ["chromium"]
 on the `test` target). After a fresh `npm ci`, download the browser binary once
 with `npx playwright install chromium`.
 
-`.github/workflows/ci.yml` runs lint, tests and a build on every push and pull
-request; the deploy job only runs outside pull requests, and only if that passes.
+`.github/workflows/deploy.yml` runs lint, tests and a build on every push and pull
+request; the Pages deploy and the image push only run outside pull requests, and
+only if that passes.
+
+## Docker
+
+The prerendered site is also published as a container image, at
+[ghcr.io/gabrielecabrini/portfolio](https://github.com/gabrielecabrini/portfolio/pkgs/container/portfolio):
+
+```
+docker run --rm -p 8080:80 ghcr.io/gabrielecabrini/portfolio:latest
+```
+
+Since the image serves exactly what GitHub Pages serves, it exists for
+self-hosting, not because production depends on it.
 
 ## Three checks, three jobs
 
