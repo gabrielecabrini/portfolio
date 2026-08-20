@@ -27,7 +27,6 @@
         class="theme-toggle"
         (click)="theme.toggle()"
         [attr.aria-label]="'nav.switchTheme' | translate"
-        data-umami-event="theme_toggle"
       >
         @if (theme.theme() === 'dark') {
           <svg

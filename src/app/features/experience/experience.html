@@ -123,12 +123,7 @@
             <div class="cert-body">
               <h3 class="cert-name">
                 @if (cert.url) {
-                  <a
-                    [href]="cert.url"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-umami-event="cert_link_click"
-                    [attr.data-umami-event-cert]="cert.name"
+                  <a [href]="cert.url" target="_blank" rel="noopener noreferrer"
                     >{{ cert.name }} ↗</a
                   >
                 } @else {
@@ -144,9 +139,7 @@
     </div>
 
     <div class="exp-cta">
-      <a routerLink="/projects" class="btn-primary" data-umami-event="experience_cta_click">{{
-        'experience.cta.projects' | translate
-      }}</a>
+      <a routerLink="/projects" class="btn-primary">{{ 'experience.cta.projects' | translate }}</a>
     </div>
   </div>
 </section>
