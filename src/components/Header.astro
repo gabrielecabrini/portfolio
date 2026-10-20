@@ -23,7 +23,7 @@ const links = [
 <header>
   <div class="header-inner">
     <a class="brand" href={localePath(lang, '/')}>
-      gc.
+      gc<span class="brand-dot">.</span>
     </a>
     <nav>
       {links.map((link) => (
@@ -72,6 +72,7 @@ const links = [
   }
 
   .brand {
+    font-family: var(--font-mono);
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--text);
@@ -81,6 +82,13 @@ const links = [
 
   .brand:hover {
     color: var(--accent);
+  }
+
+  /* Same mark as the favicon: accent dot, pulled in because a monospace period
+     sits centred in a full-width cell. */
+  .brand-dot {
+    color: var(--accent);
+    margin-left: -0.2em;
   }
 
   nav {
