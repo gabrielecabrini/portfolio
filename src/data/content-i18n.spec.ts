@@ -37,7 +37,9 @@ const CONTENT_KEYS: string[] = [
 const SRC = join(import.meta.dirname, '..');
 const TEMPLATE_KEYS = readdirSync(SRC, { recursive: true, encoding: 'utf8' })
   .filter((file) => file.endsWith('.astro'))
-  .flatMap((file) => [...readFileSync(join(SRC, file), 'utf8').matchAll(/\bt\(lang, '([^']+)'/g)])
+  .flatMap((file) => [
+    ...readFileSync(join(SRC, file), 'utf8').matchAll(/\bt\(\s*lang,\s*'([^']+)'/g),
+  ])
   .map((match) => match[1] ?? '');
 
 describe('translation files', () => {

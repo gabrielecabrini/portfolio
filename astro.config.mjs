@@ -7,5 +7,5 @@ export default defineConfig({
   // Attribute selectors, like Angular's emulated encapsulation the CSS was written
   // for: scoped rules keep the extra specificity over the global stylesheets.
   scopedStyleStrategy: 'attribute',
-  integrations: [sitemap({ i18n: { defaultLocale: 'it', locales: { it: 'it-IT', en: 'en-US' } } })],
+  integrations: [sitemap({ i18n: { defaultLocale: 'it', locales: { it: 'it', en: 'en' } } })],
 });
