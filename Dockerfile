@@ -1,26 +1,24 @@
 # syntax=docker/dockerfile:1
 
 # The build runs inside the image on purpose: `docker build .` works standalone,
-# without depending on a dist/ produced elsewhere.
-FROM node:26-alpine AS build
+# without depending on a dist/ produced elsewhere. Debian rather than Alpine
+# because the build prints the CV PDFs with Playwright's Chromium, which doesn't
+# run on musl.
+FROM node:26 AS build
 
 WORKDIR /app
 
-# `playwright` is a devDependency (unit tests run in real Chromium) and its
-# postinstall would pull a ~150MB browser into a stage that never runs tests.
-ENV PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
-
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm ci && npx playwright install --with-deps chromium
 
 COPY . .
-RUN npx ng build
+RUN npm run build
 
-# angular.json sets outputMode "static", so the build prerenders every route into
-# plain HTML: the runtime only ever serves files, no Node process involved.
+# Astro outputs plain static files: the runtime only ever serves files, no Node
+# process involved.
 FROM nginx:alpine AS runtime
 
-COPY --from=build /app/dist/portfolio/browser /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 
 EXPOSE 80
 

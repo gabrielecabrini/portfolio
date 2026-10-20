@@ -1,17 +1,15 @@
-# node_modules and .angular are the ones that matter: leaving them in would push
+# node_modules is the one that matters: leaving them in would push
 # the build context from a few MB to several GB.
 node_modules
-.angular
+.astro
 dist
-out-tsc
 coverage
-__screenshots__
 
 .git
 .gitignore
 .github
 
-# Editor and agent tooling — never read by `ng build`, and excluding them keeps an
+# Editor and agent tooling — never read by the build, and excluding them keeps an
 # unrelated settings change from invalidating the npm ci layer.
 .idea
 .vscode

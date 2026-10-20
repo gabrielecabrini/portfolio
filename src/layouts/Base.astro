@@ -1,0 +1,124 @@
+---
+import '../styles.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { basePath, LANGS, localePath, t, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  /** Page name, rendered as "<title> — Gabriele Cabrini"; omitted on the home page. */
+  title?: string;
+  description: string;
+  noindex?: boolean;
+}
+
+const { lang, title, description, noindex = false } = Astro.props;
+const fullTitle = title ? `${title} — Gabriele Cabrini` : 'Gabriele Cabrini';
+const path = basePath(Astro.url.pathname);
+const url = (l: Lang) => new URL(localePath(l, path), Astro.site).href;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <script is:inline>
+      try {
+        var t = localStorage.getItem('theme');
+        if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    </script>
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url(lang)} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://www.gabrielecabrini.it/assets/images/logo.png" />
+    <meta property="og:locale" content={lang === 'it' ? 'it_IT' : 'en_US'} />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://www.gabrielecabrini.it/assets/images/logo.png" />
+
+    <meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f8f8f8" media="(prefers-color-scheme: light)" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    {!noindex && (
+      <>
+        <link rel="canonical" href={url(lang)} />
+        {LANGS.map((l) => (
+          <link rel="alternate" hreflang={l} href={url(l)} />
+        ))}
+        <link rel="alternate" hreflang="x-default" href={url('it')} />
+      </>
+    )}
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Gabriele Cabrini",
+        "url": "https://www.gabrielecabrini.it",
+        "jobTitle": "Fullstack Software Developer",
+        "knowsAbout": ["Java", "Spring Boot", "Angular", "TypeScript", "Docker", "Kubernetes"],
+        "sameAs": [
+          "https://github.com/gabrielecabrini",
+          "https://www.linkedin.com/in/gabrielecabrini"
+        ]
+      }
+    </script>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">
+      {t(lang, 'nav.skipToContent')}
+    </a>
+    <Header lang={lang} path={path} />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>
+
+<style>
+  .skip-link {
+    position: fixed;
+    top: -100%;
+    left: 1rem;
+    z-index: 9999;
+    padding: 0.5rem 1.1rem;
+    background: var(--accent);
+    color: #fff;
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: top 0.1s;
+  }
+
+  .skip-link:focus-visible {
+    top: 1rem;
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+
+  main {
+    min-height: calc(100vh - var(--header-h) - var(--footer-h));
+  }
+</style>

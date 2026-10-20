@@ -1,0 +1,208 @@
+---
+import { localePath, t, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  /** Current path without the /en prefix, e.g. "/about". */
+  path: string;
+}
+
+const { lang, path } = Astro.props;
+const other: Lang = lang === 'it' ? 'en' : 'it';
+// The 404 page has no English twin to switch to.
+const switchHref = localePath(other, path === '/404' ? '/' : path);
+const links = [
+  { href: '/', label: t(lang, 'nav.home') },
+  { href: '/about', label: t(lang, 'nav.about') },
+  { href: '/cv', label: 'CV' },
+  { href: '/experience', label: t(lang, 'nav.experience') },
+  { href: '/projects', label: t(lang, 'nav.projects') },
+];
+---
+
+<header>
+  <div class="header-inner">
+    <a class="brand" href={localePath(lang, '/')}>
+      gc.
+    </a>
+    <nav>
+      {links.map((link) => (
+        <a href={localePath(lang, link.href)} class:list={{ active: link.href === path }}>
+          {link.label}
+        </a>
+      ))}
+    </nav>
+    <a
+      class="lang-toggle"
+      href={switchHref}
+      hreflang={other}
+      aria-label={t(lang, 'nav.switchLang')}
+    >
+      <img
+        src={other === 'en' ? 'https://flagcdn.com/gb.svg' : 'https://flagcdn.com/it.svg'}
+        alt=""
+        class="flag-icon"
+        aria-hidden="true"
+      />
+      {other.toUpperCase()}
+    </a>
+  </div>
+</header>
+
+<style>
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--header-h);
+    background: color-mix(in srgb, var(--bg) 60%, transparent);
+    border-bottom: 1px solid var(--border);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  .header-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .brand {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.04em;
+    margin-right: auto;
+  }
+
+  .brand:hover {
+    color: var(--accent);
+  }
+
+  nav {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  nav a {
+    color: var(--muted);
+    font-size: 0.9rem;
+    transition: color 0.15s;
+  }
+
+  nav a:hover,
+  nav a.active {
+    color: var(--text);
+  }
+
+  .lang-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-sm);
+    transition:
+      border-color 0.15s,
+      color 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    white-space: nowrap;
+  }
+
+  .lang-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .flag-icon {
+    width: 16px;
+    height: 11px;
+    object-fit: cover;
+    border-radius: 1px;
+    flex-shrink: 0;
+  }
+
+  /* ── Desktop: underline animation on nav links ── */
+  @media (min-width: 481px) {
+    nav a {
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.2s ease;
+    }
+
+    nav a:hover::after {
+      transform: scaleX(1);
+    }
+  }
+
+  /* ── Tablet: compact single row ── */
+  @media (max-width: 768px) {
+    nav {
+      gap: 1rem;
+    }
+
+    nav a {
+      font-size: 0.85rem;
+    }
+  }
+
+  /* ── Mobile: brand + toggle on row 1, nav full-width on row 2 ── */
+  @media (max-width: 480px) {
+    .header-inner {
+      flex-wrap: wrap;
+      align-content: center;
+      gap: 0;
+      padding: 0 1rem;
+    }
+
+    .brand {
+      /* first row, left — pushes lang-toggle to the right */
+      flex: 1;
+      line-height: 60px;
+    }
+
+    .lang-toggle {
+      font-size: 0.78rem;
+      padding: 0.2rem 0.5rem;
+    }
+
+    nav {
+      /* second row, full width */
+      order: 3;
+      width: 100%;
+      gap: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    nav a {
+      font-size: 0.8rem;
+      flex: 1;
+      text-align: center;
+      /* 44px min touch target */
+      padding: 0.6rem 0;
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+</style>

@@ -1,0 +1,285 @@
+---
+import Base from '../../layouts/Base.astro';
+import { EMAIL } from '../../data/social-links';
+import { langPaths, localePath, pageLang, t } from '../../i18n';
+
+export const getStaticPaths = langPaths;
+const lang = pageLang(Astro.params.lang);
+
+// Purely decorative GitHub-style heatmap (aria-hidden, no real data): 20 weeks of
+// 7 days. Deterministic pseudo-noise instead of Math.random() so every build is
+// identical.
+const cells = Array.from({ length: 140 }, (_, i) => {
+  const noise = Math.sin(i * 12.9898) * 43758.5453;
+  return Math.floor((noise - Math.floor(noise)) * 5);
+});
+---
+
+<Base lang={lang} description={t(lang, 'home.tagline')}>
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <p class="label">{t(lang, 'home.greeting')}</p>
+        <h1>Gabriele Cabrini</h1>
+        <p class="subtitle">{t(lang, 'home.subtitle')}</p>
+        <p class="tagline">{t(lang, 'home.tagline')}</p>
+        <div class="cta-row">
+          <a href={localePath(lang, '/experience')} class="btn-primary">
+            {t(lang, 'home.cta.experience')}
+          </a>
+          <a href={localePath(lang, '/about')} class="btn-secondary">
+            {t(lang, 'home.cta.about')}
+          </a>
+          <a href={localePath(lang, '/cv')} class="btn-secondary">
+            {t(lang, 'home.cta.cv')}
+          </a>
+        </div>
+
+        <p class="availability">
+          <span class="avail-dot" aria-hidden="true"></span>
+          {t(lang, 'home.available')}
+          <span class="availability-sep" aria-hidden="true">
+            {' '}
+            |{' '}
+          </span>
+          <a href={EMAIL.href} class="availability-contact">
+            {t(lang, 'home.contact.cta')}
+          </a>
+        </p>
+      </div>
+
+      <div class="hero-right">
+        <div class="activity-wrapper" aria-hidden="true">
+          <span class="activity-label">{t(lang, 'home.githubLabel')}</span>
+          <div class="contrib-grid">
+            {cells.map((level) => (
+              <div class="contrib-cell" data-level={level} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    display: flex;
+    align-items: center;
+    /* dvh accounts for mobile browser chrome (address bar) */
+    min-height: calc(100dvh - var(--header-h) - var(--footer-h));
+    min-height: calc(100vh - var(--header-h) - var(--footer-h)); /* fallback */
+    padding: 4rem 1.5rem;
+  }
+
+  .hero-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+  }
+
+  /* ── Entrance: stagger each hero element ── */
+  .hero-left > * {
+    animation: fade-up 0.5s ease both;
+  }
+  .hero-left > :nth-child(1) {
+    animation-delay: 0ms;
+  }
+  .hero-left > :nth-child(2) {
+    animation-delay: 80ms;
+  }
+  .hero-left > :nth-child(3) {
+    animation-delay: 160ms;
+  }
+  .hero-left > :nth-child(4) {
+    animation-delay: 240ms;
+  }
+  .hero-left > :nth-child(5) {
+    animation-delay: 320ms;
+  }
+  .hero-left > :nth-child(6) {
+    animation-delay: 400ms;
+  }
+
+  .hero-right {
+    flex-shrink: 0;
+  }
+
+  .label {
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--muted);
+    font-weight: 400;
+    margin-bottom: 1rem;
+    max-width: none;
+    min-height: 1.6em;
+  }
+
+  .tagline {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 55ch;
+    margin-bottom: 2.5rem;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    display: inline-block;
+    padding: 0.65rem 1.4rem;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.15s;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-dim);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+
+  .btn-secondary {
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--text);
+    color: var(--text);
+  }
+
+  .availability {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+    max-width: none;
+    margin-top: 1rem;
+  }
+
+  .availability-sep {
+    color: var(--border);
+  }
+
+  .availability-contact {
+    color: var(--accent);
+    font-size: inherit;
+    transition: opacity 0.15s;
+  }
+
+  .availability-contact:hover {
+    opacity: 0.75;
+  }
+
+  .avail-dot {
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #22c55e;
+    animation: avail-pulse 1.8s ease-out infinite;
+  }
+
+  @media (max-width: 700px) {
+    .hero-right {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: 2.5rem 1rem;
+      /* on small screens don't force full-viewport height */
+      min-height: unset;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      /* full-width buttons on narrow screens */
+      width: 100%;
+      text-align: center;
+    }
+
+    .availability-sep {
+      display: none;
+    }
+  }
+  .activity-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding-left: 2rem;
+    border-left: 1px solid var(--border);
+  }
+
+  .activity-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: #6a9955; /* IDE comment green */
+    letter-spacing: 0.04em;
+    cursor: default;
+  }
+
+  :global([data-theme='light']) .activity-label {
+    color: #4a7a34;
+  }
+
+  .contrib-grid {
+    display: grid;
+    grid-template-rows: repeat(7, 11px);
+    grid-auto-flow: column;
+    grid-auto-columns: 11px;
+    gap: 3px;
+  }
+
+  .contrib-cell {
+    border-radius: 2px;
+    background: var(--border);
+  }
+
+  .contrib-cell[data-level='1'] {
+    background: color-mix(in srgb, var(--accent) 20%, var(--surface));
+  }
+  .contrib-cell[data-level='2'] {
+    background: color-mix(in srgb, var(--accent) 40%, var(--surface));
+  }
+  .contrib-cell[data-level='3'] {
+    background: color-mix(in srgb, var(--accent) 65%, var(--surface));
+    box-shadow: 0 0 5px color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  .contrib-cell[data-level='4'] {
+    background: var(--accent);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--accent) 65%, transparent);
+  }
+</style>
