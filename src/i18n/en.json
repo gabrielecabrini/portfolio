@@ -11,8 +11,7 @@
   "title": {
     "about": "About",
     "experience": "Experience",
-    "projects": "Projects",
-    "notFound": "Page not found"
+    "projects": "Projects"
   },
   "home": {
     "greeting": "Hi, I'm",
@@ -163,8 +162,6 @@
     }
   },
   "notFound": {
-    "code": "404",
-    "title": "Page not found",
     "message": "The page you're looking for doesn't exist or has been moved.",
     "cta": "Back to home"
   }

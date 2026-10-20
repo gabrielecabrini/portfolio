@@ -11,8 +11,7 @@
   "title": {
     "about": "Chi sono",
     "experience": "Esperienza",
-    "projects": "Progetti",
-    "notFound": "Pagina non trovata"
+    "projects": "Progetti"
   },
   "home": {
     "greeting": "Ciao, sono",
@@ -163,8 +162,6 @@
     }
   },
   "notFound": {
-    "code": "404",
-    "title": "Pagina non trovata",
     "message": "La pagina che cerchi non esiste o è stata spostata.",
     "cta": "Torna in home"
   }

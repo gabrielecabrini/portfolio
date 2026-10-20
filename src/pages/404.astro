@@ -1,26 +1,27 @@
 ---
 import Base from '../layouts/Base.astro';
-import { t } from '../i18n';
+import { localePath, t } from '../i18n';
 
-// Served for any unknown URL, so it can't know the visitor's language: Italian, the
-// site default.
-const lang = 'it';
+// GitHub Pages serves this one file for every unknown URL, /en/… included, so it
+// can't know the visitor's language: the page is bilingual instead.
 ---
 
-<Base
-  lang={lang}
-  title={t(lang, 'title.notFound')}
-  description={t(lang, 'notFound.message')}
-  noindex
->
+<Base lang="it" title="404" description={t('it', 'notFound.message')} noindex>
   <section class="not-found-page">
     <div class="not-found-inner">
-      <p class="code">{t(lang, 'notFound.code')}</p>
-      <h1>{t(lang, 'notFound.title')}</h1>
-      <p class="message">{t(lang, 'notFound.message')}</p>
-      <a href="/" class="btn-home">
-        {t(lang, 'notFound.cta')}
-      </a>
+      <h1 class="code">404</h1>
+      <p class="message">{t('it', 'notFound.message')}</p>
+      <p class="message" lang="en">
+        {t('en', 'notFound.message')}
+      </p>
+      <div class="actions">
+        <a href={localePath('it', '/')} class="btn-home">
+          {t('it', 'notFound.cta')}
+        </a>
+        <a href={localePath('en', '/')} class="btn-home" lang="en">
+          {t('en', 'notFound.cta')}
+        </a>
+      </div>
     </div>
   </section>
 </Base>
@@ -65,16 +66,19 @@ const lang = 'it';
     margin-bottom: 1rem;
   }
 
-  h1 {
-    color: var(--text);
-    margin-bottom: 1rem;
-  }
-
   .message {
     color: var(--muted);
     font-size: 1rem;
     line-height: 1.7;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
   }
 
   .btn-home {
