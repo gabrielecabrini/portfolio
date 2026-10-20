@@ -112,21 +112,13 @@
   },
   "projects": {
     "title": "Projects",
-    "subtitle": "A selection of projects I've worked on.",
+    "subtitle": "Open source projects I've contributed to.",
     "card": {
       "repo": "Code"
     },
-    "rdoh": {
-      "title": "rdoh",
-      "description": "DNS-over-HTTPS resolver written in Rust, with DNSSEC support."
-    },
-    "brainfucker": {
-      "title": "brainfucker",
-      "description": "Interpreter and LLVM IR transpiler for the Brainfuck language, written in Go."
-    },
-    "tcp-proxy": {
-      "title": "tcp-proxy",
-      "description": "Configurable TCP proxy written in Rust using the Tokio async runtime, designed to handle multiple concurrent connections efficiently."
+    "servo": {
+      "title": "Servo",
+      "description": "Open source browser engine written in Rust: a lightweight, high-performance alternative for embedding web technologies in applications."
     },
     "sossoldi": {
       "title": "Sossoldi",
