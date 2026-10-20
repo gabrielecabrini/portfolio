@@ -1,4 +1,5 @@
 ---
+import { Font } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import {
   CERTIFICATIONS,
@@ -22,6 +23,8 @@ const buildDate = new Date().toLocaleDateString('it-IT');
 ---
 
 <Base lang={lang} title="CV" description={t(lang, 'cv.seo.description')}>
+  <Font cssVariable="--font-inter" slot="head" />
+
   <!-- ── Desktop toolbar ── -->
   <div class="cv-actions">
     <span class="cv-lang-hint">{t(lang, 'cv.lang.hint')}</span>
@@ -189,6 +192,7 @@ const buildDate = new Date().toLocaleDateString('it-IT');
 
   /* ── Paper card ── */
   .cv-page {
+    font-family: var(--font-inter);
     max-width: 820px;
     margin: 0 auto 4rem;
     padding: 48px 56px;

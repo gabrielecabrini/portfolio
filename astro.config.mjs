@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
@@ -7,5 +7,18 @@ export default defineConfig({
   // Attribute selectors, like Angular's emulated encapsulation the CSS was written
   // for: scoped rules keep the extra specificity over the global stylesheets.
   scopedStyleStrategy: 'attribute',
+  // The CV pins Inter instead of system-ui, which Playwright's Chromium resolves to
+  // whatever sans the build machine has. Inter is what GNOME's system-ui (Adwaita
+  // Sans) is derived from, so the PDF matches the page as seen on the desktop.
+  // Fontsource rather than Google: it serves static per-weight files, while
+  // Chromium prints Google's variable font as Type 3 glyphs with broken spacing.
+  fonts: [
+    {
+      provider: fontProviders.fontsource(),
+      name: 'Inter',
+      cssVariable: '--font-inter',
+      weights: [400, 500, 600, 700],
+    },
+  ],
   integrations: [sitemap({ i18n: { defaultLocale: 'it', locales: { it: 'it', en: 'en' } } })],
 });

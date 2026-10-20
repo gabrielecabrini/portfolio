@@ -12,6 +12,7 @@ try {
     ['/en/cv', 'EN'],
   ]) {
     await page.goto(`http://localhost:${server.port}${path}`, { waitUntil: 'networkidle' });
+    await page.evaluate(() => document.fonts.ready);
     const generated = await page.locator('.cv-page').getAttribute('data-pdf-footer');
     await page.pdf({
       path: `dist/CV-GabrieleCabrini-${lang}.pdf`,
