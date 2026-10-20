@@ -2,6 +2,7 @@
 import '../styles.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { SKILLS } from '../data/experience';
 import { basePath, LANGS, localePath, t, type Lang } from '../i18n';
 
 interface Props {
@@ -16,6 +17,16 @@ const { lang, title, description, noindex = false } = Astro.props;
 const fullTitle = title ? `${title} — Gabriele Cabrini` : 'Gabriele Cabrini';
 const path = basePath(Astro.url.pathname);
 const url = (l: Lang) => new URL(localePath(l, path), Astro.site).href;
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Gabriele Cabrini',
+  url: 'https://www.gabrielecabrini.it',
+  jobTitle: 'Fullstack Software Developer',
+  knowsAbout: SKILLS.map((skill) => skill.name),
+  sameAs: ['https://github.com/gabrielecabrini', 'https://www.linkedin.com/in/gabrielecabrini'],
+};
 ---
 
 <!doctype html>
@@ -64,20 +75,7 @@ const url = (l: Lang) => new URL(localePath(l, path), Astro.site).href;
       </>
     )}
 
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Gabriele Cabrini",
-        "url": "https://www.gabrielecabrini.it",
-        "jobTitle": "Fullstack Software Developer",
-        "knowsAbout": ["Java", "Spring Boot", "Angular", "TypeScript", "Docker", "Kubernetes"],
-        "sameAs": [
-          "https://github.com/gabrielecabrini",
-          "https://www.linkedin.com/in/gabrielecabrini"
-        ]
-      }
-    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(person)} />
     <!-- sizes on the .ico stops it from outranking the SVG in browsers that support both -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

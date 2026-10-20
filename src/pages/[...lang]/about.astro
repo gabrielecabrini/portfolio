@@ -17,7 +17,11 @@ const lang = pageLang(Astro.params.lang);
             <h2>{t(lang, 'about.title')}</h2>
           </div>
           <div class="bio">
-            <p>{t(lang, 'about.bio')}</p>
+            {t(lang, 'about.bio')
+              .split('\n')
+              .map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
           </div>
         </div>
       </div>
@@ -130,6 +134,10 @@ const lang = pageLang(Astro.params.lang);
     color: var(--muted);
     font-size: 1.05rem;
     line-height: 1.8;
+  }
+
+  .bio p + p {
+    margin-top: 1rem;
   }
 
   .links-grid {

@@ -16,8 +16,8 @@
   "home": {
     "greeting": "Ciao, sono",
     "subtitle": "Fullstack Software Developer",
-    "tagline": "Sviluppo software fullstack con interesse per l'open source e il mondo Linux, dalla JVM al browser, dal backend all'infrastruttura.",
-    "available": "Disponibile per posizioni full-time e progetti freelance",
+    "tagline": "Sviluppo gestionali e applicazioni aziendali, dal backend in Java e Kotlin fino all'interfaccia. Uso Linux da anni e curo volentieri anche l'infrastruttura su cui girano.",
+    "available": "Aperto a posizioni full-time e progetti freelance",
     "cta": {
       "cv": "CV",
       "experience": "Esperienze",
@@ -26,14 +26,17 @@
     "contact": {
       "cta": "contattami ↗"
     },
-    "githubLabel": "// contributi se lavorassi in repo pubbliche"
+    "githubLabel": "// contributi se lavorassi in repo pubbliche",
+    "seo": {
+      "description": "Gabriele Cabrini, sviluppatore fullstack: backend in Java, Spring Boot e Kotlin, frontend in Angular, infrastruttura su Linux, Docker e Kubernetes."
+    }
   },
   "about": {
     "title": "Chi sono",
     "seo": {
-      "description": "Sviluppatore fullstack con base a Bergamo, Italia. Specializzato in Java/Spring Boot, Angular e infrastrutture Docker/Kubernetes."
+      "description": "Chi è Gabriele Cabrini: sviluppatore fullstack tra gestionali in Java e Angular, infrastruttura Linux e contributi open source. Contatti e profili."
     },
-    "bio": "Sono Gabriele e lavoro dalla provincia di Bergamo. Mi piace avere il controllo su tutto il ciclo di vita del software. Negli anni mi sono specializzato nella costruzione di applicazioni enterprise e sistemi ERP complessi, trasformando requisiti articolati in piattaforme affidabili.\nMi muovo agevolmente tra la logica di business dei backend in Java/Spring Boot e le interfacce utente in Angular. L'amore per il mondo Linux mi spinge poi a curare in prima persona anche l'infrastruttura, containerizzando e orchestrando i servizi con Docker e Kubernetes. La mia filosofia? Che si tratti di architettura o di codice, cerco sempre la soluzione più pulita, elegante e scalabile.",
+    "bio": "Sono Gabriele, sviluppatore fullstack. Lavoro soprattutto su gestionali e applicazioni aziendali: backend in Java, Spring Boot e Kotlin, frontend in Angular, e tutto quello che serve perché le due parti lavorino bene insieme.\nMi piace seguire un progetto dall'inizio alla fine, anche dopo il deploy: uso Linux da anni e mi occupo volentieri di container, Kubernetes e server. Fuori dal lavoro contribuisco anche a qualche progetto open source.",
     "cv": {
       "link": "Curriculum Vitae",
       "hint": "Disponibile online e scaricabile in PDF",
@@ -51,7 +54,7 @@
   "experience": {
     "empty": "Nessun elemento ancora. Aggiornalo presto!",
     "seo": {
-      "description": "Esperienza lavorativa, competenze tecniche, certificazioni e lingue di Gabriele Cabrini — Sviluppatore Fullstack."
+      "description": "Esperienze lavorative, competenze e certificazioni di Gabriele Cabrini, sviluppatore fullstack: Java, Spring Boot, Kotlin, Angular, Docker, Kubernetes."
     },
     "cta": {
       "projects": "Vedi i progetti"
@@ -132,7 +135,7 @@
   "cv": {
     "download": "Scarica PDF",
     "seo": {
-      "description": "Curriculum Vitae di Gabriele Cabrini — Sviluppatore Fullstack con base nel nord Italia. Java, Spring Boot, Angular, Docker, Kubernetes."
+      "description": "Curriculum di Gabriele Cabrini, sviluppatore fullstack. Da consultare online o scaricare in PDF, in italiano e in inglese."
     },
     "location": "Bergamo, Italia",
     "lang": {
