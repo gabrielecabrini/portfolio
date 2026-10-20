@@ -162,7 +162,6 @@
     }
   },
   "notFound": {
-    "message": "La pagina che cerchi non esiste o è stata spostata.",
-    "cta": "Torna in home"
+    "message": "La pagina che cerchi non esiste o è stata spostata."
   }
 }

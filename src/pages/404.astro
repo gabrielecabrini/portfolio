@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { localePath, t } from '../i18n';
+import { t } from '../i18n';
 
 // GitHub Pages serves this one file for every unknown URL, /en/… included, so it
 // can't know the visitor's language: the page is bilingual instead.
@@ -14,14 +14,22 @@ import { localePath, t } from '../i18n';
       <p class="message" lang="en">
         {t('en', 'notFound.message')}
       </p>
-      <div class="actions">
-        <a href={localePath('it', '/')} class="btn-home">
-          {t('it', 'notFound.cta')}
-        </a>
-        <a href={localePath('en', '/')} class="btn-home" lang="en">
-          {t('en', 'notFound.cta')}
-        </a>
-      </div>
+      <a href="/" class="btn-home" aria-label="Home">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <line x1="19" y1="12" x2="5" y2="12" />
+          <polyline points="12 19 5 12 12 5" />
+        </svg>
+      </a>
     </div>
   </section>
 </Base>
@@ -73,16 +81,9 @@ import { localePath, t } from '../i18n';
     margin-bottom: 1rem;
   }
 
-  .actions {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-
   .btn-home {
-    display: inline-block;
+    display: inline-flex;
+    margin-top: 1rem;
     padding: 0.65rem 1.6rem;
     background: var(--accent);
     color: #fff;
