@@ -100,6 +100,12 @@ export const SKILL_GROUPS: SkillGroup[] = [
         iconUrl:
           'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original-wordmark.svg',
       },
+      {
+        id: 'rust',
+        name: 'Rust',
+        // Brand-coloured rather than devicon's black logo, which vanishes on the dark theme.
+        iconUrl: 'https://cdn.simpleicons.org/rust/DEA584',
+      },
     ],
   },
   {
@@ -116,6 +122,11 @@ export const SKILL_GROUPS: SkillGroup[] = [
         name: 'Angular',
         iconUrl:
           'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg',
+      },
+      {
+        id: 'astro',
+        name: 'Astro',
+        iconUrl: 'https://cdn.simpleicons.org/astro',
       },
       {
         id: 'flutter',
