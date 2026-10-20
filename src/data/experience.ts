@@ -1,0 +1,249 @@
+import type { WorkExperience } from '../models/work-experience.model';
+import type { Skill, SkillGroup } from '../models/skill.model';
+import type { Certification } from '../models/certification.model';
+import type { Education } from '../models/education.model';
+
+// Content for /experience and /cv. Order here is display order for skills/education/
+// certifications; WORK_EXPERIENCES itself is re-sorted by end date in cv.ts (most
+// recent/current first) so insertion order doesn't matter for that one. Adding an
+// entry with a `...Key` field also requires the matching key in both
+// src/i18n/it.json and en.json — see src/data/README.md.
+export const WORK_EXPERIENCES: WorkExperience[] = [
+  {
+    id: 'sandrini-metalli',
+    company: 'SANDRINI Metalli S.p.A.',
+    roleKey: 'experience.work.sandrini.role',
+    startDate: '2023-04',
+    descriptionKey: 'experience.work.sandrini.description',
+    logoUrl: '/assets/images/logos/sandrini-metalli.webp',
+  },
+  {
+    id: 'skyblockpuro',
+    company: 'SkyBlockPuro',
+    roleKey: 'experience.work.skyblockpuro.role',
+    startDate: '2024-01',
+    endDate: '2025-09',
+    descriptionKey: 'experience.work.skyblockpuro.description',
+    logoUrl: '/assets/images/logos/skyblockpuro.webp',
+  },
+  {
+    id: 'r1se-gaming',
+    company: 'R1SE Gaming Publisher LLC',
+    roleKey: 'experience.work.r1se.role',
+    startDate: '2022-07',
+    endDate: '2023-03',
+    descriptionKey: 'experience.work.r1se.description',
+    logoUrl: '/assets/images/logos/r1se-gaming.webp',
+  },
+  {
+    id: 'metamc-networks',
+    company: 'MetaMC Networks',
+    roleKey: 'experience.work.metamc.role',
+    startDate: '2022-04',
+    endDate: '2023-03',
+    descriptionKey: 'experience.work.metamc.description',
+    logoUrl: '/assets/images/logos/metamc-networks.webp',
+  },
+  {
+    id: 'devroom',
+    company: 'DevRoom',
+    roleKey: 'experience.work.devroom.role',
+    startDate: '2022-08',
+    endDate: '2024-02',
+    descriptionKey: 'experience.work.devroom.description',
+    logoUrl: '/assets/images/logos/devroom.png',
+  },
+];
+
+export const SKILL_GROUPS: SkillGroup[] = [
+  {
+    categoryKey: 'experience.skills.cat.backend',
+    skills: [
+      {
+        id: 'java',
+        name: 'Java',
+        iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg',
+      },
+      {
+        id: 'kotlin',
+        name: 'Kotlin',
+        iconUrl:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg',
+      },
+      {
+        id: 'spring-boot',
+        name: 'Spring Boot',
+        iconUrl:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg',
+      },
+      {
+        id: 'golang',
+        name: 'Go',
+        iconUrl:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original-wordmark.svg',
+      },
+      {
+        id: 'rust',
+        name: 'Rust',
+        // Brand-coloured rather than devicon's black logo, which vanishes on the dark theme.
+        iconUrl: 'https://cdn.simpleicons.org/rust/DEA584',
+      },
+    ],
+  },
+  {
+    categoryKey: 'experience.skills.cat.frontend',
+    skills: [
+      {
+        id: 'typescript',
+        name: 'TypeScript',
+        iconUrl:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg',
+      },
+      {
+        id: 'angular',
+        name: 'Angular',
+        iconUrl:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg',
+      },
+      {
+        id: 'astro',
+        name: 'Astro',
+        iconUrl: 'https://cdn.simpleicons.org/astro',
+      },
+      {
+        id: 'flutter',
+        name: 'Flutter',
+        iconUrl:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg',
+      },
+    ],
+  },
+  {
+    categoryKey: 'experience.skills.cat.database',
+    skills: [
+      {
+        id: 'postgresql',
+        name: 'PostgreSQL',
+        iconUrl:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg',
+      },
+      {
+        id: 'sql-server',
+        name: 'SQL Server',
+        iconUrl:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-plain.svg',
+      },
+      {
+        id: 'mariadb',
+        name: 'MariaDB',
+        iconUrl:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg',
+      },
+      {
+        id: 'redis',
+        name: 'Redis',
+        iconUrl:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg',
+      },
+      {
+        id: 'elk',
+        name: 'Elastic Stack',
+        iconUrl:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/elasticsearch/elasticsearch-original.svg',
+      },
+      {
+        id: 'cassandra',
+        name: 'Cassandra',
+        iconUrl:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cassandra/cassandra-original.svg',
+      },
+    ],
+  },
+  {
+    categoryKey: 'experience.skills.cat.devops',
+    skills: [
+      {
+        id: 'docker',
+        name: 'Docker',
+        iconUrl:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg',
+      },
+      {
+        id: 'kubernetes',
+        name: 'Kubernetes',
+        iconUrl:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg',
+      },
+      {
+        id: 'aws',
+        name: 'AWS',
+        iconUrl:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg',
+      },
+    ],
+  },
+  {
+    categoryKey: 'experience.skills.cat.infra',
+    skills: [
+      {
+        id: 'linux',
+        name: 'Linux',
+        iconUrl:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg',
+      },
+      { id: 'proxmox', name: 'Proxmox', iconUrl: 'https://cdn.simpleicons.org/proxmox' },
+      { id: 'vmware', name: 'VMware vSphere', iconUrl: 'https://cdn.simpleicons.org/vmware' },
+      {
+        id: 'git',
+        name: 'Git',
+        iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg',
+      },
+    ],
+  },
+];
+
+export const SKILLS: Skill[] = SKILL_GROUPS.flatMap((g) => g.skills);
+
+export const LANGUAGES: Skill[] = [
+  {
+    id: 'italian',
+    name: 'Italiano',
+    descriptionKey: 'experience.lang.italian.level',
+    iconUrl: 'https://flagcdn.com/it.svg',
+  },
+  {
+    id: 'english',
+    name: 'English',
+    descriptionKey: 'experience.lang.english.level',
+    iconUrl: 'https://flagcdn.com/gb.svg',
+  },
+];
+
+export const EDUCATION: Education[] = [
+  {
+    id: 'afp-patronato',
+    institution: 'AFP Patronato S. Vincenzo',
+    qualificationKey: 'experience.edu.afp.qualification',
+    startDate: '2019',
+    endDate: '2022',
+    location: 'Endine Gaiano (BG)',
+  },
+];
+
+export const CERTIFICATIONS: Certification[] = [
+  {
+    id: 'gsom-polimi-image-text-dl',
+    name: 'Image and Text Analysis with Deep Learning',
+    issuer: 'GSOM · Politecnico di Milano',
+    date: '2026-05',
+    iconUrl: '/assets/images/logos/polimi.webp',
+  },
+  {
+    id: 'kotlin-for-java-developers',
+    name: 'Kotlin for Java Developers',
+    issuer: 'JetBrains Academy · Coursera',
+    date: '2025-06',
+    iconUrl: '/assets/images/logos/jetbrains.webp',
+    url: 'https://www.coursera.org/verify/C556TLSX3HOM',
+  },
+];

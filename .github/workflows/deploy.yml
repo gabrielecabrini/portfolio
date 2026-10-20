@@ -35,20 +35,19 @@ jobs:
         run: npm ci
 
       - name: Lint
-        run: npx ng lint
+        run: npm run lint
 
-      # Unit tests run in real Chromium (see angular.json -> test.browsers), so the
-      # browser binary has to be fetched; it isn't part of the npm install.
+      - name: Test
+        run: npm test
+
+      # The build prints the CV PDFs with Playwright's Chromium, which isn't part of
+      # the npm install.
       - name: Install Chromium for Playwright
         run: npx playwright install --with-deps chromium
 
-      - name: Test
-        run: npx ng test --watch=false
-
-      # Prerenders every route, which is also the strictest type check available:
-      # the Angular compiler only checks templates during a real build.
+      # `astro check` + build: the type check covers the .astro templates too.
       - name: Build
-        run: npx ng build
+        run: npm run build
 
   deploy:
     name: Deploy to GitHub Pages
@@ -69,8 +68,19 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Build
+        run: npm run build
+
+      # Pushes dist/ to the gh-pages branch, which Pages serves. .nojekyll is
+      # required: Jekyll would drop Astro's _astro/ asset folder.
       - name: Deploy
-        run: npx ng deploy
+        run: >-
+          npx gh-pages --silent --dist dist --nojekyll --cname www.gabrielecabrini.it
+          --user "Gabriele Cabrini <gabrielecabriniiii@gmail.com>"
+          --repo "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
