@@ -40,8 +40,6 @@ describe('sortForCv', () => {
       'r1se-gaming',
       'metamc-networks',
       'devroom',
-      'songoda',
-      'techscode',
     ]);
   });
 });

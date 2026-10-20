@@ -53,24 +53,6 @@ export const WORK_EXPERIENCES: WorkExperience[] = [
     descriptionKey: 'experience.work.devroom.description',
     logoUrl: '/assets/images/logos/devroom.png',
   },
-  {
-    id: 'songoda',
-    company: 'Songoda',
-    roleKey: 'experience.work.songoda.role',
-    startDate: '2022-01',
-    endDate: '2022-05',
-    descriptionKey: 'experience.work.songoda.description',
-    logoUrl: '/assets/images/logos/songoda.webp',
-  },
-  {
-    id: 'techscode',
-    company: 'TechsCode',
-    roleKey: 'experience.work.techscode.role',
-    startDate: '2021-01',
-    endDate: '2022-03',
-    descriptionKey: 'experience.work.techscode.description',
-    logoUrl: '/assets/images/logos/techscode.webp',
-  },
 ];
 
 export const SKILL_GROUPS: SkillGroup[] = [

@@ -83,14 +83,6 @@
       "devroom": {
         "role": "Freelance Developer",
         "description": "Commission-based work for the devroom team: mod development, server configurations, and custom plugins."
-      },
-      "songoda": {
-        "role": "Translator (EN → IT)",
-        "description": "Translated Songoda's Minecraft plugins from English to Italian."
-      },
-      "techscode": {
-        "role": "Translator (EN → IT)",
-        "description": "Translated TechsCode's Minecraft plugins from English to Italian."
       }
     },
     "skills": {
