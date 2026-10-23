@@ -118,19 +118,19 @@
     "title": "Progetti",
     "subtitle": "Progetti open source a cui ho contribuito.",
     "card": {
-      "repo": "Codice"
+      "site": "Sito"
     },
     "servo": {
       "title": "Servo",
-      "description": "Browser engine open source scritto in Rust: un'alternativa leggera e ad alte prestazioni per integrare le tecnologie web nelle applicazioni."
+      "description": "Motore di rendering web scritto in Rust, pensato per essere integrato in altre applicazioni tramite un'API WebView. Sfrutta la sicurezza della memoria di Rust e il parallelismo multi-core, gira su desktop, Android e OpenHarmony ed è gestito da Linux Foundation Europe."
     },
     "sossoldi": {
       "title": "Sossoldi",
-      "description": "App Flutter open source per la gestione del patrimonio personale e il tracciamento del Net Worth."
+      "description": "App open source in Flutter per la finanza personale e il tracciamento del patrimonio netto, nata per sostituire il classico foglio di calcolo. Gestisce spese ricorrenti, più conti, investimenti e valute diverse, con statistiche e dati salvati solo sul dispositivo."
     },
     "winboat": {
       "title": "WinBoat",
-      "description": "Applicazione open source per eseguire app Windows nativamente su Linux, con un'interfaccia grafica elegante e configurazione automatizzata tramite Docker/Podman e QEMU/KVM."
+      "description": "Esegue le app Windows su Linux come finestre native, senza un desktop virtuale separato. Windows gira in un container Docker o Podman su QEMU/KVM, l'installazione è guidata dall'interfaccia e la cartella home di Linux è condivisa con Windows."
     }
   },
   "cv": {

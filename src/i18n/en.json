@@ -118,19 +118,19 @@
     "title": "Projects",
     "subtitle": "Open source projects I've contributed to.",
     "card": {
-      "repo": "Code"
+      "site": "Website"
     },
     "servo": {
       "title": "Servo",
-      "description": "Open source browser engine written in Rust: a lightweight, high-performance alternative for embedding web technologies in applications."
+      "description": "Web rendering engine written in Rust, designed to be embedded in other applications through a WebView API. It builds on Rust's memory safety and multi-core parallelism, runs on desktop, Android and OpenHarmony, and is governed by Linux Foundation Europe."
     },
     "sossoldi": {
       "title": "Sossoldi",
-      "description": "Open source Flutter app for personal wealth management and Net Worth tracking."
+      "description": "Open source Flutter app for personal finance and net worth tracking, built to replace the classic spreadsheet. It handles recurring expenses, multiple accounts, investments and currencies, with statistics and data stored only on the device."
     },
     "winboat": {
       "title": "WinBoat",
-      "description": "Open source app to run Windows applications natively on Linux, with an elegant GUI and automated setup via Docker/Podman and QEMU/KVM."
+      "description": "Runs Windows apps on Linux as native windows, with no separate virtual desktop. Windows runs in a Docker or Podman container on QEMU/KVM, setup is guided by the GUI, and the Linux home folder is shared with Windows."
     }
   },
   "cv": {
