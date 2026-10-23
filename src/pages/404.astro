@@ -17,32 +17,21 @@ import { t } from '../i18n';
         <pre><span class="g"> --&gt;</span> router.rs:1:5
 <span class="g">  |</span>
 <span class="g">1 |</span> GET <span id="nf-path">/…</span>
-<span class="g">  |</span>     <span class="err"><span id="nf-carets">^</span> <span lang="en">no route matches this path</span></span>
+<span class="g">  |</span>     <span class="err"><span id="nf-carets">^</span><span class="label" lang="en"> no route matches this path</span></span>
 <span class="g">  |</span></pre>
-        <pre class="notes"><span class="g">  =</span> <b>help</b>: {t('it', 'notFound.message')}
-<span class="g">  =</span> <b>help</b>: <span lang="en">{t('en', 'notFound.message')}</span></pre>
+        <pre class="notes"><span class="note"><span class="g">  =</span> <b>help</b>: {t('it', 'notFound.message')}</span><span class="note" lang="en"><span class="g">  =</span> <b>help</b>: {t('en', 'notFound.message')}</span></pre>
       </div>
-      <a href="/" class="btn-home" aria-label="Home">
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <line x1="19" y1="12" x2="5" y2="12" />
-          <polyline points="12 19 5 12 12 5" />
-        </svg>
+      <a href="/" class="btn-home">
+        Home
       </a>
     </div>
   </section>
   <script is:inline>
-    document.getElementById('nf-path').textContent = location.pathname;
-    document.getElementById('nf-carets').textContent = '^'.repeat(location.pathname.length);
+    // Long paths are cut so the source line and its carets never need to scroll
+    const path =
+      location.pathname.length > 32 ? location.pathname.slice(0, 31) + '…' : location.pathname;
+    document.getElementById('nf-path').textContent = path;
+    document.getElementById('nf-carets').textContent = '^'.repeat(path.length);
   </script>
 </Base>
 
@@ -103,6 +92,13 @@ import { t } from '../i18n';
     white-space: pre-wrap;
   }
 
+  /* Hanging indent: wrapped text lines up after "  = help: ", as rustc does */
+  .note {
+    display: block;
+    padding-left: 10ch;
+    text-indent: -10ch;
+  }
+
   .err {
     color: var(--error);
     font-weight: 700;
@@ -140,6 +136,16 @@ import { t } from '../i18n';
   }
 
   @media (max-width: 480px) {
+    .rustc,
+    .rustc pre {
+      font-size: 0.75rem;
+    }
+
+    /* No room beside the carets on a phone: they alone mark the path */
+    .label {
+      display: none;
+    }
+
     .not-found-page {
       padding: 2.5rem 1rem;
       min-height: unset;
