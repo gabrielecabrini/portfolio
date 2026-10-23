@@ -57,7 +57,7 @@ export const WORK_EXPERIENCES: WorkExperience[] = [
 
 export const SKILL_GROUPS: SkillGroup[] = [
   {
-    categoryKey: 'experience.skills.cat.backend',
+    categoryKey: 'experience.skills.cat.languages',
     skills: [
       {
         id: 'java',
@@ -71,16 +71,15 @@ export const SKILL_GROUPS: SkillGroup[] = [
           'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg',
       },
       {
-        id: 'spring-boot',
-        name: 'Spring Boot',
+        id: 'typescript',
+        name: 'TypeScript',
         iconUrl:
-          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg',
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg',
       },
       {
-        id: 'golang',
-        name: 'Go',
-        iconUrl:
-          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original-wordmark.svg',
+        id: 'dart',
+        name: 'Dart',
+        iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dart/dart-original.svg',
       },
       {
         id: 'rust',
@@ -91,13 +90,13 @@ export const SKILL_GROUPS: SkillGroup[] = [
     ],
   },
   {
-    categoryKey: 'experience.skills.cat.frontend',
+    categoryKey: 'experience.skills.cat.frameworks',
     skills: [
       {
-        id: 'typescript',
-        name: 'TypeScript',
+        id: 'spring-boot',
+        name: 'Spring Boot',
         iconUrl:
-          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg',
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg',
       },
       {
         id: 'angular',
@@ -146,12 +145,6 @@ export const SKILL_GROUPS: SkillGroup[] = [
           'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg',
       },
       {
-        id: 'elk',
-        name: 'Elastic Stack',
-        iconUrl:
-          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/elasticsearch/elasticsearch-original.svg',
-      },
-      {
         id: 'cassandra',
         name: 'Cassandra',
         iconUrl:
@@ -179,6 +172,29 @@ export const SKILL_GROUPS: SkillGroup[] = [
         name: 'AWS',
         iconUrl:
           'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg',
+      },
+    ],
+  },
+  {
+    categoryKey: 'experience.skills.cat.observability',
+    skills: [
+      {
+        id: 'prometheus',
+        name: 'Prometheus',
+        iconUrl:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prometheus/prometheus-original.svg',
+      },
+      {
+        id: 'grafana',
+        name: 'Grafana',
+        iconUrl:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/grafana/grafana-original.svg',
+      },
+      {
+        id: 'elk',
+        name: 'Elastic Stack',
+        iconUrl:
+          'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/elasticsearch/elasticsearch-original.svg',
       },
     ],
   },

@@ -91,10 +91,11 @@
     "skills": {
       "title": "Skills",
       "cat": {
-        "backend": "Backend",
-        "frontend": "Frontend",
+        "languages": "Languages",
+        "frameworks": "Frameworks",
         "database": "Database",
         "devops": "DevOps & Cloud",
+        "observability": "Observability",
         "infra": "Infrastructure"
       }
     },
