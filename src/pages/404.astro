@@ -9,11 +9,19 @@ import { t } from '../i18n';
 <Base lang="it" title="404" description={t('it', 'notFound.message')} noindex>
   <section class="not-found-page">
     <div class="not-found-inner">
-      <h1 class="code">404</h1>
-      <p class="message">{t('it', 'notFound.message')}</p>
-      <p class="message" lang="en">
-        {t('en', 'notFound.message')}
-      </p>
+      <div class="rustc">
+        <h1 lang="en">
+          <span class="err">error[E404]</span>
+          <b>: route not found</b>
+        </h1>
+        <pre><span class="g"> --&gt;</span> router.rs:1:5
+<span class="g">  |</span>
+<span class="g">1 |</span> GET <span id="nf-path">/…</span>
+<span class="g">  |</span>     <span class="err"><span id="nf-carets">^</span> <span lang="en">no route matches this path</span></span>
+<span class="g">  |</span></pre>
+        <pre class="notes"><span class="g">  =</span> <b>help</b>: {t('it', 'notFound.message')}
+<span class="g">  =</span> <b>help</b>: <span lang="en">{t('en', 'notFound.message')}</span></pre>
+      </div>
       <a href="/" class="btn-home" aria-label="Home">
         <svg
           width="20"
@@ -32,53 +40,81 @@ import { t } from '../i18n';
       </a>
     </div>
   </section>
+  <script is:inline>
+    document.getElementById('nf-path').textContent = location.pathname;
+    document.getElementById('nf-carets').textContent = '^'.repeat(location.pathname.length);
+  </script>
 </Base>
 
 <style>
   .not-found-page {
+    --error: #f87171;
+    --gutter: #60a5fa;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: calc(100vh - var(--header-h) - var(--footer-h));
     padding: 4rem 1.5rem;
-    text-align: center;
   }
 
   .not-found-inner {
-    max-width: 480px;
+    max-width: 640px;
+    /* Lets the flex item shrink below the unwrapped <pre> width so it scrolls instead */
+    min-width: 0;
     margin: 0 auto;
   }
 
   .not-found-inner > * {
     animation: fade-up 0.45s ease both;
   }
-  .not-found-inner > :nth-child(1) {
-    animation-delay: 0ms;
-  }
   .not-found-inner > :nth-child(2) {
     animation-delay: 80ms;
   }
-  .not-found-inner > :nth-child(3) {
-    animation-delay: 160ms;
-  }
-  .not-found-inner > :nth-child(4) {
-    animation-delay: 240ms;
+
+  /* Mimics rustc's output: one size, one font, bold red error, bold blue gutter */
+  .rustc,
+  .rustc pre {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    /* Keep "-->" literal instead of JetBrains Mono's arrow ligature */
+    font-variant-ligatures: none;
   }
 
-  .code {
-    font-size: clamp(4rem, 15vw, 7rem);
+  .rustc h1 {
+    /* Flex drops the whitespace Prettier puts between the two spans */
+    display: flex;
+    flex-wrap: wrap;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: normal;
+  }
+
+  .rustc pre {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    /* Long paths scroll like a terminal instead of breaking the caret alignment */
+    overflow-x: auto;
+  }
+
+  .rustc pre.notes {
+    white-space: pre-wrap;
+  }
+
+  .err {
+    color: var(--error);
     font-weight: 700;
-    color: var(--accent);
-    line-height: 1;
-    letter-spacing: -0.04em;
-    margin-bottom: 1rem;
   }
 
-  .message {
-    color: var(--muted);
-    font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 1rem;
+  .g {
+    color: var(--gutter);
+    font-weight: 700;
+  }
+
+  .rustc b {
+    font-weight: 700;
   }
 
   .btn-home {
@@ -96,6 +132,11 @@ import { t } from '../i18n';
   .btn-home:hover {
     background: var(--accent-dim);
     color: var(--on-accent);
+  }
+
+  :global([data-theme='light']) .not-found-page {
+    --error: #dc2626;
+    --gutter: #2563eb;
   }
 
   @media (max-width: 480px) {

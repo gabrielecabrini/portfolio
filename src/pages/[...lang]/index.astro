@@ -21,7 +21,10 @@ const cells = Array.from({ length: 140 }, (_, i) => {
       <div class="hero-left">
         <p class="label">{t(lang, 'home.greeting')}</p>
         <h1>Gabriele Cabrini</h1>
-        <p class="subtitle">{t(lang, 'home.subtitle')}</p>
+        <p class="subtitle">
+          {t(lang, 'home.subtitle')}
+          <span class="caret" aria-hidden="true"></span>
+        </p>
         <p class="tagline">{t(lang, 'home.tagline')}</p>
         <div class="cta-row">
           <a href={localePath(lang, '/experience')} class="btn-primary">
@@ -52,8 +55,8 @@ const cells = Array.from({ length: 140 }, (_, i) => {
         <div class="activity-wrapper" aria-hidden="true">
           <span class="activity-label">{t(lang, 'home.githubLabel')}</span>
           <div class="contrib-grid">
-            {cells.map((level) => (
-              <div class="contrib-cell" data-level={level} />
+            {cells.map((level, i) => (
+              <div class="contrib-cell" data-level={level} style={`--col: ${Math.floor(i / 7)}`} />
             ))}
           </div>
         </div>
@@ -262,6 +265,28 @@ const cells = Array.from({ length: 140 }, (_, i) => {
   .contrib-cell {
     border-radius: 2px;
     background: var(--border);
+    /* Lights up week by week, left to right, after the hero has faded in */
+    animation: cell-in 0.3s ease backwards;
+    animation-delay: calc(var(--col) * 25ms + 500ms);
+    transition:
+      background 0.15s,
+      transform 0.15s;
+  }
+
+  .contrib-cell:hover {
+    background: var(--accent);
+    transform: scale(1.25);
+  }
+
+  /* Editor bar cursor, in the subtitle's own color */
+  .caret {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    background: currentColor;
+    animation: caret-blink 1.1s steps(1) infinite;
   }
 
   .contrib-cell[data-level='1'] {
