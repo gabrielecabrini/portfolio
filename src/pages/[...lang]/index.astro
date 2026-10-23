@@ -158,12 +158,12 @@ const cells = Array.from({ length: 140 }, (_, i) => {
 
   .btn-primary {
     background: var(--accent);
-    color: #fff;
+    color: var(--on-accent);
   }
 
   .btn-primary:hover {
     background: var(--accent-dim);
-    color: #fff;
+    color: var(--on-accent);
     transform: translateY(-1px);
     box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 35%, transparent);
   }
@@ -246,13 +246,9 @@ const cells = Array.from({ length: 140 }, (_, i) => {
   .activity-label {
     font-family: var(--font-mono);
     font-size: 0.72rem;
-    color: #6a9955; /* IDE comment green */
+    color: var(--muted);
     letter-spacing: 0.04em;
     cursor: default;
-  }
-
-  :global([data-theme='light']) .activity-label {
-    color: #4a7a34;
   }
 
   .contrib-grid {

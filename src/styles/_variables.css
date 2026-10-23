@@ -5,8 +5,9 @@
   --border: #2a2a2a;
   --text: #e8e8e8;
   --muted: #888888;
-  --accent: #7c6ef5;
-  --accent-dim: #5b50c9;
+  --accent: #2dd4bf;
+  --accent-dim: #14b8a6;
+  --on-accent: #0d0d0d;
   --font: system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
   --radius: 8px;
@@ -23,8 +24,9 @@
   --border: #e0e0e0;
   --text: #111111;
   --muted: #555555;
-  --accent: #5b50c9;
-  --accent-dim: #4a3dc5;
+  --accent: #0f766e;
+  --accent-dim: #115e59;
+  --on-accent: #fff;
 }
 
 /* On mobile the header wraps to 2 rows */
