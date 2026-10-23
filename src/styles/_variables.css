@@ -5,8 +5,8 @@
   --border: #2a2a2a;
   --text: #e8e8e8;
   --muted: #888888;
-  --accent: #2dd4bf;
-  --accent-dim: #14b8a6;
+  --accent: #4e958c;
+  --accent-dim: #448a81;
   --on-accent: #0d0d0d;
   --font: system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
@@ -24,8 +24,8 @@
   --border: #e0e0e0;
   --text: #111111;
   --muted: #555555;
-  --accent: #0f766e;
-  --accent-dim: #115e59;
+  --accent: #2a645e;
+  --accent-dim: #1f4c47;
   --on-accent: #fff;
 }
 
