@@ -25,8 +25,8 @@ export function workPlace(job: Pick<WorkExperience, 'location' | 'remote'>, lang
   return [job.location, remote].filter(Boolean).join(' · ');
 }
 
-/** Link href → readable label: drops mailto:/http(s):// and a trailing slash. */
+/** Link href → readable label: drops mailto:/http(s)://, a leading www. and a trailing slash. */
 export function displayUrl(href: string): string {
   if (href.startsWith('mailto:')) return href.slice('mailto:'.length);
-  return href.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  return href.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
 }

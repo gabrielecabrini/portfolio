@@ -84,18 +84,16 @@ const lang = pageLang(Astro.params.lang);
         <div class="skills-grid">
           {LANGUAGES.map((language) => (
             <div class="skill-card">
-              {language.iconUrl && (
-                <img
-                  class="skill-icon"
-                  src={language.iconUrl}
-                  alt={language.name}
-                  decoding="async"
-                  loading="lazy"
-                />
-              )}
+              <img
+                class="skill-icon"
+                src={language.iconUrl}
+                alt={t(lang, language.nameKey)}
+                decoding="async"
+                loading="lazy"
+              />
               <div class="skill-body">
-                <h3>{language.name}</h3>
-                {language.descriptionKey && <p>{t(lang, language.descriptionKey)}</p>}
+                <h3>{t(lang, language.nameKey)}</h3>
+                <p>{t(lang, language.levelKey)}</p>
               </div>
             </div>
           ))}

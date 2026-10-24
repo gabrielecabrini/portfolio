@@ -24,11 +24,8 @@ const EN_KEYS = new Set(flattenKeys(en));
 // Every i18n key referenced from the typed content arrays under src/data/.
 const CONTENT_KEYS: string[] = [
   ...WORK_EXPERIENCES.flatMap((w) => [w.roleKey, w.descriptionKey]),
-  ...SKILL_GROUPS.flatMap((g) => [
-    g.categoryKey,
-    ...g.skills.map((s) => s.descriptionKey).filter((k) => k !== undefined),
-  ]),
-  ...LANGUAGES.map((l) => l.descriptionKey).filter((k) => k !== undefined),
+  ...SKILL_GROUPS.map((g) => g.categoryKey),
+  ...LANGUAGES.flatMap((l) => [l.nameKey, l.levelKey]),
   ...EDUCATION.map((e) => e.qualificationKey),
   ...PROJECTS.flatMap((p) => [p.titleKey, p.descriptionKey]),
 ];

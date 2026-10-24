@@ -22,7 +22,7 @@ lives in `src/i18n/it.json` and `en.json`.
 | `PROJECTS`         | `projects.<id>.title`, `projects.<id>.description`              |
 | `WORK_EXPERIENCES` | `experience.work.<id>.role`, `experience.work.<id>.description` |
 | `SKILL_GROUPS`     | `experience.skills.cat.<id>`                                    |
-| `LANGUAGES`        | `experience.lang.<id>.level`                                    |
+| `LANGUAGES`        | `experience.lang.<id>.name`, `experience.lang.<id>.level`       |
 | `EDUCATION`        | `experience.edu.<id>.qualification`                             |
 
 So adding an entry means: add the object (with a new `id`, no keys) and add its text

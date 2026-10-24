@@ -47,6 +47,10 @@ describe('displayUrl', () => {
     expect(displayUrl('http://example.com')).toBe('example.com');
   });
 
+  it('strips a leading www.', () => {
+    expect(displayUrl('https://www.linkedin.com/in/user/')).toBe('linkedin.com/in/user');
+  });
+
   it('strips a trailing slash only', () => {
     expect(displayUrl('https://linkedin.com/in/user/')).toBe('linkedin.com/in/user');
     expect(displayUrl('https://github.com/user/repo')).toBe('github.com/user/repo');

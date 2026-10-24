@@ -69,7 +69,7 @@
       "title": "Work experience",
       "skyblockpuro": {
         "role": "Founder & Lead Developer",
-        "description": "Founded the Minecraft server SkyBlockPuro and ran its whole technical side: DDoS protection, proxies, version upgrades, custom Java plugins and coordination of external contributors."
+        "description": "Founder and technical lead of a multiplayer game server (Minecraft): network infrastructure with proxies and DDoS protection, custom Java plugin development, platform version upgrades and coordination of external contributors."
       },
       "r1se-gaming": {
         "role": "Java Developer",
@@ -80,8 +80,8 @@
         "description": "Develop the company ERP and MES (Spring Boot and Angular) and a companion Android app in Flutter. Manage CI/CD pipelines and the SQL Server database; hands-on experience with Docker (Swarm), Kubernetes and VMware."
       },
       "metamc-networks": {
-        "role": "Senior Developer",
-        "description": "Developed Java plugins for Minecraft servers with 150+ concurrent players and managed the server infrastructure."
+        "role": "Java Developer",
+        "description": "Developed Java plugins for a multiplayer game platform (Minecraft) with 150+ concurrent users and managed the server infrastructure."
       },
       "devroom": {
         "role": "Freelance Developer",
@@ -104,9 +104,11 @@
     },
     "lang": {
       "italian": {
+        "name": "Italian",
         "level": "Native"
       },
       "english": {
+        "name": "English",
         "level": "Advanced (C1)"
       }
     },

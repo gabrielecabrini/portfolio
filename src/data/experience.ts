@@ -2,6 +2,7 @@ import type { WorkExperience } from '../models/work-experience.model';
 import type { Skill, SkillGroup } from '../models/skill.model';
 import type { Certification } from '../models/certification.model';
 import type { Education } from '../models/education.model';
+import type { Language } from '../models/language.model';
 
 // Content for /experience and /cv. Order here is display order for skills/education/
 // certifications; WORK_EXPERIENCES itself is re-sorted by end date in cv.ts (most
@@ -226,20 +227,16 @@ export const SKILL_GROUPS: SkillGroup[] = (
 
 export const SKILLS: Skill[] = SKILL_GROUPS.flatMap((g) => g.skills);
 
-export const LANGUAGES: Skill[] = (
+export const LANGUAGES: Language[] = (
   [
-    {
-      id: 'italian',
-      name: 'Italiano',
-      iconUrl: 'https://flagcdn.com/it.svg',
-    },
-    {
-      id: 'english',
-      name: 'English',
-      iconUrl: 'https://flagcdn.com/gb.svg',
-    },
-  ] satisfies Omit<Skill, 'descriptionKey'>[]
-).map((l) => ({ ...l, descriptionKey: `experience.lang.${l.id}.level` }));
+    { id: 'italian', iconUrl: 'https://flagcdn.com/it.svg' },
+    { id: 'english', iconUrl: 'https://flagcdn.com/gb.svg' },
+  ] satisfies Omit<Language, 'nameKey' | 'levelKey'>[]
+).map((l) => ({
+  ...l,
+  nameKey: `experience.lang.${l.id}.name`,
+  levelKey: `experience.lang.${l.id}.level`,
+}));
 
 export const EDUCATION: Education[] = (
   [

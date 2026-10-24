@@ -1,10 +1,8 @@
 // `name` is display text as-is (proper nouns like "Java", "Kotlin" aren't translated).
-// `descriptionKey` (when present) and `categoryKey` below are i18n keys, resolved via `t()`;
-// in src/data they are derived from `id`.
+// `categoryKey` below is an i18n key, resolved via `t()`; in src/data it is derived from `id`.
 export interface Skill {
   id: string;
   name: string;
-  descriptionKey?: string;
   iconUrl?: string;
 }
 

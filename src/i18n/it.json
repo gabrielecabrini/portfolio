@@ -69,7 +69,7 @@
       "title": "Esperienza lavorativa",
       "skyblockpuro": {
         "role": "Founder & Lead Developer",
-        "description": "Fondatore del server Minecraft SkyBlockPuro e responsabile di tutta la parte tecnica: protezione anti-DDoS, proxy, aggiornamenti di versione, plugin Java su misura e coordinamento dei collaboratori esterni."
+        "description": "Fondatore e responsabile tecnico di un server di gioco multiplayer (Minecraft): infrastruttura di rete con proxy e protezione anti-DDoS, sviluppo di plugin Java su misura, aggiornamenti di versione della piattaforma e coordinamento dei collaboratori esterni."
       },
       "r1se-gaming": {
         "role": "Java Developer",
@@ -80,8 +80,8 @@
         "description": "Sviluppo del gestionale ERP e MES aziendale (Spring Boot e Angular) e di un'app Android in Flutter collegata al gestionale. Gestione delle pipeline CI/CD e del database SQL Server; esperienza pratica con Docker (Swarm), Kubernetes e VMware."
       },
       "metamc-networks": {
-        "role": "Senior Developer",
-        "description": "Sviluppo di plugin Java per server Minecraft con oltre 150 giocatori attivi in contemporanea e gestione dell'infrastruttura server."
+        "role": "Java Developer",
+        "description": "Sviluppo di plugin Java per una piattaforma di gioco multiplayer (Minecraft) con oltre 150 utenti connessi in contemporanea e gestione dell'infrastruttura server."
       },
       "devroom": {
         "role": "Freelance Developer",
@@ -104,9 +104,11 @@
     },
     "lang": {
       "italian": {
+        "name": "Italiano",
         "level": "Madrelingua"
       },
       "english": {
+        "name": "Inglese",
         "level": "Avanzato (C1)"
       }
     },
