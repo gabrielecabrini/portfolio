@@ -161,6 +161,11 @@ const years = Math.floor(
                 ) : (
                   <strong>{cert.name}</strong>
                 )}
+                {cert.credentialId && (
+                  <span class="cv-entry-date cv-cert-id">
+                    {t(lang, 'experience.certs.credentialId')}: {cert.credentialId}
+                  </span>
+                )}
               </div>
             </div>
           ))}
@@ -358,6 +363,11 @@ const years = Math.floor(
     color: #444;
     line-height: 1.6;
     margin: 0;
+  }
+
+  .cv-cert-id {
+    display: block;
+    margin-top: 0.15rem;
   }
 
   .cv-cert-name {

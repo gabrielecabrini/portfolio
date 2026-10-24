@@ -130,6 +130,11 @@ const lang = pageLang(Astro.params.lang);
                 </h3>
                 <span class="cert-issuer">{cert.issuer}</span>
                 <span class="cert-date">{formatMonthYear(cert.date, lang)}</span>
+                {cert.credentialId && (
+                  <span class="cert-date">
+                    {t(lang, 'experience.certs.credentialId')}: {cert.credentialId}
+                  </span>
+                )}
               </div>
             </div>
           ))}

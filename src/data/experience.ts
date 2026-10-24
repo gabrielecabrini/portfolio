@@ -268,5 +268,6 @@ export const CERTIFICATIONS: Certification[] = [
     date: '2025-06',
     iconUrl: '/assets/images/logos/jetbrains.webp',
     url: 'https://www.coursera.org/verify/C556TLSX3HOM',
+    credentialId: 'C556TLSX3HOM',
   },
 ];
