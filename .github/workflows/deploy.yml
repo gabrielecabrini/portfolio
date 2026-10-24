@@ -40,21 +40,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '26'
-          cache: 'npm'
+          cache: 'yarn'
 
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
 
       - name: Lint
-        run: npm run lint
+        run: yarn lint
 
       - name: Test
-        run: npm test
+        run: yarn test
 
       # Type check only (covers the .astro templates too): the full build, with its
       # Chromium install for the CV PDFs, runs just in the deploy job.
       - name: Type check
-        run: npx astro check
+        run: yarn astro check
 
   deploy:
     name: Deploy to GitHub Pages
@@ -71,22 +71,22 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '26'
-          cache: 'npm'
+          cache: 'yarn'
 
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
 
       - name: Install Chromium for Playwright
-        run: npx playwright install --with-deps chromium
+        run: yarn playwright install --with-deps chromium
 
       - name: Build
-        run: npm run build
+        run: yarn build
 
       # Pushes dist/ to the gh-pages branch, which Pages serves. .nojekyll is
       # required: Jekyll would drop Astro's _astro/ asset folder.
       - name: Deploy
         run: >-
-          npx gh-pages --silent --dist dist --nojekyll --cname www.gabrielecabrini.it
+          yarn gh-pages --silent --dist dist --nojekyll --cname www.gabrielecabrini.it
           --user "Gabriele Cabrini <gabrielecabriniiii@gmail.com>"
           --repo "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
         env:

@@ -11,7 +11,7 @@
     "pretty:check": "prettier --check ."
   },
   "private": true,
-  "packageManager": "npm@11.12.1",
+  "packageManager": "yarn@1.22.22",
   "devDependencies": {
     "@astrojs/check": "^0.9.11",
     "@eslint/js": "^10.0.1",

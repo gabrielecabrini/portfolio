@@ -9,12 +9,12 @@ translations in `src/i18n/`.
 ## Development
 
 ```
-npm ci
-npx playwright install chromium   # once, for the CV PDFs
-npm run dev
+yarn install
+yarn playwright install chromium  # once, for the CV PDFs
+yarn dev
 ```
 
-Before pushing: `npm run lint`, `npm test`, `npm run pretty`.
+Before pushing: `yarn lint`, `yarn test`, `yarn pretty`.
 
 ## Release
 

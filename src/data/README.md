@@ -28,7 +28,7 @@ lives in `src/i18n/it.json` and `en.json`.
 So adding an entry means: add the object (with a new `id`, no keys) and add its text
 under that id in **both** `it.json` and `en.json`. Renaming an `id` means renaming
 the JSON block too. The build doesn't fail on a missing key — it renders as the raw
-key string — but `npm test` does (`content-i18n.spec.ts`).
+key string — but `yarn test` does (`content-i18n.spec.ts`).
 
 Fields that are NOT keys (plain literal text, not translated): `company`, `name`,
 `institution`, `location` — proper nouns and places that read the same in both

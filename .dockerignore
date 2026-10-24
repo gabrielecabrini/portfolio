@@ -10,7 +10,7 @@ coverage
 .github
 
 # Editor and agent tooling — never read by the build, and excluding them keeps an
-# unrelated settings change from invalidating the npm ci layer.
+# unrelated settings change from invalidating the yarn install layer.
 .idea
 .vscode
 .editorconfig

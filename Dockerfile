@@ -8,11 +8,14 @@ FROM node:26 AS build
 
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-RUN npm ci && npx playwright install --with-deps chromium
+# Yarn 1 is installed only if the base image doesn't already ship it.
+RUN command -v yarn || npm install -g yarn@1.22.22
+
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile && yarn playwright install --with-deps chromium
 
 COPY . .
-RUN npm run build
+RUN yarn build
 
 # Astro outputs plain static files: the runtime only ever serves files, no Node
 # process involved.
