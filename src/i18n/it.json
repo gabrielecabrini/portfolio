@@ -139,6 +139,7 @@
   },
   "cv": {
     "download": "Scarica PDF",
+    "summary": "Sviluppatore fullstack con {{years}} anni di esperienza. Sviluppo il gestionale ERP e MES di un'azienda con Java, Spring Boot, Angular e database SQL, dal codice al deploy: CI/CD, Kubernetes e VMware.",
     "seo": {
       "description": "Curriculum di Gabriele Cabrini, sviluppatore fullstack. Da consultare online o scaricare in PDF, in italiano e in inglese."
     },
