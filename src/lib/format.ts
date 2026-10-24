@@ -1,4 +1,5 @@
 import type { Lang } from '../i18n';
+import type { WorkExperience } from '../models/work-experience.model';
 
 /**
  * "2025-06" → "giu 2025" / "Jun 2025". A bare "YYYY" really can arrive (education
@@ -16,6 +17,12 @@ export function formatMonthYear(date: string, lang: Lang): string {
 export function dateRange(start: string, end: string | undefined, lang: Lang): string {
   const to = end ? formatMonthYear(end, lang) : lang === 'it' ? 'Presente' : 'Present';
   return `${formatMonthYear(start, lang)} — ${to}`;
+}
+
+/** "Dubai" + remote → "Dubai · Remote"; empty string when the job has neither. */
+export function workPlace(job: Pick<WorkExperience, 'location' | 'remote'>, lang: Lang): string {
+  const remote = job.remote ? (lang === 'it' ? 'Da remoto' : 'Remote') : undefined;
+  return [job.location, remote].filter(Boolean).join(' · ');
 }
 
 /** Link href → readable label: drops mailto:/http(s):// and a trailing slash. */

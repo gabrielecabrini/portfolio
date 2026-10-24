@@ -10,4 +10,8 @@ export interface WorkExperience {
   // i18n key, see roleKey.
   descriptionKey: string;
   logoUrl?: string;
+  // Literal place, not translated (city names read the same): "Costa Volpino (BG)".
+  location?: string;
+  // Rendered after the location as "Da remoto"/"Remote".
+  remote?: boolean;
 }

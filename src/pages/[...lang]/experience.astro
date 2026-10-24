@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { CERTIFICATIONS, LANGUAGES, SKILL_GROUPS, WORK_EXPERIENCES } from '../../data/experience';
 import { langPaths, localePath, pageLang, t } from '../../i18n';
-import { dateRange, formatMonthYear } from '../../lib/format';
+import { dateRange, formatMonthYear, workPlace } from '../../lib/format';
 
 export const getStaticPaths = langPaths;
 const lang = pageLang(Astro.params.lang);
@@ -35,7 +35,9 @@ const lang = pageLang(Astro.params.lang);
                 <div class="item-header">
                   <div>
                     <h3 class="item-title">{t(lang, job.roleKey)}</h3>
-                    <span class="item-subtitle">{job.company}</span>
+                    <span class="item-subtitle">
+                      {[job.company, workPlace(job, lang)].filter(Boolean).join(' · ')}
+                    </span>
                   </div>
                   <span class="item-date">{dateRange(job.startDate, job.endDate, lang)}</span>
                 </div>

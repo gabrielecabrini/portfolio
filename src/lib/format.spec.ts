@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { dateRange, displayUrl, formatMonthYear } from './format';
+import { dateRange, displayUrl, formatMonthYear, workPlace } from './format';
 
 describe('formatMonthYear', () => {
   // The month part is 1-based in the data but 0-based in `new Date`, so the two
@@ -50,5 +50,18 @@ describe('displayUrl', () => {
   it('strips a trailing slash only', () => {
     expect(displayUrl('https://linkedin.com/in/user/')).toBe('linkedin.com/in/user');
     expect(displayUrl('https://github.com/user/repo')).toBe('github.com/user/repo');
+  });
+});
+
+describe('workPlace', () => {
+  it('joins location and remote, localised', () => {
+    expect(workPlace({ location: 'Dubai', remote: true }, 'en')).toBe('Dubai · Remote');
+    expect(workPlace({ location: 'Dubai', remote: true }, 'it')).toBe('Dubai · Da remoto');
+  });
+
+  it('renders whichever part is present, or nothing', () => {
+    expect(workPlace({ location: 'Costa Volpino (BG)' }, 'en')).toBe('Costa Volpino (BG)');
+    expect(workPlace({ remote: true }, 'en')).toBe('Remote');
+    expect(workPlace({}, 'en')).toBe('');
   });
 });

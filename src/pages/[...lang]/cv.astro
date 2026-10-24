@@ -11,7 +11,7 @@ import {
 import { EMAIL, SOCIAL_LINKS } from '../../data/social-links';
 import { langPaths, pageLang, t } from '../../i18n';
 import { sortForCv } from '../../lib/cv';
-import { dateRange, displayUrl, formatMonthYear } from '../../lib/format';
+import { dateRange, displayUrl, formatMonthYear, workPlace } from '../../lib/format';
 
 export const getStaticPaths = langPaths;
 const lang = pageLang(Astro.params.lang);
@@ -63,18 +63,22 @@ const buildDate = new Date().toLocaleDateString('it-IT');
 
     <section class="cv-section">
       <h2 class="cv-section-title">{t(lang, 'experience.work.title')}</h2>
-      {sortForCv(WORK_EXPERIENCES).map((job) => (
-        <div class="cv-entry">
-          <div class="cv-entry-meta">
-            <span class="cv-entry-date">{dateRange(job.startDate, job.endDate, lang)}</span>
-            <span class="cv-entry-company">{job.company}</span>
+      {sortForCv(WORK_EXPERIENCES).map((job) => {
+        const place = workPlace(job, lang);
+        return (
+          <div class="cv-entry">
+            <div class="cv-entry-meta">
+              <span class="cv-entry-date">{dateRange(job.startDate, job.endDate, lang)}</span>
+              <span class="cv-entry-company">{job.company}</span>
+              {place && <span class="cv-entry-date">{place}</span>}
+            </div>
+            <div class="cv-entry-body">
+              <strong class="cv-entry-role">{t(lang, job.roleKey)}</strong>
+              <p class="cv-entry-desc">{t(lang, job.descriptionKey)}</p>
+            </div>
           </div>
-          <div class="cv-entry-body">
-            <strong class="cv-entry-role">{t(lang, job.roleKey)}</strong>
-            <p class="cv-entry-desc">{t(lang, job.descriptionKey)}</p>
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </section>
 
     <hr class="cv-rule" />

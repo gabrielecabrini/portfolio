@@ -31,7 +31,8 @@ the JSON block too. The build doesn't fail on a missing key — it renders as th
 key string — but `npm test` does (`content-i18n.spec.ts`).
 
 Fields that are NOT keys (plain literal text, not translated): `company`, `name`,
-`institution` — proper nouns that read the same in both languages.
+`institution`, `location` — proper nouns and places that read the same in both
+languages. `remote: true` on a work entry is rendered as "Da remoto"/"Remote".
 
 ## Files
 
