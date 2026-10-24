@@ -13,7 +13,8 @@
   "private": true,
   "packageManager": "yarn@1.22.22",
   "devDependencies": {
-    "@astrojs/check": "^0.9.11",
+    "@astrojs/check": "^0.9.12",
+    "@emnapi/runtime": "^1.11.3",
     "@eslint/js": "^10.0.1",
     "eslint": "^10.8.1",
     "eslint-plugin-astro": "^1.7.0",
@@ -23,7 +24,7 @@
     "prettier-plugin-astro": "^1.1.1",
     "typescript": "~6.0.3",
     "typescript-eslint": "8.67.0",
-    "vitest": "^5.0.5"
+    "vitest": "^4.1.10"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
