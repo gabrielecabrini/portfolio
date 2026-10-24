@@ -183,7 +183,7 @@ const cells = Array.from({ length: 140 }, (_, i) => {
 
   .availability {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.5rem;
     font-size: 0.85rem;
     color: var(--muted);
@@ -198,6 +198,7 @@ const cells = Array.from({ length: 140 }, (_, i) => {
   .availability-contact {
     color: var(--accent);
     font-size: inherit;
+    white-space: nowrap;
     transition: opacity 0.15s;
   }
 
@@ -209,6 +210,8 @@ const cells = Array.from({ length: 140 }, (_, i) => {
     width: 8px;
     height: 8px;
     flex-shrink: 0;
+    /* Centered on the first line, not on the whole block, when the text wraps */
+    margin-top: calc((1lh - 8px) / 2);
     border-radius: 50%;
     background: #22c55e;
     animation: avail-pulse 1.8s ease-out infinite;
@@ -234,8 +237,19 @@ const cells = Array.from({ length: 140 }, (_, i) => {
       text-align: center;
     }
 
+    .availability {
+      flex-wrap: wrap;
+      row-gap: 0.35rem;
+    }
+
     .availability-sep {
       display: none;
+    }
+
+    /* Own line, lined up with the text after the dot */
+    .availability-contact {
+      flex-basis: 100%;
+      padding-left: calc(8px + 0.5rem);
     }
   }
   .activity-wrapper {
