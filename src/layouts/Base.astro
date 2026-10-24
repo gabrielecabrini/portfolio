@@ -94,6 +94,21 @@ const person = {
       <slot />
     </main>
     <Footer lang={lang} />
+    <script>
+      import { EMAIL } from '../data/social-links';
+
+      // Easter egg for whoever opens the devtools. Hardcoded accent: CSS vars don't reach the console.
+      console.log(
+        String.raw`%c
+       __ _  ___
+      / _' |/ __|
+     | (_| | (__ _
+      \__, |\___(_)
+      |___/`,
+        'color: #4e958c; font-family: monospace; font-weight: bold',
+      );
+      console.log(`Reading the source? Let's talk: ${EMAIL.name}`);
+    </script>
   </body>
 </html>
 
