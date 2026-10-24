@@ -5,7 +5,7 @@ import {
   CERTIFICATIONS,
   EDUCATION,
   LANGUAGES,
-  SKILLS,
+  SKILL_GROUPS,
   WORK_EXPERIENCES,
 } from '../../data/experience';
 import { EMAIL, SOCIAL_LINKS } from '../../data/social-links';
@@ -101,7 +101,14 @@ const buildDate = new Date().toLocaleDateString('it-IT');
 
     <section class="cv-section">
       <h2 class="cv-section-title">{t(lang, 'experience.skills.title')}</h2>
-      <p class="cv-skills-list">{SKILLS.map((skill) => skill.name).join(' · ')}</p>
+      <dl class="cv-skills-list">
+        {SKILL_GROUPS.map((group) => (
+          <>
+            <dt>{t(lang, group.categoryKey)}</dt>
+            <dd>{group.skills.map((skill) => skill.name).join(' · ')}</dd>
+          </>
+        ))}
+      </dl>
     </section>
 
     <hr class="cv-rule" />
@@ -337,9 +344,20 @@ const buildDate = new Date().toLocaleDateString('it-IT');
 
   /* ── Skills ── */
   .cv-skills-list {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 0.15rem 1.5rem;
     font-size: 0.88rem;
     color: #333;
-    line-height: 1.8;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .cv-skills-list dt {
+    font-weight: 600;
+  }
+
+  .cv-skills-list dd {
     margin: 0;
   }
 
