@@ -17,7 +17,7 @@ permissions:
 jobs:
   # Runs on pull requests too, so a Dependabot bump can't reach master red.
   verify:
-    name: Lint, test and build
+    name: Lint, test and type check
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.version.outputs.version }}
@@ -51,14 +51,10 @@ jobs:
       - name: Test
         run: npm test
 
-      # The build prints the CV PDFs with Playwright's Chromium, which isn't part of
-      # the npm install.
-      - name: Install Chromium for Playwright
-        run: npx playwright install --with-deps chromium
-
-      # `astro check` + build: the type check covers the .astro templates too.
-      - name: Build
-        run: npm run build
+      # Type check only (covers the .astro templates too): the full build, with its
+      # Chromium install for the CV PDFs, runs just in the deploy job.
+      - name: Type check
+        run: npx astro check
 
   deploy:
     name: Deploy to GitHub Pages
