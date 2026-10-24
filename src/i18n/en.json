@@ -61,7 +61,7 @@
     },
     "edu": {
       "title": "Education",
-      "afp": {
+      "afp-patronato": {
         "qualification": "Qualification: IT and Management Administrator (Economics)"
       }
     },
@@ -71,15 +71,15 @@
         "role": "Founder & Lead Developer",
         "description": "Founded the Minecraft server SkyBlockPuro and ran its whole technical side: DDoS protection, proxies, version upgrades, custom Java plugins and coordination of external contributors."
       },
-      "r1se": {
+      "r1se-gaming": {
         "role": "Java Developer",
         "description": "Built Java bots and tools for the company's communities and helped on other projects."
       },
-      "sandrini": {
+      "sandrini-metalli": {
         "role": "Fullstack Developer",
         "description": "Develop the company ERP and MES (Spring Boot and Angular) and a companion Android app in Flutter. Manage CI/CD pipelines and the SQL Server database; hands-on experience with Docker (Swarm), Kubernetes and VMware."
       },
-      "metamc": {
+      "metamc-networks": {
         "role": "Senior Developer",
         "description": "Developed Java plugins for Minecraft servers with 150+ concurrent players and managed the server infrastructure."
       },
@@ -116,9 +116,13 @@
   },
   "projects": {
     "title": "Projects",
-    "subtitle": "Open source projects I've contributed to.",
+    "subtitle": "Personal projects and open source contributions.",
     "card": {
       "site": "Website"
+    },
+    "runtopage": {
+      "title": "runto.page",
+      "description": "Free URL shortener with custom links (runto.page/menu) instead of random strings. Destinations can be changed any time, every link gets its own QR code and everything can also be managed through a REST API."
     },
     "servo": {
       "title": "Servo",

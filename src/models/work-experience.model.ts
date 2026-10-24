@@ -3,7 +3,7 @@
 export interface WorkExperience {
   id: string;
   company: string;
-  // i18n key (src/i18n/{it,en}.json), not literal text — resolved via `t()`.
+  // i18n key (src/i18n/{it,en}.json) derived from `id`, not literal text — resolved via `t()`.
   roleKey: string;
   startDate: string; // "YYYY-MM"
   endDate?: string; // "YYYY-MM" — undefined means present, rendered as "Present"/"Presente"

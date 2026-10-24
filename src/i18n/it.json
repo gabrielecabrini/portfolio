@@ -61,7 +61,7 @@
     },
     "edu": {
       "title": "Formazione",
-      "afp": {
+      "afp-patronato": {
         "qualification": "Qualifica di Amministratore Informatico / Gestionale (Economia)"
       }
     },
@@ -71,15 +71,15 @@
         "role": "Founder & Lead Developer",
         "description": "Fondatore del server Minecraft SkyBlockPuro e responsabile di tutta la parte tecnica: protezione anti-DDoS, proxy, aggiornamenti di versione, plugin Java su misura e coordinamento dei collaboratori esterni."
       },
-      "r1se": {
+      "r1se-gaming": {
         "role": "Java Developer",
         "description": "Sviluppo in Java di bot e strumenti per le community dell'azienda e supporto su altri progetti."
       },
-      "sandrini": {
+      "sandrini-metalli": {
         "role": "Fullstack Developer",
         "description": "Sviluppo del gestionale ERP e MES aziendale (Spring Boot e Angular) e di un'app Android in Flutter collegata al gestionale. Gestione delle pipeline CI/CD e del database SQL Server; esperienza pratica con Docker (Swarm), Kubernetes e VMware."
       },
-      "metamc": {
+      "metamc-networks": {
         "role": "Senior Developer",
         "description": "Sviluppo di plugin Java per server Minecraft con oltre 150 giocatori attivi in contemporanea e gestione dell'infrastruttura server."
       },
@@ -116,9 +116,13 @@
   },
   "projects": {
     "title": "Progetti",
-    "subtitle": "Progetti open source a cui ho contribuito.",
+    "subtitle": "Progetti personali e contributi open source.",
     "card": {
       "site": "Sito"
+    },
+    "runtopage": {
+      "title": "runto.page",
+      "description": "URL shortener gratuito con link personalizzati (runto.page/menu) al posto di stringhe casuali. La destinazione si cambia quando serve, ogni link ha il suo QR code e tutto si gestisce anche tramite API REST."
     },
     "servo": {
       "title": "Servo",
