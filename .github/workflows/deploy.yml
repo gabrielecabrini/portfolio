@@ -3,9 +3,6 @@ name: CI
 on:
   push:
     branches: [master]
-    # Release tags exist only to publish a versioned image; the Pages deploy stays
-    # tied to master (see the `deploy` job condition).
-    tags: ['v*']
   pull_request:
     branches: [master]
   workflow_dispatch:
@@ -22,9 +19,23 @@ jobs:
   verify:
     name: Lint, test and build
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      new: ${{ steps.version.outputs.new }}
 
     steps:
       - uses: actions/checkout@v4
+
+      # A release is a package.json version with no v<version> tag on origin yet.
+      # The tag is pushed only after a successful deploy, so a failed one retries on
+      # the next push; commits without a bump (Dependabot included) release nothing.
+      - name: Detect new version
+        id: version
+        run: |
+          version=$(node -p "require('./package.json').version")
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          if git ls-remote --exit-code --tags origin "refs/tags/v$version" >/dev/null; then new=false; else new=true; fi
+          echo "new=$new" >> "$GITHUB_OUTPUT"
 
       - uses: actions/setup-node@v4
         with:
@@ -52,9 +63,10 @@ jobs:
   deploy:
     name: Deploy to GitHub Pages
     needs: verify
-    # Branch-scoped rather than just "not a PR": a v* tag push must not redeploy
-    # Pages, it only publishes the versioned image.
-    if: github.ref == 'refs/heads/master'
+    # Only on a version bump; a manual run forces a redeploy of the current version.
+    if: >-
+      github.ref == 'refs/heads/master' &&
+      (needs.verify.outputs.new == 'true' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
 
     steps:
@@ -84,10 +96,17 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # Pushed with GITHUB_TOKEN, so it doesn't trigger another workflow run.
+      - name: Tag release
+        if: needs.verify.outputs.new == 'true'
+        run: git tag "v$VERSION" && git push origin "v$VERSION"
+        env:
+          VERSION: ${{ needs.verify.outputs.version }}
+
   image:
     name: Publish Docker image to GHCR
     needs: verify
-    if: github.event_name != 'pull_request'
+    if: github.ref == 'refs/heads/master' && needs.verify.outputs.new == 'true'
     runs-on: ubuntu-latest
 
     steps:
@@ -113,8 +132,8 @@ jobs:
           tags: |
             type=ref,event=branch
             type=sha,format=short
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{version}},value=v${{ needs.verify.outputs.version }}
+            type=semver,pattern={{major}}.{{minor}},value=v${{ needs.verify.outputs.version }}
             type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push
