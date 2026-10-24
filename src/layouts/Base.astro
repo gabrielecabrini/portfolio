@@ -9,7 +9,7 @@ interface Props {
   lang: Lang;
   /** Page name, rendered as "<title> — Gabriele Cabrini"; omitted on the home page. */
   title?: string;
-  description: string;
+  description?: string;
   noindex?: boolean;
 }
 
@@ -41,20 +41,20 @@ const person = {
       } catch (e) {}
     </script>
     <title>{fullTitle}</title>
-    <meta name="description" content={description} />
+    {description && <meta name="description" content={description} />}
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content={url(lang)} />
     <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
+    {description && <meta property="og:description" content={description} />}
     <meta property="og:image" content="https://www.gabrielecabrini.it/assets/images/logo.png" />
     <meta property="og:locale" content={lang === 'it' ? 'it_IT' : 'en_US'} />
 
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
+    {description && <meta name="twitter:description" content={description} />}
     <meta name="twitter:image" content="https://www.gabrielecabrini.it/assets/images/logo.png" />
 
     <meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)" />
@@ -89,7 +89,7 @@ const person = {
     <a class="skip-link" href="#main-content">
       {t(lang, 'nav.skipToContent')}
     </a>
-    <Header lang={lang} path={path} />
+    <Header lang={lang} path={path} noTwin={noindex} />
     <main id="main-content">
       <slot />
     </main>

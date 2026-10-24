@@ -5,12 +5,13 @@ interface Props {
   lang: Lang;
   /** Current path without the /en prefix, e.g. "/about". */
   path: string;
+  /** Page has no twin in the other language (404, easter eggs): the toggle goes home. */
+  noTwin?: boolean;
 }
 
-const { lang, path } = Astro.props;
+const { lang, path, noTwin = false } = Astro.props;
 const other: Lang = lang === 'it' ? 'en' : 'it';
-// The 404 page has no English twin to switch to.
-const switchHref = localePath(other, path === '/404' ? '/' : path);
+const switchHref = localePath(other, noTwin ? '/' : path);
 const links = [
   { href: '/', label: t(lang, 'nav.home') },
   { href: '/about', label: t(lang, 'nav.about') },
