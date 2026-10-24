@@ -69,23 +69,23 @@
       "title": "Work experience",
       "skyblockpuro": {
         "role": "Founder & Lead Developer",
-        "description": "Founded the Minecraft server SkyBlockPuro. Responsible for the entire technical infrastructure: DDoS protection, proxy management, version updates, custom Java plugin development, and coordination of external contributors."
+        "description": "Founded the Minecraft server SkyBlockPuro and ran its whole technical side: DDoS protection, proxies, version upgrades, custom Java plugins and coordination of external contributors."
       },
       "r1se": {
-        "role": "Backend Developer",
-        "description": "Developed backend software for internal company utilities. Set up the initial cloud infrastructure on AWS using EC2 instances."
+        "role": "Java Developer",
+        "description": "Built Java bots and tools for the company's communities and helped on other projects."
       },
       "sandrini": {
         "role": "Fullstack Developer",
-        "description": "Backend development of an ERP management system using Java and Spring Boot. ERP frontend development with Angular and TypeScript. CI/CD pipeline implementation. Development of an integrative ERP mobile app with Flutter (Android). PostgreSQL, SQL Server, MariaDB, and Redis database management. Hands-on experience with Docker, Kubernetes, and Proxmox."
+        "description": "Develop the company ERP and MES (Spring Boot and Angular) and a companion Android app in Flutter. Manage CI/CD pipelines and the SQL Server database; hands-on experience with Docker (Swarm), Kubernetes and VMware."
       },
       "metamc": {
-        "role": "Lead Developer",
-        "description": "Developed Java plugins for Minecraft servers handling 150+ concurrent active players. Responsible for server infrastructure management and development team supervision."
+        "role": "Senior Developer",
+        "description": "Developed Java plugins for Minecraft servers with 150+ concurrent players and managed the server infrastructure."
       },
       "devroom": {
         "role": "Freelance Developer",
-        "description": "Commission-based work for the devroom team: mod development, server configurations, and custom plugins."
+        "description": "Commissioned work for the DevRoom team: mods, server configurations and custom plugins."
       }
     },
     "skills": {

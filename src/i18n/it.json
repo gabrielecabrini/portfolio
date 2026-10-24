@@ -69,23 +69,23 @@
       "title": "Esperienza lavorativa",
       "skyblockpuro": {
         "role": "Founder & Lead Developer",
-        "description": "Fondatore del server Minecraft SkyBlockPuro. Responsabile dell'intera infrastruttura tecnica: protezione anti-DDoS, gestione proxy, aggiornamenti di versione, sviluppo di plugin Java personalizzati e coordinamento di collaboratori esterni."
+        "description": "Fondatore del server Minecraft SkyBlockPuro e responsabile di tutta la parte tecnica: protezione anti-DDoS, proxy, aggiornamenti di versione, plugin Java su misura e coordinamento dei collaboratori esterni."
       },
       "r1se": {
-        "role": "Backend Developer",
-        "description": "Sviluppo di software backend per utilities interne aziendali. Configurazione iniziale dell'infrastruttura cloud su AWS con istanze EC2."
+        "role": "Java Developer",
+        "description": "Sviluppo in Java di bot e strumenti per le community dell'azienda e supporto su altri progetti."
       },
       "sandrini": {
         "role": "Fullstack Developer",
-        "description": "Sviluppo backend del gestionale ERP con Java e Spring Boot. Sviluppo del frontend ERP con Angular e TypeScript. Implementazione di pipeline CI/CD. Sviluppo di un'app mobile integrativa per il gestionale con Flutter (Android). Gestione di database PostgreSQL, SQL Server, MariaDB e Redis. Acquisizione di competenze su Docker, Kubernetes e Proxmox."
+        "description": "Sviluppo del gestionale ERP e MES aziendale (Spring Boot e Angular) e di un'app Android in Flutter collegata al gestionale. Gestione delle pipeline CI/CD e del database SQL Server; esperienza pratica con Docker (Swarm), Kubernetes e VMware."
       },
       "metamc": {
-        "role": "Lead Developer",
-        "description": "Sviluppo di plugin Java per server Minecraft con oltre 150 player attivi in contemporanea. Responsabile dell'infrastruttura server e supervisione del team di sviluppo."
+        "role": "Senior Developer",
+        "description": "Sviluppo di plugin Java per server Minecraft con oltre 150 giocatori attivi in contemporanea e gestione dell'infrastruttura server."
       },
       "devroom": {
         "role": "Freelance Developer",
-        "description": "Lavori su commissione per il team devroom: sviluppo di mod, configurazioni server e plugin custom."
+        "description": "Lavori su commissione per il team DevRoom: mod, configurazioni server e plugin su misura."
       }
     },
     "skills": {
