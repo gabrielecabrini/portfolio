@@ -139,7 +139,7 @@
   },
   "cv": {
     "download": "Download PDF",
-    "summary": "Fullstack developer with {{years}} years of experience. I build a company ERP and MES with Java, Spring Boot, Angular and SQL databases, from code to deployment: CI/CD, Kubernetes and VMware.",
+    "summary": "Fullstack developer with {{years}} years of experience in business applications (ERP, MES) and open source: scalable Spring Boot backends, Angular and Flutter apps shaped around real workflows.",
     "seo": {
       "description": "CV of Gabriele Cabrini, fullstack developer. Read it online or download it as a PDF, in English or Italian."
     },
