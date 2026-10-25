@@ -1,0 +1,361 @@
+<canvas class="hero-scene" aria-hidden="true"></canvas>
+
+<script>
+  import type { BufferGeometry, Shape, Vector2, Vector3, WebGLRenderer } from 'three';
+
+  // Decorative wireframe dev objects drifting behind the home hero. Loaded on idle so
+  // three.js never competes with the first paint, and only once the canvas is shown.
+  const canvas = document.querySelector<HTMLCanvasElement>('.hero-scene')!;
+
+  async function init() {
+    const THREE = await import('three');
+
+    let renderer: WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    } catch {
+      return; // no WebGL: the hero simply stays plain
+    }
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+    camera.position.z = 12;
+    // Half the visible height at z = 0; the width follows the aspect ratio
+    const halfH = camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
+
+    const material = new THREE.LineBasicMaterial();
+    const setColor = () =>
+      material.color.set(
+        getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),
+      );
+    setColor();
+    // Reduced motion draws no frames of its own, so it needs an explicit redraw
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    new MutationObserver(() => (setColor(), still && render(4000))).observe(
+      document.documentElement,
+      {
+        attributeFilter: ['data-theme'],
+      },
+    );
+
+    // Low threshold angle keeps the hard edges, a higher one hides the facets of curved surfaces
+    const edges = (geometry: BufferGeometry, threshold = 1) =>
+      new THREE.LineSegments(new THREE.EdgesGeometry(geometry, threshold), material);
+    const extrude = (shape: Shape, depth = 0.3) =>
+      new THREE.ExtrudeGeometry(shape, { depth, bevelEnabled: false });
+    const polygon = (points: [number, number][]) =>
+      new THREE.Shape(points.map(([x, y]) => new THREE.Vector2(x, y)));
+    const line = (points: Vector3[]) =>
+      new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), material);
+
+    // </>
+    const code = new THREE.Group();
+    // Inner edges parallel to the outer ones, 0.28 apart like the slash, so the stroke
+    // keeps one thickness all the way to the tip
+    const chevron = polygon([
+      [0.5, 1],
+      [-0.6, 0],
+      [0.5, -1],
+      [0.688, -0.793],
+      [-0.184, 0],
+      [0.688, 0.793],
+    ]);
+    const left = edges(extrude(chevron));
+    left.position.x = -1.5;
+    const right = edges(extrude(chevron));
+    right.scale.x = -1;
+    right.position.x = 1.5;
+    const slash = edges(
+      extrude(
+        polygon([
+          [-0.45, -1.1],
+          [-0.15, -1.1],
+          [0.45, 1.1],
+          [0.15, 1.1],
+        ]),
+      ),
+    );
+    code.add(left, slash, right);
+
+    // { }: the brace's centreline, thickened into an outline along its normals
+    const path = new THREE.Path();
+    path.moveTo(0.5, 1.3);
+    path.quadraticCurveTo(0, 1.3, 0, 0.8);
+    path.lineTo(0, 0.3);
+    path.quadraticCurveTo(0, 0, -0.4, 0);
+    path.quadraticCurveTo(0, 0, 0, -0.3);
+    path.lineTo(0, -0.8);
+    path.quadraticCurveTo(0, -1.3, 0.5, -1.3);
+    const centre = path.getPoints(8);
+    const outer: Vector2[] = [];
+    const inner: Vector2[] = [];
+    centre.forEach((p, i) => {
+      const dir = centre[Math.min(i + 1, centre.length - 1)]!.clone().sub(
+        centre[Math.max(i - 1, 0)]!,
+      );
+      const normal = new THREE.Vector2(-dir.y, dir.x).normalize().multiplyScalar(0.12);
+      outer.push(p.clone().add(normal));
+      inner.unshift(p.clone().sub(normal));
+    });
+    const brace = extrude(new THREE.Shape([...outer, ...inner]));
+    const braces = new THREE.Group();
+    const open = edges(brace, 20);
+    open.position.x = -0.9;
+    const close = edges(brace, 20);
+    close.scale.x = -1;
+    close.position.x = 0.9;
+    braces.add(open, close);
+
+    // Terminal window: title bar with three dots and a >_ prompt
+    const frame = new THREE.Shape();
+    frame.moveTo(-1.05, -0.8);
+    frame.lineTo(1.05, -0.8);
+    frame.quadraticCurveTo(1.2, -0.8, 1.2, -0.65);
+    frame.lineTo(1.2, 0.65);
+    frame.quadraticCurveTo(1.2, 0.8, 1.05, 0.8);
+    frame.lineTo(-1.05, 0.8);
+    frame.quadraticCurveTo(-1.2, 0.8, -1.2, 0.65);
+    frame.lineTo(-1.2, -0.65);
+    frame.quadraticCurveTo(-1.2, -0.8, -1.05, -0.8);
+    const terminal = new THREE.Group();
+    // Front face of the 0.15-deep body, nudged out so the details don't z-fight it
+    const front = 0.16;
+    terminal.add(
+      edges(extrude(frame, 0.15), 20),
+      line([new THREE.Vector3(-1.2, 0.5, front), new THREE.Vector3(1.2, 0.5, front)]),
+    );
+    const dot = new THREE.EdgesGeometry(new THREE.CircleGeometry(0.07, 8));
+    for (const x of [-0.95, -0.75, -0.55]) {
+      const light = new THREE.LineSegments(dot, material);
+      light.position.set(x, 0.65, front);
+      terminal.add(light);
+    }
+    // The </> chevron mirrored and shrunk into the prompt's >
+    const prompt = edges(extrude(chevron));
+    prompt.scale.set(-0.25, 0.25, 0.25);
+    prompt.position.set(-0.8, -0.05, front);
+    const cursor = edges(new THREE.BoxGeometry(0.3, 0.06, 0.05));
+    cursor.position.set(-0.5, -0.27, front + 0.025);
+    terminal.add(prompt, cursor);
+
+    // Coffee mug
+    const mug = new THREE.Group();
+    mug.add(edges(new THREE.CylinderGeometry(0.7, 0.6, 1.5, 12, 1, true)));
+    const handle = edges(new THREE.TorusGeometry(0.4, 0.08, 4, 10, Math.PI));
+    handle.rotation.z = -Math.PI / 2;
+    handle.position.x = 0.68;
+    mug.add(handle);
+    // Steam: three wavy lines whose x is recomputed every frame in render()
+    // Staggered in depth too, so they don't merge into one line when the mug turns
+    const steam = (
+      [
+        [-0.3, 0.15],
+        [0, -0.25],
+        [0.3, 0.1],
+      ] as const
+    ).map(([x, z], i) => {
+      const wisp = line(
+        Array.from({ length: 16 }, (_, k) => new THREE.Vector3(x, 0.9 + k * 0.07, z)),
+      );
+      mug.add(wisp);
+      return { wisp, x, offset: i * 2.1 };
+    });
+
+    // Git graph: main with a feature branch and a hotfix forking off and merging back.
+    // Drawn left to right, then turned upright so history reads bottom to top like `git log`.
+    const git = new THREE.Group();
+    git.rotation.z = Math.PI / 2;
+    // Commits as low-poly globes: UV-sphere quads are planar, so the edges are only the
+    // meridians and parallels
+    const node = new THREE.EdgesGeometry(new THREE.SphereGeometry(0.2, 6, 4));
+    const commit = (x: number, y: number) => {
+      const c = new THREE.LineSegments(node, material);
+      c.position.set(x, y, 0);
+      git.add(c);
+    };
+    const curve = (ax: number, ay: number, bx: number, by: number) =>
+      git.add(
+        line(
+          new THREE.CubicBezierCurve3(
+            new THREE.Vector3(ax, ay, 0),
+            new THREE.Vector3((ax + bx) / 2, ay, 0),
+            new THREE.Vector3((ax + bx) / 2, by, 0),
+            new THREE.Vector3(bx, by, 0),
+          ).getPoints(12),
+        ),
+      );
+    for (let i = -3; i <= 3; i++) commit(i * 0.8, 0);
+    curve(-2.4, 0, 2.4, 0);
+    // feature: forks after the 2nd commit, three commits, merges into the 6th
+    for (const x of [-0.8, 0, 0.8]) commit(x, 0.9);
+    curve(-1.6, 0, -0.8, 0.9);
+    curve(-0.8, 0.9, 0.8, 0.9);
+    curve(0.8, 0.9, 1.6, 0);
+    // hotfix: one commit, merged into the next one on main
+    commit(0, -0.9);
+    curve(-0.8, 0, 0, -0.9);
+    curve(0, -0.9, 0.8, 0);
+
+    // fx: fraction of the half width, fy: of the half height. Mostly the edges and the
+    // right side, away from the title.
+    const items = [
+      { object: code, fx: 0.82, fy: 0.62, z: -1, scale: 0.55 },
+      { object: terminal, fx: 0.86, fy: -0.6, z: 0, scale: 0.7 },
+      { object: git, fx: 0.3, fy: -0.72, z: -3, scale: 0.6 },
+      { object: mug, fx: -0.93, fy: 0.75, z: -2, scale: 0.7 },
+      { object: braces, fx: -0.88, fy: -0.6, z: -1, scale: 0.6 },
+    ].map((item, i) => {
+      item.object.scale.setScalar(item.scale);
+      // The pivot carries the animated position and rotation, leaving the object's own
+      // pose (like the git graph standing upright) untouched
+      const pivot = new THREE.Group().add(item.object);
+      scene.add(pivot);
+      // drag*: extra rotation from the user dragging the object, eased back to 0 on release
+      return { ...item, pivot, phase: i * 1.7, dragX: 0, dragY: 0 };
+    });
+
+    function layout() {
+      const { clientWidth: w, clientHeight: h } = canvas;
+      if (!w || !h) return;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      for (const item of items)
+        item.pivot.position.set(item.fx * halfH * camera.aspect, item.fy * halfH, item.z);
+    }
+
+    // Motion from the timestamp, not per-frame steps, so 144 Hz screens don't move faster
+    function render(time: number) {
+      const t = time / 1000;
+      for (const { pivot, fy, phase, dragX, dragY } of items) {
+        // Rocking rather than spinning, so no object shows its back or turns edge-on
+        pivot.rotation.set(0.3 + dragX, Math.sin(t * 0.4 + phase) * 0.5 + dragY, 0);
+        pivot.position.y = fy * halfH + Math.sin(t * 0.6 + phase) * 0.15;
+      }
+      for (const { wisp, x, offset } of steam) {
+        const points = wisp.geometry.attributes['position']!;
+        for (let k = 0; k < points.count; k++)
+          points.setX(k, x + 0.1 * Math.sin(points.getY(k) * 4 - t * 2 + offset));
+        points.needsUpdate = true;
+      }
+      camera.lookAt(0, 0, 0);
+      renderer.render(scene, camera);
+    }
+
+    layout();
+    if (still) {
+      render(4000);
+      new ResizeObserver(() => (layout(), render(4000))).observe(canvas);
+    } else {
+      // Subtle parallax: the camera eases towards the pointer
+      const target = { x: 0, y: 0 };
+      addEventListener('pointermove', (e) => {
+        target.x = (e.clientX / innerWidth - 0.5) * 1.2;
+        target.y = -(e.clientY / innerHeight - 0.5) * 0.8;
+      });
+
+      // Drag an object to turn it. The canvas ignores the pointer so the text stays
+      // selectable; the hero listens instead and hit-tests the objects' bounding spheres.
+      const hero = canvas.parentElement!;
+      const raycaster = new THREE.Raycaster();
+      const ndc = new THREE.Vector2();
+      const box = new THREE.Box3();
+      const sphere = new THREE.Sphere();
+      const pick = (e: PointerEvent) => {
+        if ((e.target as Element).closest('a, button')) return undefined;
+        const r = canvas.getBoundingClientRect();
+        ndc.set(
+          ((e.clientX - r.left) / r.width) * 2 - 1,
+          -((e.clientY - r.top) / r.height) * 2 + 1,
+        );
+        raycaster.setFromCamera(ndc, camera);
+        return items.find((item) =>
+          raycaster.ray.intersectsSphere(box.setFromObject(item.pivot).getBoundingSphere(sphere)),
+        );
+      };
+      let drag: { item: (typeof items)[number]; x: number; y: number } | undefined;
+      hero.addEventListener('pointerdown', (e) => {
+        const item = pick(e);
+        if (!item) return;
+        e.preventDefault(); // no text selection while dragging
+        drag = { item, x: e.clientX, y: e.clientY };
+        hero.setPointerCapture(e.pointerId);
+        hero.style.cursor = 'grabbing';
+      });
+      hero.addEventListener('pointermove', (e) => {
+        if (!drag) return void (hero.style.cursor = pick(e) ? 'grab' : '');
+        drag.item.dragY += (e.clientX - drag.x) * 0.01;
+        drag.item.dragX += (e.clientY - drag.y) * 0.01;
+        drag.x = e.clientX;
+        drag.y = e.clientY;
+      });
+      const release = () => {
+        drag = undefined;
+        hero.style.cursor = '';
+      };
+      hero.addEventListener('pointerup', release);
+      hero.addEventListener('pointercancel', release);
+
+      const { damp } = THREE.MathUtils;
+      let last = performance.now();
+      const loop = (time: number) => {
+        // Capped so the first frame after a pause doesn't jump
+        const dt = Math.min(time - last, 100);
+        last = time;
+        camera.position.x = damp(camera.position.x, target.x, 1 / 400, dt);
+        camera.position.y = damp(camera.position.y, target.y, 1 / 400, dt);
+        for (const item of items) {
+          if (item === drag?.item) continue;
+          item.dragX = damp(item.dragX, 0, 1 / 800, dt);
+          item.dragY = damp(item.dragY, 0, 1 / 800, dt);
+        }
+        render(time);
+      };
+      // Paused while the hero is scrolled away or hidden by the mobile breakpoint
+      new IntersectionObserver(([entry]) =>
+        renderer.setAnimationLoop(entry!.isIntersecting ? loop : null),
+      ).observe(canvas);
+      new ResizeObserver(layout).observe(canvas);
+    }
+    canvas.classList.add('ready');
+  }
+
+  // The CSS breakpoint decides: a display: none canvas never intersects, so phones never
+  // download three.js, and widening the window past the breakpoint still starts it
+  const shown = new IntersectionObserver(([entry]) => {
+    if (!entry!.isIntersecting) return;
+    shown.disconnect();
+    if ('requestIdleCallback' in window) requestIdleCallback(() => void init());
+    else setTimeout(() => void init(), 200);
+  });
+  shown.observe(canvas);
+</script>
+
+<style>
+  .hero-scene {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+  }
+
+  /* Faint enough to stay behind the text, never compete with it */
+  .hero-scene.ready {
+    opacity: 0.35;
+  }
+
+  :global([data-theme='light']) .hero-scene.ready {
+    opacity: 0.3;
+  }
+
+  @media (max-width: 700px) {
+    .hero-scene {
+      display: none;
+    }
+  }
+</style>
