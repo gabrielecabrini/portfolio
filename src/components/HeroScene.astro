@@ -1,7 +1,7 @@
 <canvas class="hero-scene" aria-hidden="true"></canvas>
 
 <script>
-  import type { BufferGeometry, Shape, Vector2, Vector3, WebGLRenderer } from 'three';
+  import type { BufferGeometry, Material, Shape, Vector2, Vector3, WebGLRenderer } from 'three';
 
   // Decorative wireframe dev objects drifting behind the home hero. Loaded on idle so
   // three.js never competes with the first paint, and only once the canvas is shown.
@@ -9,6 +9,7 @@
 
   async function init() {
     const THREE = await import('three');
+    const { clamp, damp, lerp, mapLinear, randFloat, randFloatSpread } = THREE.MathUtils;
 
     let renderer: WebGLRenderer;
     try {
@@ -25,10 +26,13 @@
     const halfH = camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
 
     const material = new THREE.LineBasicMaterial();
-    const setColor = () =>
-      material.color.set(
-        getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),
-      );
+    // The steam's own: per-vertex alpha on top of the accent fades it out
+    const steamMaterial = new THREE.LineBasicMaterial({ vertexColors: true, transparent: true });
+    const setColor = () => {
+      const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+      material.color.set(accent);
+      steamMaterial.color.set(accent);
+    };
     setColor();
     // Reduced motion draws no frames of its own, so it needs an explicit redraw
     const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -46,8 +50,8 @@
       new THREE.ExtrudeGeometry(shape, { depth, bevelEnabled: false });
     const polygon = (points: [number, number][]) =>
       new THREE.Shape(points.map(([x, y]) => new THREE.Vector2(x, y)));
-    const line = (points: Vector3[]) =>
-      new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), material);
+    const line = (points: Vector3[], lineMaterial: Material = material, Kind = THREE.Line) =>
+      new Kind(new THREE.BufferGeometry().setFromPoints(points), lineMaterial);
 
     // </>
     const code = new THREE.Group();
@@ -139,15 +143,22 @@
     cursor.position.set(-0.5, -0.27, front + 0.025);
     terminal.add(prompt, cursor);
 
-    // Coffee mug
+    // Coffee mug: a tapered open cylinder, its wall reused by the coffee below
+    const BOTTOM = -0.75,
+      RIM = 0.75,
+      BASE_R = 0.6,
+      RIM_R = 0.7;
+    const wall = (y: number) => mapLinear(y, BOTTOM, RIM, BASE_R, RIM_R); // radius at height y
     const mug = new THREE.Group();
-    mug.add(edges(new THREE.CylinderGeometry(0.7, 0.6, 1.5, 12, 1, true)));
+    mug.add(edges(new THREE.CylinderGeometry(RIM_R, BASE_R, RIM - BOTTOM, 12, 1, true)));
     const handle = edges(new THREE.TorusGeometry(0.4, 0.08, 4, 10, Math.PI));
     handle.rotation.z = -Math.PI / 2;
     handle.position.x = 0.68;
     mug.add(handle);
-    // Steam: three wavy lines whose x is recomputed every frame in render()
-    // Staggered in depth too, so they don't merge into one line when the mug turns
+    // Steam: three wisps rising from the coffee, staggered in depth so they don't merge into
+    // one line when the mug turns. They live in world space and are rebuilt every frame by
+    // draw(), so they always rise straight up whatever the mug's tilt.
+    const STEAM_POINTS = 20;
     const steam = (
       [
         [-0.3, 0.15],
@@ -156,11 +167,184 @@
       ] as const
     ).map(([x, z], i) => {
       const wisp = line(
-        Array.from({ length: 16 }, (_, k) => new THREE.Vector3(x, 0.9 + k * 0.07, z)),
+        Array.from({ length: STEAM_POINTS }, () => new THREE.Vector3()),
+        steamMaterial,
       );
-      mug.add(wisp);
-      return { wisp, x, offset: i * 2.1 };
+      wisp.geometry.setAttribute(
+        'color',
+        new THREE.BufferAttribute(new Float32Array(STEAM_POINTS * 4).fill(1), 4),
+      );
+      wisp.frustumCulled = false; // its points move every frame, a bounding sphere would go stale
+      scene.add(wisp);
+      return { wisp, x, z, offset: i * 2.1 };
     });
+
+    // Coffee: the surface stays level in the world while the mug tilts, sloshes on a damped
+    // spring and spills over the rim as drops. fill is the level on the mug's axis.
+    const FULL = 0.35,
+      SIDES = 24;
+    // The surface's outline is sampled at fixed angles around the wall; p is this frame's point
+    const sides = Array.from({ length: SIDES }, (_, i) => {
+      const a = (i / SIDES) * Math.PI * 2;
+      return { a, c: Math.cos(a), s: Math.sin(a), p: new THREE.Vector3() };
+    });
+    // The surface as concentric rings: its outline along the wall, two more towards the middle
+    const rings = [1, 0.66, 0.33].map((scale) => {
+      const ring = line(
+        sides.map(() => new THREE.Vector3()),
+        material,
+        THREE.LineLoop,
+      );
+      mug.add(ring);
+      return { ring, scale };
+    });
+    const coffee = {
+      fill: FULL,
+      // Surface normal and its velocity in world space, where level is simply (0, 1, 0):
+      // the mug swaying on its own axis can't disturb it, only a real tilt does
+      normal: new THREE.Vector3(0, 1, 0),
+      velocity: new THREE.Vector3(),
+      axis: undefined as Vector3 | undefined, // the mug's axis last frame, to measure tilting
+      // Where the level is over the rim: the outline points it pours from, and by how much
+      spills: [] as { p: Vector3; over: number }[],
+    };
+    const mugTurn = new THREE.Quaternion();
+    const localNormal = new THREE.Vector3();
+    const middle = new THREE.Vector3();
+    const ringPoint = new THREE.Vector3();
+    const steamAt = new THREE.Vector3();
+
+    // Shapes the surface from the current fill and normal; returns its centre's height, where
+    // the steam rises from
+    function pour(t: number) {
+      const n = localNormal
+        .copy(coffee.normal)
+        .applyQuaternion(mug.getWorldQuaternion(mugTurn).invert());
+      // Divided by below: kept off zero for a hard slosh at full tilt
+      const ny = Math.max(n.y, 0.1);
+      const level = (r: number, c: number, s: number) =>
+        (coffee.fill - r * (c * n.x + s * n.z)) / ny;
+      // The plane's line across the bottom disc: x·n.x + z·n.z = across
+      const across = coffee.fill - BOTTOM * ny;
+      const slope = n.x * n.x + n.z * n.z;
+      coffee.spills.length = 0;
+      middle.set(0, 0, 0);
+      for (const { c, s, p } of sides) {
+        // Where the plane meets the tapered wall: one refinement of the radius is plenty
+        const raw = level(wall(clamp(level(0.65, c, s), BOTTOM, RIM)), c, s);
+        if (raw > RIM) {
+          // Over the rim: the surface ends at the rim, and pours from there
+          p.set(RIM_R * c, RIM, RIM_R * s);
+          coffee.spills.push({ p, over: raw - RIM });
+        } else if (raw < BOTTOM) {
+          // No coffee against this side of the wall: the outline runs along the chord where
+          // the plane cuts the bottom, so the wall point is projected onto it
+          p.set(BASE_R * c, BOTTOM, BASE_R * s);
+          if (slope > 1e-6) {
+            const k = (p.x * n.x + p.z * n.z - across) / slope;
+            p.x -= k * n.x;
+            p.z -= k * n.z;
+          }
+        } else p.set(wall(raw) * c, raw, wall(raw) * s);
+        middle.add(p);
+      }
+      // Inner rings shrink towards the outline's own centre, so they stay on the coffee
+      // however it's cut by the rim or the bottom
+      middle.divideScalar(SIDES);
+      // Ripples while it sloshes, travelling from the wall inwards, gone once it settles
+      const ripple = Math.min(coffee.velocity.length() * 0.05, 0.06);
+      const wet = coffee.fill > BOTTOM + 0.05;
+      for (const { ring, scale } of rings) {
+        ring.visible = wet;
+        const points = ring.geometry.attributes['position']!;
+        sides.forEach(({ a, p }, i) => {
+          const wave = ripple * Math.sin(3 * a + t * 7 + scale * 4) * scale;
+          ringPoint.lerpVectors(middle, p, scale);
+          points.setXYZ(i, ringPoint.x, clamp(ringPoint.y + wave, BOTTOM, RIM), ringPoint.z);
+        });
+        points.needsUpdate = true;
+      }
+      return clamp(middle.y, BOTTOM, RIM);
+    }
+
+    // Tilting the mug kicks the surface against the motion, then a damped spring pulls it
+    // back level. Runs after pose(), so the axis it compares is always this frame's.
+    const axisNow = new THREE.Vector3();
+    function slosh(dt: number) {
+      const s = dt / 1000;
+      const axis = axisNow.set(0, 1, 0).applyQuaternion(mug.getWorldQuaternion(mugTurn));
+      if (coffee.axis) coffee.velocity.addScaledVector(coffee.axis.sub(axis), 25);
+      coffee.axis = (coffee.axis ?? new THREE.Vector3()).copy(axis);
+      // Spring towards level, (0, 1, 0)
+      coffee.velocity.multiplyScalar(1 - 6 * s).addScaledVector(coffee.normal, -60 * s);
+      coffee.velocity.y += 60 * s;
+      coffee.normal.addScaledVector(coffee.velocity, s).normalize();
+    }
+
+    // Spilled drops: a pool of wireframe teardrops reused round-robin. The lathe profile
+    // runs from the round bottom to the tip, which trails behind as the drop falls.
+    const tear = new THREE.EdgesGeometry(
+      new THREE.LatheGeometry(
+        [
+          [0, -0.09],
+          [0.06, -0.07],
+          [0.09, -0.02],
+          [0.075, 0.04],
+          [0.04, 0.1],
+          [0, 0.17],
+        ].map(([x, y]) => new THREE.Vector2(x, y)),
+        6,
+      ),
+    );
+    const drops = Array.from({ length: 30 }, () => {
+      const shape = new THREE.LineSegments(tear, material);
+      shape.visible = false;
+      scene.add(shape);
+      return { shape, velocity: new THREE.Vector3() };
+    });
+    const tipUp = new THREE.Vector3(0, 1, 0);
+    const tip = new THREE.Vector3();
+    let nextDrop = 0,
+      sinceDrop = 0;
+
+    // Spill while the level is over the rim: the further over, the faster the drops come
+    // (120 ms down to 35 ms) and the bigger they are. Refill once upright again.
+    function spill(dt: number) {
+      const s = dt / 1000;
+      const overflow = Math.max(0, ...coffee.spills.map(({ over }) => over));
+      const flow = clamp(overflow / 0.4, 0, 1);
+      sinceDrop += dt;
+      if (coffee.spills.length && coffee.fill > BOTTOM && sinceDrop > lerp(120, 35, flow)) {
+        sinceDrop = 0;
+        // From anywhere along the overflowing stretch of rim, mostly where it's highest
+        let pick = Math.random() * coffee.spills.reduce((sum, { over }) => sum + over, 0);
+        const { p } = coffee.spills.find(({ over }) => (pick -= over) <= 0) ?? coffee.spills[0]!;
+        const drop = drops[nextDrop]!;
+        mug.localToWorld(drop.shape.position.copy(p));
+        // Thrown outwards from the axis, the way it leaves the rim, with a little randomness
+        // in throw and size so the drops don't fall in a neat column
+        drop.velocity
+          .set(p.x, 0, p.z)
+          .transformDirection(mug.matrixWorld)
+          .multiplyScalar(randFloat(1.2, 1.8));
+        drop.velocity.x += randFloatSpread(0.5);
+        drop.velocity.y += randFloat(0, 0.25);
+        drop.velocity.z += randFloatSpread(0.5);
+        drop.shape.scale.setScalar((0.7 + 0.5 * flow) * randFloat(0.85, 1.15));
+        drop.shape.visible = true;
+        nextDrop = (nextDrop + 1) % drops.length;
+        coffee.fill -= 0.01;
+      } else if (!coffee.spills.length && (coffee.axis?.y ?? 1) > 0.9)
+        coffee.fill = Math.min(FULL, coffee.fill + ((FULL - BOTTOM) / 5) * s);
+      for (const { shape, velocity } of drops) {
+        if (!shape.visible) continue;
+        velocity.y -= 15 * s;
+        shape.position.addScaledVector(velocity, s);
+        // Tip pointing back along the fall
+        shape.quaternion.setFromUnitVectors(tipUp, tip.copy(velocity).negate().normalize());
+        if (shape.position.y < -halfH - 1) shape.visible = false;
+      }
+    }
 
     // Git graph: main with a feature branch and a hotfix forking off and merging back.
     // Drawn left to right, then turned upright so history reads bottom to top like `git log`.
@@ -197,6 +381,10 @@
     curve(-0.8, 0, 0, -0.9);
     curve(0, -0.9, 0.8, 0);
 
+    // Every object rests tilted towards the viewer, and can be dragged at most this far
+    const REST_TILT = 0.3,
+      MAX_TILT = 1.3;
+
     // fx: fraction of the half width, fy: of the half height. Mostly the edges and the
     // right side, away from the title.
     const items = [
@@ -226,21 +414,49 @@
     }
 
     // Motion from the timestamp, not per-frame steps, so 144 Hz screens don't move faster
-    function render(time: number) {
-      const t = time / 1000;
+    function pose(t: number) {
       for (const { pivot, fy, phase, dragX, dragY } of items) {
         // Rocking rather than spinning, so no object shows its back or turns edge-on
-        pivot.rotation.set(0.3 + dragX, Math.sin(t * 0.4 + phase) * 0.5 + dragY, 0);
+        pivot.rotation.set(REST_TILT + dragX, Math.sin(t * 0.4 + phase) * 0.5 + dragY, 0);
         pivot.position.y = fy * halfH + Math.sin(t * 0.6 + phase) * 0.15;
       }
-      for (const { wisp, x, offset } of steam) {
+    }
+
+    function draw(t: number, surface: number) {
+      // Steam: narrow at the surface and widening as it rises, curling in both x and z, all
+      // wisps bent together by a slow draught. Alpha fades in above the coffee and out at
+      // the top, breathes per wisp and weakens as the mug empties.
+      const heat = clamp((coffee.fill - BOTTOM) / (FULL - BOTTOM), 0, 1) ** 2;
+      const size = mug.scale.y; // the mug's pivot and the scene are unscaled
+      for (const { wisp, x, z, offset } of steam) {
+        const from = mug.localToWorld(steamAt.set(x, surface, z));
         const points = wisp.geometry.attributes['position']!;
-        for (let k = 0; k < points.count; k++)
-          points.setX(k, x + 0.1 * Math.sin(points.getY(k) * 4 - t * 2 + offset));
+        const alphas = wisp.geometry.attributes['color']!;
+        const breath = 0.7 + 0.3 * Math.sin(t * 0.7 + offset);
+        for (let k = 0; k < STEAM_POINTS; k++) {
+          const u = k / (STEAM_POINTS - 1);
+          const spread = (0.03 + 0.14 * u) * size;
+          const drift = 0.08 * u * u * size;
+          points.setXYZ(
+            k,
+            from.x + spread * Math.sin(u * 6 - t * 2 + offset) + drift * Math.cos(t * 0.3),
+            from.y + u * 1.6 * size,
+            from.z + spread * Math.cos(u * 5 - t * 1.7 + offset * 1.3) + drift * Math.sin(t * 0.3),
+          );
+          alphas.setW(k, Math.sin(Math.PI * u ** 0.7) * breath * heat);
+        }
         points.needsUpdate = true;
+        alphas.needsUpdate = true;
       }
       camera.lookAt(0, 0, 0);
       renderer.render(scene, camera);
+    }
+
+    // A still frame: the pose and the coffee as they are, no simulation step
+    function render(time: number) {
+      const t = time / 1000;
+      pose(t);
+      draw(t, pour(t));
     }
 
     layout();
@@ -286,7 +502,13 @@
       hero.addEventListener('pointermove', (e) => {
         if (!drag) return void (hero.style.cursor = pick(e) ? 'grab' : '');
         drag.item.dragY += (e.clientX - drag.x) * 0.01;
-        drag.item.dragX += (e.clientY - drag.y) * 0.01;
+        // Total tilt capped at MAX_TILT (about 75°) either way, so nothing turns upside down;
+        // the coffee still spills well before that
+        drag.item.dragX = clamp(
+          drag.item.dragX + (e.clientY - drag.y) * 0.01,
+          -MAX_TILT - REST_TILT,
+          MAX_TILT - REST_TILT,
+        );
         drag.x = e.clientX;
         drag.y = e.clientY;
       });
@@ -297,12 +519,15 @@
       hero.addEventListener('pointerup', release);
       hero.addEventListener('pointercancel', release);
 
-      const { damp } = THREE.MathUtils;
       let last = performance.now();
       const loop = (time: number) => {
         // Capped so the first frame after a pause doesn't jump
-        const dt = Math.min(time - last, 100);
+        const gap = time - last;
+        const dt = Math.min(gap, 100);
         last = time;
+        // After a pause (hero scrolled away, tab hidden) the mug has kept rocking: its old
+        // axis would read as a jolt and spill coffee
+        if (gap > 100) coffee.axis = undefined;
         camera.position.x = damp(camera.position.x, target.x, 1 / 400, dt);
         camera.position.y = damp(camera.position.y, target.y, 1 / 400, dt);
         for (const item of items) {
@@ -310,7 +535,13 @@
           item.dragX = damp(item.dragX, 0, 1 / 800, dt);
           item.dragY = damp(item.dragY, 0, 1 / 800, dt);
         }
-        render(time);
+
+        const t = time / 1000;
+        pose(t);
+        slosh(dt);
+        const surface = pour(t);
+        spill(dt);
+        draw(t, surface);
       };
       // Paused while the hero is scrolled away or hidden by the mobile breakpoint
       new IntersectionObserver(([entry]) =>
