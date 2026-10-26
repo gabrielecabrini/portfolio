@@ -164,7 +164,6 @@
     "seo": {
       "description": "Gabriele Cabrini's PGP public key: fingerprint, download and commands to import it."
     },
-    "hint": "Use it to send me encrypted email or to verify my signed commits and tags.",
     "copy": "copy",
     "copied": "copied ✓",
     "download": "download pgp.asc"

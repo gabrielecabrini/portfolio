@@ -20,10 +20,7 @@ const keyLine = (key: (typeof keys)[number]) =>
 <Base lang={lang} title="PGP" description={t(lang, 'pgp.seo.description')}>
   <section class="pgp-page">
     <div class="pgp-inner">
-      <div class="section-header">
-        <h1>PGP</h1>
-        <p class="section-desc">{t(lang, 'pgp.hint')}</p>
-      </div>
+      <h1>PGP</h1>
 
       <pre class="term"><span class="prompt">$</span> gpg --fingerprint {EMAIL.name}
 {keyLine(primary!)}
@@ -81,17 +78,9 @@ const keyLine = (key: (typeof keys)[number]) =>
     animation: fade-up 0.45s ease both;
   }
 
-  .section-header {
-    margin-bottom: 2rem;
-  }
-
-  .section-header h1 {
+  h1 {
     color: var(--text);
-    margin-bottom: 0.5rem;
-  }
-
-  .section-desc {
-    color: var(--muted);
+    margin-bottom: 2rem;
   }
 
   /* Terminal output: one mono size, long lines scroll instead of wrapping like a real tty */
