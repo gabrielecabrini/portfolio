@@ -1,14 +1,17 @@
+import { execFileSync } from 'node:child_process';
+import { parseKey } from '../lib/pgp';
 import type { PgpKey } from '../models/pgp-key.model';
 
-// Mirrors public/pgp.asc, the file /pgp offers for download. After renewing or
-// re-exporting the key, update this from `gpg --show-keys public/pgp.asc`;
-// pgp.spec.ts fails `yarn test` (and so CI) if the two disagree.
-export const PGP_KEY: PgpKey = {
-  fingerprint: '50761238F7719F61752B0410CFFA1EF2640C5BF3',
-  uids: ['Gabriele Cabrini <gabriele@gabrielecabrini.it>'],
-  keys: [
-    { kind: 'pub', algorithm: 'ed25519', usage: 'C', created: '2026-10-26', expires: '2028-10-25' },
-    { kind: 'sub', algorithm: 'ed25519', usage: 'S', created: '2026-10-26', expires: '2028-10-25' },
-    { kind: 'sub', algorithm: 'cv25519', usage: 'E', created: '2026-10-26', expires: '2028-10-25' },
-  ],
-};
+// public/pgp.asc is the single source: /pgp and the WKD copies are derived from it at
+// build time, so renewing the key is just re-exporting it there. Parsed with the real
+// gpg (no OpenPGP dependency); without gpg the build fails rather than ship no key.
+const ASC = 'public/pgp.asc';
+
+const gpg = (args: string[]) => execFileSync('gpg', args, { stdio: ['ignore', 'pipe', 'inherit'] });
+
+export const PGP_KEY: PgpKey = parseKey(
+  gpg(['--show-keys', '--with-colons', ASC]).toString('utf8'),
+);
+
+/** Binary (dearmored) key, the form WKD serves. */
+export const PGP_BINARY: Buffer = gpg(['--dearmor', '--output', '-', ASC]);
