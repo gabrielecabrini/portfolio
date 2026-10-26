@@ -7,6 +7,8 @@ export default defineConfig({
   // Attribute selectors, like Angular's emulated encapsulation the CSS was written
   // for: scoped rules keep the extra specificity over the global stylesheets.
   scopedStyleStrategy: 'attribute',
+  // Pages are tiny static HTML: prefetch every internal link on hover.
+  prefetch: { prefetchAll: true },
   // The CV pins Inter instead of system-ui, which Playwright's Chromium resolves to
   // whatever sans the build machine has. Inter is what GNOME's system-ui (Adwaita
   // Sans) is derived from, so the PDF matches the page as seen on the desktop.

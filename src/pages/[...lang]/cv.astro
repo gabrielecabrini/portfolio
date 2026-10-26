@@ -43,7 +43,7 @@ const years = Math.floor(
   <!-- ── Desktop toolbar ── -->
   <div class="cv-actions">
     <span class="cv-lang-hint">{t(lang, 'cv.lang.hint')}</span>
-    <a class="cv-print-btn" href={pdfHref} download>
+    <a class="cv-print-btn" href={pdfHref} download data-astro-prefetch="false">
       {t(lang, 'cv.download')}
     </a>
   </div>
@@ -51,7 +51,7 @@ const years = Math.floor(
   <!-- ── Mobile: download only ── -->
   <div class="cv-mobile-msg">
     <p>{t(lang, 'cv.mobile.hint')}</p>
-    <a class="cv-print-btn" href={pdfHref} download>
+    <a class="cv-print-btn" href={pdfHref} download data-astro-prefetch="false">
       {t(lang, 'cv.download')}
     </a>
   </div>

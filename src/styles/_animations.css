@@ -45,3 +45,11 @@
     animation: none !important;
   }
 }
+
+/* Cross-document crossfade between pages; outside the reduced-motion rule above,
+   which doesn't reach the ::view-transition pseudo-elements. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
