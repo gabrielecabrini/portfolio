@@ -3,6 +3,25 @@
 @import './styles/_typography.css';
 @import './styles/_animations.css';
 
+/* Main call to action, shared by home, experience and /pgp */
+.btn-primary {
+  display: inline-block;
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+
+.btn-primary:hover {
+  background: var(--accent-dim);
+  color: var(--on-accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
 /* GitHub brand icon is near-black — invert in dark mode for visibility */
 :root img[alt='GitHub'] {
   filter: invert(1);

@@ -18,8 +18,11 @@ const { lang } = Astro.props;
       <a class="muted repo-link" href={localePath(lang, '/donut')} aria-label="Donut">
         🍩
       </a>
+      <a class="muted repo-link hide-mobile" href={localePath(lang, '/pgp')}>
+        PGP
+      </a>
       <a
-        class="muted repo-link sitemap-link"
+        class="muted repo-link hide-mobile"
         href="/sitemap-index.xml"
         target="_blank"
         rel="noopener noreferrer"
@@ -80,10 +83,21 @@ const { lang } = Astro.props;
 
 <script>
   // The initial theme is set by the inline script in Base.astro, before first paint.
+  const root = document.documentElement;
+  const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+  const osTheme = () => (systemDark.matches ? 'dark' : 'light');
+
+  // Without a saved choice the site keeps following the OS, even while open.
+  systemDark.addEventListener('change', () => {
+    if (!localStorage.getItem('theme')) root.dataset['theme'] = osTheme();
+  });
+
   document.querySelector('.theme-toggle')?.addEventListener('click', () => {
-    const next = document.documentElement.dataset['theme'] === 'dark' ? 'light' : 'dark';
-    document.documentElement.dataset['theme'] = next;
-    localStorage.setItem('theme', next);
+    const next = root.dataset['theme'] === 'dark' ? 'light' : 'dark';
+    root.dataset['theme'] = next;
+    // Picking the OS theme again drops the override, so the site follows the OS from now on
+    if (next === osTheme()) localStorage.removeItem('theme');
+    else localStorage.setItem('theme', next);
   });
 </script>
 
@@ -115,7 +129,7 @@ const { lang } = Astro.props;
   }
 
   @media (max-width: 480px) {
-    .sitemap-link {
+    .hide-mobile {
       display: none;
     }
   }

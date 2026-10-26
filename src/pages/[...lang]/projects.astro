@@ -96,6 +96,8 @@ const lang = pageLang(Astro.params.lang);
   }
 
   .project-card {
+    /* Anchors the first link's ::after, which stretches over the whole card */
+    position: relative;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -179,6 +181,18 @@ const lang = pageLang(Astro.params.lang);
 
   .card-link:hover {
     color: var(--accent);
+  }
+
+  /* Whole card opens the first link (the site); the others sit above that layer */
+  .card-link:first-child::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .card-link:not(:first-child) {
+    position: relative;
+    z-index: 1;
   }
 
   /* ── Responsive ── */

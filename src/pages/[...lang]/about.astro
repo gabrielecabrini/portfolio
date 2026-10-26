@@ -1,10 +1,11 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { EMAIL, SOCIAL_LINKS } from '../../data/social-links';
+import { EMAIL, PGP_LINK, SOCIAL_LINKS } from '../../data/social-links';
 import { langPaths, localePath, pageLang, t } from '../../i18n';
 
 export const getStaticPaths = langPaths;
 const lang = pageLang(Astro.params.lang);
+const links = [...SOCIAL_LINKS, { ...PGP_LINK, href: localePath(lang, PGP_LINK.href) }];
 ---
 
 <Base lang={lang} title={t(lang, 'title.about')} description={t(lang, 'about.seo.description')}>
@@ -23,6 +24,11 @@ const lang = pageLang(Astro.params.lang);
                 <p>{paragraph}</p>
               ))}
           </div>
+          {lang === 'en' && (
+            <p class="local-time" hidden>
+              Local time in Bergamo: <time>--:--</time>
+            </p>
+          )}
         </div>
       </div>
 
@@ -31,7 +37,7 @@ const lang = pageLang(Astro.params.lang);
       </div>
 
       <div class="links-grid">
-        {SOCIAL_LINKS.map((link) => (
+        {links.map((link) => (
           <a href={link.href} target={link.target} rel={link.rel} class="link-card">
             <span class="link-icon">
               <img
@@ -43,7 +49,7 @@ const lang = pageLang(Astro.params.lang);
               />
             </span>
             <span class="link-name">{link.name}</span>
-            <span class="link-arrow">↗</span>
+            <span class="link-arrow">{link.target ? '↗' : '→'}</span>
           </a>
         ))}
       </div>
@@ -72,6 +78,25 @@ const lang = pageLang(Astro.params.lang);
       </div>
     </div>
   </section>
+  <script>
+    // English page only: tells visitors abroad what time it is here before they write.
+    const localTime = document.querySelector<HTMLElement>('.local-time');
+    if (localTime) {
+      const clock = localTime.querySelector('time')!;
+      const format = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Europe/Rome',
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+      // Re-armed on each minute boundary, so the clock never lags the real minute
+      const tick = () => {
+        clock.textContent = format.format(new Date());
+        setTimeout(tick, 60_000 - (Date.now() % 60_000));
+      };
+      tick();
+      localTime.hidden = false;
+    }
+  </script>
 </Base>
 
 <style>
@@ -136,6 +161,14 @@ const lang = pageLang(Astro.params.lang);
     color: var(--muted);
     font-size: 1.05rem;
     line-height: 1.8;
+  }
+
+  .local-time {
+    margin-top: 1rem;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
   }
 
   .bio p + p {

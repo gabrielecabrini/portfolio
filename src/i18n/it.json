@@ -159,5 +159,14 @@
   },
   "notFound": {
     "message": "La pagina che cerchi non esiste o è stata spostata."
+  },
+  "pgp": {
+    "seo": {
+      "description": "Chiave pubblica PGP di Gabriele Cabrini: fingerprint, download e comandi per importarla."
+    },
+    "hint": "Usala per scrivermi un'email cifrata o per verificare i miei commit e tag firmati.",
+    "copy": "copia",
+    "copied": "copiata ✓",
+    "download": "scarica pgp.asc"
   }
 }

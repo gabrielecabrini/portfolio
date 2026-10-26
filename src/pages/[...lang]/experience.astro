@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { CERTIFICATIONS, LANGUAGES, SKILL_GROUPS, WORK_EXPERIENCES } from '../../data/experience';
 import { langPaths, localePath, pageLang, t } from '../../i18n';
-import { dateRange, formatMonthYear, workPlace } from '../../lib/format';
+import { dateRange, duration, formatMonthYear, workPlace } from '../../lib/format';
 
 export const getStaticPaths = langPaths;
 const lang = pageLang(Astro.params.lang);
@@ -40,7 +40,15 @@ const lang = pageLang(Astro.params.lang);
                       {[job.company, workPlace(job, lang)].filter(Boolean).join(' · ')}
                     </span>
                   </div>
-                  <span class="item-date">{dateRange(job.startDate, job.endDate, lang)}</span>
+                  <div class="item-when">
+                    <span class="item-date">{dateRange(job.startDate, job.endDate, lang)}</span>
+                    <span
+                      class="item-duration"
+                      data-start={job.endDate ? undefined : job.startDate}
+                    >
+                      {duration(job.startDate, job.endDate, lang)}
+                    </span>
+                  </div>
                 </div>
                 <p class="item-desc">{t(lang, job.descriptionKey)}</p>
               </div>
@@ -147,6 +155,15 @@ const lang = pageLang(Astro.params.lang);
       </div>
     </div>
   </section>
+  <script>
+    import { duration } from '../../lib/format';
+
+    // Ongoing roles: swap the build-time duration for one measured today.
+    const lang = document.documentElement.lang === 'en' ? 'en' : 'it';
+    document.querySelectorAll<HTMLElement>('[data-start]').forEach((el) => {
+      el.textContent = duration(el.dataset['start']!, undefined, lang);
+    });
+  </script>
 </Base>
 
 <style>
@@ -259,11 +276,43 @@ const lang = pageLang(Astro.params.lang);
     color: var(--accent);
   }
 
+  .item-when {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.15rem;
+  }
+
   .item-date {
     color: var(--muted);
     font-size: 0.82rem;
     font-family: var(--font-mono);
     white-space: nowrap;
+  }
+
+  .item-duration {
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    opacity: 0.8;
+  }
+
+  /* Scroll-driven: each job fades in and its connector line grows as it scrolls into view */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .timeline-item {
+        animation: fade-up linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 60%;
+      }
+
+      .timeline-item::before {
+        transform-origin: top;
+        animation: grow-y linear both;
+        animation-timeline: view();
+        animation-range: entry 50% cover 60%;
+      }
+    }
   }
 
   .item-desc {
@@ -473,6 +522,10 @@ const lang = pageLang(Astro.params.lang);
     .item-header {
       flex-direction: column;
       gap: 0.25rem;
+    }
+
+    .item-when {
+      align-items: flex-start;
     }
 
     .skills-grid {

@@ -157,7 +157,7 @@ const cells = Array.from({ length: 140 }, (_, i) => {
     flex-wrap: wrap;
   }
 
-  .btn-primary,
+  /* Same box as the global .btn-primary beside it */
   .btn-secondary {
     display: inline-block;
     padding: 0.65rem 1.4rem;
@@ -165,21 +165,6 @@ const cells = Array.from({ length: 140 }, (_, i) => {
     font-size: 0.9rem;
     font-weight: 500;
     transition: all 0.15s;
-  }
-
-  .btn-primary {
-    background: var(--accent);
-    color: var(--on-accent);
-  }
-
-  .btn-primary:hover {
-    background: var(--accent-dim);
-    color: var(--on-accent);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 35%, transparent);
-  }
-
-  .btn-secondary {
     border: 1px solid var(--border);
     color: var(--muted);
   }

@@ -30,3 +30,36 @@ export function displayUrl(href: string): string {
   if (href.startsWith('mailto:')) return href.slice('mailto:'.length);
   return href.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
 }
+
+/**
+ * "2022-04" → "2023-03" = "1 anno" / "1 yr": both end months count, like LinkedIn.
+ * An ongoing role runs up to `now`, so callers re-run it in the browser at page load.
+ */
+export function duration(
+  start: string,
+  end: string | undefined,
+  lang: Lang,
+  now: Date = new Date(),
+): string {
+  const [sy = 0, sm = 1] = start.split('-').map(Number);
+  const [ey = 0, em = 1] = end
+    ? end.split('-').map(Number)
+    : [now.getFullYear(), now.getMonth() + 1];
+  const total = Math.max(1, (ey - sy) * 12 + em - sm + 1);
+  const years = Math.floor(total / 12);
+  const months = total % 12;
+  const [yr, yrs, mo, mos] =
+    lang === 'it' ? ['anno', 'anni', 'mese', 'mesi'] : ['yr', 'yrs', 'mo', 'mos'];
+  return [
+    years && `${years} ${years === 1 ? yr : yrs}`,
+    months && `${months} ${months === 1 ? mo : mos}`,
+  ]
+    .filter(Boolean)
+    .join(' ');
+}
+
+/** 40 hex chars → ["5076 1238 F771 9F61 752B", "0410 … 5BF3"]: gpg's groups of 4, in two halves. */
+export function formatFingerprint(fingerprint: string): [string, string] {
+  const groups = fingerprint.match(/.{1,4}/g) ?? [];
+  return [groups.slice(0, 5).join(' '), groups.slice(5).join(' ')];
+}

@@ -24,6 +24,12 @@
   }
 }
 
+@keyframes grow-y {
+  from {
+    transform: scaleY(0);
+  }
+}
+
 @keyframes cell-in {
   from {
     opacity: 0;

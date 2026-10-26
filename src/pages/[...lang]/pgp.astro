@@ -1,0 +1,184 @@
+---
+import Base from '../../layouts/Base.astro';
+import { PGP_KEY } from '../../data/pgp';
+import { EMAIL } from '../../data/social-links';
+import { langPaths, pageLang, t } from '../../i18n';
+import { formatFingerprint } from '../../lib/format';
+
+export const getStaticPaths = langPaths;
+const lang = pageLang(Astro.params.lang);
+
+const { fingerprint, uids, keys } = PGP_KEY;
+const [primary, ...subkeys] = keys;
+const keyUrl = new URL('/pgp.asc', Astro.site).href;
+const [firstHalf, secondHalf] = formatFingerprint(fingerprint);
+// Same columns as `gpg --fingerprint`: a 6-char record type, then the key itself.
+const keyLine = (key: (typeof keys)[number]) =>
+  `${key.kind.padEnd(6)}${key.algorithm} ${key.created} [${key.usage}] [expires: ${key.expires}]`;
+---
+
+<Base lang={lang} title="PGP" description={t(lang, 'pgp.seo.description')}>
+  <section class="pgp-page">
+    <div class="pgp-inner">
+      <div class="section-header">
+        <h1>PGP</h1>
+        <p class="section-desc">{t(lang, 'pgp.hint')}</p>
+      </div>
+
+      <pre class="term"><span class="prompt">$</span> gpg --fingerprint {EMAIL.name}
+{keyLine(primary!)}
+      <span class="fpr">{firstHalf}<span class="fpr-gap" />{secondHalf}</span> <button class="copy" type="button" hidden data-fingerprint={fingerprint} data-copied={`[${t(lang, 'pgp.copied')}]`}>[{t(lang, 'pgp.copy')}]</button>
+{uids.map((uid) => `${'uid'.padEnd(6)}${uid}\n`)}{subkeys.map((key) => `${keyLine(key)}\n`)}
+<span class="prompt">$</span> curl -sL {keyUrl} | gpg --import
+<span class="prompt">$</span> gpg --keyserver keys.openpgp.org --recv-keys {fingerprint}</pre>
+
+      <div class="pgp-links">
+        <a href="/pgp.asc" download class="btn-primary" data-astro-prefetch="false">
+          {t(lang, 'pgp.download')}
+        </a>
+        <a
+          href={`https://keys.openpgp.org/search?q=${fingerprint}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ext-link"
+        >
+          keys.openpgp.org ↗
+        </a>
+        <a
+          href="https://github.com/gabrielecabrini.gpg"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ext-link"
+        >
+          GitHub ↗
+        </a>
+      </div>
+    </div>
+  </section>
+  <script>
+    // Hidden without the Clipboard API: the fingerprint can still be selected by hand.
+    const copy = document.querySelector<HTMLButtonElement>('.copy');
+    if (copy && navigator.clipboard) {
+      const label = copy.textContent;
+      copy.hidden = false;
+      copy.addEventListener('click', async () => {
+        await navigator.clipboard.writeText(copy.dataset['fingerprint']!);
+        copy.textContent = copy.dataset['copied']!;
+        setTimeout(() => (copy.textContent = label), 1500);
+      });
+    }
+  </script>
+</Base>
+
+<style>
+  .pgp-page {
+    padding: 5rem 1.5rem;
+  }
+
+  .pgp-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    animation: fade-up 0.45s ease both;
+  }
+
+  .section-header {
+    margin-bottom: 2rem;
+  }
+
+  .section-header h1 {
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-desc {
+    color: var(--muted);
+  }
+
+  /* Terminal output: one mono size, long lines scroll instead of wrapping like a real tty */
+  .term {
+    margin: 0 0 2rem;
+    padding: 1.25rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+
+  .prompt {
+    color: var(--accent);
+    font-weight: 700;
+    user-select: none;
+  }
+
+  .fpr {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* Generated, so a hand-selected fingerprint copies without the gap */
+  .fpr-gap::before {
+    content: '  ';
+  }
+
+  .copy {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--accent);
+    font: inherit;
+  }
+
+  .copy:hover {
+    text-decoration: underline;
+  }
+
+  .pgp-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .ext-link {
+    color: var(--muted);
+    font-size: 0.9rem;
+    transition: color 0.15s;
+  }
+
+  .ext-link:hover {
+    color: var(--accent);
+  }
+
+  @media (max-width: 768px) {
+    .pgp-page {
+      padding: 3rem 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .pgp-page {
+      padding: 2rem 1rem;
+    }
+
+    .term {
+      padding: 1rem;
+      font-size: 0.75rem;
+    }
+
+    /* The fingerprint must be readable without scrolling: second half on its own line */
+    .fpr-gap::before {
+      content: '\A';
+    }
+
+    /* Indent as a 6ch box, not spaces: the minifier turns '\A ' into an escape that eats one */
+    .fpr-gap::after {
+      content: '';
+      display: inline-block;
+      width: 6ch;
+    }
+  }
+</style>

@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { dateRange, displayUrl, formatMonthYear, workPlace } from './format';
+import {
+  dateRange,
+  displayUrl,
+  duration,
+  formatFingerprint,
+  formatMonthYear,
+  workPlace,
+} from './format';
 
 describe('formatMonthYear', () => {
   // The month part is 1-based in the data but 0-based in `new Date`, so the two
@@ -67,5 +74,35 @@ describe('workPlace', () => {
     expect(workPlace({ location: 'Costa Volpino (BG)' }, 'en')).toBe('Costa Volpino (BG)');
     expect(workPlace({ remote: true }, 'en')).toBe('Remote');
     expect(workPlace({}, 'en')).toBe('');
+  });
+});
+
+describe('duration', () => {
+  it('counts both end months, so Apr 2022 — Mar 2023 is exactly one year', () => {
+    expect(duration('2022-04', '2023-03', 'en')).toBe('1 yr');
+    expect(duration('2022-04', '2023-03', 'it')).toBe('1 anno');
+  });
+
+  it('combines years and months with plurals', () => {
+    expect(duration('2024-01', '2025-09', 'en')).toBe('1 yr 9 mos');
+    expect(duration('2022-08', '2024-02', 'it')).toBe('1 anno 7 mesi');
+    expect(duration('2020-01', '2022-01', 'it')).toBe('2 anni 1 mese');
+  });
+
+  it('never renders an empty string for a role starting and ending in the same month', () => {
+    expect(duration('2024-05', '2024-05', 'en')).toBe('1 mo');
+  });
+
+  it('measures an ongoing role up to now', () => {
+    expect(duration('2023-04', undefined, 'it', new Date(2026, 9, 26))).toBe('3 anni 7 mesi');
+  });
+});
+
+describe('formatFingerprint', () => {
+  it('groups by 4 into the two halves gpg prints', () => {
+    expect(formatFingerprint('50761238F7719F61752B0410CFFA1EF2640C5BF3')).toEqual([
+      '5076 1238 F771 9F61 752B',
+      '0410 CFFA 1EF2 640C 5BF3',
+    ]);
   });
 });
