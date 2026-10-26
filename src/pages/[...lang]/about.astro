@@ -14,7 +14,7 @@ const lang = pageLang(Astro.params.lang);
         <img class="avatar" src="/assets/images/pfp.jpeg" alt="Gabriele Cabrini" decoding="async" />
         <div>
           <div class="section-header">
-            <h2>{t(lang, 'about.title')}</h2>
+            <h1>{t(lang, 'about.title')}</h1>
           </div>
           <div class="bio">
             {t(lang, 'about.bio')
@@ -27,7 +27,7 @@ const lang = pageLang(Astro.params.lang);
       </div>
 
       <div class="section-header links-section-header">
-        <h3>{t(lang, 'about.links.title')}</h3>
+        <h2>{t(lang, 'about.links.title')}</h2>
       </div>
 
       <div class="links-grid">
@@ -113,12 +113,14 @@ const lang = pageLang(Astro.params.lang);
     margin-bottom: 1rem;
   }
 
-  .section-header h2 {
+  .section-header h1 {
     color: var(--text);
   }
 
-  .section-header h3 {
+  /* Subheading keeps the h3 size it was designed at */
+  .section-header h2 {
     color: var(--text);
+    font-size: 1.15rem;
   }
 
   .links-section-header {

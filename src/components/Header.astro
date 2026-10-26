@@ -18,7 +18,7 @@ const links = [
   { href: '/cv', label: 'CV' },
   { href: '/experience', label: t(lang, 'nav.experience') },
   { href: '/projects', label: t(lang, 'nav.projects') },
-];
+].map((link) => ({ ...link, active: link.href === path, href: localePath(lang, link.href) }));
 ---
 
 <header>
@@ -26,9 +26,9 @@ const links = [
     <a class="brand" href={localePath(lang, '/')}>
       gc<span class="brand-dot">.</span>
     </a>
-    <nav>
+    <nav class="nav-desktop">
       {links.map((link) => (
-        <a href={localePath(lang, link.href)} class:list={{ active: link.href === path }}>
+        <a href={link.href} class:list={{ active: link.active }}>
           {link.label}
         </a>
       ))}
@@ -49,13 +49,21 @@ const links = [
     </a>
   </div>
 </header>
+<!-- Outside <header> so it scrolls away on mobile instead of staying pinned -->
+<nav class="nav-mobile">
+  {links.map((link) => (
+    <a href={link.href} class:list={{ active: link.active }}>
+      {link.label}
+    </a>
+  ))}
+</nav>
 
 <style>
   header {
     position: sticky;
     top: 0;
     z-index: 100;
-    height: var(--header-h);
+    height: var(--header-bar-h);
     background: color-mix(in srgb, var(--bg) 60%, transparent);
     border-bottom: 1px solid var(--border);
     -webkit-backdrop-filter: blur(12px);
@@ -92,9 +100,13 @@ const links = [
     margin-left: -0.2em;
   }
 
-  nav {
+  .nav-desktop {
     display: flex;
     gap: 1.5rem;
+  }
+
+  .nav-mobile {
+    display: none;
   }
 
   nav a {
@@ -139,54 +151,43 @@ const links = [
     flex-shrink: 0;
   }
 
-  /* ── Desktop: underline animation on nav links ── */
-  @media (min-width: 481px) {
-    nav a {
-      position: relative;
-    }
+  /* Underline animation on desktop nav links */
+  .nav-desktop a {
+    position: relative;
+  }
 
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.2s ease;
-    }
+  .nav-desktop a::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+  }
 
-    nav a:hover::after {
-      transform: scaleX(1);
-    }
+  .nav-desktop a:hover::after {
+    transform: scaleX(1);
   }
 
   /* ── Tablet: compact single row ── */
   @media (max-width: 768px) {
-    nav {
+    .nav-desktop {
       gap: 1rem;
     }
 
-    nav a {
+    .nav-desktop a {
       font-size: 0.85rem;
     }
   }
 
-  /* ── Mobile: brand + toggle on row 1, nav full-width on row 2 ── */
+  /* ── Mobile: brand + toggle stay pinned, the nav row below scrolls away ── */
   @media (max-width: 480px) {
     .header-inner {
-      flex-wrap: wrap;
-      align-content: center;
-      gap: 0;
       padding: 0 1rem;
-    }
-
-    .brand {
-      /* first row, left — pushes lang-toggle to the right */
-      flex: 1;
-      line-height: 60px;
     }
 
     .lang-toggle {
@@ -194,21 +195,19 @@ const links = [
       padding: 0.2rem 0.5rem;
     }
 
-    nav {
-      /* second row, full width */
-      order: 3;
-      width: 100%;
-      gap: 0;
-      border-top: 1px solid var(--border);
+    .nav-desktop {
+      display: none;
     }
 
-    nav a {
+    .nav-mobile {
+      display: flex;
+      height: var(--header-nav-h);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-mobile a {
       font-size: 0.8rem;
       flex: 1;
-      text-align: center;
-      /* 44px min touch target */
-      padding: 0.6rem 0;
-      min-height: 38px;
       display: flex;
       align-items: center;
       justify-content: center;

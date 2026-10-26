@@ -15,6 +15,7 @@ const lang = pageLang(Astro.params.lang);
 >
   <section class="exp-page">
     <div class="exp-inner">
+      <h1 class="sr-only">{t(lang, 'title.experience')}</h1>
       <!-- Work Experience: declaration order (unlike /cv, which re-sorts by end date) -->
       <div class="exp-section">
         <h2>{t(lang, 'experience.work.title')}</h2>

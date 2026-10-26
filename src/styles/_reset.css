@@ -50,3 +50,13 @@ button {
   outline-offset: 3px;
   border-radius: var(--radius-sm);
 }
+
+/* Read by screen readers, invisible on screen */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

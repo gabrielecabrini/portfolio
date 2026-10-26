@@ -13,6 +13,7 @@
 
 @media print {
   body > header,
+  body > nav,
   body > footer,
   .skip-link {
     display: none !important;

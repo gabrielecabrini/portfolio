@@ -13,7 +13,10 @@
   --radius: 8px;
   --radius-sm: 4px;
   --max-w: 900px;
-  --header-h: 60px;
+  --header-bar-h: 60px;
+  --header-nav-h: 0px;
+  /* Total height above <main>; on mobile the nav row sits under the pinned bar */
+  --header-h: calc(var(--header-bar-h) + var(--header-nav-h));
   --footer-h: 60px;
 }
 
@@ -29,9 +32,9 @@
   --on-accent: #fff;
 }
 
-/* On mobile the header wraps to 2 rows */
+/* On mobile the nav moves to its own row under the header */
 @media (max-width: 480px) {
   :root {
-    --header-h: 98px;
+    --header-nav-h: 38px;
   }
 }
