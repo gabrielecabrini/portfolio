@@ -1,4 +1,3 @@
-import { createHash } from 'node:crypto';
 import type { PgpKey } from '../models/pgp-key.model';
 
 const day = (epoch: string) => new Date(+epoch * 1000).toISOString().slice(0, 10);
@@ -22,12 +21,3 @@ export function parseKey(colons: string): PgpKey {
   };
 }
 
-/** WKD file name for an address: z-base-32 of the SHA-1 of its lowercased local part. */
-export function wkdHash(email: string): string {
-  const alphabet = 'ybndrfg8ejkmcpqxot1uwisza345h769';
-  const local = email.slice(0, email.lastIndexOf('@')).toLowerCase();
-  const bits = [...createHash('sha1').update(local).digest()]
-    .map((b) => b.toString(2).padStart(8, '0'))
-    .join('');
-  return bits.replace(/.{5}/g, (chunk) => alphabet[parseInt(chunk, 2)]!);
-}

@@ -83,11 +83,10 @@ jobs:
         run: yarn build
 
       # Pushes dist/ to the gh-pages branch, which Pages serves. .nojekyll is
-      # required: Jekyll would drop Astro's _astro/ asset folder. --dotfiles too:
-      # gh-pages skips them by default, which would drop .well-known/ (WKD).
+      # required: Jekyll would drop Astro's _astro/ asset folder.
       - name: Deploy
         run: >-
-          yarn gh-pages --silent --dist dist --nojekyll --dotfiles --cname www.gabrielecabrini.it
+          yarn gh-pages --silent --dist dist --nojekyll --cname www.gabrielecabrini.it
           --user "Gabriele Cabrini <gabrielecabriniiii@gmail.com>"
           --repo "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
         env:

@@ -19,9 +19,9 @@ Before pushing: `yarn lint`, `yarn test`, `yarn pretty`.
 ## PGP key
 
 `public/pgp.asc` is the only source: the build reads it with `gpg` (so `gpg` must be
-installed) to render `/pgp` and to publish the key for
-[Web Key Directory](https://wiki.gnupg.org/WKD) lookup under
-`/.well-known/openpgpkey/hu/`, so `gpg --locate-keys gabriele@gabrielecabrini.it` finds it.
+installed) to render `/pgp`.
+[Web Key Directory](https://wiki.gnupg.org/WKD) lookup (`gpg --locate-keys`) uses the
+advanced method, served from `openpgpkey.gabrielecabrini.it`, not by this site.
 To renew or replace the key, re-export it and release:
 
 ```

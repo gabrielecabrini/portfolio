@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parseKey, wkdHash } from './pgp';
+import { parseKey } from './pgp';
 
 describe('parseKey', () => {
   it('reads fingerprint, uids and per-key usage and dates from --with-colons output', () => {
@@ -30,13 +30,5 @@ describe('parseKey', () => {
         },
       ],
     });
-  });
-});
-
-describe('wkdHash', () => {
-  // Expected values from `gpg --with-wkd-hash`.
-  it('matches gpg for the local part, case-insensitively', () => {
-    expect(wkdHash('gabriele@gabrielecabrini.it')).toBe('u8w3knh56rybatrg53yuw5kjb7dwhjy8');
-    expect(wkdHash('Gabriele@other.example')).toBe('u8w3knh56rybatrg53yuw5kjb7dwhjy8');
   });
 });
