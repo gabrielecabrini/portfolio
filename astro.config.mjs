@@ -23,11 +23,4 @@ export default defineConfig({
     },
   ],
   integrations: [sitemap({ i18n: { defaultLocale: 'it', locales: { it: 'it', en: 'en' } } })],
-  vite: {
-    build: {
-      // three.js (~740 kB, ~185 kB gzipped) barely tree-shakes and is already split out:
-      // HeroScene imports it dynamically, on idle and on desktop only.
-      chunkSizeWarningLimit: 800,
-    },
-  },
 });
