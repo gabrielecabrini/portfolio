@@ -8,6 +8,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Inherited, so inner scrollers (the 404's <pre>) match too */
+  scrollbar-color: var(--border) var(--bg);
 }
 
 body {
@@ -45,10 +47,33 @@ button {
   cursor: pointer;
 }
 
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
+}
+
+/* Inverted video, like the selected row of a TUI. !important: scoped component
+   styles set their own color/background and would win on specificity. */
+:is(a, button, summary):not(.skip-link):focus-visible {
+  /* Transparent outline: forced-colors mode drops backgrounds but paints outlines */
+  outline: 2px solid transparent;
+  background: var(--accent) !important;
+  color: var(--on-accent) !important;
+  /* Grows the block past inline text without shifting layout */
+  box-shadow: 0 0 0 2px var(--accent);
+}
+
+/* Already accent-filled: invert the other way, or the focus wouldn't show */
+:is(a, button):is(.btn-primary, .btn-home):focus-visible {
+  background: var(--text) !important;
+  color: var(--bg) !important;
+  box-shadow: 0 0 0 2px var(--text);
 }
 
 /* Read by screen readers, invisible on screen */
