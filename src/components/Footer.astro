@@ -101,7 +101,13 @@ const { lang } = Astro.props;
     if (!localStorage.getItem('theme')) root.dataset['theme'] = osTheme();
   });
 
-  document.querySelector('.theme-toggle')?.addEventListener('click', () => {
+  const toggle = document.querySelector<HTMLButtonElement>('.theme-toggle');
+  // vim easter egg: the tooltip is the command the click would run
+  toggle?.addEventListener('pointerenter', () => {
+    toggle.title = `:set background=${root.dataset['theme'] === 'dark' ? 'light' : 'dark'}`;
+  });
+
+  toggle?.addEventListener('click', () => {
     const next = root.dataset['theme'] === 'dark' ? 'light' : 'dark';
     root.dataset['theme'] = next;
     // Picking the OS theme again drops the override, so the site follows the OS from now on
