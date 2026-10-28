@@ -32,6 +32,14 @@ const links = [...SOCIAL_LINKS, { ...PGP_LINK, href: localePath(lang, PGP_LINK.h
         </div>
       </div>
 
+      <blockquote class="quote">
+        <p>
+          Any fool can write code that a computer can understand. Good programmers write code that
+          humans can understand.
+        </p>
+        <cite>— Martin Fowler</cite>
+      </blockquote>
+
       <div class="section-header links-section-header">
         <h2>{t(lang, 'about.links.title')}</h2>
       </div>
@@ -146,6 +154,22 @@ const links = [...SOCIAL_LINKS, { ...PGP_LINK, href: localePath(lang, PGP_LINK.h
   .section-header h2 {
     color: var(--text);
     font-size: 1.15rem;
+  }
+
+  .quote {
+    margin-top: 3rem;
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--accent);
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .quote cite {
+    display: block;
+    margin-top: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-style: normal;
   }
 
   .links-section-header {
