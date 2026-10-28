@@ -30,9 +30,8 @@ gpg --armor --export-options export-minimal --export <fingerprint> > public/pgp.
 
 ## Release
 
-Bump `version` in `package.json` and push to `master`: CI deploys GitHub Pages,
-publishes the Docker image and tags `vX.Y.Z`. Pushes without a bump only run the checks.
+Every push to `master` is built by CI and deployed to Cloudflare with `wrangler deploy` (`wrangler.jsonc`).
 
 ```
-docker run --rm -p 8080:80 ghcr.io/gabrielecabrini/portfolio:latest
+docker build -t portfolio . && docker run --rm -p 8080:80 portfolio
 ```

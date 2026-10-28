@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "portfolio",
+  "compatibility_date": "2026-10-28",
+  "observability": {
+    "enabled": true,
+  },
+  "assets": {
+    "directory": "dist/",
+    // without this an unknown path falls through to the root document instead of the 404
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash",
+  },
+}
