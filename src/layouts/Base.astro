@@ -7,14 +7,14 @@ import { basePath, LANGS, localePath, t, type Lang } from '../i18n';
 
 interface Props {
   lang: Lang;
-  /** Page name, rendered as "<title> — Gabriele Cabrini"; omitted on the home page. */
+  /** Page name, rendered as "<title> · Gabriele Cabrini"; omitted on the home page. */
   title?: string;
   description?: string;
   noindex?: boolean;
 }
 
 const { lang, title, description, noindex = false } = Astro.props;
-const fullTitle = title ? `${title} — Gabriele Cabrini` : 'Gabriele Cabrini';
+const fullTitle = title ? `${title} · Gabriele Cabrini` : 'Gabriele Cabrini';
 const path = basePath(Astro.url.pathname);
 const url = (l: Lang) => new URL(localePath(l, path), Astro.site).href;
 
