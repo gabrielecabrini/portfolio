@@ -29,7 +29,6 @@ const cells = Array.from({ length: 140 }, (_, i) => {
         </h1>
         <p class="enter subtitle" style="--i: 2">
           {t(lang, 'home.subtitle')}
-          <span class="caret" aria-hidden="true"></span>
         </p>
         <p class="enter tagline" style="--i: 3">
           {t(lang, 'home.tagline')}
@@ -266,17 +265,6 @@ const cells = Array.from({ length: 140 }, (_, i) => {
   .contrib-cell:hover {
     background: var(--accent);
     transform: scale(1.25);
-  }
-
-  /* Editor bar cursor, in the subtitle's own color */
-  .caret {
-    display: inline-block;
-    width: 2px;
-    height: 1.1em;
-    margin-left: 2px;
-    vertical-align: text-bottom;
-    background: currentColor;
-    animation: caret-blink 1.1s steps(1) infinite;
   }
 
   .contrib-cell[data-level='1'] {

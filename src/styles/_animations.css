@@ -18,12 +18,6 @@
   }
 }
 
-@keyframes caret-blink {
-  50% {
-    opacity: 0;
-  }
-}
-
 @keyframes grow-y {
   from {
     transform: scaleY(0);
@@ -50,11 +44,6 @@
     animation-duration: 0.01ms !important;
     animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
-  }
-
-  /* An infinite animation squeezed to 0.01ms would strobe instead of stopping */
-  .caret {
-    animation: none !important;
   }
 }
 
