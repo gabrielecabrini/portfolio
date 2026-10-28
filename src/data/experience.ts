@@ -66,26 +66,23 @@ export const SKILL_GROUPS: SkillGroup[] = (
         {
           id: 'java',
           name: 'Java',
-          iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg',
+          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/java/java-original.svg',
         },
         {
           id: 'kotlin',
           name: 'Kotlin',
-          iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg',
+          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/kotlin/kotlin-original.svg',
         },
         {
           id: 'typescript',
           name: 'TypeScript',
           iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg',
+            'https://cdn.jsdelivr.net/npm/devicon@latest/icons/typescript/typescript-original.svg',
         },
         {
           id: 'dart',
           name: 'Dart',
-          iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dart/dart-original.svg',
+          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/dart/dart-original.svg',
         },
         {
           id: 'rust',
@@ -101,14 +98,12 @@ export const SKILL_GROUPS: SkillGroup[] = (
         {
           id: 'spring-boot',
           name: 'Spring Boot',
-          iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg',
+          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/spring/spring-original.svg',
         },
         {
           id: 'angular',
           name: 'Angular',
-          iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg',
+          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/angular/angular-original.svg',
         },
         {
           id: 'astro',
@@ -118,8 +113,7 @@ export const SKILL_GROUPS: SkillGroup[] = (
         {
           id: 'flutter',
           name: 'Flutter',
-          iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg',
+          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/flutter/flutter-original.svg',
         },
       ],
     },
@@ -130,31 +124,29 @@ export const SKILL_GROUPS: SkillGroup[] = (
           id: 'postgresql',
           name: 'PostgreSQL',
           iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg',
+            'https://cdn.jsdelivr.net/npm/devicon@latest/icons/postgresql/postgresql-original.svg',
         },
         {
           id: 'sql-server',
           name: 'SQL Server',
           iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-plain.svg',
+            'https://cdn.jsdelivr.net/npm/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-plain.svg',
         },
         {
           id: 'mariadb',
           name: 'MariaDB',
-          iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mariadb/mariadb-original.svg',
+          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/mariadb/mariadb-original.svg',
         },
         {
           id: 'redis',
           name: 'Redis',
-          iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg',
+          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/redis/redis-original.svg',
         },
         {
           id: 'cassandra',
           name: 'Cassandra',
           iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cassandra/cassandra-original.svg',
+            'https://cdn.jsdelivr.net/npm/devicon@latest/icons/cassandra/cassandra-original.svg',
         },
       ],
     },
@@ -164,20 +156,19 @@ export const SKILL_GROUPS: SkillGroup[] = (
         {
           id: 'docker',
           name: 'Docker',
-          iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg',
+          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/docker/docker-original.svg',
         },
         {
           id: 'kubernetes',
           name: 'Kubernetes',
           iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg',
+            'https://cdn.jsdelivr.net/npm/devicon@latest/icons/kubernetes/kubernetes-plain.svg',
         },
         {
           id: 'aws',
           name: 'AWS',
           iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg',
+            'https://cdn.jsdelivr.net/npm/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg',
         },
       ],
     },
@@ -188,19 +179,18 @@ export const SKILL_GROUPS: SkillGroup[] = (
           id: 'prometheus',
           name: 'Prometheus',
           iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prometheus/prometheus-original.svg',
+            'https://cdn.jsdelivr.net/npm/devicon@latest/icons/prometheus/prometheus-original.svg',
         },
         {
           id: 'grafana',
           name: 'Grafana',
-          iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/grafana/grafana-original.svg',
+          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/grafana/grafana-original.svg',
         },
         {
           id: 'elk',
           name: 'Elastic Stack',
           iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/elasticsearch/elasticsearch-original.svg',
+            'https://cdn.jsdelivr.net/npm/devicon@latest/icons/elasticsearch/elasticsearch-original.svg',
         },
       ],
     },
@@ -210,15 +200,14 @@ export const SKILL_GROUPS: SkillGroup[] = (
         {
           id: 'linux',
           name: 'Linux',
-          iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg',
+          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/linux/linux-original.svg',
         },
         { id: 'proxmox', name: 'Proxmox', iconUrl: 'https://cdn.simpleicons.org/proxmox' },
         { id: 'vmware', name: 'VMware vSphere', iconUrl: 'https://cdn.simpleicons.org/vmware' },
         {
           id: 'git',
           name: 'Git',
-          iconUrl: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg',
+          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/git/git-original.svg',
         },
       ],
     },
