@@ -37,6 +37,12 @@
   }
 }
 
+/* Shared page entrance: class="enter", staggered with style="--i: N" */
+.enter {
+  animation: fade-up 0.45s ease backwards;
+  animation-delay: calc(var(--i, 0) * 80ms);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

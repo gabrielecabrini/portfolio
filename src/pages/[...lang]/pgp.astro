@@ -19,7 +19,7 @@ const keyLine = (key: (typeof keys)[number]) =>
 
 <Base lang={lang} title="PGP" description={t(lang, 'pgp.seo.description')}>
   <section class="pgp-page">
-    <div class="pgp-inner">
+    <div class="pgp-inner enter">
       <h1>PGP</h1>
 
       <pre class="term"><span class="prompt">$</span> gpg --fingerprint {EMAIL.name}
@@ -76,7 +76,6 @@ const keyLine = (key: (typeof keys)[number]) =>
   .pgp-inner {
     max-width: var(--max-w);
     margin: 0 auto;
-    animation: fade-up 0.45s ease both;
   }
 
   h1 {

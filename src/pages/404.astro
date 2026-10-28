@@ -9,7 +9,7 @@ import { t } from '../i18n';
 <Base lang="it" title="404" description={t('it', 'notFound.message')} noindex>
   <section class="not-found-page">
     <div class="not-found-inner">
-      <div class="rustc">
+      <div class="rustc enter">
         <h1 lang="en">
           <span class="err">error[E404]</span>
           <b>: route not found</b>
@@ -21,7 +21,7 @@ import { t } from '../i18n';
 <span class="g">  |</span></pre>
         <pre class="notes"><span class="note"><span class="g">  =</span> <b>help</b>: {t('it', 'notFound.message')}</span><span class="note" lang="en"><span class="g">  =</span> <b>help</b>: {t('en', 'notFound.message')}</span></pre>
       </div>
-      <a href="/" class="btn-home">
+      <a href="/" class="btn-home enter" style="--i: 1">
         Home
       </a>
     </div>
@@ -51,13 +51,6 @@ import { t } from '../i18n';
     /* Lets the flex item shrink below the unwrapped <pre> width so it scrolls instead */
     min-width: 0;
     margin: 0 auto;
-  }
-
-  .not-found-inner > * {
-    animation: fade-up 0.45s ease both;
-  }
-  .not-found-inner > :nth-child(2) {
-    animation-delay: 80ms;
   }
 
   /* Mimics rustc's output: one size, one font, bold red error, bold blue gutter */

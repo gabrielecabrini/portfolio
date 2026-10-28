@@ -11,7 +11,7 @@ const links = [...SOCIAL_LINKS, { ...PGP_LINK, href: localePath(lang, PGP_LINK.h
 <Base lang={lang} title={t(lang, 'title.about')} description={t(lang, 'about.seo.description')}>
   <section class="about-page">
     <div class="about-inner">
-      <div class="profile-row">
+      <div class="profile-row enter">
         <img class="avatar" src="/assets/images/pfp.jpeg" alt="Gabriele Cabrini" decoding="async" />
         <div>
           <div class="section-header">
@@ -32,7 +32,7 @@ const links = [...SOCIAL_LINKS, { ...PGP_LINK, href: localePath(lang, PGP_LINK.h
         </div>
       </div>
 
-      <blockquote class="quote">
+      <blockquote class="quote enter" style="--i: 1">
         <p>
           Any fool can write code that a computer can understand. Good programmers write code that
           humans can understand.
@@ -40,11 +40,11 @@ const links = [...SOCIAL_LINKS, { ...PGP_LINK, href: localePath(lang, PGP_LINK.h
         <cite>— Martin Fowler</cite>
       </blockquote>
 
-      <div class="section-header links-section-header">
+      <div class="section-header links-section-header enter" style="--i: 2">
         <h2>{t(lang, 'about.links.title')}</h2>
       </div>
 
-      <div class="links-grid">
+      <div class="links-grid enter" style="--i: 2">
         {links.map((link) => (
           <a href={link.href} target={link.target} rel={link.rel} class="link-card">
             <span class="link-icon">
@@ -62,9 +62,9 @@ const links = [...SOCIAL_LINKS, { ...PGP_LINK, href: localePath(lang, PGP_LINK.h
         ))}
       </div>
 
-      <hr class="cta-divider" />
+      <hr class="cta-divider enter" style="--i: 3" />
 
-      <div class="ctas-row">
+      <div class="ctas-row enter" style="--i: 3">
         <a href={EMAIL.href} class="contact-cta">
           <div class="contact-cta-left">
             <p class="contact-cta-heading">{t(lang, 'about.contact.heading')}</p>
@@ -117,9 +117,7 @@ const links = [...SOCIAL_LINKS, { ...PGP_LINK, href: localePath(lang, PGP_LINK.h
     margin: 0 auto;
   }
 
-  /* ── Entrance ── */
   .profile-row {
-    animation: fade-up 0.45s ease both;
     display: flex;
     align-items: flex-start;
     gap: 2rem;

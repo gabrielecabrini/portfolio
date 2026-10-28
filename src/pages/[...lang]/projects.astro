@@ -10,14 +10,14 @@ const lang = pageLang(Astro.params.lang);
 <Base lang={lang} title={t(lang, 'title.projects')} description={t(lang, 'projects.subtitle')}>
   <section class="projects-page">
     <div class="projects-inner">
-      <div class="section-header">
+      <div class="section-header enter">
         <h1>{t(lang, 'projects.title')}</h1>
         <p class="section-desc">{t(lang, 'projects.subtitle')}</p>
       </div>
 
       <div class="projects-grid">
-        {PROJECTS.map((project) => (
-          <article class="project-card">
+        {PROJECTS.map((project, i) => (
+          <article class="project-card enter" style={`--i: ${i + 1}`}>
             <div class="card-body">
               <div class="card-title">
                 {project.imageUrl && (

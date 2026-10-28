@@ -14,7 +14,7 @@ const lang = pageLang(Astro.params.lang);
   description={t(lang, 'experience.seo.description')}
 >
   <section class="exp-page">
-    <div class="exp-inner">
+    <div class="exp-inner enter">
       <h1 class="sr-only">{t(lang, 'title.experience')}</h1>
       <!-- Work Experience: declaration order (unlike /cv, which re-sorts by end date) -->
       <div class="exp-section">
@@ -297,10 +297,14 @@ const lang = pageLang(Astro.params.lang);
     opacity: 0.8;
   }
 
-  /* Scroll-driven: each job fades in and its connector line grows as it scrolls into view */
+  /* Scroll-driven: each job and card fades in, and the job connector line grows, as it scrolls into view */
   @supports (animation-timeline: view()) {
     @media (prefers-reduced-motion: no-preference) {
-      .timeline-item {
+      .timeline-item,
+      .skill-group,
+      .skill-card,
+      .cert-card,
+      .exp-cta {
         animation: fade-up linear both;
         animation-timeline: view();
         animation-range: entry 0% entry 60%;

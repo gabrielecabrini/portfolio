@@ -21,14 +21,20 @@ const cells = Array.from({ length: 140 }, (_, i) => {
     <HeroScene />
     <div class="hero-inner">
       <div class="hero-left">
-        <p class="label">{t(lang, 'home.greeting')}</p>
-        <h1>Gabriele Cabrini</h1>
-        <p class="subtitle">
+        <p class="enter label" style="--i: 0">
+          {t(lang, 'home.greeting')}
+        </p>
+        <h1 class="enter" style="--i: 1">
+          Gabriele Cabrini
+        </h1>
+        <p class="enter subtitle" style="--i: 2">
           {t(lang, 'home.subtitle')}
           <span class="caret" aria-hidden="true"></span>
         </p>
-        <p class="tagline">{t(lang, 'home.tagline')}</p>
-        <div class="cta-row">
+        <p class="enter tagline" style="--i: 3">
+          {t(lang, 'home.tagline')}
+        </p>
+        <div class="enter cta-row" style="--i: 4">
           <a href={localePath(lang, '/experience')} class="btn-primary">
             {t(lang, 'home.cta.experience')}
           </a>
@@ -40,7 +46,7 @@ const cells = Array.from({ length: 140 }, (_, i) => {
           </a>
         </div>
 
-        <p class="availability">
+        <p class="enter availability" style="--i: 5">
           <span class="avail-dot" aria-hidden="true"></span>
           {t(lang, 'home.available')}
           <span class="availability-sep" aria-hidden="true">
@@ -90,29 +96,6 @@ const cells = Array.from({ length: 140 }, (_, i) => {
     align-items: center;
     justify-content: space-between;
     gap: 4rem;
-  }
-
-  /* ── Entrance: stagger each hero element ── */
-  .hero-left > * {
-    animation: fade-up 0.5s ease both;
-  }
-  .hero-left > :nth-child(1) {
-    animation-delay: 0ms;
-  }
-  .hero-left > :nth-child(2) {
-    animation-delay: 80ms;
-  }
-  .hero-left > :nth-child(3) {
-    animation-delay: 160ms;
-  }
-  .hero-left > :nth-child(4) {
-    animation-delay: 240ms;
-  }
-  .hero-left > :nth-child(5) {
-    animation-delay: 320ms;
-  }
-  .hero-left > :nth-child(6) {
-    animation-delay: 400ms;
   }
 
   .hero-right {
