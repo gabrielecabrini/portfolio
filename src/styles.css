@@ -3,7 +3,7 @@
 @import './styles/_typography.css';
 @import './styles/_animations.css';
 
-/* Main call to action, shared by home, experience and /pgp */
+/* Main call to action, shared by home and /pgp */
 .btn-primary {
   display: inline-block;
   padding: 0.65rem 1.4rem;
@@ -20,6 +20,23 @@
   color: var(--on-accent);
   transform: translateY(-1px);
   box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+/* Same box as .btn-primary, outlined: the secondary action beside it */
+.btn-secondary {
+  display: inline-block;
+  padding: 0.65rem 1.4rem;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.15s;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.btn-secondary:hover {
+  border-color: var(--text);
+  color: var(--text);
 }
 
 /* GitHub brand icon is near-black — invert in dark mode for visibility */

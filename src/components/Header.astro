@@ -14,11 +14,16 @@ const other: Lang = lang === 'it' ? 'en' : 'it';
 const switchHref = localePath(other, noTwin ? '/' : path);
 const links = [
   { href: '/', label: t(lang, 'nav.home') },
-  { href: '/about', label: t(lang, 'nav.about') },
-  { href: '/cv', label: 'CV' },
   { href: '/experience', label: t(lang, 'nav.experience') },
   { href: '/projects', label: t(lang, 'nav.projects') },
-].map((link) => ({ ...link, active: link.href === path, href: localePath(lang, link.href) }));
+  { href: '/about', label: t(lang, 'nav.about') },
+  { href: '/cv', label: 'CV' },
+].map((link) => ({
+  ...link,
+  active: link.href === path,
+  accent: link.href === '/cv',
+  href: localePath(lang, link.href),
+}));
 ---
 
 <header>
@@ -28,7 +33,7 @@ const links = [
     </a>
     <nav class="nav-desktop">
       {links.map((link) => (
-        <a href={link.href} class:list={{ active: link.active }}>
+        <a href={link.href} class:list={{ active: link.active, accent: link.accent }}>
           {link.label}
         </a>
       ))}
@@ -52,7 +57,7 @@ const links = [
 <!-- Outside <header> so it scrolls away on mobile instead of staying pinned -->
 <nav class="nav-mobile">
   {links.map((link) => (
-    <a href={link.href} class:list={{ active: link.active }}>
+    <a href={link.href} class:list={{ active: link.active, accent: link.accent }}>
       {link.label}
     </a>
   ))}
@@ -118,6 +123,12 @@ const links = [
   nav a:hover,
   nav a.active {
     color: var(--text);
+  }
+
+  /* The CV is the page the site leads to: always accented, even when active */
+  nav a.accent {
+    color: var(--accent);
+    font-weight: 600;
   }
 
   .lang-toggle {

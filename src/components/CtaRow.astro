@@ -1,0 +1,60 @@
+---
+import { EMAIL } from '../data/social-links';
+import { t, type Lang } from '../i18n';
+import { cvPdfHref } from '../lib/cv';
+
+interface Props {
+  lang: Lang;
+  /** Lets the caller add its own entrance animation (e.g. `enter` + `--i`). */
+  class?: string;
+  style?: string;
+}
+
+const { lang, class: className, style } = Astro.props;
+---
+
+<!-- Closing call to action shared by about, experience and projects: write me / get the CV -->
+<div class:list={['cta-line', className]} style={style}>
+  <p>{t(lang, 'cta.heading')}</p>
+  <div class="cta-links">
+    <a href={EMAIL.href}>{t(lang, 'cta.contact')} ↗</a>
+    <a href={cvPdfHref(lang)} download data-astro-prefetch="false">
+      {t(lang, 'cta.cv')} ↓
+    </a>
+  </div>
+</div>
+
+<style>
+  .cta-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+
+  p {
+    color: var(--muted);
+    max-width: none;
+  }
+
+  .cta-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  a {
+    color: var(--accent);
+    font-weight: 500;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+  }
+
+  a:hover {
+    opacity: 0.75;
+  }
+</style>

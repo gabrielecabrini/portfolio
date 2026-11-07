@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { EMAIL, PGP_LINK, SOCIAL_LINKS } from '../../data/social-links';
+import CtaRow from '../../components/CtaRow.astro';
+import { PGP_LINK, SOCIAL_LINKS } from '../../data/social-links';
 import { langPaths, localePath, pageLang, t } from '../../i18n';
 
 export const getStaticPaths = langPaths;
@@ -62,28 +63,7 @@ const links = [...SOCIAL_LINKS, { ...PGP_LINK, href: localePath(lang, PGP_LINK.h
         ))}
       </div>
 
-      <hr class="cta-divider enter" style="--i: 3" />
-
-      <div class="ctas-row enter" style="--i: 3">
-        <a href={EMAIL.href} class="contact-cta">
-          <div class="contact-cta-left">
-            <p class="contact-cta-heading">{t(lang, 'about.contact.heading')}</p>
-            <p class="contact-cta-hint">
-              <span class="contact-dot" aria-hidden="true"></span>
-              {t(lang, 'about.contact.hint')}
-            </p>
-          </div>
-          <span class="contact-cta-btn">{t(lang, 'about.contact.cta')} ↗</span>
-        </a>
-
-        <a href={localePath(lang, '/cv')} class="contact-cta">
-          <div class="contact-cta-left">
-            <p class="contact-cta-heading">{t(lang, 'about.cv.link')}</p>
-            <p class="contact-cta-hint">{t(lang, 'about.cv.hint')}</p>
-          </div>
-          <span class="contact-cta-btn">{t(lang, 'about.cv.cta')} ↗</span>
-        </a>
-      </div>
+      <CtaRow lang={lang} class="enter" style="--i: 3" />
     </div>
   </section>
   <script>
@@ -203,12 +183,6 @@ const links = [...SOCIAL_LINKS, { ...PGP_LINK, href: localePath(lang, PGP_LINK.h
     gap: 1rem;
   }
 
-  .cta-divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 2.5rem 0 0;
-  }
-
   .link-card {
     display: flex;
     align-items: center;
@@ -268,69 +242,6 @@ const links = [...SOCIAL_LINKS, { ...PGP_LINK, href: localePath(lang, PGP_LINK.h
     transition: transform 0.2s ease;
   }
 
-  /* ── CTAs row (contact + CV) ── */
-
-  .ctas-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-
-  .contact-cta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    padding: 1.4rem 1.6rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    color: var(--text);
-    transition:
-      border-color 0.15s,
-      background 0.15s;
-  }
-
-  .contact-cta:hover {
-    border-color: var(--accent);
-    background: var(--surface-hover);
-    color: var(--text);
-  }
-
-  .contact-cta-heading {
-    font-size: 0.95rem;
-    font-weight: 500;
-    margin-bottom: 0.3rem;
-    max-width: none;
-  }
-
-  .contact-cta-hint {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.82rem;
-    color: var(--muted);
-    max-width: none;
-  }
-
-  .contact-dot {
-    width: 7px;
-    height: 7px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    background: #22c55e;
-    animation: avail-pulse 1.8s ease-out infinite;
-  }
-
-  .contact-cta-btn {
-    font-size: 0.88rem;
-    font-weight: 500;
-    color: var(--accent);
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
   @media (max-width: 768px) {
     .about-page {
       padding: 3rem 1rem;
@@ -348,16 +259,6 @@ const links = [...SOCIAL_LINKS, { ...PGP_LINK, href: localePath(lang, PGP_LINK.h
 
     .links-grid {
       grid-template-columns: 1fr;
-    }
-
-    .ctas-row {
-      grid-template-columns: 1fr;
-    }
-
-    .contact-cta {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
     }
   }
 

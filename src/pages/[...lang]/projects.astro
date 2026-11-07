@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import CtaRow from '../../components/CtaRow.astro';
 import { PROJECTS } from '../../data/projects';
 import { langPaths, pageLang, t } from '../../i18n';
 
@@ -61,6 +62,8 @@ const lang = pageLang(Astro.params.lang);
           </article>
         ))}
       </div>
+
+      <CtaRow lang={lang} />
     </div>
   </section>
 </Base>

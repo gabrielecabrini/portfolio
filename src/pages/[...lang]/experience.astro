@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import CtaRow from '../../components/CtaRow.astro';
 import { CERTIFICATIONS, LANGUAGES, SKILL_GROUPS, WORK_EXPERIENCES } from '../../data/experience';
 import { langPaths, localePath, pageLang, t } from '../../i18n';
 import { dateRange, duration, formatMonthYear, workPlace } from '../../lib/format';
@@ -55,6 +56,10 @@ const lang = pageLang(Astro.params.lang);
             </div>
           ))}
         </div>
+
+        <a class="projects-link" href={localePath(lang, '/projects')}>
+          {t(lang, 'experience.projects.link')} →
+        </a>
       </div>
 
       <!-- Skills -->
@@ -148,11 +153,8 @@ const lang = pageLang(Astro.params.lang);
         </div>
       </div>
 
-      <div class="exp-cta">
-        <a href={localePath(lang, '/projects')} class="btn-primary">
-          {t(lang, 'experience.cta.projects')}
-        </a>
-      </div>
+      <!-- The section gap already spaces it -->
+      <CtaRow lang={lang} style="margin-top: 0" />
     </div>
   </section>
   <script>
@@ -184,6 +186,17 @@ const lang = pageLang(Astro.params.lang);
     margin-bottom: 2rem;
     padding-bottom: 0.75rem;
     border-bottom: 1px solid var(--border);
+  }
+
+  .projects-link {
+    display: inline-block;
+    color: var(--muted);
+    font-size: 0.9rem;
+    transition: color 0.15s;
+  }
+
+  .projects-link:hover {
+    color: var(--accent);
   }
 
   .empty {
@@ -303,8 +316,7 @@ const lang = pageLang(Astro.params.lang);
       .timeline-item,
       .skill-group,
       .skill-card,
-      .cert-card,
-      .exp-cta {
+      .cert-card {
         animation: fade-up linear both;
         animation-timeline: view();
         animation-range: entry 0% entry 60%;
@@ -506,10 +518,6 @@ const lang = pageLang(Astro.params.lang);
     color: var(--muted);
     font-size: 0.8rem;
     font-family: var(--font-mono);
-  }
-
-  .exp-cta {
-    text-align: center;
   }
 
   /* ── Responsive ── */

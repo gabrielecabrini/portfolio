@@ -13,3 +13,8 @@ export function sortForCv(jobs: readonly WorkExperience[]): WorkExperience[] {
     return a.startDate > b.startDate ? -1 : 1;
   });
 }
+
+/** Site path of the CV PDF; scripts/cv-pdf.mjs reads it from /cv and writes the file there. */
+export function cvPdfHref(lang: string): string {
+  return `/CV-GabrieleCabrini-${lang.toUpperCase()}.pdf`;
+}
