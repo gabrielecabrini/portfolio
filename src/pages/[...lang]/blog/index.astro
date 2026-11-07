@@ -17,7 +17,6 @@ const posts = (await getPosts()).map((post) => ({ slug: post.slug, ...pick(post,
         <p class="section-desc">{t(lang, 'blog.subtitle')}</p>
       </div>
 
-      {posts.length === 0 && <p class="empty enter">{t(lang, 'blog.empty')}</p>}
       <ul class="posts">
         {posts.map(({ slug, entry, lang: postLang }, i) => (
           <li class="enter" style={`--i: ${i + 1}`} lang={postLang}>
@@ -58,8 +57,7 @@ const posts = (await getPosts()).map((post) => ({ slug: post.slug, ...pick(post,
     margin-bottom: 0.5rem;
   }
 
-  .section-desc,
-  .empty {
+  .section-desc {
     color: var(--muted);
   }
 
