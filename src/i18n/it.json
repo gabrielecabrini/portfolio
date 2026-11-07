@@ -131,6 +131,11 @@
       "description": "Esegue le app Windows su Linux come finestre native, senza un desktop virtuale separato. Windows gira in un container Docker o Podman su QEMU/KVM, l'installazione è guidata dall'interfaccia e la cartella home di Linux è condivisa con Windows."
     }
   },
+  "blog": {
+    "subtitle": "Tutto quello che mi va di scrivere finisce qui.",
+    "empty": "Ancora niente da leggere.",
+    "untranslated": "Questo articolo è disponibile solo in inglese."
+  },
   "cv": {
     "download": "Scarica PDF",
     "summary": "Sviluppatore fullstack con {{years}} anni di esperienza su applicazioni aziendali (ERP, MES) e open source: backend scalabili in Spring Boot, interfacce Angular e app Flutter pensate sui processi reali.",

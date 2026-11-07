@@ -131,6 +131,11 @@
       "description": "Runs Windows apps on Linux as native windows, with no separate virtual desktop. Windows runs in a Docker or Podman container on QEMU/KVM, setup is guided by the GUI, and the Linux home folder is shared with Windows."
     }
   },
+  "blog": {
+    "subtitle": "Whatever I feel like writing ends up here.",
+    "empty": "Nothing here yet.",
+    "untranslated": "This post is only available in Italian."
+  },
   "cv": {
     "download": "Download PDF",
     "summary": "Fullstack developer with {{years}} years of experience in business applications (ERP, MES) and open source: scalable Spring Boot backends, Angular and Flutter apps shaped around real workflows.",

@@ -1,16 +1,23 @@
 import type { Lang } from '../i18n';
 import type { WorkExperience } from '../models/work-experience.model';
 
+const locale = (lang: Lang) => (lang === 'it' ? 'it-IT' : 'en-US');
+
 /**
  * "2025-06" → "giu 2025" / "Jun 2025". A bare "YYYY" really can arrive (education
  * dates), so the month defaults to January instead of producing an Invalid Date.
  */
 export function formatMonthYear(date: string, lang: Lang): string {
   const [year = '', month = '1'] = date.split('-');
-  return new Date(+year, +month - 1).toLocaleDateString(lang === 'it' ? 'it-IT' : 'en-US', {
+  return new Date(+year, +month - 1).toLocaleDateString(locale(lang), {
     month: 'short',
     year: 'numeric',
   });
+}
+
+/** Blog post date → "7 nov 2026" / "Nov 7, 2026". */
+export function formatDay(date: Date, lang: Lang): string {
+  return date.toLocaleDateString(locale(lang), { year: 'numeric', month: 'short', day: 'numeric' });
 }
 
 /** "2022-04" + "2023-03" → "apr 2022 — mar 2023"; no end date means an ongoing role. */

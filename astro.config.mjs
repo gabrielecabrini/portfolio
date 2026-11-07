@@ -1,7 +1,26 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
-import { rename, rmdir } from 'node:fs/promises';
 import sitemap from '@astrojs/sitemap';
+import { readFile, rename, rmdir } from 'node:fs/promises';
+
+// Pages whose <link rel="canonical"> points elsewhere (e.g. an untranslated blog post
+// under the other language) stay out of the sitemap. Read from the built HTML, so
+// Base.astro stays the only place that decides the canonical.
+/** @type {Set<string>} */
+const nonCanonical = new Set();
+/** @type {import('astro').AstroIntegration} */
+const skipNonCanonical = {
+  name: 'skip-non-canonical',
+  hooks: {
+    'astro:build:done': async ({ dir, pages }) => {
+      for (const { pathname } of pages) {
+        const html = await readFile(new URL(`${pathname}index.html`, dir), 'utf8').catch(() => '');
+        const href = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+        if (href && new URL(href).pathname !== `/${pathname}`) nonCanonical.add(`/${pathname}`);
+      }
+    },
+  },
+};
 
 export default defineConfig({
   site: 'https://www.gabrielecabrini.it',
@@ -24,10 +43,12 @@ export default defineConfig({
     },
   ],
   integrations: [
+    // Before sitemap: build:done hooks run in order, and sitemap reads the set in its own
+    skipNonCanonical,
     sitemap({
       i18n: { defaultLocale: 'it', locales: { it: 'it', en: 'en' } },
       // donut is noindex
-      filter: (page) => !page.endsWith('/donut/'),
+      filter: (page) => !page.endsWith('/donut/') && !nonCanonical.has(new URL(page).pathname),
     }),
     {
       // Cloudflare serves the nearest 404.html, but Astro only flattens the root /404:

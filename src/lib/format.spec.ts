@@ -3,10 +3,19 @@ import {
   dateRange,
   displayUrl,
   duration,
+  formatDay,
   formatFingerprint,
   formatMonthYear,
   workPlace,
 } from './format';
+
+describe('formatDay', () => {
+  it("follows each language's day/month order", () => {
+    const date = new Date(2026, 10, 7);
+    expect(formatDay(date, 'en')).toBe('Nov 7, 2026');
+    expect(formatDay(date, 'it')).toBe('7 nov 2026');
+  });
+});
 
 describe('formatMonthYear', () => {
   // The month part is 1-based in the data but 0-based in `new Date`, so the two

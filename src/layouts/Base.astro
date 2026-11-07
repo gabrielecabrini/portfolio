@@ -11,9 +11,14 @@ interface Props {
   title?: string;
   description?: string;
   noindex?: boolean;
+  /**
+   * Both language versions carry the same content (an untranslated blog post): point
+   * them at one canonical URL instead of declaring them translations of each other.
+   */
+  canonicalLang?: Lang | undefined;
 }
 
-const { lang, title, description, noindex = false } = Astro.props;
+const { lang, title, description, noindex = false, canonicalLang } = Astro.props;
 const fullTitle = title ? `${title} · Gabriele Cabrini` : 'Gabriele Cabrini';
 const path = basePath(Astro.url.pathname);
 const url = (l: Lang) => new URL(localePath(l, path), Astro.site).href;
@@ -67,11 +72,11 @@ const person = {
 
     {!noindex && (
       <>
-        <link rel="canonical" href={url(lang)} />
-        {LANGS.map((l) => (
-          <link rel="alternate" hreflang={l} href={url(l)} />
-        ))}
-        <link rel="alternate" hreflang="x-default" href={url('it')} />
+        <link rel="canonical" href={url(canonicalLang ?? lang)} />
+        {!canonicalLang &&
+          [...LANGS, 'x-default' as const].map((l) => (
+            <link rel="alternate" hreflang={l} href={url(l === 'x-default' ? 'it' : l)} />
+          ))}
       </>
     )}
 

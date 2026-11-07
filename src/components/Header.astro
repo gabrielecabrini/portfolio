@@ -16,10 +16,12 @@ const links = [
   { href: '/experience', label: t(lang, 'nav.experience') },
   { href: '/projects', label: t(lang, 'nav.projects') },
   { href: '/about', label: t(lang, 'nav.about') },
+  { href: '/blog', label: 'Blog' },
   { href: '/cv', label: 'CV' },
 ].map((link) => ({
   ...link,
-  active: link.href === path,
+  // Posts live under /blog/…: keep "Blog" highlighted there too
+  active: link.href === path || path.startsWith(`${link.href}/`),
   current: link.href === path ? ('page' as const) : undefined,
   accent: link.href === '/cv',
   href: localePath(lang, link.href),

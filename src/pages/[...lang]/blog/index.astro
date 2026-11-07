@@ -1,0 +1,121 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { formatDay } from '../../../lib/format';
+import { getPosts, pick } from '../../../lib/blog';
+import { langPaths, localePath, pageLang, t } from '../../../i18n';
+
+export const getStaticPaths = langPaths;
+const lang = pageLang(Astro.params.lang);
+const posts = (await getPosts()).map((post) => ({ slug: post.slug, ...pick(post, lang) }));
+---
+
+<Base lang={lang} title="Blog" description={t(lang, 'blog.subtitle')}>
+  <section class="blog-page">
+    <div class="blog-inner">
+      <div class="section-header enter">
+        <h1>Blog</h1>
+        <p class="section-desc">{t(lang, 'blog.subtitle')}</p>
+      </div>
+
+      {posts.length === 0 && <p class="empty enter">{t(lang, 'blog.empty')}</p>}
+      <ul class="posts">
+        {posts.map(({ slug, entry, lang: postLang }, i) => (
+          <li class="enter" style={`--i: ${i + 1}`} lang={postLang}>
+            <time lang={lang} datetime={entry.data.pubDate.toISOString()}>
+              {formatDay(entry.data.pubDate, lang)}
+            </time>
+            <a href={localePath(lang, `/blog/${slug}`)}>{entry.data.title}</a>
+            {/* Untranslated: say which language it's in before the click */}
+            {postLang !== lang && (
+              <span class="tag" title={t(lang, 'blog.untranslated')}>
+                {postLang.toUpperCase()}
+              </span>
+            )}
+            <p>{entry.data.description}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .blog-page {
+    padding: 5rem 1.5rem;
+  }
+
+  .blog-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+
+  .section-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-header h1 {
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-desc,
+  .empty {
+    color: var(--muted);
+  }
+
+  .posts {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  time {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .posts a {
+    color: var(--text);
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+
+  .posts a:hover {
+    color: var(--accent);
+  }
+
+  /* Same chip as the project tags */
+  .tag {
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .posts p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+  }
+
+  @media (max-width: 768px) {
+    .blog-page {
+      padding: 3rem 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .blog-page {
+      padding: 2rem 1rem;
+    }
+  }
+</style>
