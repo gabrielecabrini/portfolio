@@ -58,7 +58,7 @@ const lang = pageLang(Astro.params.lang);
         </div>
 
         <a class="projects-link" href={localePath(lang, '/projects')}>
-          {t(lang, 'experience.projects.link')} →
+          {t(lang, 'experience.projects.link')} <span aria-hidden="true">→</span>
         </a>
       </div>
 
@@ -134,7 +134,7 @@ const lang = pageLang(Astro.params.lang);
                 <h3 class="cert-name">
                   {cert.url ? (
                     <a href={cert.url} target="_blank" rel="noopener noreferrer">
-                      {cert.name} ↗
+                      {cert.name} <span aria-hidden="true">↗</span>
                     </a>
                   ) : (
                     cert.name
@@ -190,6 +190,9 @@ const lang = pageLang(Astro.params.lang);
 
   .projects-link {
     display: inline-block;
+    /* Bigger tap area, same layout */
+    padding-block: 0.6rem;
+    margin-block: -0.6rem;
     color: var(--muted);
     font-size: 0.9rem;
     transition: color 0.15s;

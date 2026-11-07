@@ -173,6 +173,13 @@ const { lang } = Astro.props;
     gap: 1.25rem;
   }
 
+  /* Tap area grows to ~35px; the negative margin keeps the visual spacing */
+  .repo-link,
+  .theme-toggle {
+    padding: 0.6rem;
+    margin: -0.6rem;
+  }
+
   .repo-link {
     transition: color 0.15s;
   }
@@ -189,7 +196,6 @@ const { lang } = Astro.props;
     background: none;
     border: none;
     color: var(--muted);
-    padding: 0;
     cursor: pointer;
     transition: color 0.15s;
     display: flex;

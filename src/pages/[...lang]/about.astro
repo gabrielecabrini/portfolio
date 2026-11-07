@@ -49,16 +49,12 @@ const links = [...SOCIAL_LINKS, { ...PGP_LINK, href: localePath(lang, PGP_LINK.h
         {links.map((link) => (
           <a href={link.href} target={link.target} rel={link.rel} class="link-card">
             <span class="link-icon">
-              <img
-                src={link.iconUrl}
-                alt={link.name}
-                class="link-img"
-                decoding="async"
-                loading="lazy"
-              />
+              <img src={link.iconUrl} alt="" class="link-img" decoding="async" loading="lazy" />
             </span>
             <span class="link-name">{link.name}</span>
-            <span class="link-arrow">{link.target ? '↗' : '→'}</span>
+            <span class="link-arrow" aria-hidden="true">
+              {link.target ? '↗' : '→'}
+            </span>
           </a>
         ))}
       </div>

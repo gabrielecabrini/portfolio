@@ -13,7 +13,6 @@ const { lang, path, noTwin = false } = Astro.props;
 const other: Lang = lang === 'it' ? 'en' : 'it';
 const switchHref = localePath(other, noTwin ? '/' : path);
 const links = [
-  { href: '/', label: t(lang, 'nav.home') },
   { href: '/experience', label: t(lang, 'nav.experience') },
   { href: '/projects', label: t(lang, 'nav.projects') },
   { href: '/about', label: t(lang, 'nav.about') },
@@ -21,6 +20,7 @@ const links = [
 ].map((link) => ({
   ...link,
   active: link.href === path,
+  current: link.href === path ? ('page' as const) : undefined,
   accent: link.href === '/cv',
   href: localePath(lang, link.href),
 }));
@@ -28,12 +28,22 @@ const links = [
 
 <header>
   <div class="header-inner">
-    <a class="brand" href={localePath(lang, '/')}>
+    <!-- The only home link: labelled, since "gc." alone means nothing to a screen reader -->
+    <a
+      class="brand"
+      href={localePath(lang, '/')}
+      aria-label={t(lang, 'nav.home')}
+      aria-current={path === '/' ? 'page' : undefined}
+    >
       gc<span class="brand-dot">.</span>
     </a>
     <nav class="nav-desktop">
       {links.map((link) => (
-        <a href={link.href} class:list={{ active: link.active, accent: link.accent }}>
+        <a
+          href={link.href}
+          class:list={{ active: link.active, accent: link.accent }}
+          aria-current={link.current}
+        >
           {link.label}
         </a>
       ))}
@@ -57,7 +67,11 @@ const links = [
 <!-- Outside <header> so it scrolls away on mobile instead of staying pinned -->
 <nav class="nav-mobile">
   {links.map((link) => (
-    <a href={link.href} class:list={{ active: link.active, accent: link.accent }}>
+    <a
+      href={link.href}
+      class:list={{ active: link.active, accent: link.accent }}
+      aria-current={link.current}
+    >
       {link.label}
     </a>
   ))}
@@ -92,6 +106,8 @@ const links = [
     color: var(--text);
     letter-spacing: -0.04em;
     margin-right: auto;
+    /* Bigger tap area, same look */
+    padding-block: 0.5rem;
   }
 
   .brand:hover {
@@ -170,17 +186,19 @@ const links = [
   .nav-desktop a::after {
     content: '';
     position: absolute;
-    bottom: -1px;
+    bottom: -4px;
     left: 0;
     width: 100%;
-    height: 1px;
+    height: 2px;
     background: var(--accent);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.2s ease;
   }
 
-  .nav-desktop a:hover::after {
+  /* Same bar for hover and current page, so after the click it just stays put */
+  .nav-desktop a:hover::after,
+  .nav-desktop a.active::after {
     transform: scaleX(1);
   }
 
@@ -203,7 +221,7 @@ const links = [
 
     .lang-toggle {
       font-size: 0.78rem;
-      padding: 0.2rem 0.5rem;
+      padding: 0.4rem 0.6rem;
     }
 
     .nav-desktop {
@@ -222,6 +240,10 @@ const links = [
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    .nav-mobile a.active {
+      box-shadow: inset 0 -2px var(--accent);
     }
   }
 </style>

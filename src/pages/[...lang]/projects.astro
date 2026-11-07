@@ -44,7 +44,9 @@ const lang = pageLang(Astro.params.lang);
               <div class="card-links">
                 {project.url && (
                   <a href={project.url} target="_blank" rel="noopener noreferrer" class="card-link">
-                    {t(lang, 'projects.card.site')} ↗
+                    {t(lang, 'projects.card.site')}{' '}
+                    <span class="sr-only">{t(lang, project.titleKey)}</span>{' '}
+                    <span aria-hidden="true">↗</span>
                   </a>
                 )}
                 {project.repoUrl && (
@@ -54,7 +56,8 @@ const lang = pageLang(Astro.params.lang);
                     rel="noopener noreferrer"
                     class="card-link"
                   >
-                    GitHub ↗
+                    GitHub <span class="sr-only">{t(lang, project.titleKey)}</span>{' '}
+                    <span aria-hidden="true">↗</span>
                   </a>
                 )}
               </div>

@@ -35,6 +35,6 @@
 /* On mobile the nav moves to its own row under the header */
 @media (max-width: 480px) {
   :root {
-    --header-nav-h: 38px;
+    --header-nav-h: 44px;
   }
 }

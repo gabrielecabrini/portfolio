@@ -10,7 +10,7 @@
     "skipToContent": "Salta al contenuto"
   },
   "cta": {
-    "heading": "Hai un progetto in mente?",
+    "heading": "Lavoriamo insieme?",
     "contact": "Scrivimi",
     "cv": "Scarica CV"
   },
@@ -25,7 +25,7 @@
     "tagline": "Sviluppo gestionali e applicazioni aziendali, dal backend in Java e Kotlin fino all'interfaccia. Uso Linux da anni e curo volentieri anche l'infrastruttura su cui girano.",
     "available": "Disponibile per collaborazioni e progetti freelance",
     "cta": {
-      "experience": "Esperienze"
+      "experience": "Esperienza"
     },
     "githubLabel": "// contributi se lavorassi in repo pubbliche",
     "seo": {
@@ -139,7 +139,7 @@
     },
     "location": "Bergamo, Italia",
     "lang": {
-      "hint": "Lingua: cambia con il toggle nell'header"
+      "hint": "Lingua: cambiala dal selettore in alto"
     },
     "mobile": {
       "hint": "L'anteprima del CV è disponibile su desktop. Qui puoi scaricare direttamente il PDF."

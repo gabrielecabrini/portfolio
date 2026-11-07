@@ -17,9 +17,11 @@ const { lang, class: className, style } = Astro.props;
 <div class:list={['cta-line', className]} style={style}>
   <p>{t(lang, 'cta.heading')}</p>
   <div class="cta-links">
-    <a href={EMAIL.href}>{t(lang, 'cta.contact')} ↗</a>
+    <a href={EMAIL.href}>
+      {t(lang, 'cta.contact')} <span aria-hidden="true">↗</span>
+    </a>
     <a href={cvPdfHref(lang)} download data-astro-prefetch="false">
-      {t(lang, 'cta.cv')} ↓
+      {t(lang, 'cta.cv')} <span aria-hidden="true">↓</span>
     </a>
   </div>
 </div>
@@ -48,6 +50,9 @@ const { lang, class: className, style } = Astro.props;
   }
 
   a {
+    /* Bigger tap area, same layout */
+    padding-block: 0.6rem;
+    margin-block: -0.6rem;
     color: var(--accent);
     font-weight: 500;
     white-space: nowrap;
