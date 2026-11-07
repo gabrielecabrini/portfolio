@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
+import { rename, rmdir } from 'node:fs/promises';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
@@ -22,5 +23,22 @@ export default defineConfig({
       weights: [400, 500, 600, 700],
     },
   ],
-  integrations: [sitemap({ i18n: { defaultLocale: 'it', locales: { it: 'it', en: 'en' } } })],
+  integrations: [
+    sitemap({
+      i18n: { defaultLocale: 'it', locales: { it: 'it', en: 'en' } },
+      // donut is noindex
+      filter: (page) => !page.endsWith('/donut/'),
+    }),
+    {
+      // Cloudflare serves the nearest 404.html, but Astro only flattens the root /404:
+      // en/404/index.html must become en/404.html for /en/… to get the English page.
+      name: 'en-404',
+      hooks: {
+        'astro:build:done': async ({ dir }) => {
+          await rename(new URL('en/404/index.html', dir), new URL('en/404.html', dir));
+          await rmdir(new URL('en/404/', dir));
+        },
+      },
+    },
+  ],
 });

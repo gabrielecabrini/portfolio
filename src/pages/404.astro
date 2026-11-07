@@ -1,12 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
-import { t } from '../i18n';
+import { localePath, t, type Lang } from '../i18n';
 
-// Cloudflare serves this one file for every unknown URL, /en/… included, so it
-// can't know the visitor's language: the page is bilingual instead.
+// Cloudflare serves the nearest 404.html: en/404.astro renders this with lang="en"
+// so /en/… gets the English one.
+const { lang = 'it' }: { lang?: Lang } = Astro.props;
 ---
 
-<Base lang="it" title="404" description={t('it', 'notFound.message')} noindex>
+<Base lang={lang} title="404" description="Page not found" noindex>
   <section class="not-found-page">
     <div class="not-found-inner">
       <div class="rustc enter">
@@ -19,10 +20,10 @@ import { t } from '../i18n';
 <span class="g">1 |</span> GET <span id="nf-path">/…</span>
 <span class="g">  |</span>     <span class="err"><span id="nf-carets">^</span><span class="label" lang="en"> no route matches this path</span></span>
 <span class="g">  |</span></pre>
-        <pre class="notes"><span class="note"><span class="g">  =</span> <b>help</b>: {t('it', 'notFound.message')}</span><span class="note" lang="en"><span class="g">  =</span> <b>help</b>: {t('en', 'notFound.message')}</span></pre>
+        <pre class="notes"><span class="note" lang="en"><span class="g">  =</span> <b>help</b>: The page you're looking for doesn't exist or has been moved.</span></pre>
       </div>
-      <a href="/" class="btn-home enter" style="--i: 1">
-        Home
+      <a href={localePath(lang, '/')} class="btn-home enter" style="--i: 1">
+        {t(lang, 'nav.home')}
       </a>
     </div>
   </section>

@@ -148,9 +148,6 @@
       "generated": "Generated on {{date}}"
     }
   },
-  "notFound": {
-    "message": "The page you're looking for doesn't exist or has been moved."
-  },
   "pgp": {
     "seo": {
       "description": "Gabriele Cabrini's PGP public key: fingerprint, download and commands to import it."
