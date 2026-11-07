@@ -1,6 +1,5 @@
 ---
 import Base from '../../layouts/Base.astro';
-import HeroScene from '../../components/HeroScene.astro';
 import { EMAIL } from '../../data/social-links';
 import { langPaths, localePath, pageLang, t } from '../../i18n';
 
@@ -18,7 +17,6 @@ const cells = Array.from({ length: 140 }, (_, i) => {
 
 <Base lang={lang} description={t(lang, 'home.seo.description')}>
   <section class="hero">
-    <HeroScene />
     <div class="hero-inner">
       <div class="hero-left">
         <p class="enter label" style="--i: 0">
@@ -74,9 +72,6 @@ const cells = Array.from({ length: 140 }, (_, i) => {
 
 <style>
   .hero {
-    /* Contains the absolutely positioned 3D scene behind the content */
-    position: relative;
-    overflow: hidden;
     display: flex;
     align-items: center;
     /* dvh accounts for mobile browser chrome (address bar) */
@@ -86,8 +81,6 @@ const cells = Array.from({ length: 140 }, (_, i) => {
   }
 
   .hero-inner {
-    position: relative;
-    z-index: 1;
     max-width: var(--max-w);
     margin: 0 auto;
     width: 100%;
