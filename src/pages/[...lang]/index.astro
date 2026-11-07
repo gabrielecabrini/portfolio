@@ -142,8 +142,17 @@ const cells = Array.from({ length: 140 }, (_, i) => {
     flex-shrink: 0;
     /* Centered on the first line, not on the whole block, when the text wraps */
     margin-top: calc((1lh - 8px) / 2);
+    position: relative;
     border-radius: 50%;
     background: #22c55e;
+  }
+
+  .avail-dot::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: inherit;
     animation: avail-pulse 1.8s ease-out infinite;
   }
 

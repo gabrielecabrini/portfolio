@@ -1,26 +1,26 @@
+/* Slide settles at 70%: ending on a sub-pixel offset made text snap sharp on the last frame */
 @keyframes fade-up {
   from {
     opacity: 0;
     transform: translateY(16px);
   }
+  70% {
+    transform: none;
+  }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-}
-
+/* Ring scaled on the compositor, not an animated box-shadow repainting every frame */
 @keyframes avail-pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
+  from {
+    transform: scale(1);
+    opacity: 0.5;
   }
-  100% {
-    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+  to {
+    transform: scale(2.5);
+    opacity: 0;
   }
 }
 
@@ -43,28 +43,14 @@
   animation-delay: calc(var(--i, 0) * 80ms);
 }
 
-/* Phones: fade only. The slide ends on a sub-pixel offset, and the text visibly
-   snaps from soft to sharp on the frame the animation stops. */
-@media (max-width: 480px) {
-  .enter {
-    animation-name: fade-in;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-delay: 0ms !important;
+    /* Infinite loops would otherwise strobe at 0.01ms */
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-}
-
-/* Cross-document crossfade between pages; outside the reduced-motion rule above,
-   which doesn't reach the ::view-transition pseudo-elements. */
-@media (prefers-reduced-motion: no-preference) {
-  @view-transition {
-    navigation: auto;
   }
 }
