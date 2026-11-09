@@ -241,19 +241,18 @@ export const EDUCATION: Education[] = (
 
 export const CERTIFICATIONS: Certification[] = [
   {
+    id: 'fortinet-nse-3',
+    name: 'NSE 3 Certified in Cybersecurity',
+    issuer: 'Fortinet',
+    date: '2026-11',
+    iconUrl: '/assets/images/logos/fortinet-nse-3.webp',
+    url: 'https://www.credly.com/badges/bdf046a3-52b7-42b0-8ef1-910a7becdcdc',
+  },
+  {
     id: 'gsom-polimi-image-text-dl',
     name: 'Image and Text Analysis with Deep Learning',
     issuer: 'GSOM · Politecnico di Milano',
     date: '2026-05',
     iconUrl: '/assets/images/logos/polimi.webp',
-  },
-  {
-    id: 'kotlin-for-java-developers',
-    name: 'Kotlin for Java Developers',
-    issuer: 'JetBrains Academy · Coursera',
-    date: '2025-06',
-    iconUrl: '/assets/images/logos/jetbrains.webp',
-    url: 'https://www.coursera.org/verify/C556TLSX3HOM',
-    credentialId: 'C556TLSX3HOM',
   },
 ];
