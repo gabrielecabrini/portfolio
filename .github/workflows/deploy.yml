@@ -15,7 +15,7 @@ permissions:
 jobs:
   # Runs on pull requests too, so a Dependabot bump can't reach master red.
   verify:
-    name: Lint, test and type check
+    name: Lint, test, build and e2e
     runs-on: ubuntu-latest
 
     steps:
@@ -35,10 +35,22 @@ jobs:
       - name: Test
         run: yarn test
 
-      # Type check only (covers the .astro templates too): the full build, with its
-      # Chromium install for the CV PDFs, runs just in the deploy job.
-      - name: Type check
-        run: yarn astro check
+      - name: Install Chromium for Playwright
+        run: yarn playwright install --with-deps chromium
+
+      # astro check + astro build + CV PDFs; the type check covers the .astro templates too.
+      - name: Build
+        run: yarn build
+
+      - name: E2E
+        run: yarn test:e2e
+
+      # The deploy job publishes exactly the dist tested here, without rebuilding it.
+      - uses: actions/upload-artifact@v4
+        if: github.ref == 'refs/heads/master'
+        with:
+          name: dist
+          path: dist/
 
   deploy:
     name: Deploy to Cloudflare
@@ -54,18 +66,14 @@ jobs:
           node-version: '26'
           cache: 'yarn'
 
+      # Only for the pinned wrangler version.
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Install Chromium for Playwright
-        run: yarn playwright install --with-deps chromium
-
-      - name: Build
-        run: yarn build
-
-      # Needs the built dist and Chromium, so it runs here rather than in verify.
-      - name: E2E
-        run: yarn test:e2e
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
 
       - name: Deploy
         run: npx wrangler deploy
