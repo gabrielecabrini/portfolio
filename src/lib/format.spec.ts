@@ -93,6 +93,10 @@ describe('duration', () => {
     expect(duration('2024-05', '2024-05', 'en')).toBe('1 mo');
   });
 
+  it('counts across a year boundary', () => {
+    expect(duration('2024-12', '2025-01', 'en')).toBe('2 mos');
+  });
+
   it('measures an ongoing role up to now', () => {
     expect(duration('2023-04', undefined, 'it', new Date(2026, 9, 26))).toBe('3 anni 7 mesi');
   });

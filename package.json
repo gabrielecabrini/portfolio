@@ -4,7 +4,8 @@
     "dev": "astro dev",
     "build": "astro check && astro build && node scripts/cv-pdf.mjs",
     "preview": "astro preview",
-    "test": "vitest run",
+    "test": "vitest run --project unit",
+    "test:e2e": "vitest run --project e2e",
     "lint": "eslint .",
     "pretty": "prettier --write .",
     "pretty:check": "prettier --check ."

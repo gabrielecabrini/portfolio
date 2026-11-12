@@ -63,6 +63,10 @@ jobs:
       - name: Build
         run: yarn build
 
+      # Needs the built dist and Chromium, so it runs here rather than in verify.
+      - name: E2E
+        run: yarn test:e2e
+
       - name: Deploy
         run: npx wrangler deploy
         env:
