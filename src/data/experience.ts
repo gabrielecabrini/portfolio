@@ -164,12 +164,6 @@ export const SKILL_GROUPS: SkillGroup[] = (
           iconUrl:
             'https://cdn.jsdelivr.net/npm/devicon@latest/icons/kubernetes/kubernetes-plain.svg',
         },
-        {
-          id: 'aws',
-          name: 'AWS',
-          iconUrl:
-            'https://cdn.jsdelivr.net/npm/devicon@latest/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg',
-        },
       ],
     },
     {
