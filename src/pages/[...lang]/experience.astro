@@ -329,7 +329,8 @@ const lang = pageLang(Astro.params.lang);
         transform-origin: top;
         animation: grow-y linear both;
         animation-timeline: view();
-        animation-range: entry 50% cover 60%;
+        /* Full length once its bottom (the next logo) is on screen, whatever the item height */
+        animation-range: entry 0% entry 100%;
       }
     }
   }

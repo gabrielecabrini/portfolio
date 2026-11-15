@@ -61,7 +61,7 @@
       },
       "r1se-gaming": {
         "role": "Java Developer",
-        "description": "Built Java bots and tools for the company's communities and helped on other projects."
+        "description": "Built custom Java Discord bots to manage and automate R1SE's gaming communities; supported the team on other internal projects."
       },
       "sandrini-metalli": {
         "role": "Fullstack Developer",
@@ -73,7 +73,7 @@
       },
       "devroom": {
         "role": "Freelance Developer",
-        "description": "Commissioned work for the DevRoom team: mods, server configurations and custom plugins."
+        "description": "Freelance work through the DevRoom platform: took on client-posted requests and built Java plugins for Minecraft servers and Forge/Fabric mods to spec."
       }
     },
     "skills": {
