@@ -1,0 +1,119 @@
+<canvas class="head" width="320" height="320" style="--i: 2" aria-hidden="true"></canvas>
+
+<script>
+  // Decorative low-poly head that looks at the cursor. Skipped when the canvas is hidden (e.g. by a parent media query).
+  const canvas = document.querySelector<HTMLCanvasElement>('canvas.head');
+  if (canvas && canvas.offsetParent) {
+    // Library chunks and the model download in parallel
+    const [THREE, { GLTFLoader }, { MeshoptDecoder }, model] = await Promise.all([
+      import('three'),
+      import('three/addons/loaders/GLTFLoader.js'),
+      import('three/addons/libs/meshopt_decoder.module.js'),
+      fetch('/assets/models/head.glb').then((r) => r.arrayBuffer()),
+    ]);
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 10);
+    camera.position.z = 4;
+    // Low ambient so flat facets read; key from the front (slightly high-left), weak fill on the
+    // right, and a top light from above-behind that catches hair, shoulders and collar
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x202020, 0.25));
+    for (const [intensity, x, y, z] of [
+      [2.4, -0.5, 1, 3],
+      [0.5, 2.5, -0.3, 2],
+      [2, 0.5, 3, -1],
+    ] as const) {
+      const light = new THREE.DirectionalLight(0xffffff, intensity);
+      light.position.set(x, y, z);
+      scene.add(light);
+    }
+
+    const { scene: head } = await new GLTFLoader()
+      .setMeshoptDecoder(MeshoptDecoder)
+      .parseAsync(model, '');
+    const material = new THREE.MeshStandardMaterial({ flatShading: true, roughness: 0.65 });
+    head.traverse((o) => {
+      if (o instanceof THREE.Mesh) o.material = material;
+    });
+    scene.add(head);
+
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const target = { x: 0, y: 0 };
+    // Easing rate (1/s): drops on leave/enter so the head turns slowly, then ramps back up to FOLLOW
+    const FOLLOW = 5;
+    const SLOW = 0.9;
+    const RAMP = 1.9;
+    let rate = FOLLOW;
+    let tracking = false;
+    let last = 0;
+
+    // Renders only while the head is moving; any input calls wake() to restart the loop
+    const loop = (t: number) => {
+      // Time-based, so 144 Hz screens don't turn faster (same reason as donut.astro)
+      const dt = last ? Math.min((t - last) / 1000, 0.1) : 0;
+      last = t;
+      if (tracking) rate = Math.min(FOLLOW, rate + RAMP * dt);
+      const f = reduced ? 1 : 1 - Math.exp(-rate * dt);
+      head.rotation.y += (target.y - head.rotation.y) * f;
+      head.rotation.x += (target.x - head.rotation.x) * f;
+      renderer.render(scene, camera);
+      if (
+        Math.abs(target.y - head.rotation.y) < 1e-4 &&
+        Math.abs(target.x - head.rotation.x) < 1e-4
+      ) {
+        renderer.setAnimationLoop(null);
+        last = 0;
+      }
+    };
+    const wake = () => renderer.setAnimationLoop(loop);
+
+    const setColor = () => {
+      material.color.set(getComputedStyle(canvas).getPropertyValue('--accent').trim());
+      wake();
+    };
+    setColor();
+    new MutationObserver(setColor).observe(document.documentElement, {
+      attributeFilter: ['data-theme'],
+    });
+
+    addEventListener('pointermove', (e) => {
+      if (!tracking) {
+        tracking = true;
+        rate = SLOW;
+      }
+      const r = canvas.getBoundingClientRect();
+      // Angle towards the pointer, relative to the canvas centre, clamped to a plausible neck range
+      target.y = THREE.MathUtils.clamp(
+        ((e.clientX - r.left - r.width / 2) / innerWidth) * 2,
+        -0.6,
+        0.6,
+      );
+      target.x = THREE.MathUtils.clamp(
+        (e.clientY - r.top - r.height / 2) / innerHeight,
+        -0.25,
+        0.25,
+      );
+      wake();
+    });
+    // Cursor left the window: slowly ease back to neutral
+    document.documentElement.addEventListener('mouseleave', () => {
+      tracking = false;
+      rate = SLOW;
+      target.x = target.y = 0;
+      wake();
+    });
+
+    // Same entrance as the hero text, started only once the model is there to show
+    canvas.classList.add('enter');
+  }
+</script>
+
+<style>
+  .head {
+    display: block;
+    width: 320px;
+    height: 320px;
+  }
+</style>

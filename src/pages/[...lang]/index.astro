@@ -3,17 +3,10 @@ import Base from '../../layouts/Base.astro';
 import { EMAIL } from '../../data/social-links';
 import { langPaths, localePath, pageLang, t } from '../../i18n';
 import { cvPdfHref } from '../../lib/cv';
+import HeadModel from '../../components/HeadModel.astro';
 
 export const getStaticPaths = langPaths;
 const lang = pageLang(Astro.params.lang);
-
-// Purely decorative GitHub-style heatmap (aria-hidden, no real data): 20 weeks of
-// 7 days. Deterministic pseudo-noise instead of Math.random() so every build is
-// identical.
-const cells = Array.from({ length: 140 }, (_, i) => {
-  const noise = Math.sin(i * 12.9898) * 43758.5453;
-  return Math.floor((noise - Math.floor(noise)) * 5);
-});
 ---
 
 <Base lang={lang} description={t(lang, 'home.seo.description')}>
@@ -51,14 +44,7 @@ const cells = Array.from({ length: 140 }, (_, i) => {
       </div>
 
       <div class="hero-right">
-        <div class="activity-wrapper" aria-hidden="true">
-          <span class="activity-label">{t(lang, 'home.githubLabel')}</span>
-          <div class="contrib-grid">
-            {cells.map((level, i) => (
-              <div class="contrib-cell" data-level={level} style={`--col: ${Math.floor(i / 7)}`} />
-            ))}
-          </div>
-        </div>
+        <HeadModel />
       </div>
     </div>
   </section>
@@ -175,59 +161,5 @@ const cells = Array.from({ length: 140 }, (_, i) => {
       width: 100%;
       text-align: center;
     }
-  }
-  .activity-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    padding-left: 2rem;
-    border-left: 1px solid var(--border);
-  }
-
-  .activity-label {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--muted);
-    letter-spacing: 0.04em;
-    cursor: default;
-  }
-
-  .contrib-grid {
-    display: grid;
-    grid-template-rows: repeat(7, 11px);
-    grid-auto-flow: column;
-    grid-auto-columns: 11px;
-    gap: 3px;
-  }
-
-  .contrib-cell {
-    border-radius: 2px;
-    background: var(--border);
-    /* Lights up week by week, left to right, after the hero has faded in */
-    animation: cell-in 0.3s ease backwards;
-    animation-delay: calc(var(--col) * 25ms + 500ms);
-    transition:
-      background 0.15s,
-      transform 0.15s;
-  }
-
-  .contrib-cell:hover {
-    background: var(--accent);
-    transform: scale(1.25);
-  }
-
-  .contrib-cell[data-level='1'] {
-    background: color-mix(in srgb, var(--accent) 20%, var(--surface));
-  }
-  .contrib-cell[data-level='2'] {
-    background: color-mix(in srgb, var(--accent) 40%, var(--surface));
-  }
-  .contrib-cell[data-level='3'] {
-    background: color-mix(in srgb, var(--accent) 65%, var(--surface));
-    box-shadow: 0 0 5px color-mix(in srgb, var(--accent) 35%, transparent);
-  }
-  .contrib-cell[data-level='4'] {
-    background: var(--accent);
-    box-shadow: 0 0 8px color-mix(in srgb, var(--accent) 65%, transparent);
   }
 </style>
