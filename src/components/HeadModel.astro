@@ -17,13 +17,13 @@
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 10);
     camera.position.z = 4;
-    // Low ambient so flat facets read; key from the front (slightly high-left), weak fill on the
-    // right, and a top light from above-behind that catches hair, shoulders and collar
-    scene.add(new THREE.HemisphereLight(0xffffff, 0x202020, 0.25));
+    // Low ambient so flat facets read; near-side key from high-right so half the head falls into
+    // shadow and turning visibly moves the lit area, weak fill on the left, and a top light from above-behind that catches hair, shoulders and collar
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x202020, 0.08));
     for (const [intensity, x, y, z] of [
-      [2.4, -0.5, 1, 3],
-      [0.5, 2.5, -0.3, 2],
-      [2, 0.5, 3, -1],
+      [4, 2.5, 1.2, 0.6],
+      [0.15, -2.5, -0.3, 2],
+      [0.8, -0.5, 3, -1],
     ] as const) {
       const light = new THREE.DirectionalLight(0xffffff, intensity);
       light.position.set(x, y, z);
@@ -33,7 +33,7 @@
     const { scene: head } = await new GLTFLoader()
       .setMeshoptDecoder(MeshoptDecoder)
       .parseAsync(model, '');
-    const material = new THREE.MeshStandardMaterial({ flatShading: true, roughness: 0.65 });
+    const material = new THREE.MeshStandardMaterial({ flatShading: true, roughness: 0.6 });
     head.traverse((o) => {
       if (o instanceof THREE.Mesh) o.material = material;
     });
@@ -42,9 +42,9 @@
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const target = { x: 0, y: 0 };
     // Easing rate (1/s): drops on leave/enter so the head turns slowly, then ramps back up to FOLLOW
-    const FOLLOW = 5;
-    const SLOW = 0.9;
-    const RAMP = 1.9;
+    const FOLLOW = 12;
+    const SLOW = 1.5;
+    const RAMP = 6;
     let rate = FOLLOW;
     let tracking = false;
     let last = 0;
