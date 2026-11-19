@@ -66,7 +66,7 @@ export const SKILL_GROUPS: SkillGroup[] = (
         {
           id: 'java',
           name: 'Java',
-          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/java/java-original.svg',
+          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/java/java-plain.svg',
         },
         {
           id: 'kotlin',
@@ -135,7 +135,7 @@ export const SKILL_GROUPS: SkillGroup[] = (
         {
           id: 'mariadb',
           name: 'MariaDB',
-          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/mariadb/mariadb-original.svg',
+          iconUrl: 'https://cdn.simpleicons.org/mariadb/C0765A',
         },
         {
           id: 'redis',
@@ -145,8 +145,7 @@ export const SKILL_GROUPS: SkillGroup[] = (
         {
           id: 'cassandra',
           name: 'Cassandra',
-          iconUrl:
-            'https://cdn.jsdelivr.net/npm/devicon@latest/icons/cassandra/cassandra-original.svg',
+          iconUrl: 'https://cdn.simpleicons.org/apachecassandra',
         },
       ],
     },
@@ -197,7 +196,11 @@ export const SKILL_GROUPS: SkillGroup[] = (
           iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/linux/linux-original.svg',
         },
         { id: 'proxmox', name: 'Proxmox', iconUrl: 'https://cdn.simpleicons.org/proxmox' },
-        { id: 'vmware', name: 'VMware vSphere', iconUrl: 'https://cdn.simpleicons.org/vmware' },
+        {
+          id: 'vmware',
+          name: 'VMware vSphere',
+          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/vsphere/vsphere-original.svg',
+        },
         {
           id: 'git',
           name: 'Git',

@@ -89,9 +89,10 @@ const links = [
   }
 
   .header-inner {
-    max-width: var(--max-w);
+    /* Padding outside --max-w, as on the pages, so the edges match the content */
+    max-width: calc(var(--max-w) + 2 * var(--gutter));
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0 var(--gutter);
     height: 100%;
     display: flex;
     align-items: center;
@@ -214,10 +215,6 @@ const links = [
 
   /* ── Mobile: brand + toggle stay pinned, the nav row below scrolls away ── */
   @media (max-width: 480px) {
-    .header-inner {
-      padding: 0 1rem;
-    }
-
     .lang-toggle {
       font-size: 0.78rem;
       padding: 0.4rem 0.6rem;

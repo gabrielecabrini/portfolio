@@ -1,4 +1,5 @@
 ---
+import ExternalArrow from '../../components/ExternalArrow.astro';
 import Base from '../../layouts/Base.astro';
 import { PGP_KEY } from '../../data/pgp';
 import { EMAIL } from '../../data/social-links';
@@ -40,7 +41,7 @@ const keyLine = (key: (typeof keys)[number]) =>
           rel="noopener noreferrer"
           class="ext-link"
         >
-          keys.openpgp.org <span aria-hidden="true">↗</span>
+          keys.openpgp.org <ExternalArrow />
         </a>
         <a
           href="https://github.com/gabrielecabrini.gpg"
@@ -48,7 +49,7 @@ const keyLine = (key: (typeof keys)[number]) =>
           rel="noopener noreferrer"
           class="ext-link"
         >
-          GitHub <span aria-hidden="true">↗</span>
+          GitHub <ExternalArrow />
         </a>
       </div>
     </div>
@@ -70,7 +71,7 @@ const keyLine = (key: (typeof keys)[number]) =>
 
 <style>
   .pgp-page {
-    padding: 5rem 1.5rem;
+    padding: 5rem var(--gutter);
   }
 
   .pgp-inner {
@@ -144,13 +145,13 @@ const keyLine = (key: (typeof keys)[number]) =>
 
   @media (max-width: 768px) {
     .pgp-page {
-      padding: 3rem 1rem;
+      padding: 3rem var(--gutter);
     }
   }
 
   @media (max-width: 480px) {
     .pgp-page {
-      padding: 2rem 1rem;
+      padding: 2rem var(--gutter);
     }
 
     .term {

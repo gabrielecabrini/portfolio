@@ -18,7 +18,7 @@ const { lang } = Astro.props;
       <a class="muted repo-link" href="/donut/" aria-label="Donut">
         🍩
       </a>
-      <a class="muted repo-link hide-mobile" href={localePath(lang, '/pgp')}>
+      <a class="muted repo-link" href={localePath(lang, '/pgp')}>
         PGP
       </a>
       <a
@@ -141,9 +141,10 @@ const { lang } = Astro.props;
   }
 
   .footer-inner {
-    max-width: var(--max-w);
+    /* Padding outside --max-w, as on the pages, so the edges match the content */
+    max-width: calc(var(--max-w) + 2 * var(--gutter));
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0 var(--gutter);
     height: 100%;
     display: flex;
     align-items: center;

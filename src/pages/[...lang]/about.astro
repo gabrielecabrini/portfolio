@@ -1,12 +1,12 @@
 ---
+import ExternalArrow from '../../components/ExternalArrow.astro';
 import Base from '../../layouts/Base.astro';
 import CtaRow from '../../components/CtaRow.astro';
-import { PGP_LINK, SOCIAL_LINKS } from '../../data/social-links';
-import { langPaths, localePath, pageLang, t } from '../../i18n';
+import { SOCIAL_LINKS } from '../../data/social-links';
+import { langPaths, pageLang, t } from '../../i18n';
 
 export const getStaticPaths = langPaths;
 const lang = pageLang(Astro.params.lang);
-const links = [...SOCIAL_LINKS, { ...PGP_LINK, href: localePath(lang, PGP_LINK.href) }];
 ---
 
 <Base lang={lang} title={t(lang, 'title.about')} description={t(lang, 'about.seo.description')}>
@@ -46,14 +46,14 @@ const links = [...SOCIAL_LINKS, { ...PGP_LINK, href: localePath(lang, PGP_LINK.h
       </div>
 
       <div class="links-grid enter" style="--i: 2">
-        {links.map((link) => (
+        {SOCIAL_LINKS.map((link) => (
           <a href={link.href} target={link.target} rel={link.rel} class="link-card">
             <span class="link-icon">
               <img src={link.iconUrl} alt="" class="link-img" decoding="async" loading="lazy" />
             </span>
             <span class="link-name">{link.name}</span>
             <span class="link-arrow" aria-hidden="true">
-              {link.target ? '↗' : '→'}
+              {link.target ? <ExternalArrow /> : '→'}
             </span>
           </a>
         ))}
@@ -85,7 +85,7 @@ const links = [...SOCIAL_LINKS, { ...PGP_LINK, href: localePath(lang, PGP_LINK.h
 
 <style>
   .about-page {
-    padding: 5rem 1.5rem;
+    padding: 5rem var(--gutter);
   }
 
   .about-inner {
@@ -240,7 +240,7 @@ const links = [...SOCIAL_LINKS, { ...PGP_LINK, href: localePath(lang, PGP_LINK.h
 
   @media (max-width: 768px) {
     .about-page {
-      padding: 3rem 1rem;
+      padding: 3rem var(--gutter);
     }
 
     .profile-row {
@@ -260,7 +260,7 @@ const links = [...SOCIAL_LINKS, { ...PGP_LINK, href: localePath(lang, PGP_LINK.h
 
   @media (max-width: 480px) {
     .about-page {
-      padding: 2rem 1rem;
+      padding: 2rem var(--gutter);
     }
   }
 </style>

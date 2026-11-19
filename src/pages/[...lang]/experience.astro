@@ -1,4 +1,5 @@
 ---
+import ExternalArrow from '../../components/ExternalArrow.astro';
 import Base from '../../layouts/Base.astro';
 import CtaRow from '../../components/CtaRow.astro';
 import { CERTIFICATIONS, LANGUAGES, SKILL_GROUPS, WORK_EXPERIENCES } from '../../data/experience';
@@ -134,7 +135,7 @@ const lang = pageLang(Astro.params.lang);
                 <h3 class="cert-name">
                   {cert.url ? (
                     <a href={cert.url} target="_blank" rel="noopener noreferrer">
-                      {cert.name} <span aria-hidden="true">↗</span>
+                      {cert.name} <ExternalArrow />
                     </a>
                   ) : (
                     cert.name
@@ -170,7 +171,7 @@ const lang = pageLang(Astro.params.lang);
 
 <style>
   .exp-page {
-    padding: 5rem 1.5rem;
+    padding: 5rem var(--gutter);
   }
 
   .exp-inner {
@@ -528,7 +529,7 @@ const lang = pageLang(Astro.params.lang);
 
   @media (max-width: 768px) {
     .exp-page {
-      padding: 3rem 1rem;
+      padding: 3rem var(--gutter);
     }
 
     .exp-inner {
@@ -551,7 +552,7 @@ const lang = pageLang(Astro.params.lang);
 
   @media (max-width: 480px) {
     .exp-page {
-      padding: 2rem 1rem;
+      padding: 2rem var(--gutter);
     }
 
     .skill-group {

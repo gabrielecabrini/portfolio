@@ -59,7 +59,7 @@ const lang = pageLang(Astro.params.lang);
     /* dvh accounts for mobile browser chrome (address bar) */
     min-height: calc(100dvh - var(--header-h) - var(--footer-h));
     min-height: calc(100vh - var(--header-h) - var(--footer-h)); /* fallback */
-    padding: 4rem 1.5rem;
+    padding: 4rem var(--gutter);
   }
 
   .hero-inner {
@@ -172,7 +172,7 @@ const lang = pageLang(Astro.params.lang);
 
   @media (max-width: 480px) {
     .hero {
-      padding: 2.5rem 1rem;
+      padding: 2.5rem var(--gutter);
       /* on small screens don't force full-viewport height */
       min-height: unset;
     }
