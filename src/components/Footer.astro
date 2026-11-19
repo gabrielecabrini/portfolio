@@ -21,14 +21,6 @@ const { lang } = Astro.props;
       <a class="muted repo-link" href={localePath(lang, '/pgp')}>
         PGP
       </a>
-      <a
-        class="muted repo-link hide-mobile"
-        href="/sitemap-index.xml"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Sitemap
-      </a>
       <a class="muted repo-link icon-link" href={EMAIL.href} aria-label="Email">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -160,12 +152,6 @@ const { lang } = Astro.props;
     display: flex;
     align-items: center;
     gap: 1rem;
-  }
-
-  @media (max-width: 480px) {
-    .hide-mobile {
-      display: none;
-    }
   }
 
   .footer-right {

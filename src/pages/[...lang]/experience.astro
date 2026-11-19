@@ -314,18 +314,9 @@ const lang = pageLang(Astro.params.lang);
     opacity: 0.8;
   }
 
-  /* Scroll-driven: each job and card fades in, and the job connector line grows, as it scrolls into view */
+  /* Scroll-driven: only the job connector line grows as it scrolls into view; the content itself stays put */
   @supports (animation-timeline: view()) {
     @media (prefers-reduced-motion: no-preference) {
-      .timeline-item,
-      .skill-group,
-      .skill-card,
-      .cert-card {
-        animation: fade-up linear both;
-        animation-timeline: view();
-        animation-range: entry 0% entry 60%;
-      }
-
       .timeline-item::before {
         transform-origin: top;
         animation: grow-y linear both;

@@ -33,19 +33,11 @@ const lang = pageLang(Astro.params.lang);
         </div>
       </div>
 
-      <blockquote class="quote enter" style="--i: 1">
-        <p>
-          Any fool can write code that a computer can understand. Good programmers write code that
-          humans can understand.
-        </p>
-        <cite>— Martin Fowler</cite>
-      </blockquote>
-
-      <div class="section-header links-section-header enter" style="--i: 2">
+      <div class="section-header links-section-header enter" style="--i: 1">
         <h2>{t(lang, 'about.links.title')}</h2>
       </div>
 
-      <div class="links-grid enter" style="--i: 2">
+      <div class="links-grid enter" style="--i: 1">
         {SOCIAL_LINKS.map((link) => (
           <a href={link.href} target={link.target} rel={link.rel} class="link-card">
             <span class="link-icon">
@@ -59,7 +51,7 @@ const lang = pageLang(Astro.params.lang);
         ))}
       </div>
 
-      <CtaRow lang={lang} class="enter" style="--i: 3" />
+      <CtaRow lang={lang} class="enter" style="--i: 2" />
     </div>
   </section>
   <script>
@@ -128,22 +120,6 @@ const lang = pageLang(Astro.params.lang);
   .section-header h2 {
     color: var(--text);
     font-size: 1.15rem;
-  }
-
-  .quote {
-    margin-top: 3rem;
-    padding-left: 1.25rem;
-    border-left: 2px solid var(--accent);
-    color: var(--muted);
-    font-style: italic;
-  }
-
-  .quote cite {
-    display: block;
-    margin-top: 0.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    font-style: normal;
   }
 
   .links-section-header {

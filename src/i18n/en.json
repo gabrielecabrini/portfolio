@@ -24,9 +24,6 @@
     "subtitle": "Fullstack Software Developer",
     "tagline": "I build business applications, from Java and Kotlin backends to the interface. I've used Linux for years, and I'm happy to look after the infrastructure they run on too.",
     "available": "Available for collaborations and freelance projects",
-    "cta": {
-      "experience": "Experience"
-    },
     "seo": {
       "description": "Gabriele Cabrini, fullstack developer: Java, Spring Boot and Kotlin backends, Angular frontends, infrastructure on Linux, Docker and Kubernetes."
     }

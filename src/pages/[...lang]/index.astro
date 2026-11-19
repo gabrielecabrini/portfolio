@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import { EMAIL } from '../../data/social-links';
-import { langPaths, localePath, pageLang, t } from '../../i18n';
+import { langPaths, pageLang, t } from '../../i18n';
 import { cvPdfHref } from '../../lib/cv';
 import HeadModel from '../../components/HeadModel.astro';
 
@@ -33,9 +33,6 @@ const lang = pageLang(Astro.params.lang);
           </a>
           <a href={EMAIL.href} class="btn-secondary">
             {t(lang, 'cta.contact')}
-          </a>
-          <a href={localePath(lang, '/experience')} class="btn-secondary">
-            {t(lang, 'home.cta.experience')}
           </a>
         </div>
 
