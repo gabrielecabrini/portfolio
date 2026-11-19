@@ -22,8 +22,6 @@ const lang = pageLang(Astro.params.lang);
       <div class="exp-section">
         <h2>{t(lang, 'experience.work.title')}</h2>
 
-        {WORK_EXPERIENCES.length === 0 && <p class="empty">{t(lang, 'experience.empty')}</p>}
-
         <div class="timeline">
           {WORK_EXPERIENCES.map((job) => (
             <div class="timeline-item">
@@ -119,8 +117,6 @@ const lang = pageLang(Astro.params.lang);
       <div class="exp-section">
         <h2>{t(lang, 'experience.certs.title')}</h2>
 
-        {CERTIFICATIONS.length === 0 && <p class="empty">{t(lang, 'experience.empty')}</p>}
-
         <div class="certs-grid">
           {CERTIFICATIONS.map((cert) => (
             <div class="cert-card lit">
@@ -210,11 +206,6 @@ const lang = pageLang(Astro.params.lang);
 
   .projects-link:hover span {
     transform: translateX(3px);
-  }
-
-  .empty {
-    color: var(--muted);
-    font-size: 0.95rem;
   }
 
   /* ── Timeline (Work Experience) ── */

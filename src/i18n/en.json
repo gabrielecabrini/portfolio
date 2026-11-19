@@ -22,7 +22,7 @@
   "home": {
     "greeting": "Hi, I'm",
     "subtitle": "Fullstack Software Developer",
-    "tagline": "I build business applications, from Java and Kotlin backends to the interface. I've used Linux for years, and I'm happy to look after the infrastructure they run on too.",
+    "tagline": "I build business software, mostly backends in Java and Spring Boot, with attention to the implementation details. I've used GNU/Linux for years and I also manage the infrastructure it runs on.",
     "available": "Available for collaborations and freelance projects",
     "seo": {
       "description": "Gabriele Cabrini, fullstack developer: Java, Spring Boot and Kotlin backends, Angular frontends, infrastructure on Linux, Docker and Kubernetes."
@@ -33,13 +33,12 @@
     "seo": {
       "description": "About Gabriele Cabrini: fullstack developer working across Java and Angular business software, Linux infrastructure and open source. Contacts and profiles."
     },
-    "bio": "I'm Gabriele, a fullstack developer. I mostly work on business software and enterprise applications: Java, Spring Boot and Kotlin on the backend, Angular on the frontend, and whatever it takes for the two to work well together.\nI like following a project from start to finish, deploy included: I've used Linux for years and I'm happy to deal with containers, Kubernetes and servers. Outside work, I also contribute to a few open source projects.",
+    "bio": "I'm Gabriele, a fullstack developer from Bergamo. I started programming with Minecraft plugins, and today I build business software: Java and Spring Boot on the backend, Angular on the frontend.\nI work mostly on the backend, where I pay attention to how things are implemented, not just to whether they work. What I like most is solving the problem and then seeing people use the result every day.\nI also look after the infrastructure my software runs on: I've used GNU/Linux for years and I manage my own servers. In my free time I contribute to open source projects.",
     "links": {
       "title": "Contact & profiles"
     }
   },
   "experience": {
-    "empty": "Nothing here yet. Check back soon!",
     "seo": {
       "description": "Work experience, skills and certifications of Gabriele Cabrini, fullstack developer: Java, Spring Boot, Kotlin, Angular, Docker, Kubernetes."
     },
