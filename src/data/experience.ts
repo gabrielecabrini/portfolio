@@ -66,29 +66,28 @@ export const SKILL_GROUPS: SkillGroup[] = (
         {
           id: 'java',
           name: 'Java',
-          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/java/java-plain.svg',
+          iconUrl: '/assets/icons/java.svg',
         },
         {
           id: 'kotlin',
           name: 'Kotlin',
-          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/kotlin/kotlin-original.svg',
+          iconUrl: '/assets/icons/kotlin.svg',
         },
         {
           id: 'typescript',
           name: 'TypeScript',
-          iconUrl:
-            'https://cdn.jsdelivr.net/npm/devicon@latest/icons/typescript/typescript-original.svg',
+          iconUrl: '/assets/icons/typescript.svg',
         },
         {
           id: 'dart',
           name: 'Dart',
-          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/dart/dart-original.svg',
+          iconUrl: '/assets/icons/dart.svg',
         },
         {
           id: 'rust',
           name: 'Rust',
           // Brand-coloured rather than devicon's black logo, which vanishes on the dark theme.
-          iconUrl: 'https://cdn.simpleicons.org/rust/DEA584',
+          iconUrl: '/assets/icons/rust.svg',
         },
       ],
     },
@@ -98,22 +97,22 @@ export const SKILL_GROUPS: SkillGroup[] = (
         {
           id: 'spring-boot',
           name: 'Spring Boot',
-          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/spring/spring-original.svg',
+          iconUrl: '/assets/icons/spring.svg',
         },
         {
           id: 'angular',
           name: 'Angular',
-          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/angular/angular-original.svg',
+          iconUrl: '/assets/icons/angular.svg',
         },
         {
           id: 'astro',
           name: 'Astro',
-          iconUrl: 'https://cdn.simpleicons.org/astro',
+          iconUrl: '/assets/icons/astro.svg',
         },
         {
           id: 'flutter',
           name: 'Flutter',
-          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/flutter/flutter-original.svg',
+          iconUrl: '/assets/icons/flutter.svg',
         },
       ],
     },
@@ -123,29 +122,27 @@ export const SKILL_GROUPS: SkillGroup[] = (
         {
           id: 'postgresql',
           name: 'PostgreSQL',
-          iconUrl:
-            'https://cdn.jsdelivr.net/npm/devicon@latest/icons/postgresql/postgresql-original.svg',
+          iconUrl: '/assets/icons/postgresql.svg',
         },
         {
           id: 'sql-server',
           name: 'SQL Server',
-          iconUrl:
-            'https://cdn.jsdelivr.net/npm/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-plain.svg',
+          iconUrl: '/assets/icons/microsoftsqlserver.svg',
         },
         {
           id: 'mariadb',
           name: 'MariaDB',
-          iconUrl: 'https://cdn.simpleicons.org/mariadb/C0765A',
+          iconUrl: '/assets/icons/mariadb.svg',
         },
         {
           id: 'redis',
           name: 'Redis',
-          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/redis/redis-original.svg',
+          iconUrl: '/assets/icons/redis.svg',
         },
         {
           id: 'cassandra',
           name: 'Cassandra',
-          iconUrl: 'https://cdn.simpleicons.org/apachecassandra',
+          iconUrl: '/assets/icons/apachecassandra.svg',
         },
       ],
     },
@@ -155,13 +152,12 @@ export const SKILL_GROUPS: SkillGroup[] = (
         {
           id: 'docker',
           name: 'Docker',
-          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/docker/docker-original.svg',
+          iconUrl: '/assets/icons/docker.svg',
         },
         {
           id: 'kubernetes',
           name: 'Kubernetes',
-          iconUrl:
-            'https://cdn.jsdelivr.net/npm/devicon@latest/icons/kubernetes/kubernetes-plain.svg',
+          iconUrl: '/assets/icons/kubernetes.svg',
         },
       ],
     },
@@ -171,19 +167,17 @@ export const SKILL_GROUPS: SkillGroup[] = (
         {
           id: 'prometheus',
           name: 'Prometheus',
-          iconUrl:
-            'https://cdn.jsdelivr.net/npm/devicon@latest/icons/prometheus/prometheus-original.svg',
+          iconUrl: '/assets/icons/prometheus.svg',
         },
         {
           id: 'grafana',
           name: 'Grafana',
-          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/grafana/grafana-original.svg',
+          iconUrl: '/assets/icons/grafana.svg',
         },
         {
           id: 'elk',
           name: 'Elastic Stack',
-          iconUrl:
-            'https://cdn.jsdelivr.net/npm/devicon@latest/icons/elasticsearch/elasticsearch-original.svg',
+          iconUrl: '/assets/icons/elasticsearch.svg',
         },
       ],
     },
@@ -193,18 +187,18 @@ export const SKILL_GROUPS: SkillGroup[] = (
         {
           id: 'linux',
           name: 'Linux',
-          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/linux/linux-original.svg',
+          iconUrl: '/assets/icons/linux.svg',
         },
-        { id: 'proxmox', name: 'Proxmox', iconUrl: 'https://cdn.simpleicons.org/proxmox' },
+        { id: 'proxmox', name: 'Proxmox', iconUrl: '/assets/icons/proxmox.svg' },
         {
           id: 'vmware',
           name: 'VMware vSphere',
-          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/vsphere/vsphere-original.svg',
+          iconUrl: '/assets/icons/vsphere.svg',
         },
         {
           id: 'git',
           name: 'Git',
-          iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/git/git-original.svg',
+          iconUrl: '/assets/icons/git.svg',
         },
       ],
     },
@@ -215,8 +209,8 @@ export const SKILLS: Skill[] = SKILL_GROUPS.flatMap((g) => g.skills);
 
 export const LANGUAGES: Language[] = (
   [
-    { id: 'italian', iconUrl: 'https://flagcdn.com/it.svg' },
-    { id: 'english', iconUrl: 'https://flagcdn.com/gb.svg' },
+    { id: 'italian', iconUrl: '/assets/icons/flag-it.svg' },
+    { id: 'english', iconUrl: '/assets/icons/flag-gb.svg' },
   ] satisfies Omit<Language, 'nameKey' | 'levelKey'>[]
 ).map((l) => ({
   ...l,

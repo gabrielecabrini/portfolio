@@ -8,8 +8,9 @@
   --accent: #4e958c;
   --accent-dim: #448a81;
   --on-accent: #0d0d0d;
-  --font: system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  /* Both self-hosted by Astro's Fonts API (astro.config.mjs), each with its own metric fallback */
+  --font: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
   --radius: 8px;
   --radius-sm: 4px;
   --max-w: 900px;

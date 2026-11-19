@@ -10,9 +10,9 @@ export default defineConfig({
   scopedStyleStrategy: 'attribute',
   // Pages are tiny static HTML: prefetch every internal link on hover.
   prefetch: { prefetchAll: true },
-  // The CV pins Inter instead of system-ui, which Playwright's Chromium resolves to
-  // whatever sans the build machine has. Inter is what GNOME's system-ui (Adwaita
-  // Sans) is derived from, so the PDF matches the page as seen on the desktop.
+  // Self-hosted at build time: no request to a font CDN, same faces on every OS.
+  // Inter also pins the CV PDF, which would otherwise print in whatever sans the
+  // build machine's Chromium resolves system-ui to.
   // Fontsource rather than Google: it serves static per-weight files, while
   // Chromium prints Google's variable font as Type 3 glyphs with broken spacing.
   fonts: [
@@ -21,6 +21,14 @@ export default defineConfig({
       name: 'Inter',
       cssVariable: '--font-inter',
       weights: [400, 500, 600, 700],
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: 'JetBrains Mono',
+      cssVariable: '--font-jetbrains-mono',
+      weights: [400, 500, 600, 700],
+      // Never set in italic: skip those files
+      styles: ['normal'],
     },
   ],
   integrations: [

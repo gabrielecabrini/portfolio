@@ -45,10 +45,10 @@
 }
 
 /* GitHub brand icon is near-black — invert in dark mode for visibility */
-:root img[src*='simpleicons.org/github/'] {
+:root img[src='/assets/icons/github.svg'] {
   filter: invert(1);
 }
-[data-theme='light'] img[src*='simpleicons.org/github/'] {
+[data-theme='light'] img[src='/assets/icons/github.svg'] {
   filter: none;
 }
 

@@ -2,8 +2,8 @@ import type { SocialLink } from '../models/social-link.model';
 
 // Kept separate from SOCIAL_LINKS (rather than folded in) because it's consumed
 // individually by home/about/cv for the "email me" CTA, not just iterated as a list.
-// iconUrl is an inline SVG data URI (not a CDN icon like the others) so the mail
-// glyph never depends on an external request.
+// iconUrl is an inline SVG data URI (not a file in /assets/icons like the others) so the mail
+// glyph needs no request at all.
 export const EMAIL: SocialLink = {
   name: 'gabriele@gabrielecabrini.it',
   href: 'mailto:gabriele@gabrielecabrini.it',
@@ -15,28 +15,28 @@ export const SOCIAL_LINKS: SocialLink[] = [
   {
     name: 'GitHub',
     href: 'https://github.com/gabrielecabrini',
-    iconUrl: 'https://cdn.simpleicons.org/github/181717',
+    iconUrl: '/assets/icons/github.svg',
     target: '_blank',
     rel: 'noopener noreferrer',
   },
   {
     name: 'GitLab',
     href: 'https://gitlab.com/gabrielecabrini',
-    iconUrl: 'https://cdn.simpleicons.org/gitlab',
+    iconUrl: '/assets/icons/gitlab.svg',
     target: '_blank',
     rel: 'noopener noreferrer',
   },
   {
     name: 'LinkedIn',
     href: 'https://www.linkedin.com/in/gabrielecabrini/',
-    iconUrl: 'https://cdn.jsdelivr.net/npm/devicon@latest/icons/linkedin/linkedin-original.svg',
+    iconUrl: '/assets/icons/linkedin.svg',
     target: '_blank',
     rel: 'noopener noreferrer',
   },
   {
     name: 'Telegram',
     href: 'https://t.me/gabrielecabrini',
-    iconUrl: 'https://cdn.simpleicons.org/telegram',
+    iconUrl: '/assets/icons/telegram.svg',
     target: '_blank',
     rel: 'noopener noreferrer',
   },

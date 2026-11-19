@@ -1,5 +1,6 @@
 ---
 import '../styles.css';
+import { Font } from 'astro:assets';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SKILLS } from '../data/experience';
@@ -60,10 +61,15 @@ const person = {
     <meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#f8f8f8" media="(prefers-color-scheme: light)" />
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
+    <!-- Preload only what the first screen paints: body text (400) and headings (600) -->
+    <Font
+      cssVariable="--font-inter"
+      preload={[
+        { subset: 'latin', weight: 400, style: 'normal' },
+        { subset: 'latin', weight: 600, style: 'normal' },
+      ]}
     />
+    <Font cssVariable="--font-jetbrains-mono" />
 
     {!noindex && (
       <>

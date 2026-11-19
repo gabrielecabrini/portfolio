@@ -1,5 +1,4 @@
 ---
-import { Font } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import {
   CERTIFICATIONS,
@@ -37,8 +36,6 @@ const years = Math.floor(
 ---
 
 <Base lang={lang} title="CV" description={t(lang, 'cv.seo.description')}>
-  <Font cssVariable="--font-inter" slot="head" />
-
   <!-- ── Desktop toolbar ── -->
   <div class="cv-actions">
     <span class="cv-lang-hint">{t(lang, 'cv.lang.hint')}</span>
