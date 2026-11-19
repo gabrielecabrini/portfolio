@@ -42,6 +42,12 @@ describe('theme toggle', () => {
 
     await page.reload();
     expect(await theme()).toBe('dark');
+    // Browser UI colour follows the saved choice, not the (light) OS
+    expect(
+      await page.$$eval('meta[name="theme-color"]', (metas) =>
+        metas.map((m) => (m as HTMLMetaElement).content),
+      ),
+    ).toEqual(['#0d0d0d', '#0d0d0d']);
   });
 
   it('drops the saved choice when switching back to the OS theme', async () => {

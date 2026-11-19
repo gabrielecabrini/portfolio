@@ -5,6 +5,7 @@ h4 {
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 
 h1 {
@@ -19,6 +20,8 @@ h3 {
 
 p {
   max-width: 65ch;
+  /* No single word left alone on the last line */
+  text-wrap: pretty;
 }
 
 code,

@@ -89,6 +89,18 @@ const links = [
     border-bottom: 1px solid var(--border);
   }
 
+  /* The line under the header draws in over the first pixels of scroll: none at the very top */
+  @supports (animation-timeline: scroll()) {
+    @media (prefers-reduced-motion: no-preference) {
+      header {
+        border-bottom-color: transparent;
+        animation: header-line linear both;
+        animation-timeline: scroll();
+        animation-range: 0 48px;
+      }
+    }
+  }
+
   .header-inner {
     /* Padding outside --max-w, as on the pages, so the edges match the content */
     max-width: calc(var(--max-w) + 2 * var(--gutter));

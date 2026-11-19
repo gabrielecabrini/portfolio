@@ -142,6 +142,8 @@ const lang = pageLang(Astro.params.lang);
     object-fit: contain;
     flex-shrink: 0;
     border-radius: 4px;
+    /* Hairline rim along the logo's own shape: a black mark stays readable on the dark card */
+    filter: drop-shadow(0 0 0.5px color-mix(in srgb, var(--text) 45%, transparent));
   }
 
   .card-body p {

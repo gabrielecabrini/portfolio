@@ -107,8 +107,18 @@ const { lang } = Astro.props;
   const osTheme = () => (systemDark.matches ? 'dark' : 'light');
 
   // Without a saved choice the site keeps following the OS, even while open.
+  // The theme-color metas only know the OS theme: point them at the page's actual background
+  const syncBar = () => {
+    const bg = getComputedStyle(root).getPropertyValue('--bg').trim();
+    document
+      .querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')
+      .forEach((meta) => (meta.content = bg));
+  };
+  syncBar();
+
   systemDark.addEventListener('change', () => {
     if (!localStorage.getItem('theme')) root.dataset['theme'] = osTheme();
+    syncBar();
   });
 
   const toggle = document.querySelector<HTMLButtonElement>('.theme-toggle');
@@ -120,6 +130,7 @@ const { lang } = Astro.props;
   toggle?.addEventListener('click', () => {
     const next = root.dataset['theme'] === 'dark' ? 'light' : 'dark';
     root.dataset['theme'] = next;
+    syncBar();
     // Picking the OS theme again drops the override, so the site follows the OS from now on
     if (next === osTheme()) localStorage.removeItem('theme');
     else localStorage.setItem('theme', next);

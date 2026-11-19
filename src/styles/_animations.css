@@ -30,6 +30,12 @@
   }
 }
 
+@keyframes header-line {
+  to {
+    border-bottom-color: var(--border);
+  }
+}
+
 @keyframes blink {
   50% {
     opacity: 0;
