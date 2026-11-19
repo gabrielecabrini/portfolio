@@ -13,15 +13,17 @@ const lang = pageLang(Astro.params.lang);
   <section class="hero">
     <div class="hero-inner">
       <div class="hero-left">
-        <p class="enter label" style="--i: 0">
-          {t(lang, 'home.greeting')}
-        </p>
-        <h1 class="enter" style="--i: 1">
-          Gabriele Cabrini
-        </h1>
-        <p class="enter subtitle" style="--i: 2">
-          {t(lang, 'home.subtitle')}
-        </p>
+        <div class="intro">
+          <p class="enter label" style="--i: 0">
+            {t(lang, 'home.greeting')}
+          </p>
+          <h1 class="enter" style="--i: 1">
+            Gabriele Cabrini
+          </h1>
+          <p class="enter subtitle" style="--i: 2">
+            {t(lang, 'home.subtitle')}
+          </p>
+        </div>
         <p class="enter tagline" style="--i: 3">
           {t(lang, 'home.tagline')}
         </p>
@@ -143,8 +145,28 @@ const lang = pageLang(Astro.params.lang);
   }
 
   @media (max-width: 700px) {
+    /* Small head beside the intro (label, name, subtitle); the rest spans the full width.
+       display: contents lets the hero-left blocks join the grid directly */
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0 1rem;
+    }
+
+    .hero-left {
+      display: contents;
+    }
+
+    .tagline,
+    .cta-row,
+    .availability {
+      grid-column: 1 / -1;
+    }
+
     .hero-right {
-      display: none;
+      grid-column: 2;
+      grid-row: 1;
+      --head-size: 112px;
     }
   }
 

@@ -1,7 +1,7 @@
 <canvas class="head" width="320" height="320" style="--i: 2" aria-hidden="true"></canvas>
 
 <script>
-  // Decorative low-poly head that looks at the cursor. Skipped when the canvas is hidden (e.g. by a parent media query).
+  // Decorative low-poly head that looks at the cursor (or taps, on touch). Skipped when the canvas is hidden by a parent.
   const canvas = document.querySelector<HTMLCanvasElement>('canvas.head');
   if (canvas && canvas.offsetParent) {
     // Library chunks and the model download in parallel
@@ -16,6 +16,8 @@
     // Firefox on macOS may silently deny MSAA: supersample instead
     const msaa = renderer.getContext().getContextAttributes()?.antialias;
     renderer.setPixelRatio(Math.min(devicePixelRatio, 2) * (msaa ? 1 : 2));
+    // Buffer from the displayed size, not the 320 attribute, so the small mobile head draws fewer pixels
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 10);
     camera.position.z = 4;
@@ -61,9 +63,10 @@
       head.rotation.y += (target.y - head.rotation.y) * f;
       head.rotation.x += (target.x - head.rotation.x) * f;
       renderer.render(scene, camera);
+      // 1e-3 rad is invisible and lets a slow glance settle (~4.5s) before the next one starts
       if (
-        Math.abs(target.y - head.rotation.y) < 1e-4 &&
-        Math.abs(target.x - head.rotation.x) < 1e-4
+        Math.abs(target.y - head.rotation.y) < 1e-3 &&
+        Math.abs(target.x - head.rotation.x) < 1e-3
       ) {
         renderer.setAnimationLoop(null);
         last = 0;
@@ -80,7 +83,30 @@
       attributeFilter: ['data-theme'],
     });
 
-    addEventListener('pointermove', (e) => {
+    // Slowly turn towards a fixed point, no longer following the pointer
+    const easeTo = (x: number, y: number) => {
+      tracking = false;
+      rate = SLOW;
+      target.x = x;
+      target.y = y;
+      wake();
+    };
+
+    // Touch devices have no hover: the head glances around on its own between taps
+    const idleGlance = !reduced && matchMedia('(hover: none)').matches;
+    let idle: ReturnType<typeof setTimeout> | undefined;
+    const glance = () => {
+      easeTo(THREE.MathUtils.randFloat(-0.2, 0.2), THREE.MathUtils.randFloat(-0.5, 0.5));
+      idle = setTimeout(glance, THREE.MathUtils.randFloat(5000, 8000));
+    };
+    if (idleGlance) idle = setTimeout(glance, 1500);
+
+    const aim = (e: PointerEvent) => {
+      if (idleGlance) {
+        // Keep looking at the tapped point for a while before glancing around again
+        clearTimeout(idle);
+        idle = setTimeout(glance, 4000);
+      }
       if (!tracking) {
         tracking = true;
         rate = SLOW;
@@ -98,14 +124,12 @@
         0.25,
       );
       wake();
-    });
+    };
+    addEventListener('pointermove', aim);
+    // On touch, pointermove fires only while dragging: a single tap needs pointerdown
+    addEventListener('pointerdown', aim);
     // Cursor left the window: slowly ease back to neutral
-    document.documentElement.addEventListener('mouseleave', () => {
-      tracking = false;
-      rate = SLOW;
-      target.x = target.y = 0;
-      wake();
-    });
+    document.documentElement.addEventListener('mouseleave', () => easeTo(0, 0));
 
     // Same entrance as the hero text, started only once the model is there to show
     canvas.classList.add('enter');
@@ -115,7 +139,8 @@
 <style>
   .head {
     display: block;
-    width: 320px;
-    height: 320px;
+    /* Pages can shrink it, e.g. on mobile */
+    width: var(--head-size, 320px);
+    height: var(--head-size, 320px);
   }
 </style>
