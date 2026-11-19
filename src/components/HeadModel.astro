@@ -13,7 +13,9 @@
     ]);
 
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    // Firefox on macOS may silently deny MSAA: supersample instead
+    const msaa = renderer.getContext().getContextAttributes()?.antialias;
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2) * (msaa ? 1 : 2));
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 10);
     camera.position.z = 4;
