@@ -11,6 +11,8 @@
   /* Both self-hosted by Astro's Fonts API (astro.config.mjs), each with its own metric fallback */
   --font: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
+  /* Exponential ease-out: quick start, long settle */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --radius: 8px;
   --radius-sm: 4px;
   --max-w: 900px;

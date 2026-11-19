@@ -82,6 +82,7 @@ const links = [
     position: sticky;
     top: 0;
     z-index: 100;
+    view-transition-name: site-header;
     height: var(--header-bar-h);
     /* Near-opaque, no backdrop blur: re-blurring animating content flickered on iOS */
     background: color-mix(in srgb, var(--bg) 92%, transparent);
@@ -112,6 +113,11 @@ const links = [
 
   .brand:hover {
     color: var(--accent);
+  }
+
+  /* The dot blinks like a terminal cursor while hovered */
+  .brand:hover .brand-dot {
+    animation: blink 1s steps(1) infinite;
   }
 
   /* Same mark as the favicon: accent dot, pulled in because a monospace period
@@ -200,6 +206,10 @@ const links = [
   .nav-desktop a:hover::after,
   .nav-desktop a.active::after {
     transform: scaleX(1);
+  }
+
+  .nav-desktop a.active::after {
+    view-transition-name: nav-underline;
   }
 
   /* ── Tablet: compact single row ── */

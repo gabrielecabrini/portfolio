@@ -73,7 +73,7 @@ const lang = pageLang(Astro.params.lang);
               <h3 class="skill-cat-label">{t(lang, group.categoryKey)}</h3>
               <ul class="skill-chips">
                 {group.skills.map((skill) => (
-                  <li class="skill-chip">
+                  <li class="skill-chip lit">
                     {skill.iconUrl && (
                       <img
                         class="skill-chip-icon"
@@ -98,7 +98,7 @@ const lang = pageLang(Astro.params.lang);
 
         <div class="skills-grid">
           {LANGUAGES.map((language) => (
-            <div class="skill-card">
+            <div class="skill-card lit">
               <img
                 class="skill-icon"
                 src={language.iconUrl}
@@ -123,7 +123,7 @@ const lang = pageLang(Astro.params.lang);
 
         <div class="certs-grid">
           {CERTIFICATIONS.map((cert) => (
-            <div class="cert-card">
+            <div class="cert-card lit">
               {cert.iconUrl ? (
                 <div class="cert-logo">
                   <img src={cert.iconUrl} alt={cert.issuer} decoding="async" loading="lazy" />
@@ -201,6 +201,15 @@ const lang = pageLang(Astro.params.lang);
 
   .projects-link:hover {
     color: var(--accent);
+  }
+
+  .projects-link span {
+    display: inline-block;
+    transition: transform 0.3s var(--ease-out);
+  }
+
+  .projects-link:hover span {
+    transform: translateX(3px);
   }
 
   .empty {
@@ -381,11 +390,9 @@ const lang = pageLang(Astro.params.lang);
     color: var(--text);
     font-size: 0.875rem;
     font-weight: 500;
-    transition: border-color 0.15s;
-  }
-
-  .skill-chip:hover {
-    border-color: var(--accent);
+    /* Many small badges: a short, faint arc of light instead of the cards' full glow */
+    --lit-size: 64px;
+    --lit-strength: 0.7;
   }
 
   .skill-chip-icon {
@@ -409,11 +416,7 @@ const lang = pageLang(Astro.params.lang);
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    transition: border-color 0.15s;
-  }
-
-  .skill-card:hover {
-    border-color: var(--accent);
+    --lit-size: 180px;
   }
 
   .skill-icon {
@@ -451,11 +454,6 @@ const lang = pageLang(Astro.params.lang);
     display: flex;
     align-items: center;
     gap: 1.25rem;
-    transition: border-color 0.15s;
-  }
-
-  .cert-card:hover {
-    border-color: var(--accent);
   }
 
   .cert-logo {

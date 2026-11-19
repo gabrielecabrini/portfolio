@@ -34,7 +34,8 @@
   font-weight: 500;
   transition:
     border-color 0.15s,
-    color 0.15s;
+    color 0.15s,
+    transform 0.15s;
   border: 1px solid var(--border);
   color: var(--muted);
 }
@@ -42,6 +43,42 @@
 .btn-secondary:hover {
   border-color: var(--text);
   color: var(--text);
+}
+
+/* Both give way under the press */
+.btn-primary:active,
+.btn-secondary:active {
+  transform: scale(0.97);
+}
+
+/* Card border lit by the pointer: Base.astro feeds --mx/--my, top-centre without JS.
+   Small, repeated boxes tone it down with --lit-size and --lit-strength.
+   The gradient fills a 1px padding ring; the mask cuts the content box out of it. */
+.lit {
+  position: relative;
+}
+
+.lit::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  border-radius: inherit;
+  background: radial-gradient(
+    var(--lit-size, 260px) circle at var(--mx, 50%) var(--my, 0%),
+    var(--accent),
+    transparent 70%
+  );
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.lit:hover::before {
+  opacity: var(--lit-strength, 1);
 }
 
 /* GitHub brand icon is near-black — invert in dark mode for visibility */

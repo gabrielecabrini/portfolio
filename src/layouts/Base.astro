@@ -103,6 +103,15 @@ const person = {
     <script>
       import { EMAIL } from '../data/social-links';
 
+      // Pointer position for the .lit card under it (styles.css)
+      addEventListener('pointermove', (e) => {
+        const card = (e.target as Element).closest<HTMLElement>('.lit');
+        if (!card) return;
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+        card.style.setProperty('--my', `${e.clientY - r.top}px`);
+      });
+
       // Easter egg for whoever opens the devtools. Hardcoded accent: CSS vars don't reach the console.
       console.log(
         String.raw`%c

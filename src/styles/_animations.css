@@ -30,10 +30,34 @@
   }
 }
 
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 /* Shared page entrance: class="enter", staggered with style="--i: N" */
 .enter {
   animation: fade-up 0.45s ease backwards;
   animation-delay: calc(var(--i, 0) * 80ms);
+}
+
+/* Cross-document transition: pages cross-fade, the header stays put and the nav
+   underline (Header.astro) slides to the new current link. No-op where unsupported. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.18s;
+}
+
+::view-transition-group(nav-underline) {
+  animation-duration: 0.35s;
+  animation-timing-function: var(--ease-out);
 }
 
 @media (prefers-reduced-motion: reduce) {

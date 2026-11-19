@@ -63,4 +63,14 @@ const { lang, class: className, style } = Astro.props;
   a:hover {
     opacity: 0.75;
   }
+
+  /* The download arrow drops, as ExternalArrow leaves up-right */
+  a span {
+    display: inline-block;
+    transition: transform 0.3s var(--ease-out);
+  }
+
+  a:hover span {
+    transform: translateY(2px);
+  }
 </style>

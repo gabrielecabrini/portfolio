@@ -39,7 +39,7 @@ const lang = pageLang(Astro.params.lang);
 
       <div class="links-grid enter" style="--i: 1">
         {SOCIAL_LINKS.map((link) => (
-          <a href={link.href} target={link.target} rel={link.rel} class="link-card">
+          <a href={link.href} target={link.target} rel={link.rel} class="link-card lit">
             <span class="link-icon">
               <img src={link.iconUrl} alt="" class="link-img" decoding="async" loading="lazy" />
             </span>
@@ -164,15 +164,12 @@ const lang = pageLang(Astro.params.lang);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     color: var(--text);
-    transition:
-      border-color 0.15s,
-      background 0.15s;
+    transition: background 0.15s;
     /* min touch target height */
     min-height: 52px;
   }
 
   .link-card:hover {
-    border-color: var(--accent);
     background: var(--surface-hover);
     color: var(--text);
   }
@@ -188,7 +185,8 @@ const lang = pageLang(Astro.params.lang);
     color: var(--accent);
   }
 
-  .link-card:hover .link-arrow {
+  /* The typed arrow only: ExternalArrow nudges itself */
+  .link-card:hover .link-arrow:not(:has(svg)) {
     transform: translateX(3px);
   }
 
@@ -211,7 +209,7 @@ const lang = pageLang(Astro.params.lang);
   .link-arrow {
     color: var(--muted);
     font-size: 0.9rem;
-    transition: transform 0.2s ease;
+    transition: transform 0.3s var(--ease-out);
   }
 
   @media (max-width: 768px) {

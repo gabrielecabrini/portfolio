@@ -19,7 +19,7 @@ const lang = pageLang(Astro.params.lang);
 
       <div class="projects-grid">
         {PROJECTS.map((project, i) => (
-          <article class="project-card enter" style={`--i: ${i + 1}`}>
+          <article class="project-card lit enter" style={`--i: ${i + 1}`}>
             <div class="card-body">
               <div class="card-title">
                 {project.imageUrl && (
@@ -112,13 +112,10 @@ const lang = pageLang(Astro.params.lang);
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    transition:
-      border-color 0.15s,
-      transform 0.15s;
+    transition: transform 0.3s var(--ease-out);
   }
 
   .project-card:hover {
-    border-color: var(--accent);
     transform: translateY(-2px);
   }
 
