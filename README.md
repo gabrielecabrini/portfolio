@@ -31,7 +31,3 @@ gpg --armor --export-options export-minimal --export <fingerprint> > public/gabr
 ## Release
 
 Every push to `master` is built by CI and deployed to Cloudflare with `wrangler deploy` (`wrangler.jsonc`).
-
-```
-docker build -t portfolio . && docker run --rm -p 8080:80 portfolio
-```
