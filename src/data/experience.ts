@@ -187,7 +187,7 @@ export const SKILL_GROUPS: SkillGroup[] = (
         {
           id: 'linux',
           name: 'Linux',
-          iconUrl: '/assets/icons/linux.svg',
+          iconUrl: '/assets/icons/linux.webp',
         },
         { id: 'proxmox', name: 'Proxmox', iconUrl: '/assets/icons/proxmox.svg' },
         {

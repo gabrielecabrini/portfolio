@@ -22,7 +22,7 @@ export const PROJECTS: Project[] = (
       tags: ['Flutter', 'Dart', 'Finance'],
       repoUrl: 'https://github.com/RIP-Comm/sossoldi',
       url: 'https://rip-comm.github.io/sossoldi/',
-      imageUrl: '/assets/images/projects/sossoldi.png',
+      imageUrl: '/assets/images/projects/sossoldi.webp',
     },
     {
       id: 'winboat',
