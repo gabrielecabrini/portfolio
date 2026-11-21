@@ -12,59 +12,56 @@ const lang = pageLang(Astro.params.lang);
 <Base lang={lang} title={t(lang, 'title.projects')} description={t(lang, 'projects.subtitle')}>
   <section class="projects-page">
     <div class="projects-inner">
-      <div class="section-header enter">
+      <div class="section-header">
         <h1>{t(lang, 'projects.title')}</h1>
         <p class="section-desc">{t(lang, 'projects.subtitle')}</p>
       </div>
 
-      <div class="projects-grid">
-        {PROJECTS.map((project, i) => (
-          <article class="project-card lit enter" style={`--i: ${i + 1}`}>
-            <div class="card-body">
-              <div class="card-title">
-                {project.imageUrl && (
-                  <img
-                    class="card-logo"
-                    src={project.imageUrl}
-                    alt={t(lang, project.titleKey)}
-                    decoding="async"
-                    loading="lazy"
-                  />
-                )}
-                <h2>{t(lang, project.titleKey)}</h2>
+      {PROJECTS.map((project) => {
+        const title = t(lang, project.titleKey);
+        const href = project.url ?? project.repoUrl;
+        return (
+          <article class="project">
+            {project.imageUrl && (
+              <img
+                class="project-logo"
+                src={project.imageUrl}
+                alt=""
+                decoding="async"
+                loading="lazy"
+              />
+            )}
+            <div class="project-body">
+              <div class="project-head">
+                <h2>
+                  {href ? (
+                    <a href={href} target="_blank" rel="noopener noreferrer">
+                      {title}
+                    </a>
+                  ) : (
+                    title
+                  )}
+                </h2>
+                <div class="project-links">
+                  {project.url && (
+                    <a href={project.url} target="_blank" rel="noopener noreferrer">
+                      {t(lang, 'projects.card.site')} <span class="sr-only">{title}</span>{' '}
+                      <ExternalArrow />
+                    </a>
+                  )}
+                  {project.repoUrl && (
+                    <a href={project.repoUrl} target="_blank" rel="noopener noreferrer">
+                      GitHub <span class="sr-only">{title}</span> <ExternalArrow />
+                    </a>
+                  )}
+                </div>
               </div>
               <p>{t(lang, project.descriptionKey)}</p>
-            </div>
-
-            <div class="card-footer">
-              <div class="tags">
-                {project.tags.map((tag) => (
-                  <span class="tag">{tag}</span>
-                ))}
-              </div>
-              <div class="card-links">
-                {project.url && (
-                  <a href={project.url} target="_blank" rel="noopener noreferrer" class="card-link">
-                    {t(lang, 'projects.card.site')}{' '}
-                    <span class="sr-only">{t(lang, project.titleKey)}</span> <ExternalArrow />
-                  </a>
-                )}
-                {project.repoUrl && (
-                  <a
-                    href={project.repoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="card-link"
-                  >
-                    GitHub <span class="sr-only">{t(lang, project.titleKey)}</span>{' '}
-                    <ExternalArrow />
-                  </a>
-                )}
-              </div>
+              <p class="tags">{project.tags.join(' · ')}</p>
             </div>
           </article>
-        ))}
-      </div>
+        );
+      })}
 
       <CtaRow lang={lang} />
     </div>
@@ -82,7 +79,7 @@ const lang = pageLang(Astro.params.lang);
   }
 
   .section-header {
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .section-header h1 {
@@ -95,110 +92,74 @@ const lang = pageLang(Astro.params.lang);
     font-size: 1rem;
   }
 
-  .projects-grid {
-    display: grid;
-    /* Two columns at most (--max-w fits two 320px cards, never three): four projects make a full 2x2 */
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-    gap: 1.25rem;
-  }
-
-  .project-card {
-    /* Anchors the first link's ::after, which stretches over the whole card */
-    position: relative;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.5rem;
+  /* One project per row, ruled off from the next */
+  .project {
     display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    transition: transform 0.3s var(--ease-out);
+    gap: 1rem;
+    padding-block: 1rem;
+    border-top: 1px solid var(--border);
   }
 
-  .project-card:hover {
-    transform: translateY(-2px);
-  }
-
-  .card-body {
-    flex: 1;
-  }
-
-  .card-title {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin-bottom: 0.6rem;
-  }
-
-  /* Card titles keep the h3 size they were designed at */
-  .card-title h2 {
-    color: var(--text);
-    font-size: 1.15rem;
-  }
-
-  .card-logo {
-    width: 46px;
-    height: 46px;
+  .project-logo {
+    width: 32px;
+    height: 32px;
     object-fit: contain;
     flex-shrink: 0;
     border-radius: 4px;
-    /* Hairline rim along the logo's own shape: a black mark stays readable on the dark card */
+    /* Hairline rim along the logo's own shape: a black mark stays readable on the dark page */
     filter: drop-shadow(0 0 0.5px color-mix(in srgb, var(--text) 45%, transparent));
   }
 
-  .card-body p {
-    color: var(--muted);
-    font-size: 0.9rem;
-    line-height: 1.6;
+  .project-body {
+    flex: 1;
+    min-width: 0;
   }
 
-  .card-footer {
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-  }
-
-  .tags {
+  /* Title on the left, its links on the right; the links wrap below on narrow screens */
+  .project-head {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.4rem;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0 1rem;
+    margin-bottom: 0.15rem;
   }
 
-  .tag {
+  h2 {
+    font-size: 1.05rem;
+  }
+
+  h2 a {
+    color: var(--text);
+  }
+
+  h2 a:hover {
+    color: var(--accent);
+  }
+
+  .project-body p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    max-width: 75ch;
+  }
+
+  .project-body .tags {
+    margin-top: 0.3rem;
     font-size: 0.75rem;
     font-family: var(--font-mono);
-    color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 12%, transparent);
-    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
-    padding: 0.15rem 0.5rem;
-    border-radius: var(--radius-sm);
   }
 
-  .card-links {
+  .project-links {
     display: flex;
     gap: 1rem;
-  }
-
-  .card-link {
     font-size: 0.85rem;
-    color: var(--muted);
-    transition: color 0.15s;
   }
 
-  .card-link:hover {
-    color: var(--accent);
-  }
-
-  /* Whole card opens the first link (the site); the others sit above that layer */
-  .card-link:first-child::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-  }
-
-  .card-link:not(:first-child) {
-    position: relative;
-    z-index: 1;
+  .project-links a {
+    /* Bigger tap area, same layout */
+    padding-block: 0.4rem;
+    margin-block: -0.4rem;
   }
 
   /* ── Responsive ── */

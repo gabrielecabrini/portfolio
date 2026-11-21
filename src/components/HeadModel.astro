@@ -1,4 +1,4 @@
-<canvas class="head" width="320" height="320" style="--i: 2" aria-hidden="true"></canvas>
+<canvas class="head" width="320" height="320" aria-hidden="true"></canvas>
 
 <script>
   // Decorative low-poly head that looks at the cursor (or taps, on touch). Skipped when the canvas is hidden by a parent.
@@ -131,8 +131,8 @@
     // Cursor left the window: slowly ease back to neutral
     document.documentElement.addEventListener('mouseleave', () => easeTo(0, 0));
 
-    // Same entrance as the hero text, started only once the model is there to show
-    canvas.classList.add('enter');
+    // Fades in only once the model is there to show
+    canvas.classList.add('ready');
   }
 </script>
 
@@ -142,5 +142,11 @@
     /* Pages can shrink it, e.g. on mobile */
     width: var(--head-size, 320px);
     height: var(--head-size, 320px);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .head.ready {
+    opacity: 1;
   }
 </style>

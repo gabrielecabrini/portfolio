@@ -1,7 +1,6 @@
 :root {
   --bg: #0d0d0d;
   --surface: #161616;
-  --surface-hover: #1e1e1e;
   --border: #2a2a2a;
   --text: #e8e8e8;
   --muted: #888888;
@@ -11,8 +10,6 @@
   /* Both self-hosted by Astro's Fonts API (astro.config.mjs), each with its own metric fallback */
   --font: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
-  /* Exponential ease-out: quick start, long settle */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --radius: 8px;
   --radius-sm: 4px;
   --max-w: 900px;
@@ -28,7 +25,6 @@
 [data-theme='light'] {
   --bg: #f8f8f8;
   --surface: #ffffff;
-  --surface-hover: #f0f0f0;
   --border: #e0e0e0;
   --text: #111111;
   --muted: #555555;

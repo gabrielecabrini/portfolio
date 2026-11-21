@@ -10,7 +10,7 @@ const { lang = 'it' }: { lang?: Lang } = Astro.props;
 <Base lang={lang} title="404" description="Page not found" noindex>
   <section class="not-found-page">
     <div class="not-found-inner">
-      <div class="rustc enter">
+      <div class="rustc">
         <h1 lang="en">
           <span class="err">error[E404]</span>
           <b>: route not found</b>
@@ -22,7 +22,7 @@ const { lang = 'it' }: { lang?: Lang } = Astro.props;
 <span class="g">  |</span></pre>
         <pre class="notes"><span class="note" lang="en"><span class="g">  =</span> <b>help</b>: The page you're looking for doesn't exist or has been moved.</span></pre>
       </div>
-      <a href={localePath(lang, '/')} class="btn-home enter" style="--i: 1">
+      <a href={localePath(lang, '/')} class="btn-home">
         {t(lang, 'nav.home')}
       </a>
     </div>
@@ -116,7 +116,6 @@ const { lang = 'it' }: { lang?: Lang } = Astro.props;
     border-radius: var(--radius);
     font-size: 0.9rem;
     font-weight: 500;
-    transition: background 0.15s;
   }
 
   .btn-home:hover {

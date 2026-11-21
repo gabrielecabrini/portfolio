@@ -82,23 +82,10 @@ const links = [
     position: sticky;
     top: 0;
     z-index: 100;
-    view-transition-name: site-header;
     height: var(--header-bar-h);
-    /* Near-opaque, no backdrop blur: re-blurring animating content flickered on iOS */
+    /* Near-opaque, no backdrop blur */
     background: color-mix(in srgb, var(--bg) 92%, transparent);
     border-bottom: 1px solid var(--border);
-  }
-
-  /* The line under the header draws in over the first pixels of scroll: none at the very top */
-  @supports (animation-timeline: scroll()) {
-    @media (prefers-reduced-motion: no-preference) {
-      header {
-        border-bottom-color: transparent;
-        animation: header-line linear both;
-        animation-timeline: scroll();
-        animation-range: 0 48px;
-      }
-    }
   }
 
   .header-inner {
@@ -151,7 +138,6 @@ const links = [
   nav a {
     color: var(--muted);
     font-size: 0.9rem;
-    transition: color 0.15s;
   }
 
   nav a:hover,
@@ -174,9 +160,6 @@ const links = [
     letter-spacing: 0.03em;
     padding: 0.25rem 0.65rem;
     border-radius: var(--radius-sm);
-    transition:
-      border-color 0.15s,
-      color 0.15s;
     display: flex;
     align-items: center;
     gap: 0.3rem;
@@ -196,32 +179,11 @@ const links = [
     flex-shrink: 0;
   }
 
-  /* Underline animation on desktop nav links */
-  .nav-desktop a {
-    position: relative;
-  }
-
-  .nav-desktop a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.2s ease;
-  }
-
-  /* Same bar for hover and current page, so after the click it just stays put */
-  .nav-desktop a:hover::after,
-  .nav-desktop a.active::after {
-    transform: scaleX(1);
-  }
-
-  .nav-desktop a.active::after {
-    view-transition-name: nav-underline;
+  /* Same bar for hover and current page */
+  .nav-desktop a:hover,
+  .nav-desktop a.active {
+    text-decoration: underline 2px var(--accent);
+    text-underline-offset: 8px;
   }
 
   /* ── Tablet: compact single row ── */

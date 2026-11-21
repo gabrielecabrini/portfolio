@@ -3,7 +3,7 @@
 @import './styles/_typography.css';
 @import './styles/_animations.css';
 
-/* Main call to action, shared by home and /pgp */
+/* Main call to action */
 .btn-primary {
   display: inline-block;
   padding: 0.65rem 1.4rem;
@@ -12,21 +12,11 @@
   color: var(--on-accent);
   font-size: 0.9rem;
   font-weight: 500;
-  /* Lit top edge: kept in the hover shadow below */
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.22);
-  transition:
-    background 0.15s,
-    transform 0.15s,
-    box-shadow 0.15s;
 }
 
 .btn-primary:hover {
   background: var(--accent-dim);
   color: var(--on-accent);
-  transform: translateY(-1px);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.22),
-    0 4px 16px color-mix(in srgb, var(--accent) 35%, transparent);
 }
 
 /* Same box as .btn-primary, outlined: the secondary action beside it */
@@ -36,10 +26,6 @@
   border-radius: var(--radius);
   font-size: 0.9rem;
   font-weight: 500;
-  transition:
-    border-color 0.15s,
-    color 0.15s,
-    transform 0.15s;
   border: 1px solid var(--border);
   color: var(--muted);
 }
@@ -47,42 +33,6 @@
 .btn-secondary:hover {
   border-color: var(--text);
   color: var(--text);
-}
-
-/* Both give way under the press */
-.btn-primary:active,
-.btn-secondary:active {
-  transform: scale(0.97);
-}
-
-/* Card border lit by the pointer: Base.astro feeds --mx/--my, top-centre without JS.
-   Small, repeated boxes tone it down with --lit-size and --lit-strength.
-   The gradient fills a 1px padding ring; the mask cuts the content box out of it. */
-.lit {
-  position: relative;
-}
-
-.lit::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  padding: 1px;
-  border-radius: inherit;
-  background: radial-gradient(
-    var(--lit-size, 260px) circle at var(--mx, 50%) var(--my, 0%),
-    var(--accent),
-    transparent 70%
-  );
-  mask:
-    linear-gradient(#000 0 0) content-box exclude,
-    linear-gradient(#000 0 0);
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
-}
-
-.lit:hover::before {
-  opacity: var(--lit-strength, 1);
 }
 
 /* GitHub brand icon is near-black — invert in dark mode for visibility */

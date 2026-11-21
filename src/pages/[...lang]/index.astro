@@ -14,20 +14,12 @@ const lang = pageLang(Astro.params.lang);
     <div class="hero-inner">
       <div class="hero-left">
         <div class="intro">
-          <p class="enter label" style="--i: 0">
-            {t(lang, 'home.greeting')}
-          </p>
-          <h1 class="enter" style="--i: 1">
-            Gabriele Cabrini
-          </h1>
-          <p class="enter subtitle" style="--i: 2">
-            {t(lang, 'home.subtitle')}
-          </p>
+          <p class="label">{t(lang, 'home.greeting')}</p>
+          <h1>Gabriele Cabrini</h1>
+          <p class="subtitle">{t(lang, 'home.subtitle')}</p>
         </div>
-        <p class="enter tagline" style="--i: 3">
-          {t(lang, 'home.tagline')}
-        </p>
-        <div class="enter cta-row" style="--i: 4">
+        <p class="tagline">{t(lang, 'home.tagline')}</p>
+        <div class="cta-row">
           <a href={cvPdfHref(lang)} download data-astro-prefetch="false" class="btn-primary">
             {t(lang, 'cta.cv')}
           </a>
@@ -35,11 +27,6 @@ const lang = pageLang(Astro.params.lang);
             {t(lang, 'cta.contact')}
           </a>
         </div>
-
-        <p class="enter availability" style="--i: 5">
-          <span class="avail-dot" aria-hidden="true"></span>
-          {t(lang, 'home.available')}
-        </p>
       </div>
 
       <div class="hero-right">
@@ -111,36 +98,6 @@ const lang = pageLang(Astro.params.lang);
     flex-wrap: wrap;
   }
 
-  .availability {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-    color: var(--muted);
-    max-width: none;
-    margin-top: 1rem;
-  }
-
-  .avail-dot {
-    width: 8px;
-    height: 8px;
-    flex-shrink: 0;
-    /* Centered on the first line, not on the whole block, when the text wraps */
-    margin-top: calc((1lh - 8px) / 2);
-    position: relative;
-    border-radius: 50%;
-    background: #22c55e;
-  }
-
-  .avail-dot::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: inherit;
-    animation: avail-pulse 1.8s ease-out infinite;
-  }
-
   @media (max-width: 700px) {
     /* Small head beside the intro (label, name, subtitle); the rest spans the full width.
        display: contents lets the hero-left blocks join the grid directly */
@@ -155,8 +112,7 @@ const lang = pageLang(Astro.params.lang);
     }
 
     .tagline,
-    .cta-row,
-    .availability {
+    .cta-row {
       grid-column: 1 / -1;
     }
 

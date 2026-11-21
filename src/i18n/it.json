@@ -23,7 +23,6 @@
     "greeting": "Ciao, sono",
     "subtitle": "Fullstack Software Developer",
     "tagline": "Sviluppo gestionali, soprattutto backend in Java e Spring Boot, con attenzione ai dettagli di implementazione. Uso GNU/Linux da anni e gestisco anche l'infrastruttura su cui girano.",
-    "available": "Disponibile per collaborazioni e progetti freelance",
     "seo": {
       "description": "Gabriele Cabrini, sviluppatore fullstack: backend in Java, Spring Boot e Kotlin, frontend in Angular, infrastruttura su Linux, Docker e Kubernetes."
     }
@@ -142,13 +141,5 @@
     "footer": {
       "generated": "Generato il {{date}}"
     }
-  },
-  "pgp": {
-    "seo": {
-      "description": "Chiave pubblica PGP di Gabriele Cabrini: fingerprint, download e comandi per importarla."
-    },
-    "copy": "copia",
-    "copied": "copiata ✓",
-    "download": "scarica pgp.asc"
   }
 }

@@ -20,13 +20,6 @@ export const SOCIAL_LINKS: SocialLink[] = [
     rel: 'noopener noreferrer',
   },
   {
-    name: 'GitLab',
-    href: 'https://gitlab.com/gabrielecabrini',
-    iconUrl: '/assets/icons/gitlab.svg',
-    target: '_blank',
-    rel: 'noopener noreferrer',
-  },
-  {
     name: 'LinkedIn',
     href: 'https://www.linkedin.com/in/gabrielecabrini/',
     iconUrl: '/assets/icons/linkedin.svg',

@@ -1,69 +1,8 @@
-/* Slide settles at 70%: ending on a sub-pixel offset made text snap sharp on the last frame */
-@keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  70% {
-    transform: none;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* Ring scaled on the compositor, not an animated box-shadow repainting every frame */
-@keyframes avail-pulse {
-  from {
-    transform: scale(1);
-    opacity: 0.5;
-  }
-  to {
-    transform: scale(2.5);
-    opacity: 0;
-  }
-}
-
-@keyframes grow-y {
-  from {
-    transform: scaleY(0);
-  }
-}
-
-@keyframes header-line {
-  to {
-    border-bottom-color: var(--border);
-  }
-}
-
+/* The brand dot, hovered (Header.astro) */
 @keyframes blink {
   50% {
     opacity: 0;
   }
-}
-
-/* Shared page entrance: class="enter", staggered with style="--i: N" */
-.enter {
-  animation: fade-up 0.45s ease backwards;
-  animation-delay: calc(var(--i, 0) * 80ms);
-}
-
-/* Cross-document transition: pages cross-fade, the header stays put and the nav
-   underline (Header.astro) slides to the new current link. No-op where unsupported. */
-@media (prefers-reduced-motion: no-preference) {
-  @view-transition {
-    navigation: auto;
-  }
-}
-
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 0.18s;
-}
-
-::view-transition-group(nav-underline) {
-  animation-duration: 0.35s;
-  animation-timing-function: var(--ease-out);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -71,7 +10,6 @@
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
-    animation-delay: 0ms !important;
     /* Infinite loops would otherwise strobe at 0.01ms */
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

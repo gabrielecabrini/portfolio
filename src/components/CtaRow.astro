@@ -6,16 +6,15 @@ import { cvPdfHref } from '../lib/cv';
 
 interface Props {
   lang: Lang;
-  /** Lets the caller add its own entrance animation (e.g. `enter` + `--i`). */
-  class?: string;
+  /** Per-page spacing override. */
   style?: string;
 }
 
-const { lang, class: className, style } = Astro.props;
+const { lang, style } = Astro.props;
 ---
 
 <!-- Closing call to action shared by about, experience and projects: write me / get the CV -->
-<div class:list={['cta-line', className]} style={style}>
+<div class="cta-line" style={style}>
   <p>{t(lang, 'cta.heading')}</p>
   <div class="cta-links">
     <a href={EMAIL.href}>
@@ -57,20 +56,9 @@ const { lang, class: className, style } = Astro.props;
     color: var(--accent);
     font-weight: 500;
     white-space: nowrap;
-    transition: opacity 0.15s;
   }
 
   a:hover {
     opacity: 0.75;
-  }
-
-  /* The download arrow drops, as ExternalArrow leaves up-right */
-  a span {
-    display: inline-block;
-    transition: transform 0.3s var(--ease-out);
-  }
-
-  a:hover span {
-    transform: translateY(2px);
   }
 </style>

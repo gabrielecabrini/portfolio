@@ -23,7 +23,6 @@
     "greeting": "Hi, I'm",
     "subtitle": "Fullstack Software Developer",
     "tagline": "I build business software, mostly backends in Java and Spring Boot, with attention to the implementation details. I've used GNU/Linux for years and I also manage the infrastructure it runs on.",
-    "available": "Available for collaborations and freelance projects",
     "seo": {
       "description": "Gabriele Cabrini, fullstack developer: Java, Spring Boot and Kotlin backends, Angular frontends, infrastructure on Linux, Docker and Kubernetes."
     }
@@ -142,13 +141,5 @@
     "footer": {
       "generated": "Generated on {{date}}"
     }
-  },
-  "pgp": {
-    "seo": {
-      "description": "Gabriele Cabrini's PGP public key: fingerprint, download and commands to import it."
-    },
-    "copy": "copy",
-    "copied": "copied ✓",
-    "download": "download pgp.asc"
   }
 }
