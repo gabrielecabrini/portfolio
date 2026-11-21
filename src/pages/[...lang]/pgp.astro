@@ -24,11 +24,10 @@ const keyLine = (key: (typeof keys)[number]) =>
   title="PGP"
   description="Gabriele Cabrini's PGP public key: fingerprint, download and commands to import it."
 >
-  <section class="pgp-page">
-    <div class="pgp-inner">
-      <h1>PGP</h1>
+  <section class="page">
+    <h1>PGP</h1>
 
-      <pre class="term"><span class="prompt">$</span> gpg --fingerprint {EMAIL.name}
+    <pre class="term"><span class="prompt">$</span> gpg --fingerprint {EMAIL.name}
 {keyLine(primary!)}
       <span class="fpr">{firstHalf}<span class="fpr-gap" />{secondHalf}</span> <button class="copy" type="button" hidden lang="en" aria-label="Copy fingerprint" data-fingerprint={fingerprint}><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2" /><path d="M5 15V5a2 2 0 0 1 2-2h10" /></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5 9.5 18 20 6.5" /></svg></button>
 {uids.map((uid) => `${'uid'.padEnd(6)}${uid}\n`)}{subkeys.map((key) => `${keyLine(key)}\n`)}
@@ -36,18 +35,17 @@ const keyLine = (key: (typeof keys)[number]) =>
 <span class="prompt">$</span> gpg --locate-keys {EMAIL.name}
 <span class="prompt">$</span> gpg --keyserver keys.openpgp.org --recv-keys {fingerprint}</pre>
 
-      <div class="pgp-links">
-        <a href="/gabrielecabrini.asc" download data-astro-prefetch="false">
-          gabrielecabrini.asc <span aria-hidden="true">↓</span>
-        </a>
-        <a
-          href={`https://keys.openpgp.org/search?q=${fingerprint}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          keys.openpgp.org <ExternalArrow />
-        </a>
-      </div>
+    <div class="pgp-links">
+      <a href="/gabrielecabrini.asc" download data-astro-prefetch="false">
+        gabrielecabrini.asc <span aria-hidden="true">↓</span>
+      </a>
+      <a
+        href={`https://keys.openpgp.org/search?q=${fingerprint}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        keys.openpgp.org <ExternalArrow />
+      </a>
     </div>
   </section>
   <script>
@@ -65,17 +63,7 @@ const keyLine = (key: (typeof keys)[number]) =>
 </Base>
 
 <style>
-  .pgp-page {
-    padding: 5rem var(--gutter);
-  }
-
-  .pgp-inner {
-    max-width: var(--max-w);
-    margin: 0 auto;
-  }
-
   h1 {
-    color: var(--text);
     margin-bottom: 2rem;
   }
 
@@ -148,17 +136,7 @@ const keyLine = (key: (typeof keys)[number]) =>
     font-size: 0.9rem;
   }
 
-  @media (max-width: 768px) {
-    .pgp-page {
-      padding: 3rem var(--gutter);
-    }
-  }
-
   @media (max-width: 480px) {
-    .pgp-page {
-      padding: 2rem var(--gutter);
-    }
-
     .term {
       padding: 1rem;
       font-size: 0.75rem;

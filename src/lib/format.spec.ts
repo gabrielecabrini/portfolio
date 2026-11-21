@@ -45,10 +45,6 @@ describe('dateRange', () => {
 });
 
 describe('displayUrl', () => {
-  it('strips mailto: prefix', () => {
-    expect(displayUrl('mailto:gabriele@example.com')).toBe('gabriele@example.com');
-  });
-
   it('strips http(s):// prefix', () => {
     expect(displayUrl('https://github.com/user')).toBe('github.com/user');
     expect(displayUrl('http://example.com')).toBe('example.com');

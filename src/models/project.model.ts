@@ -5,7 +5,7 @@ export interface Project {
   titleKey: string;
   descriptionKey: string;
   tags: string[];
-  url?: string;
+  url: string;
   repoUrl?: string;
-  imageUrl?: string;
+  imageUrl: string;
 }

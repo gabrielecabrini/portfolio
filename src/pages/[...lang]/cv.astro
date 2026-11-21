@@ -36,27 +36,15 @@ const years = Math.floor(
 ---
 
 <Base lang={lang} title="CV" description={t(lang, 'cv.seo.description')}>
-  <!-- ── Desktop toolbar ── -->
+  <!-- Toolbar above the paper; on mobile it is the whole page, with its own hint -->
   <div class="cv-actions">
     <span class="cv-lang-hint">{t(lang, 'cv.lang.hint')}</span>
+    <p class="cv-mobile-hint">{t(lang, 'cv.mobile.hint')}</p>
     <div class="cv-buttons">
       <a class="btn-secondary" href={EMAIL.href}>
         {t(lang, 'cta.contact')}
       </a>
-      <a class="cv-print-btn" href={pdfHref} download data-astro-prefetch="false">
-        {t(lang, 'cv.download')}
-      </a>
-    </div>
-  </div>
-
-  <!-- ── Mobile: no preview, just the actions ── -->
-  <div class="cv-mobile-msg">
-    <p>{t(lang, 'cv.mobile.hint')}</p>
-    <div class="cv-buttons">
-      <a class="btn-secondary" href={EMAIL.href}>
-        {t(lang, 'cta.contact')}
-      </a>
-      <a class="cv-print-btn" href={pdfHref} download data-astro-prefetch="false">
+      <a class="btn-primary" href={pdfHref} download data-astro-prefetch="false">
         {t(lang, 'cv.download')}
       </a>
     </div>
@@ -76,7 +64,7 @@ const years = Math.floor(
         <p class="cv-role">{t(lang, 'home.subtitle')}</p>
         <p class="cv-location">{t(lang, 'cv.location')}</p>
         <a href={EMAIL.href} class="cv-contact-link">
-          {displayUrl(EMAIL.href)}
+          {EMAIL.name}
         </a>
         <div class="cv-contacts">
           {contactLinks.map((href) => (
@@ -181,11 +169,6 @@ const years = Math.floor(
                 ) : (
                   <strong>{cert.name}</strong>
                 )}
-                {cert.credentialId && (
-                  <span class="cv-entry-date cv-cert-id">
-                    {t(lang, 'experience.certs.credentialId')}: {cert.credentialId}
-                  </span>
-                )}
               </div>
             </div>
           ))}
@@ -218,34 +201,21 @@ const years = Math.floor(
     color: var(--muted);
   }
 
-  .cv-print-btn {
-    display: inline-block;
-    line-height: normal;
-    padding: 0.5rem 1.25rem;
-    font-size: 0.88rem;
-    font-weight: 500;
-    background: var(--accent);
-    border: 1px solid var(--accent);
-    border-radius: var(--radius);
-    color: var(--on-accent);
-    cursor: pointer;
-  }
-
-  .cv-print-btn:hover {
-    border-color: var(--accent-dim);
-    background: var(--accent-dim);
-  }
-
   .cv-buttons {
     display: flex;
     gap: 0.75rem;
   }
 
-  /* Global secondary button, shrunk to the download button's box */
-  .cv-buttons .btn-secondary {
+  /* The global buttons, a size down; the border gives both the same box */
+  .cv-buttons a {
     line-height: normal;
     padding: 0.5rem 1.25rem;
     font-size: 0.88rem;
+    border: 1px solid var(--border);
+  }
+
+  .cv-buttons .btn-primary {
+    border-color: transparent;
   }
 
   /* ── Paper card ── */
@@ -395,11 +365,6 @@ const years = Math.floor(
     margin: 0;
   }
 
-  .cv-cert-id {
-    display: block;
-    margin-top: 0.15rem;
-  }
-
   .cv-cert-name {
     font-weight: 600;
     font-size: 0.88rem;
@@ -450,25 +415,25 @@ const years = Math.floor(
   }
 
   /* ── Mobile: download-only view ── */
-  .cv-mobile-msg {
+  .cv-mobile-hint {
     display: none;
   }
 
   @media screen and (max-width: 640px) {
     .cv-actions {
-      display: none;
-    }
-
-    .cv-mobile-msg {
-      display: flex;
       flex-direction: column;
-      align-items: center;
       gap: 1.25rem;
+      margin: 0;
       padding: 4rem 1.5rem;
       text-align: center;
     }
 
-    .cv-mobile-msg p {
+    .cv-lang-hint {
+      display: none;
+    }
+
+    .cv-mobile-hint {
+      display: block;
       color: var(--muted);
       font-size: 0.9rem;
       max-width: 32ch;

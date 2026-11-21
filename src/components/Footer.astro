@@ -11,9 +11,7 @@ const { lang } = Astro.props;
 
 <footer>
   <div class="footer-inner">
-    <div class="footer-left">
-      <span class="muted">© {new Date().getFullYear()} Gabriele Cabrini</span>
-    </div>
+    <span class="muted">© {new Date().getFullYear()} Gabriele Cabrini</span>
     <div class="footer-right">
       <a class="muted repo-link" href="/donut/" aria-label="Donut">
         🍩
@@ -159,12 +157,6 @@ const { lang } = Astro.props;
     font-size: 0.82rem;
   }
 
-  .footer-left {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
   .footer-right {
     display: flex;
     align-items: center;
@@ -190,7 +182,6 @@ const { lang } = Astro.props;
     background: none;
     border: none;
     color: var(--muted);
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -3,8 +3,6 @@ export interface Certification {
   name: string;
   issuer: string;
   date: string; // "YYYY-MM"
-  iconUrl?: string;
+  iconUrl: string;
   url?: string;
-  // Credential/certificate number printed on the certificate, shown as-is.
-  credentialId?: string;
 }

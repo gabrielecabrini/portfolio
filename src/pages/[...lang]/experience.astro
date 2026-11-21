@@ -15,142 +15,118 @@ const lang = pageLang(Astro.params.lang);
   title={t(lang, 'title.experience')}
   description={t(lang, 'experience.seo.description')}
 >
-  <section class="exp-page">
-    <div class="exp-inner">
-      <h1 class="sr-only">{t(lang, 'title.experience')}</h1>
-      <!-- Work Experience: declaration order (unlike /cv, which re-sorts by end date) -->
-      <div class="exp-section">
-        <h2>{t(lang, 'experience.work.title')}</h2>
+  <section class="page sections">
+    <h1 class="sr-only">{t(lang, 'title.experience')}</h1>
+    <!-- Work Experience: declaration order (unlike /cv, which re-sorts by end date) -->
+    <div class="exp-section">
+      <h2>{t(lang, 'experience.work.title')}</h2>
 
-        <div class="timeline">
-          {WORK_EXPERIENCES.map((job) => (
-            <div class="timeline-item">
-              {job.logoUrl ? (
-                <div class="logo">
-                  <img src={job.logoUrl} alt={job.company} decoding="async" loading="lazy" />
-                </div>
-              ) : (
-                <div class="logo placeholder">{job.company.charAt(0)}</div>
-              )}
-              <div class="item-body">
-                <div class="item-header">
-                  <div>
-                    <h3 class="item-title">{t(lang, job.roleKey)}</h3>
-                    <span class="item-subtitle">
-                      {[job.company, workPlace(job, lang)].filter(Boolean).join(' · ')}
-                    </span>
-                  </div>
-                  <div class="item-when">
-                    <span class="item-date">{dateRange(job.startDate, job.endDate, lang)}</span>
-                    <span
-                      class="item-duration"
-                      data-start={job.endDate ? undefined : job.startDate}
-                    >
-                      {duration(job.startDate, job.endDate, lang)}
-                    </span>
-                  </div>
-                </div>
-                <p class="item-desc">{t(lang, job.descriptionKey)}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <a class="projects-link" href={localePath(lang, '/projects')}>
-          {t(lang, 'experience.projects.link')} <span aria-hidden="true">→</span>
-        </a>
-      </div>
-
-      <!-- Skills -->
-      <div class="exp-section">
-        <h2>{t(lang, 'experience.skills.title')}</h2>
-
-        <div class="skill-groups">
-          {SKILL_GROUPS.map((group) => (
-            <div class="skill-group">
-              <h3 class="skill-cat-label">{t(lang, group.categoryKey)}</h3>
-              <ul class="skill-chips">
-                {group.skills.map((skill) => (
-                  <li class="skill-chip">
-                    {skill.iconUrl && (
-                      <img
-                        class="skill-chip-icon"
-                        src={skill.iconUrl}
-                        alt=""
-                        decoding="async"
-                        loading="lazy"
-                      />
-                    )}
-                    {skill.name}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <!-- Languages -->
-      <div class="exp-section">
-        <h2>{t(lang, 'experience.languages.title')}</h2>
-
-        <ul class="lang-list">
-          {LANGUAGES.map((language) => (
-            <li>
-              <img
-                class="lang-flag"
-                src={language.iconUrl}
-                alt=""
-                decoding="async"
-                loading="lazy"
-              />
-              <span class="lang-name">{t(lang, language.nameKey)}</span>
-              <span class="lang-level">{t(lang, language.levelKey)}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <!-- Certifications -->
-      <div class="exp-section">
-        <h2>{t(lang, 'experience.certs.title')}</h2>
-
-        <div>
-          {CERTIFICATIONS.map((cert) => (
-            <div class="cert">
-              {cert.iconUrl ? (
-                <div class="logo">
-                  <img src={cert.iconUrl} alt={cert.issuer} decoding="async" loading="lazy" />
-                </div>
-              ) : (
-                <div class="logo placeholder">{cert.issuer.charAt(0)}</div>
-              )}
-              <div class="cert-body">
-                <h3 class="cert-name">
-                  {cert.url ? (
-                    <a href={cert.url} target="_blank" rel="noopener noreferrer">
-                      {cert.name} <ExternalArrow />
-                    </a>
-                  ) : (
-                    cert.name
-                  )}
-                </h3>
-                <span class="cert-issuer">{cert.issuer}</span>
-                <span class="cert-date">{formatMonthYear(cert.date, lang)}</span>
-                {cert.credentialId && (
-                  <span class="cert-date">
-                    {t(lang, 'experience.certs.credentialId')}: {cert.credentialId}
+      <div class="timeline">
+        {WORK_EXPERIENCES.map((job) => (
+          <div class="timeline-item">
+            <img class="logo" src={job.logoUrl} alt={job.company} decoding="async" loading="lazy" />
+            <div class="item-body">
+              <div class="item-header">
+                <div>
+                  <h3 class="item-title">{t(lang, job.roleKey)}</h3>
+                  <span class="item-subtitle">
+                    {[job.company, workPlace(job, lang)].filter(Boolean).join(' · ')}
                   </span>
-                )}
+                </div>
+                <div class="item-when">
+                  <span class="item-date">{dateRange(job.startDate, job.endDate, lang)}</span>
+                  <span class="item-duration" data-start={job.endDate ? undefined : job.startDate}>
+                    {duration(job.startDate, job.endDate, lang)}
+                  </span>
+                </div>
               </div>
+              <p class="item-desc">{t(lang, job.descriptionKey)}</p>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
 
-      <!-- The section gap already spaces it -->
-      <CtaRow lang={lang} style="margin-top: 0" />
+      <a class="projects-link" href={localePath(lang, '/projects')}>
+        {t(lang, 'experience.projects.link')} <span aria-hidden="true">→</span>
+      </a>
     </div>
+
+    <!-- Skills -->
+    <div class="exp-section">
+      <h2>{t(lang, 'experience.skills.title')}</h2>
+
+      <div class="skill-groups">
+        {SKILL_GROUPS.map((group) => (
+          <div class="skill-group">
+            <h3 class="skill-cat-label">{t(lang, group.categoryKey)}</h3>
+            <ul class="skill-chips">
+              {group.skills.map((skill) => (
+                <li class="skill-chip">
+                  <img
+                    class="skill-chip-icon"
+                    src={skill.iconUrl}
+                    alt=""
+                    decoding="async"
+                    loading="lazy"
+                  />
+                  {skill.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Languages -->
+    <div class="exp-section">
+      <h2>{t(lang, 'experience.languages.title')}</h2>
+
+      <ul class="lang-list">
+        {LANGUAGES.map((language) => (
+          <li>
+            <img class="lang-flag" src={language.iconUrl} alt="" decoding="async" loading="lazy" />
+            <span class="lang-name">{t(lang, language.nameKey)}</span>
+            <span class="lang-level">{t(lang, language.levelKey)}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Certifications -->
+    <div class="exp-section">
+      <h2>{t(lang, 'experience.certs.title')}</h2>
+
+      <div>
+        {CERTIFICATIONS.map((cert) => (
+          <div class="cert">
+            <img
+              class="logo"
+              src={cert.iconUrl}
+              alt={cert.issuer}
+              decoding="async"
+              loading="lazy"
+            />
+            <div class="cert-body">
+              <h3 class="cert-name">
+                {cert.url ? (
+                  <a href={cert.url} target="_blank" rel="noopener noreferrer">
+                    {cert.name} <ExternalArrow />
+                  </a>
+                ) : (
+                  cert.name
+                )}
+              </h3>
+              <span class="cert-issuer">{cert.issuer}</span>
+              <span class="cert-date">{formatMonthYear(cert.date, lang)}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- The section gap already spaces it -->
+    <CtaRow lang={lang} style="margin-top: 0" />
   </section>
   <script>
     import { duration } from '../../lib/format';
@@ -164,20 +140,13 @@ const lang = pageLang(Astro.params.lang);
 </Base>
 
 <style>
-  .exp-page {
-    padding: 5rem var(--gutter);
-  }
-
-  .exp-inner {
-    max-width: var(--max-w);
-    margin: 0 auto;
+  .sections {
     display: flex;
     flex-direction: column;
     gap: 4rem;
   }
 
   .exp-section > h2 {
-    color: var(--text);
     margin-bottom: 2rem;
     padding-bottom: 0.75rem;
     border-bottom: 1px solid var(--border);
@@ -228,27 +197,11 @@ const lang = pageLang(Astro.params.lang);
     width: var(--logo);
     height: var(--logo);
     flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .logo img {
-    width: 100%;
-    height: 100%;
     object-fit: contain;
-  }
-
-  .logo.placeholder {
-    border: 1px solid var(--border);
-    color: var(--accent);
-    font-weight: 700;
-    font-size: 1.1rem;
   }
 
   .timeline-item .logo {
     border-radius: var(--radius);
-    overflow: hidden;
   }
 
   .item-body {
@@ -268,7 +221,6 @@ const lang = pageLang(Astro.params.lang);
   }
 
   .item-title {
-    color: var(--text);
     font-size: 1rem;
     margin-bottom: 0.2rem;
   }
@@ -429,11 +381,7 @@ const lang = pageLang(Astro.params.lang);
   /* ── Responsive ── */
 
   @media (max-width: 768px) {
-    .exp-page {
-      padding: 3rem var(--gutter);
-    }
-
-    .exp-inner {
+    .sections {
       gap: 2.5rem;
     }
 
@@ -448,10 +396,6 @@ const lang = pageLang(Astro.params.lang);
   }
 
   @media (max-width: 480px) {
-    .exp-page {
-      padding: 2rem var(--gutter);
-    }
-
     .skill-group {
       grid-template-columns: 1fr;
       gap: 0.5rem;

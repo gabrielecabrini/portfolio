@@ -10,47 +10,41 @@ const lang = pageLang(Astro.params.lang);
 ---
 
 <Base lang={lang} title={t(lang, 'title.about')} description={t(lang, 'about.seo.description')}>
-  <section class="about-page">
-    <div class="about-inner">
-      <div class="profile-row">
-        <img class="avatar" src="/assets/images/pfp.jpeg" alt="Gabriele Cabrini" decoding="async" />
-        <div>
-          <div class="section-header">
-            <h1>{t(lang, 'about.title')}</h1>
-          </div>
-          <div class="bio">
-            {t(lang, 'about.bio')
-              .split('\n')
-              .map((paragraph) => (
-                <p>{paragraph}</p>
-              ))}
-          </div>
-          {lang === 'en' && (
-            <p class="local-time" hidden>
-              Local time in Bergamo: <time>--:--</time>
-            </p>
-          )}
+  <section class="page">
+    <div class="profile-row">
+      <img class="avatar" src="/assets/images/pfp.jpeg" alt="Gabriele Cabrini" decoding="async" />
+      <div>
+        <h1>{t(lang, 'about.title')}</h1>
+        <div class="bio">
+          {t(lang, 'about.bio')
+            .split('\n')
+            .map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
         </div>
+        {lang === 'en' && (
+          <p class="local-time" hidden>
+            Local time in Bergamo: <time>--:--</time>
+          </p>
+        )}
       </div>
-
-      <div class="section-header links-section-header">
-        <h2>{t(lang, 'about.links.title')}</h2>
-      </div>
-
-      <ul class="links">
-        {SOCIAL_LINKS.map((link) => (
-          <li>
-            <a href={link.href} target={link.target} rel={link.rel}>
-              <img src={link.iconUrl} alt="" class="link-img" decoding="async" loading="lazy" />
-              {link.name}
-              {link.target && <ExternalArrow />}
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      <CtaRow lang={lang} />
     </div>
+
+    <h2>{t(lang, 'about.links.title')}</h2>
+
+    <ul class="links">
+      {SOCIAL_LINKS.map((link) => (
+        <li>
+          <a href={link.href} target="_blank" rel="noopener noreferrer">
+            <img src={link.iconUrl} alt="" class="link-img" decoding="async" loading="lazy" />
+            {link.name}
+            <ExternalArrow />
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <CtaRow lang={lang} />
   </section>
   <script>
     // English page only: tells visitors abroad what time it is here before they write.
@@ -74,15 +68,6 @@ const lang = pageLang(Astro.params.lang);
 </Base>
 
 <style>
-  .about-page {
-    padding: 5rem var(--gutter);
-  }
-
-  .about-inner {
-    max-width: var(--max-w);
-    margin: 0 auto;
-  }
-
   .profile-row {
     display: flex;
     align-items: flex-start;
@@ -105,24 +90,16 @@ const lang = pageLang(Astro.params.lang);
     }
   }
 
-  .section-header {
+  h1 {
     margin-bottom: 1rem;
   }
 
-  .section-header h1 {
-    color: var(--text);
-  }
-
   /* Subheading keeps the h3 size it was designed at; ruled like the /experience sections */
-  .section-header h2 {
+  h2 {
+    margin: 3rem 0 1.5rem;
     font-size: 1.15rem;
     padding-bottom: 0.75rem;
     border-bottom: 1px solid var(--border);
-  }
-
-  .links-section-header {
-    margin-top: 3rem;
-    margin-bottom: 1.5rem;
   }
 
   .bio p {
@@ -174,10 +151,6 @@ const lang = pageLang(Astro.params.lang);
   }
 
   @media (max-width: 768px) {
-    .about-page {
-      padding: 3rem var(--gutter);
-    }
-
     .profile-row {
       flex-direction: column;
       align-items: center;
@@ -186,12 +159,6 @@ const lang = pageLang(Astro.params.lang);
 
     .bio p {
       text-align: left;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .about-page {
-      padding: 2rem var(--gutter);
     }
   }
 </style>

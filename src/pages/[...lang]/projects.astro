@@ -10,86 +10,53 @@ const lang = pageLang(Astro.params.lang);
 ---
 
 <Base lang={lang} title={t(lang, 'title.projects')} description={t(lang, 'projects.subtitle')}>
-  <section class="projects-page">
-    <div class="projects-inner">
-      <div class="section-header">
-        <h1>{t(lang, 'projects.title')}</h1>
-        <p class="section-desc">{t(lang, 'projects.subtitle')}</p>
-      </div>
+  <section class="page">
+    <h1>{t(lang, 'projects.title')}</h1>
+    <p class="section-desc">{t(lang, 'projects.subtitle')}</p>
 
-      {PROJECTS.map((project) => {
-        const title = t(lang, project.titleKey);
-        const href = project.url ?? project.repoUrl;
-        return (
-          <article class="project">
-            {project.imageUrl && (
-              <img
-                class="project-logo"
-                src={project.imageUrl}
-                alt=""
-                decoding="async"
-                loading="lazy"
-              />
-            )}
-            <div class="project-body">
-              <div class="project-head">
-                <h2>
-                  {href ? (
-                    <a href={href} target="_blank" rel="noopener noreferrer">
-                      {title}
-                    </a>
-                  ) : (
-                    title
-                  )}
-                </h2>
-                <div class="project-links">
-                  {project.url && (
-                    <a href={project.url} target="_blank" rel="noopener noreferrer">
-                      {t(lang, 'projects.card.site')} <span class="sr-only">{title}</span>{' '}
-                      <ExternalArrow />
-                    </a>
-                  )}
-                  {project.repoUrl && (
-                    <a href={project.repoUrl} target="_blank" rel="noopener noreferrer">
-                      GitHub <span class="sr-only">{title}</span> <ExternalArrow />
-                    </a>
-                  )}
-                </div>
+    {PROJECTS.map((project) => {
+      const title = t(lang, project.titleKey);
+      return (
+        <article class="project">
+          <img class="project-logo" src={project.imageUrl} alt="" decoding="async" loading="lazy" />
+          <div class="project-body">
+            <div class="project-head">
+              <h2>
+                <a href={project.url} target="_blank" rel="noopener noreferrer">
+                  {title}
+                </a>
+              </h2>
+              <div class="project-links">
+                <a href={project.url} target="_blank" rel="noopener noreferrer">
+                  {t(lang, 'projects.card.site')} <span class="sr-only">{title}</span>{' '}
+                  <ExternalArrow />
+                </a>
+                {project.repoUrl && (
+                  <a href={project.repoUrl} target="_blank" rel="noopener noreferrer">
+                    GitHub <span class="sr-only">{title}</span> <ExternalArrow />
+                  </a>
+                )}
               </div>
-              <p>{t(lang, project.descriptionKey)}</p>
-              <p class="tags">{project.tags.join(' · ')}</p>
             </div>
-          </article>
-        );
-      })}
+            <p>{t(lang, project.descriptionKey)}</p>
+            <p class="tags">{project.tags.join(' · ')}</p>
+          </div>
+        </article>
+      );
+    })}
 
-      <CtaRow lang={lang} />
-    </div>
+    <CtaRow lang={lang} />
   </section>
 </Base>
 
 <style>
-  .projects-page {
-    padding: 5rem var(--gutter);
-  }
-
-  .projects-inner {
-    max-width: var(--max-w);
-    margin: 0 auto;
-  }
-
-  .section-header {
-    margin-bottom: 1.5rem;
-  }
-
-  .section-header h1 {
-    color: var(--text);
+  h1 {
     margin-bottom: 0.5rem;
   }
 
   .section-desc {
     color: var(--muted);
-    font-size: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   /* One project per row, ruled off from the next */
@@ -163,16 +130,4 @@ const lang = pageLang(Astro.params.lang);
   }
 
   /* ── Responsive ── */
-
-  @media (max-width: 768px) {
-    .projects-page {
-      padding: 3rem var(--gutter);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .projects-page {
-      padding: 2rem var(--gutter);
-    }
-  }
 </style>

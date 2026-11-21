@@ -22,7 +22,7 @@ const { lang = 'it' }: { lang?: Lang } = Astro.props;
 <span class="g">  |</span></pre>
         <pre class="notes"><span class="note" lang="en"><span class="g">  =</span> <b>help</b>: The page you're looking for doesn't exist or has been moved.</span></pre>
       </div>
-      <a href={localePath(lang, '/')} class="btn-home">
+      <a href={localePath(lang, '/')} class="btn-primary">
         {t(lang, 'nav.home')}
       </a>
     </div>
@@ -107,20 +107,8 @@ const { lang = 'it' }: { lang?: Lang } = Astro.props;
     font-weight: 700;
   }
 
-  .btn-home {
-    display: inline-flex;
+  .btn-primary {
     margin-top: 1rem;
-    padding: 0.65rem 1.6rem;
-    background: var(--accent);
-    color: var(--on-accent);
-    border-radius: var(--radius);
-    font-size: 0.9rem;
-    font-weight: 500;
-  }
-
-  .btn-home:hover {
-    background: var(--accent-dim);
-    color: var(--on-accent);
   }
 
   :global([data-theme='light']) .not-found-page {

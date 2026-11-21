@@ -68,7 +68,7 @@ button {
 }
 
 /* Already accent-filled: invert the other way, or the focus wouldn't show */
-:is(a, button):is(.btn-primary, .btn-home):focus-visible {
+.btn-primary:focus-visible {
   background: var(--text) !important;
   color: var(--bg) !important;
   box-shadow: 0 0 0 2px var(--text);

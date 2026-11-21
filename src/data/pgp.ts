@@ -7,8 +7,9 @@ import type { PgpKey } from '../models/pgp-key.model';
 // gpg (no OpenPGP dependency); without gpg the build fails rather than ship no key.
 const ASC = 'public/gabrielecabrini.asc';
 
-const gpg = (args: string[]) => execFileSync('gpg', args, { stdio: ['ignore', 'pipe', 'inherit'] });
-
 export const PGP_KEY: PgpKey = parseKey(
-  gpg(['--show-keys', '--with-colons', ASC]).toString('utf8'),
+  execFileSync('gpg', ['--show-keys', '--with-colons', ASC], {
+    stdio: ['ignore', 'pipe', 'inherit'],
+    encoding: 'utf8',
+  }),
 );

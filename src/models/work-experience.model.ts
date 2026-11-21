@@ -9,7 +9,7 @@ export interface WorkExperience {
   endDate?: string; // "YYYY-MM" — undefined means present, rendered as "Present"/"Presente"
   // i18n key, see roleKey.
   descriptionKey: string;
-  logoUrl?: string;
+  logoUrl: string;
   // Literal place, not translated (city names read the same): "Costa Volpino (BG)".
   location?: string;
   // Rendered after the location as "Da remoto"/"Remote".

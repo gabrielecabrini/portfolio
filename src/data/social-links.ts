@@ -1,36 +1,26 @@
 import type { SocialLink } from '../models/social-link.model';
 
-// Kept separate from SOCIAL_LINKS (rather than folded in) because it's consumed
-// individually by home/about/cv for the "email me" CTA, not just iterated as a list.
-// iconUrl is an inline SVG data URI (not a file in /assets/icons like the others) so the mail
-// glyph needs no request at all.
-export const EMAIL: SocialLink = {
+// Apart from SOCIAL_LINKS: it's the "email me" action on its own, not a profile in the list.
+export const EMAIL = {
   name: 'gabriele@gabrielecabrini.it',
   href: 'mailto:gabriele@gabrielecabrini.it',
-  iconUrl:
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='4' width='20' height='16' rx='2'/%3E%3Cpath d='m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7'/%3E%3C/svg%3E",
 };
 
+// All external: /about opens them in a new tab.
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     name: 'GitHub',
     href: 'https://github.com/gabrielecabrini',
     iconUrl: '/assets/icons/github.svg',
-    target: '_blank',
-    rel: 'noopener noreferrer',
   },
   {
     name: 'LinkedIn',
     href: 'https://www.linkedin.com/in/gabrielecabrini/',
     iconUrl: '/assets/icons/linkedin.svg',
-    target: '_blank',
-    rel: 'noopener noreferrer',
   },
   {
     name: 'Telegram',
     href: 'https://t.me/gabrielecabrini',
     iconUrl: '/assets/icons/telegram.svg',
-    target: '_blank',
-    rel: 'noopener noreferrer',
   },
 ];

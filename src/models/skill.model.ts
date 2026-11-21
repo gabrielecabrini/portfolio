@@ -3,7 +3,7 @@
 export interface Skill {
   id: string;
   name: string;
-  iconUrl?: string;
+  iconUrl: string;
 }
 
 export interface SkillGroup {

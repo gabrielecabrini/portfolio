@@ -35,6 +35,25 @@
   color: var(--text);
 }
 
+/* Shell of the inner pages: content capped at --max-w, gutters outside it */
+.page {
+  max-width: calc(var(--max-w) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding: 5rem var(--gutter);
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding-block: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding-block: 2rem;
+  }
+}
+
 /* GitHub brand icon is near-black — invert in dark mode for visibility */
 :root img[src='/assets/icons/github.svg'] {
   filter: invert(1);

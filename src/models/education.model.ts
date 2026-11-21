@@ -6,5 +6,4 @@ export interface Education {
   startDate: string; // "YYYY"
   endDate: string; // "YYYY"
   location?: string;
-  url?: string;
 }
